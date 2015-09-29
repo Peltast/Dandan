@@ -25,17 +25,47 @@ ApplicationMain.create = function() {
 	var types = [];
 	urls.push("assets/checkpoint.png");
 	types.push("IMAGE");
+	urls.push("assets/DashEnemy.png");
+	types.push("IMAGE");
+	urls.push("assets/Door.png");
+	types.push("IMAGE");
 	urls.push("assets/Enemy.png");
+	types.push("IMAGE");
+	urls.push("assets/LaunchEnemy.png");
+	types.push("IMAGE");
+	urls.push("assets/oldplayer.png");
 	types.push("IMAGE");
 	urls.push("assets/openfl.svg");
 	types.push("TEXT");
-	urls.push("assets/player.png");
+	urls.push("assets/Player.png");
 	types.push("IMAGE");
 	urls.push("assets/Player2.png");
 	types.push("IMAGE");
+	urls.push("assets/PlayerDash.png");
+	types.push("IMAGE");
+	urls.push("assets/PlayerLaunch.png");
+	types.push("IMAGE");
+	urls.push("assets/PlayerProjectile.png");
+	types.push("IMAGE");
 	urls.push("assets/portal.png");
 	types.push("IMAGE");
+	urls.push("assets/Projectile.png");
+	types.push("IMAGE");
+	urls.push("assets/Projectile2.png");
+	types.push("IMAGE");
+	urls.push("assets/ProjectileEnemy.png");
+	types.push("IMAGE");
 	urls.push("assets/Stage1-1.tmx");
+	types.push("TEXT");
+	urls.push("assets/Stage1-2.tmx");
+	types.push("TEXT");
+	urls.push("assets/Stage1-3.tmx");
+	types.push("TEXT");
+	urls.push("assets/Stage1-4.tmx");
+	types.push("TEXT");
+	urls.push("assets/Stage3-1.tmx");
+	types.push("TEXT");
+	urls.push("assets/Stage3-2.tmx");
 	types.push("TEXT");
 	urls.push("assets/Stranger.png");
 	types.push("IMAGE");
@@ -50,6 +80,8 @@ ApplicationMain.create = function() {
 	urls.push("assets/Tilset.pdn");
 	types.push("TEXT");
 	urls.push("assets/Untitled.png");
+	types.push("IMAGE");
+	urls.push("assets/WalkingEnemy.png");
 	types.push("IMAGE");
 	urls.push("assets/World1Tiles.png");
 	types.push("IMAGE");
@@ -75,7 +107,7 @@ ApplicationMain.init = function() {
 	if(total == 0) ApplicationMain.start();
 };
 ApplicationMain.main = function() {
-	ApplicationMain.config = { build : "669", company : "Peltast", file : "LolosSuperDreamPlace", fps : 30, name : "Lolo's Super Dream Place", orientation : "", packageName : "LolosSuperDreamPlace", version : "1.0.0", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : true, height : 360, parameters : "{}", resizable : true, stencilBuffer : true, title : "Lolo's Super Dream Place", vsync : false, width : 540, x : null, y : null}]};
+	ApplicationMain.config = { build : "1309", company : "Peltast", file : "LolosSuperDreamPlace", fps : 30, name : "Lolo's Super Dream Place", orientation : "", packageName : "LolosSuperDreamPlace", version : "1.0.0", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : true, height : 360, parameters : "{}", resizable : true, stencilBuffer : true, title : "Lolo's Super Dream Place", vsync : false, width : 540, x : null, y : null}]};
 };
 ApplicationMain.start = function() {
 	var hasMain = false;
@@ -1223,22 +1255,67 @@ var DefaultAssetLibrary = function() {
 	id = "assets/checkpoint.png";
 	this.path.set(id,id);
 	this.type.set(id,"IMAGE");
+	id = "assets/DashEnemy.png";
+	this.path.set(id,id);
+	this.type.set(id,"IMAGE");
+	id = "assets/Door.png";
+	this.path.set(id,id);
+	this.type.set(id,"IMAGE");
 	id = "assets/Enemy.png";
+	this.path.set(id,id);
+	this.type.set(id,"IMAGE");
+	id = "assets/LaunchEnemy.png";
+	this.path.set(id,id);
+	this.type.set(id,"IMAGE");
+	id = "assets/oldplayer.png";
 	this.path.set(id,id);
 	this.type.set(id,"IMAGE");
 	id = "assets/openfl.svg";
 	this.path.set(id,id);
 	this.type.set(id,"TEXT");
-	id = "assets/player.png";
+	id = "assets/Player.png";
 	this.path.set(id,id);
 	this.type.set(id,"IMAGE");
 	id = "assets/Player2.png";
 	this.path.set(id,id);
 	this.type.set(id,"IMAGE");
+	id = "assets/PlayerDash.png";
+	this.path.set(id,id);
+	this.type.set(id,"IMAGE");
+	id = "assets/PlayerLaunch.png";
+	this.path.set(id,id);
+	this.type.set(id,"IMAGE");
+	id = "assets/PlayerProjectile.png";
+	this.path.set(id,id);
+	this.type.set(id,"IMAGE");
 	id = "assets/portal.png";
 	this.path.set(id,id);
 	this.type.set(id,"IMAGE");
+	id = "assets/Projectile.png";
+	this.path.set(id,id);
+	this.type.set(id,"IMAGE");
+	id = "assets/Projectile2.png";
+	this.path.set(id,id);
+	this.type.set(id,"IMAGE");
+	id = "assets/ProjectileEnemy.png";
+	this.path.set(id,id);
+	this.type.set(id,"IMAGE");
 	id = "assets/Stage1-1.tmx";
+	this.path.set(id,id);
+	this.type.set(id,"TEXT");
+	id = "assets/Stage1-2.tmx";
+	this.path.set(id,id);
+	this.type.set(id,"TEXT");
+	id = "assets/Stage1-3.tmx";
+	this.path.set(id,id);
+	this.type.set(id,"TEXT");
+	id = "assets/Stage1-4.tmx";
+	this.path.set(id,id);
+	this.type.set(id,"TEXT");
+	id = "assets/Stage3-1.tmx";
+	this.path.set(id,id);
+	this.type.set(id,"TEXT");
+	id = "assets/Stage3-2.tmx";
 	this.path.set(id,id);
 	this.type.set(id,"TEXT");
 	id = "assets/Stranger.png";
@@ -1260,6 +1337,9 @@ var DefaultAssetLibrary = function() {
 	this.path.set(id,id);
 	this.type.set(id,"TEXT");
 	id = "assets/Untitled.png";
+	this.path.set(id,id);
+	this.type.set(id,"IMAGE");
+	id = "assets/WalkingEnemy.png";
 	this.path.set(id,id);
 	this.type.set(id,"IMAGE");
 	id = "assets/World1Tiles.png";
@@ -1764,7 +1844,7 @@ _$UInt_UInt_$Impl_$.toFloat = function(this1) {
 	var $int = this1;
 	if($int < 0) return 4294967296.0 + $int; else return $int + 0.0;
 };
-var maps_MapObject = function(implementation,defaultBmp,passable) {
+var maps_mapobjects_MapObject = function(implementation,defaultBmp,passable) {
 	if(passable == null) passable = true;
 	openfl_display_Sprite.call(this);
 	if(this != implementation) throw new js__$Boot_HaxeError(new openfl_errors_Error("MapObject is meant to be used as an abstract class."));
@@ -1773,14 +1853,16 @@ var maps_MapObject = function(implementation,defaultBmp,passable) {
 	this.addChild(this.defaultBitmap);
 	this.collisionBounds = new openfl_geom_Rectangle(this.get_x(),this.get_y(),this.get_width(),this.get_height());
 };
-$hxClasses["maps.MapObject"] = maps_MapObject;
-maps_MapObject.__name__ = ["maps","MapObject"];
-maps_MapObject.__super__ = openfl_display_Sprite;
-maps_MapObject.prototype = $extend(openfl_display_Sprite.prototype,{
+$hxClasses["maps.mapobjects.MapObject"] = maps_mapobjects_MapObject;
+maps_mapobjects_MapObject.__name__ = ["maps","mapobjects","MapObject"];
+maps_mapobjects_MapObject.__super__ = openfl_display_Sprite;
+maps_mapobjects_MapObject.prototype = $extend(openfl_display_Sprite.prototype,{
 	getPassable: function() {
 		return this.passable;
 	}
-	,checkCollision: function(otherObject) {
+	,checkCollision: function(otherObject,checkPassable) {
+		if(checkPassable == null) checkPassable = true;
+		if(!this.passable && checkPassable) return false;
 		this.tempObjectBounds = this.getCollisionBounds();
 		this.tempCollideBounds = otherObject.getCollisionBounds();
 		if(this.tempObjectBounds.intersects(this.tempCollideBounds)) return true; else return false;
@@ -1799,29 +1881,38 @@ maps_MapObject.prototype = $extend(openfl_display_Sprite.prototype,{
 		} else if(this.thisCenter.y - this.otherCenter.y >= 0) distance = this.tempObjectBounds.y - (this.tempCollideBounds.y + this.tempCollideBounds.height); else if(this.thisCenter.y - this.otherCenter.y < 0) distance = this.tempObjectBounds.y + this.tempObjectBounds.height - this.tempCollideBounds.y;
 		return Math.round(distance);
 	}
-	,__class__: maps_MapObject
+	,__class__: maps_mapobjects_MapObject
 });
-var actors_Actor = function(implementation,defaultBmp,passable,animations,actorSize,mover) {
+var actors_Actor = function(implementation,defaultBmp,passable,animations,mover,actorWidth,actorHeight) {
+	if(actorHeight == null) actorHeight = -1;
 	if(this != implementation) throw new js__$Boot_HaxeError(new openfl_errors_Error("Actor is meant to be used as an abstract class."));
-	this.actorSize = actorSize;
+	this.actorWidth = actorWidth;
+	if(actorHeight == -1) actorHeight = actorWidth;
+	this.actorHeight = actorHeight;
+	this.originalActorHeight = this.actorHeight;
+	this.originalActorWidth = this.actorWidth;
 	this.animations = animations;
 	this.baseBmp = defaultBmp;
 	this.actorBmp = this.getAnimationBmp(this.currentAnimation,defaultBmp);
-	maps_MapObject.call(this,this,this.actorBmp,passable);
+	maps_mapobjects_MapObject.call(this,this,this.actorBmp,passable);
 	this.defaultMover = mover;
 	this.currentMover = this.defaultMover;
-	this.collisionBounds = new openfl_geom_Rectangle(0,0,actorSize,actorSize);
+	this.collisionBounds = new openfl_geom_Rectangle(0,0,actorWidth,actorHeight);
+	this.originalBounds = this.collisionBounds;
 	this.maxHealth = 1;
 	this.health = this.maxHealth;
+	this.unstoppable = false;
 	this.invulnerable = false;
 	this.invulDuration = 30;
 	this.invulCount = 0;
+	this.stunCount = 0;
 };
 $hxClasses["actors.Actor"] = actors_Actor;
 actors_Actor.__name__ = ["actors","Actor"];
-actors_Actor.__super__ = maps_MapObject;
-actors_Actor.prototype = $extend(maps_MapObject.prototype,{
+actors_Actor.__super__ = maps_mapobjects_MapObject;
+actors_Actor.prototype = $extend(maps_mapobjects_MapObject.prototype,{
 	updateActor: function() {
+		this.updateStun();
 		this.updateAttack();
 		this.updateHitbox();
 		this.updateActorAnimation();
@@ -1830,6 +1921,13 @@ actors_Actor.prototype = $extend(maps_MapObject.prototype,{
 		this.moveYAxis();
 		this.checkInvulnerable();
 		this.checkDamage();
+	}
+	,updateStun: function() {
+		if(this.stunCount > 0) this.stunCount -= 1;
+	}
+	,stunLock: function(duration) {
+		this.stunCount = duration;
+		if(duration > 0) this.currentMover.freeze();
 	}
 	,updateAttack: function() {
 		if(this.attackBehavior == null) return;
@@ -1840,6 +1938,8 @@ actors_Actor.prototype = $extend(maps_MapObject.prototype,{
 		if(this.hitBox.updateHitbox()) this.removeHitbox();
 	}
 	,removeHitbox: function() {
+		if(this.hitBox == null) return;
+		this.hitBox.resetHitbox();
 		if(this.contains(this.hitBox)) this.removeChild(this.hitBox);
 		this.hitBox = null;
 	}
@@ -1856,6 +1956,9 @@ actors_Actor.prototype = $extend(maps_MapObject.prototype,{
 		if(this.attackBehavior == null) return 0;
 		return this.attackBehavior.getDamage();
 	}
+	,getAttackBehavior: function() {
+		return this.attackBehavior;
+	}
 	,updateActorAnimation: function() {
 		this.currentAnimation.updateAnimation();
 		this.removeBmp();
@@ -1870,37 +1973,53 @@ actors_Actor.prototype = $extend(maps_MapObject.prototype,{
 	}
 	,getAnimationBmp: function(animation,bitmap) {
 		var frame = animation.getRectangle();
-		var animationBmp = new openfl_display_Bitmap(new openfl_display_BitmapData(this.actorSize,this.actorSize));
+		var animationBmp = new openfl_display_Bitmap(new openfl_display_BitmapData(this.actorWidth,this.actorHeight));
 		animationBmp.bitmapData.copyPixels(bitmap.bitmapData,frame,new openfl_geom_Point());
 		return animationBmp;
 	}
 	,getAnimation: function(title) {
 		return this.animations.get(title);
 	}
+	,getAnimationName: function() {
+		if(this.currentAnimation == null) return "";
+		return this.currentAnimation.getName();
+	}
 	,checkDamage: function() {
 		var hitboxCollisions = this.currentMap.checkActorHitBoxes(this);
-		if(hitboxCollisions.length > 0) this.takeDamage(hitboxCollisions[0]);
+		if(hitboxCollisions.length > 0) this.takeActorDamage(hitboxCollisions[0],hitboxCollisions[0].getAttackBehavior());
+		var projectileCollisions = this.currentMap.checkProjectileBounds(this);
+		if(projectileCollisions.length > 0) this.takeProjectileDamage(projectileCollisions[0]);
 	}
 	,checkInvulnerable: function() {
 		if(this.invulnerable) {
 			this.invulCount += 1;
 			if(this.invulCount >= this.invulDuration) {
 				this.invulnerable = false;
+				this.set_alpha(1);
 				this.invulCount = 0;
 			}
 		}
 	}
-	,takeDamage: function(actor) {
-		if(this.invulnerable) return true;
-		var damage = actor.getAttackDamage();
+	,takeActorDamage: function(actor,attack) {
+		return this.takeDamage(actor.getAttackDamage(),actor);
+	}
+	,takeProjectileDamage: function(projectile) {
+		return this.takeDamage(projectile.getProjectileDamage(),projectile);
+	}
+	,takeDamage: function(damage,source) {
+		if(this.invulnerable) return false; else if(this.unstoppable) return false;
 		this.health -= damage;
 		if(this.health <= 0) {
 			this.kill();
-			return false;
-		} else this.invulnerable = true;
+			return true;
+		} else {
+			this.set_alpha(.7);
+			this.invulnerable = true;
+		}
 		return true;
 	}
 	,kill: function() {
+		this.endAttack();
 		this.currentMover.freeze();
 	}
 	,setGrounded: function() {
@@ -1909,19 +2028,32 @@ actors_Actor.prototype = $extend(maps_MapObject.prototype,{
 	,initiateAttack: function() {
 		if(this.attackBehavior == null) return;
 		this.attackBehavior.startAttack();
+		if(this.attackBehavior.grantsUnstoppable()) this.unstoppable = true;
 		if(this.attackBehavior.getMovement() != null) this.currentMover = this.attackBehavior.getMovement();
 		if(this.attackBehavior.getHits() != null) this.addHitbox(this.attackBehavior.getHits());
 	}
 	,endAttack: function() {
 		if(this.attackBehavior == null) return;
-		if(this.attackBehavior.getMovement() != null) this.currentMover = this.defaultMover;
+		this.revertAttackProperties();
+		this.endAttackStun();
+		this.removeHitbox();
 		this.attackBehavior = null;
 	}
+	,revertAttackProperties: function() {
+		if(this.attackBehavior.grantsUnstoppable()) this.unstoppable = false;
+		if(this.attackBehavior.getMovement() != null) this.currentMover = this.defaultMover;
+	}
+	,endAttackStun: function() {
+		this.stunLock(this.attackBehavior.getStunDuration());
+		if(this.attackBehavior.hasStunAnimation()) this.setAnimation(this.attackBehavior.getStunAnimation());
+	}
 	,goLeft: function() {
+		this.alignmentLeft = true;
 		this.currentMover.goLeft();
 		if(this.defaultMover != this.currentMover) this.defaultMover.goLeft();
 	}
 	,goRight: function() {
+		this.alignmentLeft = false;
 		this.currentMover.goRight();
 		if(this.defaultMover != this.currentMover) this.defaultMover.goRight();
 	}
@@ -1944,15 +2076,8 @@ actors_Actor.prototype = $extend(maps_MapObject.prototype,{
 		if(this.checkFatalTiles(collisions,true)) {
 			this.kill();
 			return;
-		} else if(this.checkActorCollision(actorCollisions,true)) {
-			if(!this.takeDamage(actorCollisions[0])) return;
-			collisions.push(actorCollisions[0]);
-			if(js_Boot.__instanceof(actorCollisions[0],actors_Player)) {
-				var j = 0;
-			}
-		}
+		} else if(this.checkActorCollision(actorCollisions,true)) collisions.push(actorCollisions[0]);
 		var largestDistance = this.getCollisionLargestDistance(collisions,true);
-		if(largestDistance > 8) return;
 		if(largestDistance != 0) {
 			var _g1 = this;
 			_g1.set_x(_g1.get_x() - largestDistance);
@@ -1966,12 +2091,8 @@ actors_Actor.prototype = $extend(maps_MapObject.prototype,{
 		if(this.checkFatalTiles(collisions,false)) {
 			this.kill();
 			return;
-		} else if(this.checkActorCollision(actorCollisions,false)) {
-			if(!this.takeDamage(actorCollisions[0])) return;
-			collisions.push(actorCollisions[0]);
-		}
+		} else if(this.checkActorCollision(actorCollisions,false)) collisions.push(actorCollisions[0]);
 		var largestDistance = this.getCollisionLargestDistance(collisions,false);
-		if(largestDistance > 16) return;
 		if(largestDistance != 0) {
 			var _g1 = this;
 			_g1.set_y(_g1.get_y() - largestDistance);
@@ -1983,7 +2104,7 @@ actors_Actor.prototype = $extend(maps_MapObject.prototype,{
 		var _g = collisionList.length;
 		while(_g1 < _g) {
 			var i = _g1++;
-			if(js_Boot.__instanceof(collisionList[i],maps_Tile)) {
+			if(js_Boot.__instanceof(collisionList[i],maps_mapobjects_Tile)) {
 				var tempTile = collisionList[i];
 				if(tempTile.checkFatal(this,xAxis)) return true;
 			}
@@ -2016,6 +2137,12 @@ actors_Actor.prototype = $extend(maps_MapObject.prototype,{
 		}
 		return largestDistance;
 	}
+	,setAnimation: function(animation) {
+		this.currentAnimation = this.animations.get(animation);
+	}
+	,isFacingLeft: function() {
+		return this.alignmentLeft;
+	}
 	,getCurrentMap: function() {
 		return this.currentMap;
 	}
@@ -2024,85 +2151,17 @@ actors_Actor.prototype = $extend(maps_MapObject.prototype,{
 	}
 	,__class__: actors_Actor
 });
-var actors_ActorMover = function(xAcc,yAcc,targetXVel,targetYVel,xVel,yVel,maxSpeedX,maxSpeedY,jumpCharges) {
-	this.xAcc = xAcc;
-	this.yAcc = yAcc;
-	this.targetXVel = targetXVel;
-	this.targetYVel = targetYVel;
-	this.xVel = xVel;
-	this.yVel = yVel;
-	this.maxSpeedX = maxSpeedX;
-	this.maxSpeedY = maxSpeedY;
-	this.maxJumpCharges = jumpCharges;
-	this.jumpCharges = jumpCharges;
-};
-$hxClasses["actors.ActorMover"] = actors_ActorMover;
-actors_ActorMover.__name__ = ["actors","ActorMover"];
-actors_ActorMover.prototype = {
-	updateMovement: function() {
-		this.updateVelocity();
-	}
-	,updateVelocity: function() {
-		this.xVel = this.targetXVel * this.xAcc + (1 - this.xAcc) * this.xVel;
-		if(this.xVel > this.maxSpeedX) this.xVel = this.maxSpeedX; else if(this.xVel < -this.maxSpeedX) this.xVel = -this.maxSpeedX;
-		this.yVel = this.targetYVel * this.yAcc + (1 - this.yAcc) * this.yVel;
-		if(this.yVel > this.maxSpeedY) this.yVel = this.maxSpeedY; else if(this.yVel < -this.maxSpeedY) this.yVel = -this.maxSpeedY;
-		this.targetYVel = 10;
-	}
-	,setGrounded: function() {
-		this.jumpCharges = this.maxJumpCharges;
-		this.grounded = true;
-	}
-	,goLeft: function() {
-		this.targetXVel = -5;
-	}
-	,goRight: function() {
-		this.targetXVel = 5;
-	}
-	,stopLeft: function() {
-		if(this.targetXVel < 0) this.targetXVel = 0;
-	}
-	,stopRight: function() {
-		if(this.targetXVel > 0) this.targetXVel = 0;
-	}
-	,jump: function() {
-		if(this.jumpCharges == 0) return;
-		this.jumpCharges -= 1;
-		this.grounded = false;
-		this.yVel = -15;
-	}
-	,getXVel: function() {
-		return this.xVel;
-	}
-	,getYVel: function() {
-		return this.yVel;
-	}
-	,getTargetXVel: function() {
-		return this.targetXVel;
-	}
-	,getTargetYVel: function() {
-		return this.targetYVel;
-	}
-	,getIsGrounded: function() {
-		return this.grounded;
-	}
-	,freeze: function() {
-		this.xVel = 0;
-		this.yVel = 0;
-	}
-	,copyMover: function() {
-		return new actors_ActorMover(this.xAcc,this.yAcc,this.targetXVel,this.targetYVel,this.xVel,this.yVel,this.maxSpeedX,this.maxSpeedY,this.jumpCharges);
-	}
-	,__class__: actors_ActorMover
-};
-var actors_Animation = function(name,speed,animStart,animWidth,animHeight,animFrames) {
+var actors_Animation = function(name,speed,animStart,animWidth,animHeight,animFrames,intervalPause) {
+	if(intervalPause == null) intervalPause = 0;
 	this.name = name;
 	this.speed = speed;
 	this.animStart = animStart;
 	this.animWidth = animWidth;
 	this.animHeight = animHeight;
 	this.animFrames = animFrames;
+	this.intervalPause = intervalPause;
 	this.tickCount = 0;
+	this.intervalCount = 0;
 	this.frames = [];
 	var _g1 = 0;
 	var _g = animFrames.length;
@@ -2116,12 +2175,21 @@ var actors_Animation = function(name,speed,animStart,animWidth,animHeight,animFr
 $hxClasses["actors.Animation"] = actors_Animation;
 actors_Animation.__name__ = ["actors","Animation"];
 actors_Animation.prototype = {
-	updateAnimation: function() {
+	resetAnimation: function() {
+		this.tickCount = 0;
+		this.intervalCount = 0;
+		this.currentFrame = this.frames[0];
+	}
+	,updateAnimation: function() {
 		if(this.currentFrame == null) {
 			this.currentFrame = this.frames[0];
 			return this.currentFrame;
 		}
 		if(this.speed < 0) return this.currentFrame;
+		if(this.intervalCount > 0) {
+			this.intervalCount -= 1;
+			return this.currentFrame;
+		}
 		this.tickCount++;
 		if(this.tickCount > this.speed) {
 			this.tickCount = 0;
@@ -2130,7 +2198,10 @@ actors_Animation.prototype = {
 			while(_g1 < _g) {
 				var i = _g1++;
 				if(this.currentFrame == this.frames[i]) {
-					if(this.frames.length - 1 == i) this.currentFrame = this.frames[0]; else this.currentFrame = this.frames[i + 1];
+					if(this.frames.length - 1 == i) {
+						this.currentFrame = this.frames[0];
+						this.intervalCount = this.intervalPause;
+					} else this.currentFrame = this.frames[i + 1];
 					return this.currentFrame;
 				}
 			}
@@ -2169,17 +2240,620 @@ actors_Animation.prototype = {
 	}
 	,__class__: actors_Animation
 };
-var actors_Attack = function(attackMovement,hits,duration,damage) {
+var actors_ObjectMover = function(xAcc,yAcc,targetXVel,targetYVel,xVel,yVel,maxSpeedX,maxSpeedY,jumpCharges,gravity,takesInput) {
+	if(takesInput == null) takesInput = true;
+	if(gravity == null) gravity = 10;
+	this.xAcc = xAcc;
+	this.yAcc = yAcc;
+	this.targetXVel = targetXVel;
+	this.targetYVel = targetYVel;
+	this.xVel = xVel;
+	this.yVel = yVel;
+	this.maxSpeedX = maxSpeedX;
+	this.maxSpeedY = maxSpeedY;
+	this.maxJumpCharges = jumpCharges;
+	this.jumpCharges = jumpCharges;
+	this.gravity = gravity;
+	this.takesInput = takesInput;
+};
+$hxClasses["actors.ObjectMover"] = actors_ObjectMover;
+actors_ObjectMover.__name__ = ["actors","ObjectMover"];
+actors_ObjectMover.prototype = {
+	updateMovement: function() {
+		this.updateVelocity();
+	}
+	,updateVelocity: function() {
+		this.xVel = this.targetXVel * this.xAcc + (1 - this.xAcc) * this.xVel;
+		if(this.xVel > this.maxSpeedX) this.xVel = this.maxSpeedX; else if(this.xVel < -this.maxSpeedX) this.xVel = -this.maxSpeedX;
+		this.yVel = this.targetYVel * this.yAcc + (1 - this.yAcc) * this.yVel;
+		if(this.yVel > this.maxSpeedY) this.yVel = this.maxSpeedY; else if(this.yVel < -this.maxSpeedY) this.yVel = -this.maxSpeedY;
+		this.targetYVel = this.gravity;
+	}
+	,setGrounded: function() {
+		this.jumpCharges = this.maxJumpCharges;
+		this.grounded = true;
+	}
+	,applyForce: function(direction,intensity) {
+		var hypotenuse = Math.sqrt(direction.x * direction.x + direction.y * direction.y);
+		this.xVel = Math.round(direction.x / hypotenuse * intensity * this.xAcc);
+		this.yVel = Math.round(direction.y / hypotenuse * intensity * this.yAcc);
+	}
+	,goLeft: function() {
+		if(!this.takesInput) return;
+		this.targetXVel = -5;
+	}
+	,goRight: function() {
+		if(!this.takesInput) return;
+		this.targetXVel = 5;
+	}
+	,stopLeft: function() {
+		if(!this.takesInput) return;
+		if(this.targetXVel < 0) this.targetXVel = 0;
+	}
+	,stopRight: function() {
+		if(!this.takesInput) return;
+		if(this.targetXVel > 0) this.targetXVel = 0;
+	}
+	,jump: function() {
+		if(!this.takesInput) return;
+		if(this.jumpCharges == 0) return;
+		this.jumpCharges -= 1;
+		this.grounded = false;
+		this.yVel = -15;
+	}
+	,getXVel: function() {
+		return this.xVel;
+	}
+	,getYVel: function() {
+		return this.yVel;
+	}
+	,invertTargetXVel: function() {
+		this.targetXVel = -this.targetXVel;
+	}
+	,invertTargetYVel: function() {
+		this.targetYVel = -this.targetYVel;
+	}
+	,getTargetXVel: function() {
+		return this.targetXVel;
+	}
+	,getTargetYVel: function() {
+		return this.targetYVel;
+	}
+	,getIsGrounded: function() {
+		return this.grounded;
+	}
+	,freeze: function() {
+		this.xVel = 0;
+		this.yVel = 0;
+		this.targetXVel = 0;
+		this.targetYVel = 0;
+	}
+	,copyMover: function() {
+		return new actors_ObjectMover(this.xAcc,this.yAcc,this.targetXVel,this.targetYVel,this.xVel,this.yVel,this.maxSpeedX,this.maxSpeedY,this.jumpCharges,this.gravity,this.takesInput);
+	}
+	,__class__: actors_ObjectMover
+};
+var actors_Player = function() {
+	Main.getSingleton().stage.addEventListener(openfl_events_KeyboardEvent.KEY_UP,$bind(this,this.checkKeysUp));
+	Main.getSingleton().stage.addEventListener(openfl_events_KeyboardEvent.KEY_DOWN,$bind(this,this.checkKeysDown));
+	var mover = new actors_ObjectMover(.5,.1,0,0,0,0,60,60,2);
+	var playerWidth = 32;
+	var playerHeight = 36;
+	var rightIdle = new actors_Animation("RightIdle",3,new openfl_geom_Point(0,0),playerWidth,playerHeight,[new openfl_geom_Point(),new openfl_geom_Point(1),new openfl_geom_Point(2)]);
+	var leftIdle = new actors_Animation("LeftIdle",3,new openfl_geom_Point(0,playerHeight),playerWidth,playerHeight,[new openfl_geom_Point(),new openfl_geom_Point(1),new openfl_geom_Point(2)]);
+	var rightWalk = new actors_Animation("RightWalk",3,new openfl_geom_Point(0,playerHeight * 2),playerWidth,playerHeight,[new openfl_geom_Point(),new openfl_geom_Point(1,0),new openfl_geom_Point(2,0),new openfl_geom_Point(3,0)]);
+	var leftWalk = new actors_Animation("LeftWalk",3,new openfl_geom_Point(0,playerHeight * 3),playerWidth,playerHeight,[new openfl_geom_Point(),new openfl_geom_Point(1,0),new openfl_geom_Point(2,0),new openfl_geom_Point(3,0)]);
+	var rightJump = new actors_Animation("RightJump",0,new openfl_geom_Point(0,playerHeight * 4),playerWidth,playerHeight,[new openfl_geom_Point()]);
+	var leftJump = new actors_Animation("LeftJump",0,new openfl_geom_Point(playerWidth * 2,playerHeight * 4),playerWidth,playerHeight,[new openfl_geom_Point()]);
+	var rightFall = new actors_Animation("RightFall",0,new openfl_geom_Point(playerWidth,playerHeight * 4),playerWidth,playerHeight,[new openfl_geom_Point()]);
+	var leftFall = new actors_Animation("LeftFall",0,new openfl_geom_Point(playerWidth * 3,playerHeight * 4),playerWidth,playerHeight,[new openfl_geom_Point()]);
+	var rightHurt = new actors_Animation("RightHurt",1,new openfl_geom_Point(0,playerHeight * 5),playerWidth,playerHeight,[new openfl_geom_Point(),new openfl_geom_Point(1)]);
+	var leftHurt = new actors_Animation("LeftHurt",1,new openfl_geom_Point(playerWidth * 2,playerHeight * 5),playerWidth,playerHeight,[new openfl_geom_Point(),new openfl_geom_Point(1)]);
+	var dashLeft = new actors_Animation("LeftDash",1,new openfl_geom_Point(0,playerHeight * 6),playerWidth,playerHeight,[new openfl_geom_Point(),new openfl_geom_Point(1)]);
+	var dashRight = new actors_Animation("RightDash",1,new openfl_geom_Point(playerWidth * 2,playerHeight * 6),playerWidth,playerHeight,[new openfl_geom_Point(),new openfl_geom_Point(1)]);
+	var dashRestLeft = new actors_Animation("LeftDashRest",5,new openfl_geom_Point(0,playerHeight * 7),playerWidth,playerHeight,[new openfl_geom_Point(),new openfl_geom_Point(1)]);
+	var dashRestRight = new actors_Animation("RightDashRest",5,new openfl_geom_Point(playerWidth * 2,playerHeight * 7),playerWidth,playerHeight,[new openfl_geom_Point(),new openfl_geom_Point(1)]);
+	var leftLaunch = new actors_Animation("LeftLaunch",1,new openfl_geom_Point(0,playerHeight * 6),40,40,[new openfl_geom_Point(),new openfl_geom_Point(1)]);
+	var rightLaunch = new actors_Animation("RightLaunch",1,new openfl_geom_Point(0,playerHeight * 6),40,40,[new openfl_geom_Point(),new openfl_geom_Point(1)]);
+	var leftLaunchRest = new actors_Animation("LeftLaunchRest",10,new openfl_geom_Point(0,playerHeight * 6 + 40),playerWidth,playerHeight,[new openfl_geom_Point(),new openfl_geom_Point(1)]);
+	var rightLaunchRest = new actors_Animation("RightLaunchRest",10,new openfl_geom_Point(0,playerHeight * 6 + 40),playerWidth,playerHeight,[new openfl_geom_Point(),new openfl_geom_Point(1)]);
+	var rightProjectile = new actors_Animation("RightProjectile",1,new openfl_geom_Point(0,playerHeight * 6),playerWidth,playerHeight,[new openfl_geom_Point(),new openfl_geom_Point(1),new openfl_geom_Point(2),new openfl_geom_Point(3)],10);
+	var leftProjectile = new actors_Animation("LeftProjectile",1,new openfl_geom_Point(0,playerHeight * 7),playerWidth,playerHeight,[new openfl_geom_Point(),new openfl_geom_Point(1),new openfl_geom_Point(2),new openfl_geom_Point(3)],10);
+	this.animations = new haxe_ds_StringMap();
+	var k = rightIdle.getName();
+	this.animations.set(k,rightIdle);
+	rightIdle;
+	var k1 = leftIdle.getName();
+	this.animations.set(k1,leftIdle);
+	leftIdle;
+	var k2 = leftWalk.getName();
+	this.animations.set(k2,leftWalk);
+	leftWalk;
+	var k3 = rightWalk.getName();
+	this.animations.set(k3,rightWalk);
+	rightWalk;
+	var k4 = rightJump.getName();
+	this.animations.set(k4,rightJump);
+	rightJump;
+	var k5 = rightFall.getName();
+	this.animations.set(k5,rightFall);
+	rightFall;
+	var k6 = leftJump.getName();
+	this.animations.set(k6,leftJump);
+	leftJump;
+	var k7 = leftFall.getName();
+	this.animations.set(k7,leftFall);
+	leftFall;
+	var k8 = rightHurt.getName();
+	this.animations.set(k8,rightHurt);
+	rightHurt;
+	var k9 = leftHurt.getName();
+	this.animations.set(k9,leftHurt);
+	leftHurt;
+	var k10 = dashLeft.getName();
+	this.animations.set(k10,dashLeft);
+	dashLeft;
+	var k11 = dashRight.getName();
+	this.animations.set(k11,dashRight);
+	dashRight;
+	var k12 = dashRestLeft.getName();
+	this.animations.set(k12,dashRestLeft);
+	dashRestLeft;
+	var k13 = dashRestRight.getName();
+	this.animations.set(k13,dashRestRight);
+	dashRestRight;
+	var k14 = leftLaunch.getName();
+	this.animations.set(k14,leftLaunch);
+	leftLaunch;
+	var k15 = rightLaunch.getName();
+	this.animations.set(k15,rightLaunch);
+	rightLaunch;
+	var k16 = leftLaunchRest.getName();
+	this.animations.set(k16,leftLaunchRest);
+	leftLaunchRest;
+	var k17 = rightLaunchRest.getName();
+	this.animations.set(k17,rightLaunchRest);
+	rightLaunchRest;
+	var k18 = leftProjectile.getName();
+	this.animations.set(k18,leftProjectile);
+	leftProjectile;
+	var k19 = rightProjectile.getName();
+	this.animations.set(k19,rightProjectile);
+	rightProjectile;
+	this.currentAnimation = rightIdle;
+	var hits = [];
+	hits.push(new openfl_geom_Rectangle(-2,playerHeight,playerWidth + 4,14));
+	this.jumpAttack = new actors_attacks_AbsorbAttack(new actors_ObjectMover(.5,.1,0,60,0,10,0,60,0),hits,60,3);
+	hits = [];
+	hits.push(new openfl_geom_Rectangle(-12,0,10,playerWidth));
+	hits.push(new openfl_geom_Rectangle(playerWidth + 2,0,10,playerWidth));
+	this.standAttack = new actors_attacks_Attack(new actors_ObjectMover(.5,.1,0,0,0,0,0,60,0),hits,15,1,0);
+	actors_Actor.call(this,this,Main.getBitmapAsset("assets/Player.png"),true,this.animations,mover,playerWidth,playerHeight);
+	this.maxHealth = 20;
+	this.health = 20;
+	this.collisionBounds = new openfl_geom_Rectangle(4,6,24,30);
+	this.originalBounds = this.collisionBounds;
+};
+$hxClasses["actors.Player"] = actors_Player;
+actors_Player.__name__ = ["actors","Player"];
+actors_Player.__super__ = actors_Actor;
+actors_Player.prototype = $extend(actors_Actor.prototype,{
+	updatePlayer: function() {
+		this.currentMap.updateCheckpoints(this);
+		this.centerScreen();
+		this.handleAnimation();
+		if(this.get_y() > this.currentMap.getMapHeight()) this.kill();
+	}
+	,isStunned: function() {
+		if(this.stunCount <= 0) return false;
+		return true;
+	}
+	,handleAnimation: function() {
+		if(this.stunCount > 0 && this.invulnerable) return;
+		if(this.attackBehavior != null) {
+			if(this.attackBehavior.hasAnimation()) {
+				this.setAnimation(this.attackBehavior.getAnimation());
+				return;
+			}
+		}
+		if(this.stunCount > 0 && this.currentAnimation.getName().indexOf("Rest") >= 0) return; else if(!this.currentMover.getIsGrounded() && this.currentMover.getYVel() > 0) this.setAnimation("Fall"); else if(!this.currentMover.getIsGrounded() && this.currentMover.getYVel() < 0) this.setAnimation("Jump"); else if(Math.abs(this.currentMover.getXVel()) < .1) this.setAnimation("Idle"); else if(Math.abs(this.currentMover.getXVel()) > .1) this.setAnimation("Walk");
+	}
+	,centerScreen: function() {
+		var screenHeight = 360;
+		var screenWidth = 540;
+		var scale = 1;
+		screenHeight = screenHeight / scale;
+		screenWidth = screenWidth / scale;
+		var mapWidth = this.currentMap.getMapWidth();
+		var mapHeight = this.currentMap.getMapHeight();
+		mapWidth = mapWidth * scale;
+		mapHeight = mapHeight * scale;
+		if(mapWidth < screenWidth * scale) this.currentMap.set_x((screenWidth * scale / 2 - mapWidth / 2) / scale); else if(this.get_x() - screenWidth / 2 > this.currentMap.get_x() && this.get_x() + screenWidth / 2 < mapWidth / scale) this.currentMap.set_x(-this.get_x() + screenWidth / 2); else if(this.get_x() + screenWidth / 2 > mapWidth / scale) this.currentMap.set_x(screenWidth - mapWidth / scale);
+		if(mapHeight < screenHeight * scale) this.currentMap.set_y((screenHeight * scale / 2 - mapHeight / 2) / scale); else if(this.get_y() - screenHeight / 2 > this.currentMap.get_y() && this.get_y() + screenHeight / 2 < mapHeight / scale) this.currentMap.set_y(-this.get_y() + screenHeight / 2); else if(this.get_y() + screenHeight / 2 > mapHeight / scale) this.currentMap.set_y(screenHeight - mapHeight / scale);
+	}
+	,setGrounded: function() {
+		actors_Actor.prototype.setGrounded.call(this);
+		if(this.currentMover.getIsGrounded() && this.currentAnimation.getName().indexOf("Fall") >= 0) {
+			if(Math.abs(this.currentMover.getXVel()) < 0.1) this.setAnimation("Idle"); else this.setAnimation("Walk");
+		}
+	}
+	,initiateAttack: function() {
+		if(this.isAttacking() || this.isStunned()) return;
+		if(this.ability != null) {
+			this.beginAbilityAttack();
+			this.attackBehavior = this.ability.getAbilityAttack(this,this.currentMover);
+		} else if(this.currentMover.getIsGrounded()) this.attackBehavior = this.standAttack; else this.attackBehavior = this.jumpAttack;
+		actors_Actor.prototype.initiateAttack.call(this);
+	}
+	,isAttacking: function() {
+		if(this.attackBehavior == null) return false; else return this.attackBehavior.isActive();
+	}
+	,endAttack: function() {
+		this.resetAttackAnimation();
+		if(this.ability != null) this.endAbilityAttack();
+		actors_Actor.prototype.endAttack.call(this);
+	}
+	,resetAttackAnimation: function() {
+		if(this.attackBehavior == null) return;
+		if(this.attackBehavior.hasAnimation()) this.currentAnimation.resetAnimation();
+	}
+	,beginAbilityAttack: function() {
+		if(this.ability.getAbilityHeight() != -1) this.actorHeight = this.ability.getAbilityHeight();
+		if(this.ability.getAbilityWidth() != -1) this.actorWidth = this.ability.getAbilityWidth();
+	}
+	,endAbilityAttack: function() {
+		this.actorHeight = this.originalActorHeight;
+		this.actorWidth = this.originalActorWidth;
+	}
+	,takeDamage: function(damage,source) {
+		if(actors_Actor.prototype.takeDamage.call(this,damage,source)) {
+			this.stunLock(Math.round(this.invulDuration / 4));
+			this.damageKnockback(source);
+			this.setAnimation("Hurt");
+			return true;
+		} else return false;
+	}
+	,takeProjectileDamage: function(projectile) {
+		if(js_Boot.__instanceof(projectile,actors_attacks_EnemyProjectile)) return actors_Actor.prototype.takeProjectileDamage.call(this,projectile);
+		return false;
+	}
+	,damageKnockback: function(source) {
+		var hitAngle = new openfl_geom_Point(this.get_x() + this.actorWidth / 2 - (source.get_x() + source.get_width() / 2),this.get_y() + this.actorHeight / 2 - (source.get_y() + source.get_height() / 2));
+		this.currentMover.applyForce(hitAngle,60);
+	}
+	,kill: function() {
+		actors_Actor.prototype.kill.call(this);
+		var checkpoint = this.currentMap.getCurrentCheckpoint();
+		if(checkpoint == null) return;
+		this.health = this.maxHealth;
+		this.set_x(checkpoint.get_x());
+		this.set_y(checkpoint.get_y() - this.actorHeight / 2);
+	}
+	,absorbAbility: function(enemy) {
+		if(js_Boot.__instanceof(enemy,actors_enemies_DashEnemy)) {
+			this.ability = new actors_abilities_DashAbility();
+			this.baseBmp = Main.getBitmapAsset("assets/PlayerDash.png");
+		} else if(js_Boot.__instanceof(enemy,actors_enemies_LaunchEnemy)) {
+			this.ability = new actors_abilities_LaunchAbility();
+			this.baseBmp = Main.getBitmapAsset("assets/PlayerLaunch.png");
+		} else if(js_Boot.__instanceof(enemy,actors_enemies_ProjectileEnemy)) {
+			this.ability = new actors_abilities_ProjectileAbility();
+			this.baseBmp = Main.getBitmapAsset("assets/PlayerProjectile.png");
+		}
+	}
+	,removeAbility: function() {
+		this.ability = null;
+		this.baseBmp = Main.getBitmapAsset("assets/Player.png");
+	}
+	,checkKeysDown: function(key) {
+		if(this.isStunned()) return;
+		if(key.keyCode == 65 || key.keyCode == 37) this.goLeft(); else if(key.keyCode == 68 || key.keyCode == 39) this.goRight(); else if(key.keyCode == 74) this.initiateAttack();
+		if(key.keyCode == 32) this.jump();
+		if(key.keyCode == 75) this.removeAbility();
+		if(key.keyCode == 38 || key.keyCode == 87) this.currentMap.updateEndPortal(this);
+	}
+	,checkKeysUp: function(key) {
+		if(key.keyCode == 65 || key.keyCode == 37) this.stopLeft(); else if(key.keyCode == 68 || key.keyCode == 39) this.stopRight(); else if(key.keyCode == 74) this.stopHoldAttack();
+	}
+	,stopHoldAttack: function() {
+		if(this.attackBehavior == null || !this.attackBehavior.isActive()) return;
+		if(this.attackBehavior.getDuration() < 0) this.endAttack();
+	}
+	,goLeft: function() {
+		actors_Actor.prototype.goLeft.call(this);
+	}
+	,goRight: function() {
+		actors_Actor.prototype.goRight.call(this);
+	}
+	,stopLeft: function() {
+		actors_Actor.prototype.stopLeft.call(this);
+	}
+	,stopRight: function() {
+		actors_Actor.prototype.stopRight.call(this);
+	}
+	,jump: function() {
+		actors_Actor.prototype.jump.call(this);
+		if(!this.currentMover.getIsGrounded()) this.setAnimation("Jump");
+	}
+	,setAnimation: function(action) {
+		if(this.alignmentLeft) this.currentAnimation = this.getAnimation("Left" + action); else this.currentAnimation = this.getAnimation("Right" + action);
+	}
+	,__class__: actors_Player
+});
+var actors_abilities_Ability = function(ability) {
+	if(ability != this) throw new js__$Boot_HaxeError(new openfl_errors_Error("This class is meant to be treated as Abstract."));
+	this.abilityWidth = -1;
+	this.abilityHeight = -1;
+};
+$hxClasses["actors.abilities.Ability"] = actors_abilities_Ability;
+actors_abilities_Ability.__name__ = ["actors","abilities","Ability"];
+actors_abilities_Ability.prototype = {
+	getAbilityAttack: function(actor,mover) {
+		if(mover.getIsGrounded()) return this.jumpAttack; else return this.standingAttack;
+	}
+	,getAbilityWidth: function() {
+		return this.abilityWidth;
+	}
+	,getAbilityHeight: function() {
+		return this.abilityHeight;
+	}
+	,__class__: actors_abilities_Ability
+};
+var actors_abilities_DashAbility = function() {
+	actors_abilities_Ability.call(this,this);
+	var hitBoxes = [];
+	hitBoxes.push(new openfl_geom_Rectangle(-4,-2,20,40));
+	this.leftDash = new actors_attacks_Attack(new actors_ObjectMover(.5,.1,-15,0,0,0,60,60,0,0,false),hitBoxes,15,3,20,"Dash","DashRest",true);
+	hitBoxes = [];
+	hitBoxes.push(new openfl_geom_Rectangle(16,-2,20,40));
+	this.rightDash = new actors_attacks_Attack(new actors_ObjectMover(.5,.1,15,0,0,0,60,60,0,0,false),hitBoxes,15,3,20,"Dash","DashRest",true);
+	this.jumpAttack = this.leftDash;
+	this.standingAttack = this.leftDash;
+};
+$hxClasses["actors.abilities.DashAbility"] = actors_abilities_DashAbility;
+actors_abilities_DashAbility.__name__ = ["actors","abilities","DashAbility"];
+actors_abilities_DashAbility.__super__ = actors_abilities_Ability;
+actors_abilities_DashAbility.prototype = $extend(actors_abilities_Ability.prototype,{
+	getAbilityAttack: function(actor,mover) {
+		this.changeDashDirection(actor);
+		return actors_abilities_Ability.prototype.getAbilityAttack.call(this,actor,mover);
+	}
+	,changeDashDirection: function(actor) {
+		if(actor.getAnimationName().indexOf("Left") >= 0) {
+			this.jumpAttack = this.leftDash;
+			this.standingAttack = this.leftDash;
+		} else {
+			this.jumpAttack = this.rightDash;
+			this.standingAttack = this.rightDash;
+		}
+	}
+	,__class__: actors_abilities_DashAbility
+});
+var actors_abilities_LaunchAbility = function() {
+	actors_abilities_Ability.call(this,this);
+	this.aoeHitBox = [];
+	this.aoeHitBox.push(new openfl_geom_Rectangle(0,0,40,40));
+	this.aoeAttack = new actors_attacks_Attack(new actors_ObjectMover(.1,.1,0,0,0,0,3,3,0,1,false),this.aoeHitBox,-1,1,0,"Launch","LaunchRest",true);
+	this.jumpAttack = this.aoeAttack;
+	this.standingAttack = this.aoeAttack;
+	this.abilityHeight = 40;
+	this.abilityWidth = 40;
+};
+$hxClasses["actors.abilities.LaunchAbility"] = actors_abilities_LaunchAbility;
+actors_abilities_LaunchAbility.__name__ = ["actors","abilities","LaunchAbility"];
+actors_abilities_LaunchAbility.__super__ = actors_abilities_Ability;
+actors_abilities_LaunchAbility.prototype = $extend(actors_abilities_Ability.prototype,{
+	getAbilityAttack: function(actor,mover) {
+		this.retainVelocity(mover);
+		return actors_abilities_Ability.prototype.getAbilityAttack.call(this,actor,mover);
+	}
+	,retainVelocity: function(mover) {
+		var floatMovement = new actors_ObjectMover(.1,.1,mover.getTargetXVel(),mover.getTargetYVel(),mover.getXVel(),mover.getYVel(),2,5,0,1,false);
+		this.aoeAttack = new actors_attacks_Attack(floatMovement,this.aoeHitBox,-1,1,40,"Launch","LaunchRest",true);
+		this.jumpAttack = this.aoeAttack;
+		this.standingAttack = this.aoeAttack;
+	}
+	,__class__: actors_abilities_LaunchAbility
+});
+var actors_abilities_ProjectileAbility = function() {
+	actors_abilities_Ability.call(this,this);
+	this.standingAttack = this.projectileAttack;
+	this.jumpAttack = this.projectileAttack;
+};
+$hxClasses["actors.abilities.ProjectileAbility"] = actors_abilities_ProjectileAbility;
+actors_abilities_ProjectileAbility.__name__ = ["actors","abilities","ProjectileAbility"];
+actors_abilities_ProjectileAbility.__super__ = actors_abilities_Ability;
+actors_abilities_ProjectileAbility.prototype = $extend(actors_abilities_Ability.prototype,{
+	getAbilityAttack: function(actor,mover) {
+		this.projectileAttack = new actors_attacks_ProjectileAttack(actor,new actors_attacks_PlayerProjectile(Main.getBitmapAsset("assets/Projectile2.png"),new actors_ObjectMover(.5,.1,10,0,0,0,10,0,0,0,false),30,1),0,"Projectile","");
+		this.standingAttack = this.projectileAttack;
+		this.jumpAttack = this.projectileAttack;
+		return actors_abilities_Ability.prototype.getAbilityAttack.call(this,actor,mover);
+	}
+	,__class__: actors_abilities_ProjectileAbility
+});
+var actors_actorsAI_EnemyAI = function(implementation) {
+	if(this != implementation) throw new js__$Boot_HaxeError(new openfl_errors_Error("Actor is meant to be used as an abstract class."));
+};
+$hxClasses["actors.actorsAI.EnemyAI"] = actors_actorsAI_EnemyAI;
+actors_actorsAI_EnemyAI.__name__ = ["actors","actorsAI","EnemyAI"];
+actors_actorsAI_EnemyAI.prototype = {
+	updateAI: function(actor,mover) {
+	}
+	,handleCollision: function(collider,host,horizontal) {
+	}
+	,__class__: actors_actorsAI_EnemyAI
+};
+var actors_actorsAI_DashAI = function() {
+	actors_actorsAI_EnemyAI.call(this,this);
+	this.dashCooldown = 0;
+	this.visionConeHeight = 32;
+	this.visionConeWidth = 100;
+};
+$hxClasses["actors.actorsAI.DashAI"] = actors_actorsAI_DashAI;
+actors_actorsAI_DashAI.__name__ = ["actors","actorsAI","DashAI"];
+actors_actorsAI_DashAI.__super__ = actors_actorsAI_EnemyAI;
+actors_actorsAI_DashAI.prototype = $extend(actors_actorsAI_EnemyAI.prototype,{
+	updateAI: function(actor,mover) {
+		actors_actorsAI_EnemyAI.prototype.updateAI.call(this,actor,mover);
+		this.dashCooldown -= 1;
+		if(this.dashCooldown >= 0) return;
+		if(!mover.getIsGrounded()) return;
+		var distFromPlayer = actor.getCurrentMap().checkDistFromPlayer(actor);
+		if(Math.abs(distFromPlayer.y) < this.visionConeHeight && Math.abs(distFromPlayer.x) < this.visionConeWidth) {
+			var dashEnemy = actor;
+			if(distFromPlayer.x > 0) dashEnemy.dashLeft(); else dashEnemy.dashRight();
+			this.dashCooldown = 30;
+		}
+	}
+	,__class__: actors_actorsAI_DashAI
+});
+var actors_actorsAI_LaunchAI = function() {
+	actors_actorsAI_EnemyAI.call(this,this);
+	if(Math.random() >= .5) this.alignmentLeft = false; else this.alignmentLeft = true;
+	this.visionConeHeight = 96;
+	this.visionConeWidth = 42;
+};
+$hxClasses["actors.actorsAI.LaunchAI"] = actors_actorsAI_LaunchAI;
+actors_actorsAI_LaunchAI.__name__ = ["actors","actorsAI","LaunchAI"];
+actors_actorsAI_LaunchAI.__super__ = actors_actorsAI_EnemyAI;
+actors_actorsAI_LaunchAI.prototype = $extend(actors_actorsAI_EnemyAI.prototype,{
+	updateAI: function(actor,mover) {
+		actors_actorsAI_EnemyAI.prototype.updateAI.call(this,actor,mover);
+		this.handleAttack(actor);
+		if(this.windupCooldown > 0 || this.attackCooldown > 0) return;
+		if(mover.getIsGrounded() && Math.abs(mover.getXVel()) < .1) this.switchDirections(actor);
+		var aiCollisions = actor.getCurrentMap().checkCollisions(actor,true);
+		if(aiCollisions.length > 0) {
+			if(this.headingToWall(aiCollisions[0],actor)) this.switchDirections(actor);
+		}
+	}
+	,handleAttack: function(enemy) {
+		if(this.attackCooldown > 0) {
+			this.attackCooldown -= 1;
+			if(this.attackCooldown == 0) enemy.endLaunchAttack();
+			return;
+		} else if(this.windupCooldown > 0) {
+			this.windupCooldown -= 1;
+			if(this.windupCooldown == 0) {
+				enemy.launchAttack();
+				this.attackCooldown = 50;
+			}
+			return;
+		}
+		var distFromPlayer = enemy.getCurrentMap().checkDistFromPlayer(enemy);
+		if(Math.abs(distFromPlayer.y) < this.visionConeHeight && Math.abs(distFromPlayer.x) < this.visionConeWidth) {
+			this.windupCooldown = 20;
+			enemy.windup();
+		}
+	}
+	,handleCollision: function(collider,host,horizontal) {
+		if(horizontal && this.headingToWall(collider,host)) this.switchDirections(host);
+	}
+	,headingToWall: function(object,host) {
+		var objXCenter = object.get_x() + object.get_width() / 2;
+		var hostXCenter = host.get_x() + host.get_width() / 2;
+		if(objXCenter >= hostXCenter && !this.alignmentLeft) return true; else if(objXCenter < hostXCenter && this.alignmentLeft) return true;
+		return false;
+	}
+	,switchDirections: function(actor) {
+		if(this.alignmentLeft) {
+			actor.stopLeft();
+			actor.goRight();
+			this.alignmentLeft = !this.alignmentLeft;
+		} else {
+			actor.stopRight();
+			actor.goLeft();
+			this.alignmentLeft = !this.alignmentLeft;
+		}
+	}
+	,__class__: actors_actorsAI_LaunchAI
+});
+var actors_actorsAI_PaceAI = function() {
+	actors_actorsAI_EnemyAI.call(this,this);
+	if(Math.random() >= .5) this.alignmentLeft = false; else this.alignmentLeft = true;
+};
+$hxClasses["actors.actorsAI.PaceAI"] = actors_actorsAI_PaceAI;
+actors_actorsAI_PaceAI.__name__ = ["actors","actorsAI","PaceAI"];
+actors_actorsAI_PaceAI.__super__ = actors_actorsAI_EnemyAI;
+actors_actorsAI_PaceAI.prototype = $extend(actors_actorsAI_EnemyAI.prototype,{
+	updateAI: function(actor,mover) {
+		actors_actorsAI_EnemyAI.prototype.updateAI.call(this,actor,mover);
+		if(mover.getIsGrounded() && Math.abs(mover.getXVel()) < .1) this.switchDirections(actor);
+		var aiCollisions = actor.getCurrentMap().checkCollisions(actor,true);
+		if(aiCollisions.length > 0) {
+			if(this.headingToWall(aiCollisions[0],actor)) this.switchDirections(actor);
+		}
+	}
+	,handleCollision: function(collider,host,horizontal) {
+		if(horizontal) this.switchDirections(host);
+	}
+	,headingToWall: function(object,host) {
+		var objXCenter = object.get_x() + object.get_width() / 2;
+		var hostXCenter = host.get_x() + host.get_width() / 2;
+		if(objXCenter >= hostXCenter && !this.alignmentLeft) return true; else if(objXCenter < hostXCenter && this.alignmentLeft) return true;
+		return false;
+	}
+	,switchDirections: function(actor) {
+		if(this.alignmentLeft) {
+			actor.stopLeft();
+			actor.goRight();
+			this.alignmentLeft = !this.alignmentLeft;
+		} else {
+			actor.stopRight();
+			actor.goLeft();
+			this.alignmentLeft = !this.alignmentLeft;
+		}
+	}
+	,__class__: actors_actorsAI_PaceAI
+});
+var actors_actorsAI_ProjectileAI = function() {
+	actors_actorsAI_EnemyAI.call(this,this);
+	this.alignmentLeft = true;
+	this.attackCooldown = 50;
+	this.visionConeHeight = 30;
+	this.visionConeWidth = 320;
+	this.shortVisionConeWidth = 220;
+	this.projectileCooldown = 0;
+};
+$hxClasses["actors.actorsAI.ProjectileAI"] = actors_actorsAI_ProjectileAI;
+actors_actorsAI_ProjectileAI.__name__ = ["actors","actorsAI","ProjectileAI"];
+actors_actorsAI_ProjectileAI.__super__ = actors_actorsAI_EnemyAI;
+actors_actorsAI_ProjectileAI.prototype = $extend(actors_actorsAI_EnemyAI.prototype,{
+	updateAI: function(actor,mover) {
+		actors_actorsAI_EnemyAI.prototype.updateAI.call(this,actor,mover);
+		if(this.projectileCooldown > 0) this.projectileCooldown -= 1;
+		var distFromPlayer = actor.getCurrentMap().checkDistFromPlayer(actor);
+		if(Math.abs(distFromPlayer.y) < this.visionConeHeight && Math.abs(distFromPlayer.x) < this.visionConeWidth) {
+			var projectileEnemy = actor;
+			if(distFromPlayer.x > 0) projectileEnemy.faceLeft(); else projectileEnemy.faceRight();
+			if(Math.abs(distFromPlayer.x) < this.shortVisionConeWidth) {
+				if(this.projectileCooldown > 0) return;
+				this.projectileCooldown = 45;
+				projectileEnemy.fireProjectile();
+			}
+		}
+	}
+	,__class__: actors_actorsAI_ProjectileAI
+});
+var actors_attacks_Attack = function(attackMovement,hits,duration,damage,stunDuration,animation,stunAnimation,unstoppable) {
+	if(unstoppable == null) unstoppable = false;
+	if(stunAnimation == null) stunAnimation = "";
+	if(animation == null) animation = "";
 	this.attackMovement = attackMovement;
 	this.duration = duration;
-	this.attackHitbox = new actors_Hitbox(hits,duration);
+	this.attackHitbox = new actors_attacks_Hitbox(hits,duration);
 	this.damage = damage;
+	this.stunDuration = stunDuration;
+	this.attackAnimation = animation;
+	this.stunAnimation = stunAnimation;
+	this.unstoppable = unstoppable;
 	this.counter = 0;
 	this.active = false;
 };
-$hxClasses["actors.Attack"] = actors_Attack;
-actors_Attack.__name__ = ["actors","Attack"];
-actors_Attack.prototype = {
+$hxClasses["actors.attacks.Attack"] = actors_attacks_Attack;
+actors_attacks_Attack.__name__ = ["actors","attacks","Attack"];
+actors_attacks_Attack.prototype = {
 	startAttack: function() {
 		this.active = true;
 	}
@@ -2188,16 +2862,19 @@ actors_Attack.prototype = {
 		this.counter = 0;
 	}
 	,updateAttack: function(mover) {
-		if(!this.active) return false;
+		if(!this.active || this.duration < 0) return false;
 		this.counter += 1;
-		if(mover.getIsGrounded()) this.counter = this.duration;
 		if(this.counter >= this.duration) {
 			this.endAttack();
 			return true;
 		}
 		return false;
 	}
+	,isActive: function() {
+		return this.active;
+	}
 	,getMovement: function() {
+		if(this.attackMovement == null) return null;
 		return this.attackMovement.copyMover();
 	}
 	,getHits: function() {
@@ -2206,90 +2883,146 @@ actors_Attack.prototype = {
 	,getDamage: function() {
 		return this.damage;
 	}
-	,__class__: actors_Attack
+	,getStunDuration: function() {
+		return this.stunDuration;
+	}
+	,getDuration: function() {
+		return this.duration;
+	}
+	,hasAnimation: function() {
+		if(this.attackAnimation == "") return false;
+		return true;
+	}
+	,getAnimation: function() {
+		return this.attackAnimation;
+	}
+	,hasStunAnimation: function() {
+		if(this.stunAnimation == "") return false;
+		return true;
+	}
+	,getStunAnimation: function() {
+		return this.stunAnimation;
+	}
+	,grantsUnstoppable: function() {
+		return this.unstoppable;
+	}
+	,__class__: actors_attacks_Attack
 };
-var actors_Enemy = function(homeSpawn) {
-	this.homeSpawn = homeSpawn;
-	this.enemyAI = new actors_actorsAI_PaceAI();
-	var playerSize = 32;
-	var normalIdle = new actors_Animation("Idle",0,new openfl_geom_Point(0,0),playerSize,playerSize,[new openfl_geom_Point(0,0)]);
-	var leftWalk = new actors_Animation("LeftWalk",2,new openfl_geom_Point(0,playerSize),playerSize,playerSize,[new openfl_geom_Point(),new openfl_geom_Point(1,0),new openfl_geom_Point(2,0)]);
-	var rightWalk = new actors_Animation("RightWalk",1,new openfl_geom_Point(0,playerSize * 2),playerSize,playerSize,[new openfl_geom_Point(),new openfl_geom_Point(1,0),new openfl_geom_Point(2,0)]);
-	var jump = new actors_Animation("Jump",0,new openfl_geom_Point(0,playerSize),playerSize,playerSize,[new openfl_geom_Point()]);
-	this.animations = new haxe_ds_StringMap();
-	var k = normalIdle.getName();
-	this.animations.set(k,normalIdle);
-	normalIdle;
-	var k1 = leftWalk.getName();
-	this.animations.set(k1,leftWalk);
-	leftWalk;
-	var k2 = rightWalk.getName();
-	this.animations.set(k2,rightWalk);
-	rightWalk;
-	var k3 = jump.getName();
-	this.animations.set(k3,jump);
-	jump;
-	this.currentAnimation = normalIdle;
-	actors_Actor.call(this,this,Main.getBitmapAsset("assets/Enemy.png"),true,this.animations,32,new actors_ActorMover(.5,.1,0,0,0,0,10,60,2));
-	this.health = 2;
-	this.touchDamage = 1;
+var actors_attacks_AbsorbAttack = function(attackMovement,hits,duration,damage) {
+	actors_attacks_Attack.call(this,attackMovement,hits,duration,damage,10);
 };
-$hxClasses["actors.Enemy"] = actors_Enemy;
-actors_Enemy.__name__ = ["actors","Enemy"];
-actors_Enemy.__super__ = actors_Actor;
-actors_Enemy.prototype = $extend(actors_Actor.prototype,{
-	updateActor: function() {
-		this.enemyAI.updateAI(this,this.currentMover);
-		actors_Actor.prototype.updateActor.call(this);
+$hxClasses["actors.attacks.AbsorbAttack"] = actors_attacks_AbsorbAttack;
+actors_attacks_AbsorbAttack.__name__ = ["actors","attacks","AbsorbAttack"];
+actors_attacks_AbsorbAttack.__super__ = actors_attacks_Attack;
+actors_attacks_AbsorbAttack.prototype = $extend(actors_attacks_Attack.prototype,{
+	updateAttack: function(mover) {
+		if(mover.getIsGrounded()) {
+			mover.applyForce(new openfl_geom_Point(0,10),50);
+			this.counter = this.duration;
+		}
+		return actors_attacks_Attack.prototype.updateAttack.call(this,mover);
 	}
-	,takeDamage: function(actor) {
-		if(js_Boot.__instanceof(actor,actors_Enemy)) return true;
-		return actors_Actor.prototype.takeDamage.call(this,actor);
-	}
-	,getAttackDamage: function() {
-		return this.touchDamage;
-	}
-	,kill: function() {
-		actors_Actor.prototype.kill.call(this);
-		this.currentMap.removeActor(this);
-		this.homeSpawn.enemyDead(this);
-	}
-	,goLeft: function() {
-		actors_Actor.prototype.goLeft.call(this);
-		if(this.currentAnimation.getName() != "LeftWalk" && this.currentMover.getIsGrounded()) this.currentAnimation = this.getAnimation("LeftWalk");
-	}
-	,goRight: function() {
-		actors_Actor.prototype.goRight.call(this);
-		if(this.currentAnimation.getName() != "RightWalk" && this.currentMover.getIsGrounded()) this.currentAnimation = this.getAnimation("RightWalk");
-	}
-	,stopLeft: function() {
-		actors_Actor.prototype.stopLeft.call(this);
-		if(this.currentMover.getIsGrounded() && this.currentMover.getTargetXVel() == 0) this.currentAnimation = this.getAnimation("Idle");
-	}
-	,stopRight: function() {
-		actors_Actor.prototype.stopRight.call(this);
-		if(this.currentMover.getIsGrounded() && this.currentMover.getTargetXVel() == 0) this.currentAnimation = this.getAnimation("Idle");
-	}
-	,__class__: actors_Enemy
+	,__class__: actors_attacks_AbsorbAttack
 });
-var actors_Hitbox = function(hitAreas,duration) {
+var actors_attacks_Projectile = function(implementation,bitmap,mover,duration,damage) {
+	if(this != implementation) throw new js__$Boot_HaxeError(new openfl_errors_Error("Projectile is meant to be used as an abstract class."));
+	var leftMove = new actors_Animation("Left",1,new openfl_geom_Point(),24,24,[new openfl_geom_Point(),new openfl_geom_Point(1),new openfl_geom_Point(2)]);
+	var rightMove = new actors_Animation("Right",1,new openfl_geom_Point(0,24),24,24,[new openfl_geom_Point(),new openfl_geom_Point(1),new openfl_geom_Point(2)]);
+	this.animations = new haxe_ds_StringMap();
+	var k = leftMove.getName();
+	this.animations.set(k,leftMove);
+	leftMove;
+	var k1 = rightMove.getName();
+	this.animations.set(k1,rightMove);
+	rightMove;
+	this.currentAnimation = rightMove;
+	this.projectileMover = mover;
+	this.duration = duration;
+	this.damage = damage;
+	actors_Actor.call(this,this,bitmap,true,this.animations,mover,24,24);
+};
+$hxClasses["actors.attacks.Projectile"] = actors_attacks_Projectile;
+actors_attacks_Projectile.__name__ = ["actors","attacks","Projectile"];
+actors_attacks_Projectile.__super__ = actors_Actor;
+actors_attacks_Projectile.prototype = $extend(actors_Actor.prototype,{
+	updateProjectile: function() {
+		this.duration -= 1;
+		if(this.duration <= 0) return true;
+		this.projectileMover.updateMovement();
+		this.moveXAxis();
+		this.moveYAxis();
+		this.updateActorAnimation();
+		return false;
+	}
+	,flipProjectile: function(horizontal) {
+		if(horizontal) {
+			this.invertXMovement();
+			if(this.projectileMover.getTargetXVel() > 0) this.currentAnimation = this.animations.get("Right"); else this.currentAnimation = this.animations.get("Left");
+		} else this.invertYMovement();
+	}
+	,invertXMovement: function() {
+		this.projectileMover.invertTargetXVel();
+	}
+	,invertYMovement: function() {
+		this.projectileMover.invertTargetYVel();
+	}
+	,flipProjectileBmp: function(horizontal) {
+		var matrix;
+		var newBmpData = new openfl_display_BitmapData(this.defaultBitmap.get_width(),this.defaultBitmap.get_height(),true,0);
+		if(horizontal) matrix = new openfl_geom_Matrix(-1,0,0,1,this.defaultBitmap.get_width(),0); else matrix = new openfl_geom_Matrix(1,0,0,-1,0,this.defaultBitmap.get_height());
+		newBmpData.draw(this.defaultBitmap.bitmapData,matrix);
+		this.defaultBitmap.bitmapData = newBmpData;
+	}
+	,moveXAxis: function() {
+		var _g = this;
+		_g.set_x(_g.get_x() + Math.round(this.projectileMover.getXVel()));
+	}
+	,moveYAxis: function() {
+		var _g = this;
+		_g.set_y(_g.get_y() + Math.round(this.projectileMover.getYVel()));
+	}
+	,getProjectileDamage: function() {
+		return this.damage;
+	}
+	,createClone: function() {
+		return null;
+	}
+	,__class__: actors_attacks_Projectile
+});
+var actors_attacks_EnemyProjectile = function(bitmap,mover,duration,damage) {
+	actors_attacks_Projectile.call(this,this,bitmap,mover,duration,damage);
+};
+$hxClasses["actors.attacks.EnemyProjectile"] = actors_attacks_EnemyProjectile;
+actors_attacks_EnemyProjectile.__name__ = ["actors","attacks","EnemyProjectile"];
+actors_attacks_EnemyProjectile.__super__ = actors_attacks_Projectile;
+actors_attacks_EnemyProjectile.prototype = $extend(actors_attacks_Projectile.prototype,{
+	createClone: function() {
+		return new actors_attacks_EnemyProjectile(new openfl_display_Bitmap(this.baseBmp.bitmapData),this.projectileMover.copyMover(),this.duration,this.damage);
+	}
+	,__class__: actors_attacks_EnemyProjectile
+});
+var actors_attacks_Hitbox = function(hitAreas,duration) {
 	openfl_display_Sprite.call(this);
 	this.hitAreas = hitAreas;
 	this.duration = duration;
 	this.counter = 0;
 	this.drawBoxes();
 };
-$hxClasses["actors.Hitbox"] = actors_Hitbox;
-actors_Hitbox.__name__ = ["actors","Hitbox"];
-actors_Hitbox.__super__ = openfl_display_Sprite;
-actors_Hitbox.prototype = $extend(openfl_display_Sprite.prototype,{
+$hxClasses["actors.attacks.Hitbox"] = actors_attacks_Hitbox;
+actors_attacks_Hitbox.__name__ = ["actors","attacks","Hitbox"];
+actors_attacks_Hitbox.__super__ = openfl_display_Sprite;
+actors_attacks_Hitbox.prototype = $extend(openfl_display_Sprite.prototype,{
 	updateHitbox: function() {
+		if(this.duration < 0) return false;
 		this.counter += 1;
 		if(this.counter >= this.duration) {
 			this.counter = 0;
 			return true;
 		}
 		return false;
+	}
+	,resetHitbox: function() {
+		this.counter = 0;
 	}
 	,isHitting: function(host,actor) {
 		var hitBound;
@@ -2314,76 +3047,126 @@ actors_Hitbox.prototype = $extend(openfl_display_Sprite.prototype,{
 			this.addChild(box);
 		}
 	}
-	,__class__: actors_Hitbox
+	,__class__: actors_attacks_Hitbox
 });
-var actors_Player = function() {
-	Main.getSingleton().stage.addEventListener(openfl_events_KeyboardEvent.KEY_UP,$bind(this,this.checkKeysUp));
-	Main.getSingleton().stage.addEventListener(openfl_events_KeyboardEvent.KEY_DOWN,$bind(this,this.checkKeysDown));
-	var mover = new actors_ActorMover(.5,.1,0,0,0,0,10,60,2);
-	var playerSize = 32;
-	var playerHeight = 36;
-	var normalIdle = new actors_Animation("Idle",2,new openfl_geom_Point(0,0),playerSize,playerHeight,[new openfl_geom_Point(),new openfl_geom_Point(1),new openfl_geom_Point(2)]);
-	var rightWalk = new actors_Animation("RightWalk",1,new openfl_geom_Point(0,playerHeight),playerSize,playerHeight,[new openfl_geom_Point(),new openfl_geom_Point(1,0),new openfl_geom_Point(2,0),new openfl_geom_Point(3,0)]);
-	var leftWalk = new actors_Animation("LeftWalk",1,new openfl_geom_Point(0,playerHeight * 2),playerSize,playerHeight,[new openfl_geom_Point(),new openfl_geom_Point(1,0),new openfl_geom_Point(2,0),new openfl_geom_Point(3,0)]);
-	var jump = new actors_Animation("Jump",0,new openfl_geom_Point(0,playerSize),playerSize,playerSize,[new openfl_geom_Point()]);
-	this.animations = new haxe_ds_StringMap();
-	var k = normalIdle.getName();
-	this.animations.set(k,normalIdle);
-	normalIdle;
-	var k1 = leftWalk.getName();
-	this.animations.set(k1,leftWalk);
-	leftWalk;
-	var k2 = rightWalk.getName();
-	this.animations.set(k2,rightWalk);
-	rightWalk;
-	var k3 = jump.getName();
-	this.animations.set(k3,jump);
-	jump;
-	this.currentAnimation = normalIdle;
-	var hits = [];
-	hits.push(new openfl_geom_Rectangle(-2,playerSize,playerSize + 4,10));
-	this.jumpAttack = new actors_Attack(new actors_ActorMover(.5,.1,0,60,0,10,10,60,0),hits,15,2);
-	hits = [];
-	hits.push(new openfl_geom_Rectangle(-12,0,10,playerSize));
-	hits.push(new openfl_geom_Rectangle(playerSize + 2,0,10,playerSize));
-	this.standAttack = new actors_Attack(new actors_ActorMover(.5,.1,0,0,0,0,10,60,0),hits,15,1);
-	actors_Actor.call(this,this,Main.getBitmapAsset("assets/Player2.png"),true,this.animations,playerSize,mover);
-	this.maxHealth = 2;
-	this.health = 2;
+var actors_attacks_PlayerProjectile = function(bitmap,mover,duration,damage) {
+	actors_attacks_Projectile.call(this,this,bitmap,mover,duration,damage);
 };
-$hxClasses["actors.Player"] = actors_Player;
-actors_Player.__name__ = ["actors","Player"];
-actors_Player.__super__ = actors_Actor;
-actors_Player.prototype = $extend(actors_Actor.prototype,{
-	updatePlayer: function() {
-		this.currentMap.updateCheckpoints(this);
-		this.currentMap.updateEndPortal(this);
+$hxClasses["actors.attacks.PlayerProjectile"] = actors_attacks_PlayerProjectile;
+actors_attacks_PlayerProjectile.__name__ = ["actors","attacks","PlayerProjectile"];
+actors_attacks_PlayerProjectile.__super__ = actors_attacks_Projectile;
+actors_attacks_PlayerProjectile.prototype = $extend(actors_attacks_Projectile.prototype,{
+	createClone: function() {
+		return new actors_attacks_PlayerProjectile(new openfl_display_Bitmap(this.baseBmp.bitmapData),this.projectileMover.copyMover(),this.duration,this.damage);
 	}
-	,setGrounded: function() {
-		actors_Actor.prototype.setGrounded.call(this);
-		if(this.currentMover.getIsGrounded() && this.currentMover.getTargetXVel() == 0) this.currentAnimation = this.getAnimation("Idle");
+	,__class__: actors_attacks_PlayerProjectile
+});
+var actors_attacks_ProjectileAttack = function(host,prototypeProjectile,stun,fireAnimation,stunAnimation) {
+	if(stunAnimation == null) stunAnimation = "";
+	if(fireAnimation == null) fireAnimation = "";
+	actors_attacks_Attack.call(this,null,[],20,0,stun,fireAnimation,stunAnimation);
+	this.prototypeProjectile = prototypeProjectile;
+	this.host = host;
+};
+$hxClasses["actors.attacks.ProjectileAttack"] = actors_attacks_ProjectileAttack;
+actors_attacks_ProjectileAttack.__name__ = ["actors","attacks","ProjectileAttack"];
+actors_attacks_ProjectileAttack.__super__ = actors_attacks_Attack;
+actors_attacks_ProjectileAttack.prototype = $extend(actors_attacks_Attack.prototype,{
+	startAttack: function() {
+		actors_attacks_Attack.prototype.startAttack.call(this);
+		var newProjectile = this.prototypeProjectile.createClone();
+		newProjectile.set_x(this.host.get_x() + (this.host.get_width() / 2 - newProjectile.get_width() / 2));
+		newProjectile.set_y(this.host.get_y() + (this.host.get_height() / 2 - newProjectile.get_height() / 2));
+		this.host.getCurrentMap().addProjectile(newProjectile);
+		if(this.host.isFacingLeft()) newProjectile.flipProjectile(true);
 	}
-	,initiateAttack: function() {
-		if(this.currentMover.getIsGrounded()) this.attackBehavior = this.standAttack; else this.attackBehavior = this.jumpAttack;
-		actors_Actor.prototype.initiateAttack.call(this);
+	,__class__: actors_attacks_ProjectileAttack
+});
+var actors_enemies_Enemy = function(implementation,defaultBmp,mover,enemyWidth,enemyHeight,homeSpawn,enemyAI) {
+	if(this != implementation) throw new js__$Boot_HaxeError(new openfl_errors_Error("Enemy is meant to be used as an abstract class."));
+	actors_Actor.call(this,this,defaultBmp,true,this.animations,mover,enemyWidth,enemyHeight);
+	this.homeSpawn = homeSpawn;
+	this.enemyAI = enemyAI;
+};
+$hxClasses["actors.enemies.Enemy"] = actors_enemies_Enemy;
+actors_enemies_Enemy.__name__ = ["actors","enemies","Enemy"];
+actors_enemies_Enemy.__super__ = actors_Actor;
+actors_enemies_Enemy.prototype = $extend(actors_Actor.prototype,{
+	updateActor: function() {
+		if(this.homeSpawn == null) return;
+		this.enemyAI.updateAI(this,this.currentMover);
+		this.handleAnimation();
+		actors_Actor.prototype.updateActor.call(this);
 	}
-	,takeDamage: function(actor) {
-		if(actors_Actor.prototype.takeDamage.call(this,actor)) return true; else return false;
+	,handleAnimation: function() {
+		return;
+	}
+	,takeActorDamage: function(actor,attack) {
+		if(js_Boot.__instanceof(actor,actors_enemies_Enemy)) return true;
+		if(actors_Actor.prototype.takeDamage.call(this,actor.getAttackDamage(),actor)) {
+			if(this.health <= 0) this.beAbsorbed(actor,attack);
+			this.damageReaction(actor);
+			return true;
+		} else return false;
+	}
+	,takeProjectileDamage: function(projectile) {
+		if(js_Boot.__instanceof(projectile,actors_attacks_PlayerProjectile)) return actors_Actor.prototype.takeProjectileDamage.call(this,projectile);
+		return false;
+	}
+	,beAbsorbed: function(actor,attack) {
+		if(js_Boot.__instanceof(actor,actors_Player) && js_Boot.__instanceof(attack,actors_attacks_AbsorbAttack)) {
+			var player;
+			player = js_Boot.__cast(actor , actors_Player);
+			player.absorbAbility(this);
+		}
+	}
+	,damageReaction: function(actor) {
+		return;
+	}
+	,knockBack: function(actor) {
+		var hitAngle = new openfl_geom_Point(this.get_x() + this.actorWidth / 2 - (actor.get_x() + actor.actorWidth / 2),this.get_y() + this.actorHeight / 2 - (actor.get_y() + actor.actorHeight / 2));
+		this.currentMover.applyForce(hitAngle,60);
+	}
+	,getAttackDamage: function() {
+		return this.touchDamage;
+	}
+	,moveXAxis: function() {
+		var _g = this;
+		_g.set_x(_g.get_x() + Math.round(this.currentMover.getXVel()));
+		var collisions = this.currentMap.checkCollisions(this);
+		var actorCollisions = this.currentMap.checkActorCollisions(this);
+		if(this.checkFatalTiles(collisions,true)) {
+			this.kill();
+			return;
+		} else if(this.checkActorCollision(actorCollisions,true)) collisions.push(actorCollisions[0]);
+		var largestDistance = this.getCollisionLargestDistance(collisions,true);
+		if(largestDistance != 0) {
+			var _g1 = this;
+			_g1.set_x(_g1.get_x() - largestDistance);
+		}
+		if(collisions.length > 0) this.enemyAI.handleCollision(collisions[0],this,true);
+	}
+	,moveYAxis: function() {
+		var _g = this;
+		_g.set_y(_g.get_y() + Math.round(this.currentMover.getYVel()));
+		var collisions = this.currentMap.checkCollisions(this);
+		var actorCollisions = this.currentMap.checkActorCollisions(this);
+		if(this.checkFatalTiles(collisions,false)) {
+			this.kill();
+			return;
+		} else if(this.checkActorCollision(actorCollisions,false)) collisions.push(actorCollisions[0]);
+		var largestDistance = this.getCollisionLargestDistance(collisions,false);
+		if(largestDistance != 0) {
+			var _g1 = this;
+			_g1.set_y(_g1.get_y() - largestDistance);
+		}
+		if(largestDistance > 0) this.setGrounded();
+		if(collisions.length > 0) this.enemyAI.handleCollision(collisions[0],this,false);
 	}
 	,kill: function() {
 		actors_Actor.prototype.kill.call(this);
-		var checkpoint = this.currentMap.getCurrentCheckpoint();
-		if(checkpoint == null) return;
-		this.health = this.maxHealth;
-		this.set_x(checkpoint.get_x());
-		this.set_y(checkpoint.get_y());
-	}
-	,checkKeysDown: function(key) {
-		if(key.keyCode == 65 || key.keyCode == 37) this.goLeft(); else if(key.keyCode == 68 || key.keyCode == 39) this.goRight(); else if(key.keyCode == 74) this.initiateAttack();
-		if(key.keyCode == 32) this.jump();
-	}
-	,checkKeysUp: function(key) {
-		if(key.keyCode == 65 || key.keyCode == 37) this.stopLeft(); else if(key.keyCode == 68 || key.keyCode == 39) this.stopRight();
+		this.currentMap.removeActor(this);
+		this.homeSpawn.enemyDead(this);
 	}
 	,goLeft: function() {
 		actors_Actor.prototype.goLeft.call(this);
@@ -2401,34 +3184,297 @@ actors_Player.prototype = $extend(actors_Actor.prototype,{
 		actors_Actor.prototype.stopRight.call(this);
 		if(this.currentMover.getIsGrounded() && this.currentMover.getTargetXVel() == 0) this.currentAnimation = this.getAnimation("Idle");
 	}
-	,jump: function() {
-		actors_Actor.prototype.jump.call(this);
-		if(!this.currentMover.getIsGrounded()) this.currentAnimation = this.getAnimation("Jump");
+	,createClone: function(spawnPoint) {
+		return null;
 	}
-	,__class__: actors_Player
+	,__class__: actors_enemies_Enemy
 });
-var actors_actorsAI_EnemyAI = function(implementation) {
-	if(this != implementation) throw new js__$Boot_HaxeError(new openfl_errors_Error("Actor is meant to be used as an abstract class."));
+var actors_enemies_DashEnemy = function(homespawn) {
+	var enemySize = 32;
+	var restIdle = new actors_Animation("Idle",20,new openfl_geom_Point(),enemySize,enemySize,[new openfl_geom_Point(),new openfl_geom_Point(1)]);
+	var dashLeft = new actors_Animation("DashLeft",1,new openfl_geom_Point(0,enemySize),enemySize,enemySize,[new openfl_geom_Point(),new openfl_geom_Point(1)]);
+	var dashRight = new actors_Animation("DashRight",1,new openfl_geom_Point(enemySize * 2,enemySize),enemySize,enemySize,[new openfl_geom_Point(),new openfl_geom_Point(1)]);
+	this.animations = new haxe_ds_StringMap();
+	var k = restIdle.getName();
+	this.animations.set(k,restIdle);
+	restIdle;
+	var k1 = dashLeft.getName();
+	this.animations.set(k1,dashLeft);
+	dashLeft;
+	var k2 = dashRight.getName();
+	this.animations.set(k2,dashRight);
+	dashRight;
+	this.currentAnimation = restIdle;
+	var mover = new actors_ObjectMover(.1,.1,0,0,0,0,2,60,2);
+	actors_enemies_Enemy.call(this,this,Main.getBitmapAsset("assets/DashEnemy.png"),mover,enemySize,enemySize - 2,homespawn,new actors_actorsAI_DashAI());
+	this.health = 2;
+	this.invulDuration = 15;
+	this.collisionBounds = new openfl_geom_Rectangle(2,4,28,26);
+	var hits = [];
+	hits.push(new openfl_geom_Rectangle(-7,-2,23,40));
+	this.leftDash = new actors_attacks_Attack(new actors_ObjectMover(.5,.1,-15,0,0,0,60,60,0,0,false),hits,15,3,20,"DashLeft");
+	hits = [];
+	hits.push(new openfl_geom_Rectangle(16,-2,23,40));
+	this.rightDash = new actors_attacks_Attack(new actors_ObjectMover(.5,.1,15,0,0,0,60,60,0,0,false),hits,15,3,20,"DashRight");
 };
-$hxClasses["actors.actorsAI.EnemyAI"] = actors_actorsAI_EnemyAI;
-actors_actorsAI_EnemyAI.__name__ = ["actors","actorsAI","EnemyAI"];
-actors_actorsAI_EnemyAI.prototype = {
-	updateAI: function(actor,mover) {
+$hxClasses["actors.enemies.DashEnemy"] = actors_enemies_DashEnemy;
+actors_enemies_DashEnemy.__name__ = ["actors","enemies","DashEnemy"];
+actors_enemies_DashEnemy.__super__ = actors_enemies_Enemy;
+actors_enemies_DashEnemy.prototype = $extend(actors_enemies_Enemy.prototype,{
+	handleAnimation: function() {
+		actors_enemies_Enemy.prototype.handleAnimation.call(this);
+		if(this.attackBehavior != null) {
+			if(this.attackBehavior.hasAnimation()) {
+				var key = this.attackBehavior.getAnimation();
+				this.currentAnimation = this.animations.get(key);
+				return;
+			}
+		}
+		this.currentAnimation = this.animations.get("Idle");
 	}
-	,__class__: actors_actorsAI_EnemyAI
-};
-var actors_actorsAI_PaceAI = function() {
-	actors_actorsAI_EnemyAI.call(this,this);
-};
-$hxClasses["actors.actorsAI.PaceAI"] = actors_actorsAI_PaceAI;
-actors_actorsAI_PaceAI.__name__ = ["actors","actorsAI","PaceAI"];
-actors_actorsAI_PaceAI.__super__ = actors_actorsAI_EnemyAI;
-actors_actorsAI_PaceAI.prototype = $extend(actors_actorsAI_EnemyAI.prototype,{
-	updateAI: function(actor,mover) {
-		actors_actorsAI_EnemyAI.prototype.updateAI.call(this,actor,mover);
-		if(mover.getIsGrounded()) actor.goLeft();
+	,dashLeft: function() {
+		this.attackBehavior = this.leftDash;
+		this.initiateAttack();
 	}
-	,__class__: actors_actorsAI_PaceAI
+	,dashRight: function() {
+		this.attackBehavior = this.rightDash;
+		this.initiateAttack();
+	}
+	,createClone: function(spawnPoint) {
+		return new actors_enemies_DashEnemy(spawnPoint);
+	}
+	,__class__: actors_enemies_DashEnemy
+});
+var actors_enemies_LaunchEnemy = function(homeSpawn) {
+	var enemyWidth = 40;
+	var enemyHeight = 32;
+	this.aoeWidth = 64;
+	this.aoeHeight = 40;
+	this.originalWidth = enemyWidth;
+	this.originalHeight = enemyHeight;
+	var leftIdle = new actors_Animation("LeftIdle",0,new openfl_geom_Point(),enemyWidth,enemyHeight,[new openfl_geom_Point()]);
+	var rightIdle = new actors_Animation("RightIdle",0,new openfl_geom_Point(0,enemyHeight),enemyWidth,enemyHeight,[new openfl_geom_Point()]);
+	var leftWalk = new actors_Animation("LeftWalk",3,new openfl_geom_Point(),enemyWidth,enemyHeight,[new openfl_geom_Point(),new openfl_geom_Point(),new openfl_geom_Point(1),new openfl_geom_Point(2)]);
+	var rightWalk = new actors_Animation("RightWalk",3,new openfl_geom_Point(0,enemyHeight),enemyWidth,enemyHeight,[new openfl_geom_Point(),new openfl_geom_Point(),new openfl_geom_Point(1),new openfl_geom_Point(2)]);
+	var leftWindup = new actors_Animation("LeftWindup",1,new openfl_geom_Point(0,enemyHeight * 2),enemyWidth,enemyHeight,[new openfl_geom_Point(),new openfl_geom_Point(1),new openfl_geom_Point(2),new openfl_geom_Point(1)]);
+	var rightWindup = new actors_Animation("RightWindup",1,new openfl_geom_Point(0,enemyHeight * 3),enemyWidth,enemyHeight,[new openfl_geom_Point(),new openfl_geom_Point(1),new openfl_geom_Point(2),new openfl_geom_Point(1)]);
+	var leftAttack = new actors_Animation("LeftAttack",1,new openfl_geom_Point(0,enemyHeight * 4),this.aoeWidth,this.aoeHeight,[new openfl_geom_Point(),new openfl_geom_Point(0,1)]);
+	var rightAttack = new actors_Animation("RightAttack",1,new openfl_geom_Point(0,enemyHeight * 4 + this.aoeHeight * 2),this.aoeWidth,this.aoeHeight,[new openfl_geom_Point(),new openfl_geom_Point(0,1)]);
+	this.animations = new haxe_ds_StringMap();
+	{
+		this.animations.set("Idle",leftIdle);
+		leftIdle;
+	}
+	var k = leftIdle.getName();
+	this.animations.set(k,leftIdle);
+	leftIdle;
+	var k1 = rightIdle.getName();
+	this.animations.set(k1,rightIdle);
+	rightIdle;
+	var k2 = leftWalk.getName();
+	this.animations.set(k2,leftWalk);
+	leftWalk;
+	var k3 = rightWalk.getName();
+	this.animations.set(k3,rightWalk);
+	rightWalk;
+	var k4 = leftWindup.getName();
+	this.animations.set(k4,leftWindup);
+	leftWindup;
+	var k5 = rightWindup.getName();
+	this.animations.set(k5,rightWindup);
+	rightWindup;
+	var k6 = leftAttack.getName();
+	this.animations.set(k6,leftAttack);
+	leftAttack;
+	var k7 = rightAttack.getName();
+	this.animations.set(k7,rightAttack);
+	rightAttack;
+	this.currentAnimation = leftIdle;
+	this.alignmentLeft = true;
+	var mover = new actors_ObjectMover(.1,.1,0,0,0,0,2,60,2);
+	actors_enemies_Enemy.call(this,this,Main.getBitmapAsset("assets/LaunchEnemy.png"),mover,enemyWidth,enemyHeight,homeSpawn,new actors_actorsAI_LaunchAI());
+	this.health = 2;
+	this.invulDuration = 15;
+	this.collisionBounds = new openfl_geom_Rectangle(4,10,28,18);
+	var hitBoxes = [];
+	hitBoxes.push(new openfl_geom_Rectangle(-5,-5,this.aoeWidth + 10,this.aoeHeight + 10));
+	this.aoeAttack = new actors_attacks_Attack(new actors_ObjectMover(.1,.1,0,0,0,0,0,0,0,5,false),hitBoxes,-1,1,0,"Attack","",true);
+};
+$hxClasses["actors.enemies.LaunchEnemy"] = actors_enemies_LaunchEnemy;
+actors_enemies_LaunchEnemy.__name__ = ["actors","enemies","LaunchEnemy"];
+actors_enemies_LaunchEnemy.__super__ = actors_enemies_Enemy;
+actors_enemies_LaunchEnemy.prototype = $extend(actors_enemies_Enemy.prototype,{
+	handleAnimation: function() {
+		actors_enemies_Enemy.prototype.handleAnimation.call(this);
+		if(this.attackBehavior != null) {
+			if(this.attackBehavior.hasAnimation()) {
+				this.setAnimation(this.attackBehavior.getAnimation());
+				return;
+			}
+		} else if(this.currentAnimation.getName().indexOf("Windup") >= 0) return; else if(Math.abs(this.currentMover.getXVel()) < .1) this.setAnimation("Idle"); else if(Math.abs(this.currentMover.getXVel()) > .1) this.setAnimation("Walk");
+	}
+	,stopLeft: function() {
+		this.currentMover.stopLeft();
+		if(this.defaultMover != this.currentMover) this.defaultMover.stopLeft();
+		if(this.currentMover.getIsGrounded() && this.currentMover.getTargetXVel() == 0) this.setAnimation("Idle");
+	}
+	,stopRight: function() {
+		this.currentMover.stopRight();
+		if(this.defaultMover != this.currentMover) this.defaultMover.stopRight();
+		if(this.currentMover.getIsGrounded() && this.currentMover.getTargetXVel() == 0) this.setAnimation("Idle");
+	}
+	,goLeft: function() {
+		actors_enemies_Enemy.prototype.goLeft.call(this);
+		this.alignmentLeft = true;
+	}
+	,goRight: function() {
+		actors_enemies_Enemy.prototype.goRight.call(this);
+		this.alignmentLeft = false;
+	}
+	,setAnimation: function(action) {
+		if(this.alignmentLeft) this.currentAnimation = this.getAnimation("Left" + action); else this.currentAnimation = this.getAnimation("Right" + action);
+	}
+	,windup: function() {
+		this.stopLeft();
+		this.stopRight();
+		this.currentMover.freeze();
+		this.setAnimation("Windup");
+	}
+	,launchAttack: function() {
+		this.attackBehavior = this.aoeAttack;
+		this.initiateAttack();
+		this.actorWidth = this.aoeWidth;
+		this.actorHeight = this.aoeHeight;
+		var _g = this;
+		_g.set_x(_g.get_x() - ((this.aoeWidth - this.originalWidth) / 2 + 4));
+		var _g1 = this;
+		_g1.set_y(_g1.get_y() - ((this.aoeHeight - this.originalHeight) / 2 + 4));
+	}
+	,endLaunchAttack: function() {
+		this.endAttack();
+		this.actorWidth = this.originalWidth;
+		this.actorHeight = this.originalHeight;
+		var _g = this;
+		_g.set_x(_g.get_x() + ((this.aoeWidth - this.originalWidth) / 2 + 4));
+		var _g1 = this;
+		_g1.set_y(_g1.get_y() + ((this.aoeHeight - this.originalHeight) / 2 + 4));
+	}
+	,createClone: function(spawnPoint) {
+		return new actors_enemies_LaunchEnemy(spawnPoint);
+	}
+	,__class__: actors_enemies_LaunchEnemy
+});
+var actors_enemies_ProjectileEnemy = function(spawnPoint) {
+	var enemySize = 32;
+	var leftIdle = new actors_Animation("LeftIdle",4,new openfl_geom_Point(),enemySize,enemySize,[new openfl_geom_Point(),new openfl_geom_Point(1)]);
+	var rightIdle = new actors_Animation("RightIdle",4,new openfl_geom_Point(enemySize * 2,0),enemySize,enemySize,[new openfl_geom_Point(),new openfl_geom_Point(1)]);
+	var leftFire = new actors_Animation("LeftFire",2,new openfl_geom_Point(0,enemySize),enemySize,enemySize,[new openfl_geom_Point(),new openfl_geom_Point(1),new openfl_geom_Point(2),new openfl_geom_Point(3)]);
+	var rightFire = new actors_Animation("RightFire",2,new openfl_geom_Point(0,enemySize * 2),enemySize,enemySize,[new openfl_geom_Point(),new openfl_geom_Point(1),new openfl_geom_Point(2),new openfl_geom_Point(3)]);
+	this.animations = new haxe_ds_StringMap();
+	var k = leftIdle.getName();
+	this.animations.set(k,leftIdle);
+	leftIdle;
+	var k1 = rightIdle.getName();
+	this.animations.set(k1,rightIdle);
+	rightIdle;
+	var k2 = leftFire.getName();
+	this.animations.set(k2,leftFire);
+	leftFire;
+	var k3 = rightFire.getName();
+	this.animations.set(k3,rightFire);
+	rightFire;
+	this.currentAnimation = leftIdle;
+	var mover = new actors_ObjectMover(.1,.1,0,0,0,0,2,60,2);
+	actors_enemies_Enemy.call(this,this,Main.getBitmapAsset("assets/ProjectileEnemy.png"),mover,32,30,spawnPoint,new actors_actorsAI_ProjectileAI());
+	this.health = 3;
+	this.invulDuration = 15;
+	this.collisionBounds = new openfl_geom_Rectangle(0,4,32,26);
+	this.projectileAttack = new actors_attacks_ProjectileAttack(this,new actors_attacks_EnemyProjectile(Main.getBitmapAsset("assets/Projectile.png"),new actors_ObjectMover(.5,.1,10,0,0,0,10,0,0,0,false),30,1),0,"Fire","");
+};
+$hxClasses["actors.enemies.ProjectileEnemy"] = actors_enemies_ProjectileEnemy;
+actors_enemies_ProjectileEnemy.__name__ = ["actors","enemies","ProjectileEnemy"];
+actors_enemies_ProjectileEnemy.__super__ = actors_enemies_Enemy;
+actors_enemies_ProjectileEnemy.prototype = $extend(actors_enemies_Enemy.prototype,{
+	handleAnimation: function() {
+		actors_enemies_Enemy.prototype.handleAnimation.call(this);
+		if(this.attackBehavior != null) {
+			if(this.attackBehavior.hasAnimation()) {
+				this.setAnimation(this.attackBehavior.getAnimation());
+				return;
+			}
+		}
+		this.setAnimation("Idle");
+	}
+	,faceLeft: function() {
+		this.alignmentLeft = true;
+	}
+	,faceRight: function() {
+		this.alignmentLeft = false;
+	}
+	,fireProjectile: function() {
+		this.attackBehavior = this.projectileAttack;
+		this.initiateAttack();
+	}
+	,setAnimation: function(action) {
+		if(this.alignmentLeft) this.currentAnimation = this.getAnimation("Left" + action); else this.currentAnimation = this.getAnimation("Right" + action);
+	}
+	,createClone: function(spawnPoint) {
+		return new actors_enemies_ProjectileEnemy(spawnPoint);
+	}
+	,__class__: actors_enemies_ProjectileEnemy
+});
+var actors_enemies_WalkingEnemy = function(homeSpawn) {
+	var enemySize = 32;
+	var normalIdle = new actors_Animation("Idle",0,new openfl_geom_Point(0,0),enemySize,enemySize,[new openfl_geom_Point(0,0)]);
+	var leftWalk = new actors_Animation("LeftWalk",5,new openfl_geom_Point(0,enemySize),enemySize,enemySize,[new openfl_geom_Point(),new openfl_geom_Point(1,0),new openfl_geom_Point(2,0),new openfl_geom_Point(3,0)]);
+	var rightWalk = new actors_Animation("RightWalk",5,new openfl_geom_Point(0,enemySize * 2),enemySize,enemySize,[new openfl_geom_Point(),new openfl_geom_Point(1,0),new openfl_geom_Point(2,0),new openfl_geom_Point(3,0)]);
+	var jump = new actors_Animation("Jump",0,new openfl_geom_Point(enemySize * 2,0),enemySize,enemySize,[new openfl_geom_Point()]);
+	var hurt = new actors_Animation("Hurt",1,new openfl_geom_Point(enemySize,0),enemySize,enemySize,[new openfl_geom_Point(),new openfl_geom_Point(1)]);
+	this.animations = new haxe_ds_StringMap();
+	var k = normalIdle.getName();
+	this.animations.set(k,normalIdle);
+	normalIdle;
+	var k1 = leftWalk.getName();
+	this.animations.set(k1,leftWalk);
+	leftWalk;
+	var k2 = rightWalk.getName();
+	this.animations.set(k2,rightWalk);
+	rightWalk;
+	var k3 = jump.getName();
+	this.animations.set(k3,jump);
+	jump;
+	var k4 = hurt.getName();
+	this.animations.set(k4,hurt);
+	hurt;
+	this.currentAnimation = normalIdle;
+	var mover = new actors_ObjectMover(.1,.1,0,0,0,0,2,60,2);
+	actors_enemies_Enemy.call(this,this,Main.getBitmapAsset("assets/WalkingEnemy.png"),mover,enemySize,enemySize - 2,homeSpawn,new actors_actorsAI_PaceAI());
+	this.health = 2;
+	this.touchDamage = 1;
+	this.invulDuration = 15;
+	var hits = [];
+	hits.push(new openfl_geom_Rectangle(-1,-1,this.actorWidth + 2,this.actorHeight));
+	this.attackBehavior = new actors_attacks_Attack(mover,hits,-1,1,0);
+	this.initiateAttack();
+};
+$hxClasses["actors.enemies.WalkingEnemy"] = actors_enemies_WalkingEnemy;
+actors_enemies_WalkingEnemy.__name__ = ["actors","enemies","WalkingEnemy"];
+actors_enemies_WalkingEnemy.__super__ = actors_enemies_Enemy;
+actors_enemies_WalkingEnemy.prototype = $extend(actors_enemies_Enemy.prototype,{
+	handleAnimation: function() {
+		actors_enemies_Enemy.prototype.handleAnimation.call(this);
+		if(this.invulnerable) return;
+		if(!this.currentMover.getIsGrounded()) this.currentAnimation = this.getAnimation("Jump"); else if(Math.abs(this.currentMover.getXVel()) < .1) this.currentAnimation = this.getAnimation("Idle"); else if(this.currentMover.getXVel() > .1) this.currentAnimation = this.getAnimation("RightWalk"); else if(this.currentMover.getXVel() < -.1) this.currentAnimation = this.getAnimation("LeftWalk");
+	}
+	,damageReaction: function(actor) {
+		actors_enemies_Enemy.prototype.damageReaction.call(this,actor);
+		this.knockBack(actor);
+		this.currentAnimation = this.getAnimation("Hurt");
+	}
+	,createClone: function(spawnPoint) {
+		return new actors_enemies_WalkingEnemy(spawnPoint);
+	}
+	,__class__: actors_enemies_WalkingEnemy
 });
 var core_Game = function() {
 	openfl_display_Sprite.call(this);
@@ -2490,6 +3536,20 @@ core_Game.prototype = $extend(openfl_display_Sprite.prototype,{
 	}
 	,__class__: core_Game
 });
+var core_GameScreen = function() {
+	openfl_display_Sprite.call(this);
+};
+$hxClasses["core.GameScreen"] = core_GameScreen;
+core_GameScreen.__name__ = ["core","GameScreen"];
+core_GameScreen.__super__ = openfl_display_Sprite;
+core_GameScreen.prototype = $extend(openfl_display_Sprite.prototype,{
+	initiateGameScreen: function(gameState,player,mapManager) {
+		this.gameState = gameState;
+		this.player = player;
+		this.mapManager = mapManager;
+	}
+	,__class__: core_GameScreen
+});
 var core_State = function(state) {
 	openfl_display_Sprite.call(this);
 	if(state != this) throw new js__$Boot_HaxeError(new openfl_errors_Error("This class is meant to be treated as Abstract."));
@@ -2510,17 +3570,18 @@ core_State.prototype = $extend(openfl_display_Sprite.prototype,{
 });
 var core_GameState = function() {
 	core_State.call(this,this);
+	this.gameScreen = new core_GameScreen();
 	var player = new actors_Player();
-	this.mapManager = maps_MapManager.getSingleton();
-	this.mapManager.setMap(this.mapManager.getMap("TestMap"),player);
-	this.addChild(this.mapManager);
+	this.levelManager = maps_LevelManager.getSingleton();
+	this.levelManager.setLevel(1,player);
+	this.addChild(this.levelManager);
 };
 $hxClasses["core.GameState"] = core_GameState;
 core_GameState.__name__ = ["core","GameState"];
 core_GameState.__super__ = core_State;
 core_GameState.prototype = $extend(core_State.prototype,{
 	drawState: function() {
-		this.mapManager.getCurrentMap().updateMap();
+		this.levelManager.getCurrentLevel().getCurrentMap().updateMap();
 	}
 	,__class__: core_GameState
 });
@@ -4165,7 +5226,6 @@ lime__$backend_html5_HTML5Renderer.prototype = {
 		if(this.parent.window.backend.div != null) this.parent.context = lime_graphics_RenderContext.DOM(this.parent.window.backend.div); else if(this.parent.window.backend.canvas != null) {
 			var webgl = null;
 			if(webgl == null) this.parent.context = lime_graphics_RenderContext.CANVAS(this.parent.window.backend.canvas.getContext("2d")); else {
-				webgl = WebGLDebugUtils.makeDebugContext(webgl);
 				lime_graphics_opengl_GL.context = webgl;
 				this.parent.context = lime_graphics_RenderContext.OPENGL(lime_graphics_opengl_GL.context);
 			}
@@ -14004,6 +15064,7 @@ var maps_AreaMap = function(mapFile) {
 	openfl_display_Sprite.call(this);
 	this.checkPoints = [];
 	this.spawnPoints = [];
+	this.pathWalls = [];
 	this.mapWidth = 0;
 	this.mapHeight = 0;
 	this.tileSize = 32;
@@ -14013,6 +15074,7 @@ var maps_AreaMap = function(mapFile) {
 	this.parseMapDimensions(fileArray);
 	this.addMapBG(0);
 	this.actorList = [];
+	this.projectileList = [];
 	this.initiateObjectList(this.mapWidth,this.mapHeight);
 	this.readTiles(fileArray);
 };
@@ -14074,6 +15136,7 @@ maps_AreaMap.prototype = $extend(openfl_display_Sprite.prototype,{
 			if(fileArray[j].indexOf("layer name") >= 0) {
 				xCounter = 0;
 				yCounter = 0;
+				continue;
 			} else if(fileArray[j].indexOf("tile gid=\"") < 0) continue;
 			var parsedTileLine = fileArray[j].split("\"");
 			var index = parsedTileLine[1];
@@ -14087,7 +15150,7 @@ maps_AreaMap.prototype = $extend(openfl_display_Sprite.prototype,{
 	}
 	,createObject: function(index,x,y) {
 		if(index == 0) return;
-		if(maps_ObjectFactory.getSingleton().isObjectTile(index)) this.createTile(index,x,y); else if(maps_ObjectFactory.getSingleton().isObjectCheckpoint(index)) this.createCheckpoint(index,x,y); else if(maps_ObjectFactory.getSingleton().isMapStart(index)) this.createStartpoint(index,x,y); else if(maps_ObjectFactory.getSingleton().isMapEnd(index)) this.createEndpoint(index,x,y); else if(maps_ObjectFactory.getSingleton().isObjectSpawnPoint(index)) this.createSpawnPoint(index,x,y);
+		if(maps_ObjectFactory.getSingleton().isObjectTile(index)) this.createTile(index,x,y); else if(maps_ObjectFactory.getSingleton().isObjectCheckpoint(index)) this.createCheckpoint(index,x,y); else if(maps_ObjectFactory.getSingleton().isMapStart(index)) this.createStartpoint(index,x,y); else if(maps_ObjectFactory.getSingleton().isMapEnd(index)) this.createEndpoint(index,x,y); else if(maps_ObjectFactory.getSingleton().isObjectSpawnPoint(index)) this.createSpawnPoint(index,x,y); else if(maps_ObjectFactory.getSingleton().isObjectAIPathWall(index)) this.createAIPathWall(index,x,y);
 	}
 	,createTile: function(index,x,y) {
 		var newTile = maps_ObjectFactory.getSingleton().createTile(index);
@@ -14124,6 +15187,13 @@ maps_AreaMap.prototype = $extend(openfl_display_Sprite.prototype,{
 		spawnPoint.set_y(y * this.tileSize);
 		this.spawnPoints.push(spawnPoint);
 	}
+	,createAIPathWall: function(index,x,y) {
+		var pathWall = maps_ObjectFactory.getSingleton().createAIPathWall(index);
+		pathWall.set_x(x * this.tileSize);
+		pathWall.set_y(y * this.tileSize);
+		this.objectList[y][x] = pathWall;
+		this.pathWalls.push(pathWall);
+	}
 	,setNextMap: function(map) {
 		this.nextMap = map;
 	}
@@ -14135,10 +15205,20 @@ maps_AreaMap.prototype = $extend(openfl_display_Sprite.prototype,{
 			var i = _g1++;
 			this.checkPoints[i].setInactive();
 		}
+		this.resetSpawnPoints();
+	}
+	,resetSpawnPoints: function() {
+		var _g1 = 0;
+		var _g = this.spawnPoints.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			this.spawnPoints[i].resetSpawn();
+		}
 	}
 	,updateMap: function() {
 		this.player.updatePlayer();
 		this.updateActors();
+		this.updateProjectiles();
 		this.updateSpawnPoints();
 	}
 	,updateActors: function() {
@@ -14158,11 +15238,26 @@ maps_AreaMap.prototype = $extend(openfl_display_Sprite.prototype,{
 			if(this.spawnPoints[i].updateSpawn()) this.addActor(this.spawnPoints[i].getEnemyType());
 		}
 	}
+	,updateProjectiles: function() {
+		var expiredProjectiles = [];
+		var _g1 = 0;
+		var _g = this.projectileList.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			if(this.projectileList[i].updateProjectile()) expiredProjectiles.push(this.projectileList[i]);
+		}
+		var _g11 = 0;
+		var _g2 = expiredProjectiles.length;
+		while(_g11 < _g2) {
+			var j = _g11++;
+			this.removeProjectile(expiredProjectiles[j]);
+		}
+	}
 	,addPlayer: function(player) {
 		this.player = player;
 		this.addActor(player);
 		if(this.startPoint != null) {
-			player.set_x(this.startPoint.get_x());
+			player.set_x(this.startPoint.get_x() - 32);
 			player.set_y(this.startPoint.get_y());
 			this.currentCheckpoint = this.startPoint;
 		} else {
@@ -14184,7 +15279,16 @@ maps_AreaMap.prototype = $extend(openfl_display_Sprite.prototype,{
 			if(this.actorList[i] == actor) this.actorList.splice(i,1);
 		}
 	}
-	,checkCollisions: function(object) {
+	,addProjectile: function(projectile) {
+		this.projectileList.push(projectile);
+		this.addChild(projectile);
+	}
+	,removeProjectile: function(projectile) {
+		this.projectileList.splice(HxOverrides.indexOf(this.projectileList,projectile,0),1);
+		if(this.contains(projectile)) this.removeChild(projectile);
+	}
+	,checkCollisions: function(object,AIcheck) {
+		if(AIcheck == null) AIcheck = false;
 		var objectBounds = object.getCollisionBounds();
 		var objectCenter = new openfl_geom_Point(objectBounds.x + objectBounds.width / 2,objectBounds.y + objectBounds.height / 2);
 		objectCenter = new openfl_geom_Point(Math.floor(objectCenter.x / this.tileSize),Math.floor(objectCenter.y / this.tileSize));
@@ -14201,11 +15305,17 @@ maps_AreaMap.prototype = $extend(openfl_display_Sprite.prototype,{
 				var x = _g3++;
 				if(y >= this.objectList.length || y < 0) continue; else if(x >= this.objectList[y].length || x < 0) continue;
 				if(this.objectList[y][x] != null) {
-					if(this.checkObjectCollision(object,y,x)) collisionList.push(this.objectList[y][x]);
+					if(!AIcheck) {
+						if(this.checkObjectCollision(object,y,x)) collisionList.push(this.objectList[y][x]);
+					} else if(this.checkAICollision(object,y,x)) collisionList.push(this.objectList[y][x]);
 				}
 			}
 		}
 		return collisionList;
+	}
+	,checkDistFromPlayer: function(actor) {
+		if(js_Boot.__instanceof(actor,this.player)) return new openfl_geom_Point(-1,-1);
+		return new openfl_geom_Point(actor.get_x() - this.player.get_x(),actor.get_y() - this.player.get_y());
 	}
 	,checkActorCollisions: function(actor) {
 		var actorBounds = actor.getCollisionBounds();
@@ -14226,7 +15336,17 @@ maps_AreaMap.prototype = $extend(openfl_display_Sprite.prototype,{
 		var _g = this.actorList.length;
 		while(_g1 < _g) {
 			var i = _g1++;
-			if(this.actorList[i].isHitting(actor)) collisionList.push(this.actorList[i]);
+			if(this.actorList[i].isHitting(actor) && actor != this.actorList[i]) collisionList.push(this.actorList[i]);
+		}
+		return collisionList;
+	}
+	,checkProjectileBounds: function(actor) {
+		var collisionList = [];
+		var _g1 = 0;
+		var _g = this.projectileList.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			if(this.projectileList[i].checkCollision(actor)) collisionList.push(this.projectileList[i]);
 		}
 		return collisionList;
 	}
@@ -14245,13 +15365,24 @@ maps_AreaMap.prototype = $extend(openfl_display_Sprite.prototype,{
 	,updateEndPortal: function(player) {
 		if(this.endPoint == null) return;
 		if(player.checkCollision(this.endPoint)) {
-			maps_MapManager.getSingleton().setMap(this.nextMap,player);
+			maps_LevelManager.getSingleton().getCurrentLevel().setMap(maps_LevelManager.getSingleton().getCurrentLevel().getNextMap(this),player);
 			this.removeActor(player);
 		}
 	}
+	,checkAICollision: function(object,y,x) {
+		if(this.objectList[y][x] == null) return false;
+		if(js_Boot.__instanceof(this.objectList[y][x],maps_mapobjects_AIPathWall)) {
+			var collidingPath = this.objectList[y][x];
+			if(collidingPath.checkCollision(object,false)) return true;
+		} else if(js_Boot.__instanceof(this.objectList[y][x],actors_enemies_Enemy)) {
+			var collidingEnemy = this.objectList[y][x];
+			if(collidingEnemy.checkCollision(object)) return true;
+		}
+		return false;
+	}
 	,checkObjectCollision: function(object,y,x) {
 		if(this.objectList[y][x] == null) return false;
-		if(js_Boot.__instanceof(this.objectList[y][x],maps_Tile)) {
+		if(js_Boot.__instanceof(this.objectList[y][x],maps_mapobjects_Tile)) {
 			var collidingTile = this.objectList[y][x];
 			if(collidingTile.checkCollision(object)) return true;
 		} else {
@@ -14268,68 +15399,36 @@ maps_AreaMap.prototype = $extend(openfl_display_Sprite.prototype,{
 		this.currentCheckpoint = newCheckpoint;
 		this.currentCheckpoint.setActive();
 	}
+	,getMapWidth: function() {
+		return this.mapWidth * this.tileSize;
+	}
+	,getMapHeight: function() {
+		return this.mapHeight * this.tileSize;
+	}
 	,__class__: maps_AreaMap
 });
-var maps_Checkpoint = function(active,defaultBitmap) {
-	this.activated = active;
-	var spriteSize = 16;
-	var inactive = new actors_Animation("Inactive",0,new openfl_geom_Point(0,0),16,16,[new openfl_geom_Point()]);
-	var active1 = new actors_Animation("Active",0,new openfl_geom_Point(spriteSize,0),16,16,[new openfl_geom_Point()]);
-	this.animations = new haxe_ds_StringMap();
-	var k = inactive.getName();
-	this.animations.set(k,inactive);
-	inactive;
-	var k1 = active1.getName();
-	this.animations.set(k1,active1);
-	active1;
-	this.currentAnimation = this.getAnimation("Inactive");
-	var mover = new actors_ActorMover(0,0,0,0,0,0,0,0,0);
-	actors_Actor.call(this,this,Main.getBitmapAsset("assets/checkpoint.png"),false,this.animations,spriteSize,mover);
-};
-$hxClasses["maps.Checkpoint"] = maps_Checkpoint;
-maps_Checkpoint.__name__ = ["maps","Checkpoint"];
-maps_Checkpoint.__super__ = actors_Actor;
-maps_Checkpoint.prototype = $extend(actors_Actor.prototype,{
-	setActive: function() {
-		this.activated = true;
-		this.currentAnimation = this.getAnimation("Active");
-		this.removeBmp();
-		this.addAnimationBmp(this.currentAnimation);
-	}
-	,setInactive: function() {
-		this.activated = false;
-		this.currentAnimation = this.getAnimation("Inactive");
-		this.removeBmp();
-		this.addAnimationBmp(this.currentAnimation);
-	}
-	,getActive: function() {
-		return this.activated;
-	}
-	,__class__: maps_Checkpoint
-});
-var maps_MapManager = function() {
+var maps_Level = function(mapList) {
 	openfl_display_Sprite.call(this);
-	this.maps = new haxe_ds_StringMap();
-	var testMap = new maps_AreaMap(openfl_Assets.getBytes("assets/Stage1-1.tmx"));
-	{
-		this.maps.set("TestMap",testMap);
-		testMap;
+	this.mapList = mapList;
+	if(mapList.length > 0) this.currentMap = mapList[0];
+};
+$hxClasses["maps.Level"] = maps_Level;
+maps_Level.__name__ = ["maps","Level"];
+maps_Level.__super__ = openfl_display_Sprite;
+maps_Level.prototype = $extend(openfl_display_Sprite.prototype,{
+	resetLevel: function() {
+		this.currentMap = this.mapList[0];
 	}
-};
-$hxClasses["maps.MapManager"] = maps_MapManager;
-maps_MapManager.__name__ = ["maps","MapManager"];
-maps_MapManager.singleton = null;
-maps_MapManager.getSingleton = function() {
-	if(maps_MapManager.singleton == null) maps_MapManager.singleton = new maps_MapManager();
-	return maps_MapManager.singleton;
-};
-maps_MapManager.__super__ = openfl_display_Sprite;
-maps_MapManager.prototype = $extend(openfl_display_Sprite.prototype,{
-	getCurrentMap: function() {
+	,getNextMap: function(map) {
+		var index = HxOverrides.indexOf(this.mapList,map,0);
+		if(index < 0 || index > this.mapList.length + 1) return null; else return this.getMapAt(index + 1);
+	}
+	,getMapAt: function(index) {
+		if(index < this.mapList.length) return this.mapList[index];
+		return null;
+	}
+	,getCurrentMap: function() {
 		return this.currentMap;
-	}
-	,getMap: function(title) {
-		return this.maps.get(title);
 	}
 	,setMap: function(newMap,player) {
 		if(this.currentMap != null) {
@@ -14340,9 +15439,57 @@ maps_MapManager.prototype = $extend(openfl_display_Sprite.prototype,{
 		}
 		this.currentMap = newMap;
 		this.addChild(this.currentMap);
+		this.currentMap.resetMap();
 		this.currentMap.addPlayer(player);
 	}
-	,__class__: maps_MapManager
+	,initiateLevel: function(player) {
+		this.setMap(this.currentMap,player);
+	}
+	,__class__: maps_Level
+});
+var maps_LevelManager = function() {
+	openfl_display_Sprite.call(this);
+	this.levelList = [];
+	var levelOne = new maps_Level(this.loadMaps(1,[1,2,3,4]));
+	this.levelList.push(levelOne);
+};
+$hxClasses["maps.LevelManager"] = maps_LevelManager;
+maps_LevelManager.__name__ = ["maps","LevelManager"];
+maps_LevelManager.singleton = null;
+maps_LevelManager.getSingleton = function() {
+	if(maps_LevelManager.singleton == null) maps_LevelManager.singleton = new maps_LevelManager();
+	return maps_LevelManager.singleton;
+};
+maps_LevelManager.__super__ = openfl_display_Sprite;
+maps_LevelManager.prototype = $extend(openfl_display_Sprite.prototype,{
+	loadMaps: function(level,stages) {
+		var loadedMapList = [];
+		var _g1 = 1;
+		var _g = stages.length + 1;
+		while(_g1 < _g) {
+			var i = _g1++;
+			var mapString = "assets/Stage" + level + "-" + i + ".tmx";
+			var loadedMap = new maps_AreaMap(openfl_Assets.getBytes(mapString));
+			if(loadedMap == null) continue; else loadedMapList.push(loadedMap);
+		}
+		return loadedMapList;
+	}
+	,getCurrentLevel: function() {
+		return this.currentLevel;
+	}
+	,setLevel: function(newLevel,player) {
+		if(newLevel > this.levelList.length + 1) return;
+		if(this.currentLevel != null) {
+			if(this.contains(this.currentLevel)) {
+				this.currentLevel.resetLevel();
+				this.removeChild(this.currentLevel);
+			}
+		}
+		this.currentLevel = this.levelList[newLevel - 1];
+		this.addChild(this.currentLevel);
+		this.currentLevel.initiateLevel(player);
+	}
+	,__class__: maps_LevelManager
 });
 var maps_ObjectFactory = function() {
 	this.tileSize = 32;
@@ -14366,48 +15513,78 @@ maps_ObjectFactory.prototype = {
 		var v1 = maps_ObjectFactory.TILE_ENDPOINT;
 		this.tileIndexTypes.h[1] = v1;
 		v1;
-		var v2 = maps_ObjectFactory.TILE_SPAWNPOINT;
+		var v2 = maps_ObjectFactory.TILE_BACKGROUND;
 		this.tileIndexTypes.h[2] = v2;
 		v2;
-		var v3 = maps_ObjectFactory.TILE_STARTPOINT;
-		this.tileIndexTypes.h[17] = v3;
+		var v3 = maps_ObjectFactory.TILE_AIPATHWALL;
+		this.tileIndexTypes.h[3] = v3;
 		v3;
-		var v4 = maps_ObjectFactory.TILE_BACKGROUND;
-		this.tileIndexTypes.h[15] = v4;
+		var v4 = maps_ObjectFactory.TILE_STARTPOINT;
+		this.tileIndexTypes.h[16] = v4;
 		v4;
-		var v5 = maps_ObjectFactory.TILE_PLATFORM;
-		this.tileIndexTypes.h[31] = v5;
+		var v5 = maps_ObjectFactory.TILE_SPAWNPOINT_WALKING;
+		this.tileIndexTypes.h[15] = v5;
 		v5;
-		var v6 = maps_ObjectFactory.TILE_PLATFORM;
-		this.tileIndexTypes.h[32] = v6;
+		var v6 = maps_ObjectFactory.TILE_SPAWNPOINT_DASH;
+		this.tileIndexTypes.h[30] = v6;
 		v6;
-		var v7 = maps_ObjectFactory.TILE_PLATFORM;
-		this.tileIndexTypes.h[33] = v7;
+		var v7 = maps_ObjectFactory.TILE_SPAWNPOINT_LAUNCH;
+		this.tileIndexTypes.h[45] = v7;
 		v7;
-		var v8 = maps_ObjectFactory.TILE_PLATFORM;
-		this.tileIndexTypes.h[46] = v8;
+		var v8 = maps_ObjectFactory.TILE_SPAWNPOINT_PROJECTILE;
+		this.tileIndexTypes.h[60] = v8;
 		v8;
 		var v9 = maps_ObjectFactory.TILE_PLATFORM;
-		this.tileIndexTypes.h[47] = v9;
+		this.tileIndexTypes.h[31] = v9;
 		v9;
 		var v10 = maps_ObjectFactory.TILE_PLATFORM;
-		this.tileIndexTypes.h[48] = v10;
+		this.tileIndexTypes.h[32] = v10;
 		v10;
 		var v11 = maps_ObjectFactory.TILE_PLATFORM;
-		this.tileIndexTypes.h[61] = v11;
+		this.tileIndexTypes.h[33] = v11;
 		v11;
 		var v12 = maps_ObjectFactory.TILE_PLATFORM;
-		this.tileIndexTypes.h[62] = v12;
+		this.tileIndexTypes.h[46] = v12;
 		v12;
 		var v13 = maps_ObjectFactory.TILE_PLATFORM;
-		this.tileIndexTypes.h[63] = v13;
+		this.tileIndexTypes.h[47] = v13;
 		v13;
 		var v14 = maps_ObjectFactory.TILE_PLATFORM;
-		this.tileIndexTypes.h[36] = v14;
+		this.tileIndexTypes.h[48] = v14;
 		v14;
 		var v15 = maps_ObjectFactory.TILE_PLATFORM;
-		this.tileIndexTypes.h[51] = v15;
+		this.tileIndexTypes.h[61] = v15;
 		v15;
+		var v16 = maps_ObjectFactory.TILE_PLATFORM;
+		this.tileIndexTypes.h[62] = v16;
+		v16;
+		var v17 = maps_ObjectFactory.TILE_PLATFORM;
+		this.tileIndexTypes.h[63] = v17;
+		v17;
+		var v18 = maps_ObjectFactory.TILE_PLATFORM;
+		this.tileIndexTypes.h[36] = v18;
+		v18;
+		var v19 = maps_ObjectFactory.TILE_PLATFORM;
+		this.tileIndexTypes.h[51] = v19;
+		v19;
+		var v20 = maps_ObjectFactory.TILE_FATAL_DOWN;
+		this.tileIndexTypes.h[24] = v20;
+		v20;
+		var v21 = maps_ObjectFactory.TILE_FATAL_DOWN;
+		this.tileIndexTypes.h[25] = v21;
+		v21;
+		var v22 = maps_ObjectFactory.TILE_FATAL_DOWN;
+		this.tileIndexTypes.h[26] = v22;
+		v22;
+		var v23 = maps_ObjectFactory.TILE_FATAL_UP;
+		this.tileIndexTypes.h[54] = v23;
+		v23;
+		var v24 = maps_ObjectFactory.TILE_FATAL_UP;
+		this.tileIndexTypes.h[55] = v24;
+		v24;
+		var v25 = maps_ObjectFactory.TILE_FATAL_UP;
+		this.tileIndexTypes.h[56] = v25;
+		v25;
 	}
 	,getIndexType: function(tileIndex) {
 		if(tileIndex == null) tileIndex = 0;
@@ -14436,21 +15613,31 @@ maps_ObjectFactory.prototype = {
 	}
 	,isObjectSpawnPoint: function(index) {
 		var indexType = this.getIndexType(index);
-		if(indexType == maps_ObjectFactory.TILE_SPAWNPOINT) return true;
+		if(HxOverrides.indexOf(maps_ObjectFactory.spawnTypes,indexType,0) >= 0) return true;
+		return false;
+	}
+	,isObjectAIPathWall: function(index) {
+		var indexType = this.getIndexType(index);
+		if(indexType == maps_ObjectFactory.TILE_AIPATHWALL) return true;
 		return false;
 	}
 	,createCheckpoint: function(index) {
 		var indexType = this.getIndexType(index);
 		var checkpointBmp = Main.getBitmapAsset("assets/checkpoint.png");
-		return new maps_Checkpoint(false,checkpointBmp);
+		return new maps_mapobjects_Checkpoint(false,checkpointBmp);
 	}
 	,createPortal: function(index) {
-		var portalBmp = Main.getBitmapAsset("assets/portal.png");
-		return new maps_Portal(this.getBitmap(1,portalBmp,48));
+		var portalBmp = Main.getBitmapAsset("assets/Door.png");
+		return new maps_mapobjects_Portal(portalBmp);
 	}
 	,createSpawnPoint: function(index) {
+		var indexType = this.getIndexType(index);
 		var spawnBmp = Main.getBitmapAsset("assets/portal.png");
-		return new maps_SpawnPoint(spawnBmp);
+		if(indexType == maps_ObjectFactory.TILE_SPAWNPOINT_WALKING) return new maps_mapobjects_SpawnPoint(spawnBmp,new actors_enemies_WalkingEnemy(null),1,60,60,1); else if(indexType == maps_ObjectFactory.TILE_SPAWNPOINT_DASH) return new maps_mapobjects_SpawnPoint(spawnBmp,new actors_enemies_DashEnemy(null),1,60,60,1); else if(indexType == maps_ObjectFactory.TILE_SPAWNPOINT_LAUNCH) return new maps_mapobjects_SpawnPoint(spawnBmp,new actors_enemies_LaunchEnemy(null),1,60,60,1); else if(indexType == maps_ObjectFactory.TILE_SPAWNPOINT_PROJECTILE) return new maps_mapobjects_SpawnPoint(spawnBmp,new actors_enemies_ProjectileEnemy(null),1,60,60,1); else return new maps_mapobjects_SpawnPoint(spawnBmp,new actors_enemies_WalkingEnemy(null));
+	}
+	,createAIPathWall: function(index) {
+		var pathBmp = Main.getBitmapAsset("assets/portal.png");
+		return new maps_mapobjects_AIPathWall(pathBmp);
 	}
 	,createTile: function(tileIndex) {
 		var indexType = this.getIndexType(tileIndex);
@@ -14458,15 +15645,15 @@ maps_ObjectFactory.prototype = {
 		return null;
 	}
 	,createPlatformTile: function(tileIndex,indexType) {
-		return new maps_Tile(this.getTileBitmap(tileIndex),true,[0,0,0,0]);
+		return new maps_mapobjects_Tile(this.getTileBitmap(tileIndex),true,[0,0,0,0]);
 	}
 	,createSpikeTile: function(tileIndex,indexType) {
 		var fatalDirections = [0,0,0,0];
 		if(indexType == maps_ObjectFactory.TILE_FATAL_LEFT) fatalDirections[0] = 1; else if(indexType == maps_ObjectFactory.TILE_FATAL_RIGHT) fatalDirections[1] = 1; else if(indexType == maps_ObjectFactory.TILE_FATAL_UP) fatalDirections[2] = 1; else if(indexType == maps_ObjectFactory.TILE_FATAL_DOWN) fatalDirections[3] = 1; else if(indexType == maps_ObjectFactory.TILE_FATAL_LR) fatalDirections = [1,1,0,0]; else if(indexType == maps_ObjectFactory.TILE_FATAL_UD) fatalDirections = [0,0,1,1]; else if(indexType == maps_ObjectFactory.TILE_FATAL_ALL) fatalDirections = [1,1,1,1];
-		return new maps_Tile(this.getTileBitmap(tileIndex),true,fatalDirections);
+		return new maps_mapobjects_Tile(this.getTileBitmap(tileIndex),true,fatalDirections);
 	}
 	,createBGTile: function(tileIndex,indexType) {
-		return new maps_Tile(this.getTileBitmap(tileIndex),false,[0,0,0,0]);
+		return new maps_mapobjects_Tile(this.getTileBitmap(tileIndex),false,[0,0,0,0]);
 	}
 	,getTileBitmap: function(index) {
 		return this.getBitmap(index,this.tileSheet,this.tileSheetWidth);
@@ -14482,61 +15669,120 @@ maps_ObjectFactory.prototype = {
 	}
 	,__class__: maps_ObjectFactory
 };
-var maps_Portal = function(defaultBmp) {
-	maps_MapObject.call(this,this,defaultBmp,true);
+var maps_mapobjects_AIPathWall = function(defaultBmp) {
+	maps_mapobjects_MapObject.call(this,this,defaultBmp,false);
 };
-$hxClasses["maps.Portal"] = maps_Portal;
-maps_Portal.__name__ = ["maps","Portal"];
-maps_Portal.__super__ = maps_MapObject;
-maps_Portal.prototype = $extend(maps_MapObject.prototype,{
-	__class__: maps_Portal
+$hxClasses["maps.mapobjects.AIPathWall"] = maps_mapobjects_AIPathWall;
+maps_mapobjects_AIPathWall.__name__ = ["maps","mapobjects","AIPathWall"];
+maps_mapobjects_AIPathWall.__super__ = maps_mapobjects_MapObject;
+maps_mapobjects_AIPathWall.prototype = $extend(maps_mapobjects_MapObject.prototype,{
+	__class__: maps_mapobjects_AIPathWall
 });
-var maps_SpawnPoint = function(defaultBmp,maxEnemies,minEnemies) {
-	if(minEnemies == null) minEnemies = 1;
-	if(maxEnemies == null) maxEnemies = 3;
-	maps_MapObject.call(this,this,defaultBmp,true);
-	this.frequency = 60;
-	this.counter = 50;
-	this.enemyCount = 0;
-	this.maxEnemies = maxEnemies;
-	this.minEnemies = minEnemies;
-	this.enemyType = new actors_Enemy(this);
+var maps_mapobjects_Checkpoint = function(active,defaultBitmap) {
+	this.activated = active;
+	var spriteSize = 16;
+	var inactive = new actors_Animation("Inactive",0,new openfl_geom_Point(0,0),16,16,[new openfl_geom_Point()]);
+	var active1 = new actors_Animation("Active",0,new openfl_geom_Point(spriteSize,0),16,16,[new openfl_geom_Point()]);
+	this.animations = new haxe_ds_StringMap();
+	var k = inactive.getName();
+	this.animations.set(k,inactive);
+	inactive;
+	var k1 = active1.getName();
+	this.animations.set(k1,active1);
+	active1;
+	this.currentAnimation = this.getAnimation("Inactive");
+	var mover = new actors_ObjectMover(0,0,0,0,0,0,0,0,0);
+	actors_Actor.call(this,this,Main.getBitmapAsset("assets/checkpoint.png"),false,this.animations,mover,spriteSize);
 };
-$hxClasses["maps.SpawnPoint"] = maps_SpawnPoint;
-maps_SpawnPoint.__name__ = ["maps","SpawnPoint"];
-maps_SpawnPoint.__super__ = maps_MapObject;
-maps_SpawnPoint.prototype = $extend(maps_MapObject.prototype,{
+$hxClasses["maps.mapobjects.Checkpoint"] = maps_mapobjects_Checkpoint;
+maps_mapobjects_Checkpoint.__name__ = ["maps","mapobjects","Checkpoint"];
+maps_mapobjects_Checkpoint.__super__ = actors_Actor;
+maps_mapobjects_Checkpoint.prototype = $extend(actors_Actor.prototype,{
+	setActive: function() {
+		this.activated = true;
+		this.currentAnimation = this.getAnimation("Active");
+		this.removeBmp();
+		this.addAnimationBmp(this.currentAnimation);
+	}
+	,setInactive: function() {
+		this.activated = false;
+		this.currentAnimation = this.getAnimation("Inactive");
+		this.removeBmp();
+		this.addAnimationBmp(this.currentAnimation);
+	}
+	,getActive: function() {
+		return this.activated;
+	}
+	,__class__: maps_mapobjects_Checkpoint
+});
+var maps_mapobjects_Portal = function(defaultBmp) {
+	maps_mapobjects_MapObject.call(this,this,defaultBmp,true);
+	this.defaultBitmap.set_x(4);
+	this.defaultBitmap.set_y(-8);
+};
+$hxClasses["maps.mapobjects.Portal"] = maps_mapobjects_Portal;
+maps_mapobjects_Portal.__name__ = ["maps","mapobjects","Portal"];
+maps_mapobjects_Portal.__super__ = maps_mapobjects_MapObject;
+maps_mapobjects_Portal.prototype = $extend(maps_mapobjects_MapObject.prototype,{
+	__class__: maps_mapobjects_Portal
+});
+var maps_mapobjects_SpawnPoint = function(defaultBmp,enemyPrototype,maxEnemies,frequency,startCount,enemiesPerInstance) {
+	if(enemiesPerInstance == null) enemiesPerInstance = -1;
+	if(startCount == null) startCount = 50;
+	if(frequency == null) frequency = 60;
+	if(maxEnemies == null) maxEnemies = 3;
+	maps_mapobjects_MapObject.call(this,this,defaultBmp,false);
+	this.frequency = frequency;
+	this.startCount = startCount;
+	this.counter = startCount;
+	this.enemyCount = 0;
+	this.totalEnemiesSpawned = 0;
+	this.maxEnemies = maxEnemies;
+	this.enemiesPerInstance = enemiesPerInstance;
+	this.enemyPrototype = enemyPrototype;
+};
+$hxClasses["maps.mapobjects.SpawnPoint"] = maps_mapobjects_SpawnPoint;
+maps_mapobjects_SpawnPoint.__name__ = ["maps","mapobjects","SpawnPoint"];
+maps_mapobjects_SpawnPoint.__super__ = maps_mapobjects_MapObject;
+maps_mapobjects_SpawnPoint.prototype = $extend(maps_mapobjects_MapObject.prototype,{
 	updateSpawn: function() {
+		if(this.enemiesPerInstance != -1 && this.totalEnemiesSpawned >= this.enemiesPerInstance) return false;
 		if(this.enemyCount >= this.maxEnemies) return false;
 		this.counter += 1;
 		if(this.counter >= this.frequency) {
 			this.counter = 0;
 			this.enemyCount += 1;
+			this.totalEnemiesSpawned += 1;
 			return true;
 		}
 		return false;
 	}
+	,resetSpawn: function() {
+		this.totalEnemiesSpawned = 0;
+		this.counter = this.startCount;
+	}
 	,getEnemyType: function() {
-		this.enemyType = new actors_Enemy(this);
-		this.enemyType.set_x(this.get_x());
-		this.enemyType.set_y(this.get_y());
-		return this.enemyType;
+		var newEnemy = this.enemyPrototype.createClone(this);
+		newEnemy.set_x(this.get_x());
+		newEnemy.set_y(this.get_y());
+		return newEnemy;
 	}
 	,enemyDead: function(enemy) {
 		this.enemyCount -= 1;
 	}
-	,__class__: maps_SpawnPoint
+	,__class__: maps_mapobjects_SpawnPoint
 });
-var maps_Tile = function(defaultBmp,collidable,fatalDirections) {
-	maps_MapObject.call(this,this,defaultBmp);
+var maps_mapobjects_Tile = function(defaultBmp,collidable,fatalDirections) {
+	maps_mapobjects_MapObject.call(this,this,defaultBmp);
 	this.tileCollidable = collidable;
 	this.tileFatalDirections = fatalDirections;
 };
-$hxClasses["maps.Tile"] = maps_Tile;
-maps_Tile.__name__ = ["maps","Tile"];
-maps_Tile.__super__ = maps_MapObject;
-maps_Tile.prototype = $extend(maps_MapObject.prototype,{
-	checkCollision: function(otherObject) {
+$hxClasses["maps.mapobjects.Tile"] = maps_mapobjects_Tile;
+maps_mapobjects_Tile.__name__ = ["maps","mapobjects","Tile"];
+maps_mapobjects_Tile.__super__ = maps_mapobjects_MapObject;
+maps_mapobjects_Tile.prototype = $extend(maps_mapobjects_MapObject.prototype,{
+	checkCollision: function(otherObject,checkPassable) {
+		if(checkPassable == null) checkPassable = true;
 		if(!this.tileCollidable) return false;
 		this.tempObjectBounds = this.getCollisionBounds();
 		this.tempCollideBounds = otherObject.getCollisionBounds();
@@ -14548,7 +15794,7 @@ maps_Tile.prototype = $extend(maps_MapObject.prototype,{
 		this.otherCenter = new openfl_geom_Point(actor.get_x() + actor.get_width() / 2,actor.get_y() + actor.get_height() / 2);
 		if(xAxis) {
 			if(this.thisCenter.x - this.otherCenter.x >= 0 && this.tileFatalDirections[0] == 1) return true; else if(this.thisCenter.x - this.otherCenter.x < 0 && this.tileFatalDirections[1] == 1) return true;
-		} else if(this.thisCenter.y - this.otherCenter.y >= 0 && this.tileFatalDirections[2] == 1) return true; else if(this.thisCenter.y - this.otherCenter.y < 0 && this.tileFatalDirections[3] == 1) return true;
+		} else if(this.thisCenter.y - this.otherCenter.y >= 0 && Math.abs(this.thisCenter.x - this.otherCenter.x) < 16 && this.tileFatalDirections[2] == 1) return true; else if(this.thisCenter.y - this.otherCenter.y < 0 && this.tileFatalDirections[3] == 1) return true;
 		return false;
 	}
 	,getLeftDistance: function(otherObject) {
@@ -14563,7 +15809,7 @@ maps_Tile.prototype = $extend(maps_MapObject.prototype,{
 	,getDownDistance: function(otherObject) {
 		return Math.round(this.get_y() + this.get_height() - otherObject.get_y());
 	}
-	,__class__: maps_Tile
+	,__class__: maps_mapobjects_Tile
 });
 var openfl_IAssetCache = function() { };
 $hxClasses["openfl.IAssetCache"] = openfl_IAssetCache;
@@ -15394,29 +16640,24 @@ openfl_Memory._setPositionTemporarily = function(position,action) {
 	return value;
 };
 openfl_Memory.getByte = function(addr) {
-	if(addr < 0 || addr + 1 > openfl_Memory.len) throw new js__$Boot_HaxeError("Bad address");
 	return openfl_Memory.gcRef.data.getInt8(addr);
 };
 openfl_Memory.getDouble = function(addr) {
-	if(addr < 0 || addr + 8 > openfl_Memory.len) throw new js__$Boot_HaxeError("Bad address");
 	return openfl_Memory._setPositionTemporarily(addr,function() {
 		return openfl_Memory.gcRef.readDouble();
 	});
 };
 openfl_Memory.getFloat = function(addr) {
-	if(addr < 0 || addr + 4 > openfl_Memory.len) throw new js__$Boot_HaxeError("Bad address");
 	return openfl_Memory._setPositionTemporarily(addr,function() {
 		return openfl_Memory.gcRef.readFloat();
 	});
 };
 openfl_Memory.getI32 = function(addr) {
-	if(addr < 0 || addr + 4 > openfl_Memory.len) throw new js__$Boot_HaxeError("Bad address");
 	return openfl_Memory._setPositionTemporarily(addr,function() {
 		return openfl_Memory.gcRef.readInt();
 	});
 };
 openfl_Memory.getUI16 = function(addr) {
-	if(addr < 0 || addr + 2 > openfl_Memory.len) throw new js__$Boot_HaxeError("Bad address");
 	return openfl_Memory._setPositionTemporarily(addr,function() {
 		return openfl_Memory.gcRef.readUnsignedShort();
 	});
@@ -15426,29 +16667,24 @@ openfl_Memory.select = function(inBytes) {
 	if(inBytes != null) openfl_Memory.len = inBytes.length; else openfl_Memory.len = 0;
 };
 openfl_Memory.setByte = function(addr,v) {
-	if(addr < 0 || addr + 1 > openfl_Memory.len) throw new js__$Boot_HaxeError("Bad address");
 	openfl_Memory.gcRef.data.setUint8(addr,v);
 };
 openfl_Memory.setDouble = function(addr,v) {
-	if(addr < 0 || addr + 8 > openfl_Memory.len) throw new js__$Boot_HaxeError("Bad address");
 	openfl_Memory._setPositionTemporarily(addr,function() {
 		openfl_Memory.gcRef.writeDouble(v);
 	});
 };
 openfl_Memory.setFloat = function(addr,v) {
-	if(addr < 0 || addr + 4 > openfl_Memory.len) throw new js__$Boot_HaxeError("Bad address");
 	openfl_Memory._setPositionTemporarily(addr,function() {
 		openfl_Memory.gcRef.writeFloat(v);
 	});
 };
 openfl_Memory.setI16 = function(addr,v) {
-	if(addr < 0 || addr + 2 > openfl_Memory.len) throw new js__$Boot_HaxeError("Bad address");
 	openfl_Memory._setPositionTemporarily(addr,function() {
 		openfl_Memory.gcRef.writeUnsignedShort(v);
 	});
 };
 openfl_Memory.setI32 = function(addr,v) {
-	if(addr < 0 || addr + 4 > openfl_Memory.len) throw new js__$Boot_HaxeError("Bad address");
 	openfl_Memory._setPositionTemporarily(addr,function() {
 		openfl_Memory.gcRef.writeInt(v);
 	});
@@ -22799,7 +24035,9 @@ openfl_display_BitmapData.prototype = {
 				while(_g3 < _g2) {
 					var xx = _g3++;
 					position = (width_yy + xx) * 4;
-					pixelValue = openfl_Memory.getI32(position);
+					pixelValue = openfl_Memory._setPositionTemporarily(position,function() {
+						return openfl_Memory.gcRef.readInt();
+					});
 					pixelMask = pixelValue & mask;
 					i = openfl_display_BitmapData.__ucompare(pixelMask,thresholdMask);
 					test = false;
@@ -22861,7 +24099,9 @@ openfl_display_BitmapData.prototype = {
 				while(_g11 < dw) {
 					var xx1 = _g11++;
 					position1 = (xx1 + sx + (yy1 + sy) * sw) * 4;
-					pixelValue1 = openfl_Memory.getI32(canvasMemory + position1);
+					pixelValue1 = openfl_Memory._setPositionTemporarily(canvasMemory + position1,function() {
+						return openfl_Memory.gcRef.readInt();
+					});
 					pixelMask1 = pixelValue1 & mask;
 					i1 = openfl_display_BitmapData.__ucompare(pixelMask1,thresholdMask1);
 					test1 = false;
@@ -33225,7 +34465,11 @@ lime_utils__$UInt8Array_UInt8Array_$Impl_$.BYTES_PER_ELEMENT = 1;
 maps_ObjectFactory.TILE_STARTPOINT = 41;
 maps_ObjectFactory.TILE_ENDPOINT = 42;
 maps_ObjectFactory.TILE_CHECKPOINT = 20;
-maps_ObjectFactory.TILE_SPAWNPOINT = 43;
+maps_ObjectFactory.TILE_AIPATHWALL = 43;
+maps_ObjectFactory.TILE_SPAWNPOINT_WALKING = 44;
+maps_ObjectFactory.TILE_SPAWNPOINT_DASH = 45;
+maps_ObjectFactory.TILE_SPAWNPOINT_LAUNCH = 46;
+maps_ObjectFactory.TILE_SPAWNPOINT_PROJECTILE = 47;
 maps_ObjectFactory.TILE_BACKGROUND = 11;
 maps_ObjectFactory.TILE_PLATFORM = 12;
 maps_ObjectFactory.TILE_FATAL_UP = 13;
@@ -33237,6 +34481,7 @@ maps_ObjectFactory.TILE_FATAL_UD = 18;
 maps_ObjectFactory.TILE_FATAL_ALL = 19;
 maps_ObjectFactory.tileTypes = [maps_ObjectFactory.TILE_FATAL_ALL,maps_ObjectFactory.TILE_FATAL_DOWN,maps_ObjectFactory.TILE_FATAL_LEFT,maps_ObjectFactory.TILE_FATAL_RIGHT,maps_ObjectFactory.TILE_FATAL_UP,maps_ObjectFactory.TILE_FATAL_LR,maps_ObjectFactory.TILE_FATAL_UD,maps_ObjectFactory.TILE_BACKGROUND,maps_ObjectFactory.TILE_PLATFORM];
 maps_ObjectFactory.fatalTypes = [maps_ObjectFactory.TILE_FATAL_ALL,maps_ObjectFactory.TILE_FATAL_DOWN,maps_ObjectFactory.TILE_FATAL_LEFT,maps_ObjectFactory.TILE_FATAL_RIGHT,maps_ObjectFactory.TILE_FATAL_UP,maps_ObjectFactory.TILE_FATAL_LR,maps_ObjectFactory.TILE_FATAL_UD];
+maps_ObjectFactory.spawnTypes = [maps_ObjectFactory.TILE_SPAWNPOINT_WALKING,maps_ObjectFactory.TILE_SPAWNPOINT_DASH,maps_ObjectFactory.TILE_SPAWNPOINT_LAUNCH,maps_ObjectFactory.TILE_SPAWNPOINT_PROJECTILE];
 openfl_Assets.cache = new openfl_AssetCache();
 openfl_Assets.dispatcher = new openfl_events_EventDispatcher();
 openfl_display_LoaderInfo.__rootURL = window.document.URL;
@@ -33516,5 +34761,3 @@ openfl_ui_Keyboard.RIGHTBRACKET = 221;
 openfl_ui_Keyboard.QUOTE = 222;
 ApplicationMain.main();
 })(typeof console != "undefined" ? console : {log:function(){}}, typeof window != "undefined" ? window : exports);
-
-//# sourceMappingURL=LolosSuperDreamPlace.js.map

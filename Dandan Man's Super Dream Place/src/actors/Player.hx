@@ -16,6 +16,7 @@ import actors.enemies.LaunchEnemy;
 import actors.enemies.ProjectileEnemy;
 import maps.AreaMap;
 import maps.mapobjects.MapObject;
+import maps.mapobjects.Portal;
 import openfl.events.KeyboardEvent;
 import openfl.ui.Keyboard;
 import openfl.utils.Dictionary;
@@ -146,7 +147,7 @@ class Player extends Actor
 	
 	public function updatePlayer():Void {
 		
-		currentMap.updateCheckpoints(this);
+		//currentMap.updateCheckpoints(this);
 		
 		centerScreen();
 		handleAnimation();
@@ -197,25 +198,37 @@ class Player extends Actor
 			mapWidth = mapWidth * scale;
 			mapHeight = mapHeight * scale;
 			
+			// If the map is narrower than the screen, just center X-axis around the map.
 			if (mapWidth < screenWidth * scale)
 				currentMap.x = ((screenWidth * scale) / 2 - (mapWidth) / 2) / scale;
+			
+			else {
+				// Otherwise, center it around the player.
+				currentMap.x = screenWidth / 2 - this.x;
 				
-			else if (this.x - screenWidth / 2 > currentMap.x && this.x + screenWidth / 2 < mapWidth / scale)
-				currentMap.x = -(this.x) + screenWidth / 2;
+				if (currentMap.x > 0)	// Don't go beyond the map's left border.
+					currentMap.x = 0;
+				else if (this.x + screenWidth / 2 > mapWidth)  // And don't go beyond the map's right border.
+					currentMap.x = screenWidth - mapWidth;
+			}
 			
-			else if (this.x + screenWidth / 2 > mapWidth / scale)
-				currentMap.x = screenWidth - mapWidth / scale;
-			
+			// If the map is shorter than the screen, just center Y-axis around the map.
 			if (mapHeight < screenHeight * scale)
 				currentMap.y = ((screenHeight * scale) / 2 - mapHeight / 2) / scale;
 			
-			else if (this.y - screenHeight / 2 > currentMap.y && this.y + screenHeight / 2 < mapHeight / scale)
-				currentMap.y = -(this.y) + screenHeight / 2;
-			
-			else if (this.y + screenHeight / 2 > mapHeight / scale)
-				currentMap.y = screenHeight - mapHeight / scale;
+			else {
+				// Otherwise, center it around the player.
+				currentMap.y = screenHeight / 2 - this.y;
+				
+				if (currentMap.y > 0)	// Don't go beyond the map's top border.
+					currentMap.y = 0;
+				else if (this.y + screenHeight / 2 > mapHeight)	// And don't go beyond the map's lower border.
+					currentMap.y = screenHeight - mapHeight;
+				
+			}
 			
 	}
+	
 	
 	private override function setGrounded():Void {
 		super.setGrounded();
@@ -302,12 +315,12 @@ class Player extends Actor
 	private override function kill():Void {
 		super.kill();
 		
-		var checkpoint:Checkpoint = currentMap.getCurrentCheckpoint();
+		var checkpoint:MapObject = currentMap.getCurrentCheckpoint();
 		if (checkpoint == null) return;
 		
 		this.health = maxHealth;
-		this.x = checkpoint.x;
-		this.y = checkpoint.y - actorHeight / 2;
+		this.x = checkpoint.x + 6;
+		this.y = checkpoint.y - 4;
 	}
 	
 	public function absorbAbility(enemy:Enemy):Void {

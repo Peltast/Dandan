@@ -34,7 +34,23 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
+		urls.push ("assets/DashEnemy.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/Door.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
 		urls.push ("assets/Enemy.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/LaunchEnemy.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/oldplayer.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
@@ -42,7 +58,7 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
-		urls.push ("assets/player.png");
+		urls.push ("assets/Player.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
@@ -50,11 +66,55 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
+		urls.push ("assets/PlayerDash.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/PlayerLaunch.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/PlayerProjectile.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
 		urls.push ("assets/portal.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
+		urls.push ("assets/Projectile.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/Projectile2.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/ProjectileEnemy.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
 		urls.push ("assets/Stage1-1.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-2.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-3.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-4.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage3-1.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage3-2.tmx");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
@@ -83,6 +143,10 @@ class ApplicationMain {
 		
 		
 		urls.push ("assets/Untitled.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/WalkingEnemy.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
@@ -150,7 +214,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "669",
+			build: "1309",
 			company: "Peltast",
 			file: "LolosSuperDreamPlace",
 			fps: 30,

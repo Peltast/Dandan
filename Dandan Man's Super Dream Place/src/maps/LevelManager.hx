@@ -32,7 +32,7 @@ import actors.Player;
 			
 			levelList = new Array<Level>();
 			
-			var levelOne:Level = new Level(loadMaps(1, [1, 2, 3, 4]));
+			var levelOne:Level = new Level(1, [1, 2, 3, 4, 420], "Stage1-1");
 			//var levelTwo:Level = new Level(loadMaps(2, [1, 2]));
 			
 			levelList.push(levelOne);
@@ -40,21 +40,6 @@ import actors.Player;
 			
 		}
 		
-		private function loadMaps(level:Int, stages:Array<Int>):Array<AreaMap> {
-			
-			var loadedMapList:Array<AreaMap> = [];
-			
-			for (i in 1...stages.length + 1) {
-				var mapString:String = "assets/Stage" + level + "-" + i + ".tmx";
-				var loadedMap:AreaMap = new AreaMap(Assets.getBytes(mapString));
-				if (loadedMap == null)
-					continue;
-				else
-					loadedMapList.push(loadedMap);
-			}
-			
-			return loadedMapList;
-		}
 		
 		public function getCurrentLevel():Level {
 			return currentLevel;

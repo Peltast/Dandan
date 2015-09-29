@@ -110,6 +110,10 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
+		urls.push ("assets/Stage1-420.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
 		urls.push ("assets/Stage3-1.tmx");
 		types.push (lime.Assets.AssetType.TEXT);
 		
@@ -214,7 +218,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "1308",
+			build: "1418",
 			company: "Peltast",
 			file: "LolosSuperDreamPlace",
 			fps: 30,

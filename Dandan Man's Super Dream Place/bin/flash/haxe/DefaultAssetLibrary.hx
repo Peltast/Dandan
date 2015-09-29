@@ -82,6 +82,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
 		#end
 		
 		#if flash
@@ -126,6 +127,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/Stage1-3.tmx", AssetType.TEXT);
 		className.set ("assets/Stage1-4.tmx", __ASSET__assets_stage1_4_tmx);
 		type.set ("assets/Stage1-4.tmx", AssetType.TEXT);
+		className.set ("assets/Stage1-420.tmx", __ASSET__assets_stage1_420_tmx);
+		type.set ("assets/Stage1-420.tmx", AssetType.TEXT);
 		className.set ("assets/Stage3-1.tmx", __ASSET__assets_stage3_1_tmx);
 		type.set ("assets/Stage3-1.tmx", AssetType.TEXT);
 		className.set ("assets/Stage3-2.tmx", __ASSET__assets_stage3_2_tmx);
@@ -230,6 +233,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		type.set (id, AssetType.TEXT);
 		id = "assets/Stage1-4.tmx";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-420.tmx";
 		path.set (id, id);
 		
 		type.set (id, AssetType.TEXT);
@@ -351,6 +358,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("assets/Stage1-4.tmx", __ASSET__assets_stage1_4_tmx);
 		type.set ("assets/Stage1-4.tmx", AssetType.TEXT);
+		
+		className.set ("assets/Stage1-420.tmx", __ASSET__assets_stage1_420_tmx);
+		type.set ("assets/Stage1-420.tmx", AssetType.TEXT);
 		
 		className.set ("assets/Stage3-1.tmx", __ASSET__assets_stage3_1_tmx);
 		type.set ("assets/Stage3-1.tmx", AssetType.TEXT);
@@ -1095,6 +1105,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep @:bind #if display private #end class __ASSET__assets_stage1_2_tmx extends flash.utils.ByteArray { }
 @:keep @:bind #if display private #end class __ASSET__assets_stage1_3_tmx extends flash.utils.ByteArray { }
 @:keep @:bind #if display private #end class __ASSET__assets_stage1_4_tmx extends flash.utils.ByteArray { }
+@:keep @:bind #if display private #end class __ASSET__assets_stage1_420_tmx extends flash.utils.ByteArray { }
 @:keep @:bind #if display private #end class __ASSET__assets_stage3_1_tmx extends flash.utils.ByteArray { }
 @:keep @:bind #if display private #end class __ASSET__assets_stage3_2_tmx extends flash.utils.ByteArray { }
 @:keep @:bind #if display private #end class __ASSET__assets_stranger_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -1109,6 +1120,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 #elseif html5
+
 
 
 
@@ -1170,6 +1182,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:file("assets/Stage1-2.tmx") #if display private #end class __ASSET__assets_stage1_2_tmx extends lime.utils.ByteArray {}
 @:file("assets/Stage1-3.tmx") #if display private #end class __ASSET__assets_stage1_3_tmx extends lime.utils.ByteArray {}
 @:file("assets/Stage1-4.tmx") #if display private #end class __ASSET__assets_stage1_4_tmx extends lime.utils.ByteArray {}
+@:file("assets/Stage1-420.tmx") #if display private #end class __ASSET__assets_stage1_420_tmx extends lime.utils.ByteArray {}
 @:file("assets/Stage3-1.tmx") #if display private #end class __ASSET__assets_stage3_1_tmx extends lime.utils.ByteArray {}
 @:file("assets/Stage3-2.tmx") #if display private #end class __ASSET__assets_stage3_2_tmx extends lime.utils.ByteArray {}
 @:image("assets/Stranger.png") #if display private #end class __ASSET__assets_stranger_png extends lime.graphics.Image {}

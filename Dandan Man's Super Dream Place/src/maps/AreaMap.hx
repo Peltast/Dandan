@@ -23,6 +23,7 @@ import openfl.Vector;
  */
 class AreaMap extends Sprite
 {
+	private var hostLevel:Level;
 	
 	private var objectList:Array<Array<MapObject>>;
 	private var actorList:Array<Actor>;
@@ -30,13 +31,11 @@ class AreaMap extends Sprite
 	private var player:Player;
 	
 	private var startPoint:Checkpoint;
-	private var currentCheckpoint:Checkpoint;
+	private var currentCheckpoint:MapObject;
 	private var checkPoints:Array<Checkpoint>;
 	private var spawnPoints:Array<SpawnPoint>;
 	private var pathWalls:Array<AIPathWall>;
-	
-	private var endPoint:Portal;
-	private var nextMap:AreaMap;
+	private var endPoints:Array<Portal>;
 	
 	private var background:Shape;
 	
@@ -44,13 +43,15 @@ class AreaMap extends Sprite
 	private var mapHeight:Int;
 	private var tileSize:Int;
 	
-	public function new(mapFile:ByteArray) 
+	public function new(mapFile:ByteArray, hostLevel:Level) 
 	{
 		super();
+		this.hostLevel = hostLevel;
 		
 		checkPoints = new Array<Checkpoint>();
 		spawnPoints = new Array<SpawnPoint>();
 		pathWalls = new Array<AIPathWall>();
+		endPoints = new Array<Portal>();
 		
 		mapWidth = 0;
 		mapHeight = 0;
@@ -65,8 +66,9 @@ class AreaMap extends Sprite
 		actorList = new Array<Actor>();
 		projectileList = new Array<Projectile>();
 		initiateObjectList(mapWidth, mapHeight);
-		readTiles(fileArray);
 		
+		readTiles(fileArray);
+		readDynamicObjects(fileArray);
 	}
 	private function parseMapDimensions(fileArray:Array<String>):Void {
 		
@@ -144,8 +146,8 @@ class AreaMap extends Sprite
 			createCheckpoint(index, x, y);
 		else if (ObjectFactory.getSingleton().isMapStart(index))
 			createStartpoint(index, x, y);
-		else if (ObjectFactory.getSingleton().isMapEnd(index))
-			createEndpoint(index, x, y);
+		//else if (ObjectFactory.getSingleton().isMapEnd(index))
+		//	createEndpoint(index, x, y);
 		else if (ObjectFactory.getSingleton().isObjectSpawnPoint(index))
 			createSpawnPoint(index, x, y);
 		else if (ObjectFactory.getSingleton().isObjectAIPathWall(index))
@@ -177,11 +179,11 @@ class AreaMap extends Sprite
 		startPoint.y = y * tileSize;
 		this.startPoint = startPoint;
 	}
-	private function createEndpoint(index:Int, x:Int, y:Int):Void {
-		var endPoint:Portal = ObjectFactory.getSingleton().createPortal(index);
+	private function createEndpoint(index:Int, endMap:String, x:Int, y:Int):Void {
+		var endPoint:Portal = ObjectFactory.getSingleton().createPortal(index, endMap);
 		endPoint.x = x * tileSize;
 		endPoint.y = y * tileSize;
-		this.endPoint = endPoint;
+		this.endPoints.push(endPoint);
 		this.addChild(endPoint);
 	}
 	private function createSpawnPoint(index:Int, x:Int, y:Int):Void {
@@ -200,8 +202,63 @@ class AreaMap extends Sprite
 		pathWalls.push(pathWall);
 	}
 	
-	public function setNextMap(map:AreaMap):Void {
-		nextMap = map;
+	private function readDynamicObjects(fileArray:Array<String>):Void {
+		
+		for (i in 0...fileArray.length) {
+			if (fileArray[i].indexOf("object id") >= 0)
+				parseDynamicObject(fileArray, i);
+		}
+		
+	}
+	private function parseDynamicObject(fileArray:Array<String>, startIndex:Int):Void {
+		
+		var objectProperties:Map<String, String> = new Map<String,String>();
+		var objectID:Int = parseObjectID(fileArray[startIndex]);
+		var objectLocation:Point = parseObjectLocation(fileArray[startIndex]);
+		
+		for (j in startIndex...fileArray.length) {
+			if (fileArray[j].indexOf("/properties") >= 0) break;
+			
+			if (fileArray[j].indexOf("property name") >= 0)
+				objectProperties = addObjectProperty(fileArray[j], objectProperties);
+		}
+		
+		if (objectProperties["type"] == "portal")
+			createEndpoint(objectID, objectProperties["map"], cast objectLocation.x / tileSize, cast objectLocation.y / tileSize);
+	}
+	private function parseObjectID(idLine:String):Int {
+		var parsedLine:Array<String> = idLine.split(" ");
+		var objectID:Int = 0;
+		for (i in 0...parsedLine.length) {
+			if (parsedLine[i].indexOf("gid") >= 0)
+				objectID = cast parsedLine[i].split('"')[1];
+		}
+		return objectID;
+	}
+	private function parseObjectLocation(idLine:String):Point {
+		var parsedLine:Array<String> = idLine.split(" ");
+		var objectX:Int = 0;
+		var objectY:Int  = 0;
+		for (i in 0...parsedLine.length) {
+			if (parsedLine[i].indexOf("x") >= 0)
+				objectX = cast parsedLine[i].split('"')[1];
+			if (parsedLine[i].indexOf("y") >= 0)
+				objectY = cast parsedLine[i].split('"')[1];
+		}
+		return new Point(objectX, objectY - 1);
+	}
+	private function addObjectProperty(propertyLine:String, propertyMap:Map<String, String>):Map<String, String> {
+		var parsedLine:Array<String> = propertyLine.split(" ");
+		var name:String = "";
+		var value:String = "";
+		for (i in 0...parsedLine.length) {
+			if (parsedLine[i].indexOf("name") >= 0)
+				name = parsedLine[i].split('"')[1];
+			if (parsedLine[i].indexOf("value") >= 0)
+				value = parsedLine[i].split('"')[1];
+		}
+		propertyMap[name] = value;
+		return propertyMap;
 	}
 	
 	public function resetMap():Void {
@@ -252,12 +309,17 @@ class AreaMap extends Sprite
 		}
 	}
 	
-	public function addPlayer(player:Player):Void {
+	public function addPlayer(player:Player, origin:Portal = null):Void {
 		this.player = player;
 		addActor(player);
 		
-		if (startPoint != null) {
-			player.x = startPoint.x  - 32;
+		if (origin != null) {
+			player.x = origin.x + 6;
+			player.y = origin.y - 4;
+			currentCheckpoint = origin;
+		}
+		else if (startPoint != null) {
+			player.x = startPoint.x;
 			player.y = startPoint.y;
 			currentCheckpoint = startPoint;
 		}
@@ -378,12 +440,27 @@ class AreaMap extends Sprite
 		}
 	}
 	public function updateEndPortal(player:Player):Void {
-		if (endPoint == null) return;
+		if (endPoints == null) return;
 		
-		if (player.checkCollision(endPoint)) {
-			LevelManager.getSingleton().getCurrentLevel().setMap(LevelManager.getSingleton().getCurrentLevel().getNextMap(this), player);
-			removeActor(player);
+		for (i in 0...endPoints.length) {
+			
+			var endPoint:Portal = endPoints[i];
+			if (player.checkCollision(endPoint)) {
+				
+				var endMap:AreaMap = hostLevel.getMap(endPoint.getEndMap());
+				var origin:Portal = endMap.findDoorFrom(hostLevel.getMapLabel(this));
+				
+				LevelManager.getSingleton().getCurrentLevel().setMap(endMap, player, origin);
+				removeActor(player);
+			}
 		}
+	}
+	private function findDoorFrom(map:String):Portal {
+		for (i in 0...endPoints.length) {
+			if (endPoints[i].getEndMap() == map)
+				return endPoints[i];
+		}
+		return null;
 	}
 	
 	private function checkAICollision(object:MapObject, y:Int, x:Int):Bool {
@@ -418,16 +495,12 @@ class AreaMap extends Sprite
 		return false;
 	}
 	
-	public function getCurrentCheckpoint():Checkpoint {
+	public function getCurrentCheckpoint():MapObject {
 		return currentCheckpoint;
 	}
-	private function changeCheckpoint(newCheckpoint:Checkpoint):Void {
-		
-		if (currentCheckpoint != null)
-			currentCheckpoint.setInactive();
+	private function changeCheckpoint(newCheckpoint:MapObject):Void {
 		
 		currentCheckpoint = newCheckpoint;
-		currentCheckpoint.setActive();
 	}
 	
 	public function getMapWidth():Int {

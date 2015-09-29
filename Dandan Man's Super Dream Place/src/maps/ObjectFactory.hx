@@ -172,10 +172,10 @@ class ObjectFactory
 		var checkpointBmp:Bitmap = Main.getBitmapAsset("assets/checkpoint.png");
 		return new Checkpoint(false, checkpointBmp);
 	}
-	public function createPortal(index:Int):Portal {
+	public function createPortal(index:Int, endMap:String):Portal {
 		var portalBmp:Bitmap = Main.getBitmapAsset("assets/Door.png");
 			
-		return new Portal(portalBmp); 
+		return new Portal(portalBmp, endMap); 
 	}
 	public function createSpawnPoint(index:Int):SpawnPoint {
 		var indexType:Int = getIndexType(index);
