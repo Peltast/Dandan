@@ -5,11 +5,16 @@
 #include <hxcpp.h>
 #endif
 
-HX_DECLARE_CLASS1(maps,Checkpoint)
-HX_DECLARE_CLASS1(maps,MapObject)
+HX_DECLARE_CLASS1(actors,Actor)
+HX_DECLARE_CLASS1(haxe,IMap)
+HX_DECLARE_CLASS2(haxe,ds,IntMap)
 HX_DECLARE_CLASS1(maps,ObjectFactory)
-HX_DECLARE_CLASS1(maps,Portal)
-HX_DECLARE_CLASS1(maps,Tile)
+HX_DECLARE_CLASS2(maps,mapobjects,AIPathWall)
+HX_DECLARE_CLASS2(maps,mapobjects,Checkpoint)
+HX_DECLARE_CLASS2(maps,mapobjects,MapObject)
+HX_DECLARE_CLASS2(maps,mapobjects,Portal)
+HX_DECLARE_CLASS2(maps,mapobjects,SpawnPoint)
+HX_DECLARE_CLASS2(maps,mapobjects,Tile)
 HX_DECLARE_CLASS2(openfl,display,Bitmap)
 HX_DECLARE_CLASS2(openfl,display,DisplayObject)
 HX_DECLARE_CLASS2(openfl,display,DisplayObjectContainer)
@@ -51,12 +56,15 @@ class HXCPP_CLASS_ATTRIBUTES  ObjectFactory_obj : public hx::Object{
 		int tileSize;
 		int tileSheetWidth;
 		::openfl::display::Bitmap tileSheet;
-		Array< ::Dynamic > tileIndexTypes;
+		::haxe::ds::IntMap tileIndexTypes;
 		virtual Void assignTileIndexTypes( );
 		Dynamic assignTileIndexTypes_dyn();
 
-		virtual int getIndexType( int tileIndex);
+		virtual int getIndexType( hx::Null< int >  tileIndex);
 		Dynamic getIndexType_dyn();
+
+		virtual Void changeTileSheet( ::openfl::display::Bitmap newSet);
+		Dynamic changeTileSheet_dyn();
 
 		virtual bool isObjectTile( int index);
 		Dynamic isObjectTile_dyn();
@@ -70,22 +78,34 @@ class HXCPP_CLASS_ATTRIBUTES  ObjectFactory_obj : public hx::Object{
 		virtual bool isMapEnd( int index);
 		Dynamic isMapEnd_dyn();
 
-		virtual ::maps::Checkpoint createCheckpoint( int index);
+		virtual bool isObjectSpawnPoint( int index);
+		Dynamic isObjectSpawnPoint_dyn();
+
+		virtual bool isObjectAIPathWall( int index);
+		Dynamic isObjectAIPathWall_dyn();
+
+		virtual ::maps::mapobjects::Checkpoint createCheckpoint( int index);
 		Dynamic createCheckpoint_dyn();
 
-		virtual ::maps::Portal createPortal( int index);
+		virtual ::maps::mapobjects::Portal createPortal( int index,::String endMap);
 		Dynamic createPortal_dyn();
 
-		virtual ::maps::Tile createTile( int tileIndex);
+		virtual ::maps::mapobjects::SpawnPoint createSpawnPoint( int index);
+		Dynamic createSpawnPoint_dyn();
+
+		virtual ::maps::mapobjects::AIPathWall createAIPathWall( int index);
+		Dynamic createAIPathWall_dyn();
+
+		virtual ::maps::mapobjects::Tile createTile( int tileIndex);
 		Dynamic createTile_dyn();
 
-		virtual ::maps::Tile createPlatformTile( int tileIndex,int indexType);
+		virtual ::maps::mapobjects::Tile createPlatformTile( int tileIndex,int indexType);
 		Dynamic createPlatformTile_dyn();
 
-		virtual ::maps::Tile createSpikeTile( int tileIndex,int indexType);
+		virtual ::maps::mapobjects::Tile createSpikeTile( int tileIndex,int indexType);
 		Dynamic createSpikeTile_dyn();
 
-		virtual ::maps::Tile createBGTile( int tileIndex,int indexType);
+		virtual ::maps::mapobjects::Tile createBGTile( int tileIndex,int indexType);
 		Dynamic createBGTile_dyn();
 
 		virtual ::openfl::display::Bitmap getTileBitmap( int index);
@@ -101,6 +121,14 @@ class HXCPP_CLASS_ATTRIBUTES  ObjectFactory_obj : public hx::Object{
 		static int TILE_STARTPOINT;
 		static int TILE_ENDPOINT;
 		static int TILE_CHECKPOINT;
+		static int TILE_AIPATHWALL;
+		static int TILE_SPAWNPOINT_WALKING;
+		static int TILE_SPAWNPOINT_DASH;
+		static int TILE_SPAWNPOINT_LAUNCH;
+		static int TILE_SPAWNPOINT_PROJECTILE;
+		static int TILE_SPAWNPOINT_FLYING_HOR;
+		static int TILE_SPAWNPOINT_FLYING_VER;
+		static int TILE_SPAWNPOINT_RUNNING;
 		static int TILE_BACKGROUND;
 		static int TILE_PLATFORM;
 		static int TILE_FATAL_UP;
@@ -112,6 +140,7 @@ class HXCPP_CLASS_ATTRIBUTES  ObjectFactory_obj : public hx::Object{
 		static int TILE_FATAL_ALL;
 		static Array< int > tileTypes;
 		static Array< int > fatalTypes;
+		static Array< int > spawnTypes;
 };
 
 } // end namespace maps

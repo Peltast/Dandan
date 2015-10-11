@@ -48,14 +48,14 @@ class DashEnemy extends Enemy
 		
 		leftDash = new Attack
 			(new ObjectMover(.5, .1, -15, 0, 0, 0, 60, 60, 0, 0, false), hits,
-			15, 3, 20, "DashLeft");
+			15, 1, 20, "DashLeft");
 		
 		hits = [];
 		hits.push(new Rectangle(16, -2, 23, 40));
 		
 		rightDash = new Attack
 			(new ObjectMover(.5, .1, 15, 0, 0, 0, 60, 60, 0, 0, false), hits,
-			15, 3, 20, "DashRight");
+			15, 1, 20, "DashRight");
 		
 	}
 	

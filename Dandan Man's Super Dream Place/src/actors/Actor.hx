@@ -21,6 +21,7 @@ class Actor extends MapObject
 {
 	
 	private var animations:Map<String, Animation>;
+	private var deathAnimation:Animation;
 	private var defaultMover:ObjectMover;
 	private var currentMover:ObjectMover;
 	private var attackBehavior:Attack;
@@ -84,6 +85,11 @@ class Actor extends MapObject
 		updateHitbox();
 		updateActorAnimation();
 		currentMover.updateMovement();
+		
+		if (currentAnimation.getName() == "Death") {	
+			checkDeathAnimation();
+			return;
+		}
 		
 		moveXAxis();
 		moveYAxis();
@@ -185,8 +191,10 @@ class Actor extends MapObject
 			takeActorDamage(hitboxCollisions[0], hitboxCollisions[0].getAttackBehavior());
 		
 		var projectileCollisions:Array<Projectile> = currentMap.checkProjectileBounds(this);
-		if (projectileCollisions.length > 0)
-			takeProjectileDamage(projectileCollisions[0]);
+		if (projectileCollisions.length > 0) {
+			if (takeProjectileDamage(projectileCollisions[0]))
+				currentMap.removeProjectile(projectileCollisions[0]);
+		}
 	}
 	private function checkInvulnerable():Void {
 		if (invulnerable) {
@@ -211,20 +219,40 @@ class Actor extends MapObject
 		
 		health -= damage;
 		
+		calculateDamage(source);
+		
+		return true;
+	}
+	private function calculateDamage(source:MapObject):Void {
+		
 		if (health <= 0) {	
 			kill();
-			return true;
 		}
 		else {
 			this.alpha = .7;
 			invulnerable = true;
 		}
-		return true;
 	}
+	
 	private function kill():Void {
 		endAttack();
 		currentMover.freeze();
+		
+		if (deathAnimation != null)
+			setAnimation("Death");
+		else
+			handleDeath();
 	}
+	private function checkDeathAnimation():Void {
+		if (currentAnimation == deathAnimation && currentAnimation.isFinished()) {
+			deathAnimation.resetAnimation();
+			handleDeath();
+		}
+	}
+	private function handleDeath():Void {
+		return;
+	}
+	
 	private function setGrounded():Void {
 		currentMover.setGrounded();
 	}
@@ -262,6 +290,12 @@ class Actor extends MapObject
 		stunLock(attackBehavior.getStunDuration());
 		if (attackBehavior.hasStunAnimation())
 			setAnimation(attackBehavior.getStunAnimation());
+	}
+	
+	private function damageKnockback(source:MapObject):Void {
+		var hitAngle:Point = new Point((this.x + this.actorWidth / 2) - (source.x + source.width / 2),
+										(this.y + this.actorHeight / 2) - (source.y + source.height / 2));
+		currentMover.applyForce(hitAngle, 60);
 	}
 	
 	public function goLeft():Void {

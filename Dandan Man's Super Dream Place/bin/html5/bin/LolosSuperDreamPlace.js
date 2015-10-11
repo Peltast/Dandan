@@ -57,11 +57,23 @@ ApplicationMain.create = function() {
 	types.push("IMAGE");
 	urls.push("assets/Stage1-1.tmx");
 	types.push("TEXT");
+	urls.push("assets/Stage1-100.tmx");
+	types.push("TEXT");
 	urls.push("assets/Stage1-2.tmx");
 	types.push("TEXT");
 	urls.push("assets/Stage1-3.tmx");
 	types.push("TEXT");
 	urls.push("assets/Stage1-4.tmx");
+	types.push("TEXT");
+	urls.push("assets/Stage1-420.tmx");
+	types.push("TEXT");
+	urls.push("assets/Stage1-421.tmx");
+	types.push("TEXT");
+	urls.push("assets/Stage1-97.tmx");
+	types.push("TEXT");
+	urls.push("assets/Stage1-98.tmx");
+	types.push("TEXT");
+	urls.push("assets/Stage1-99.tmx");
 	types.push("TEXT");
 	urls.push("assets/Stage3-1.tmx");
 	types.push("TEXT");
@@ -107,7 +119,7 @@ ApplicationMain.init = function() {
 	if(total == 0) ApplicationMain.start();
 };
 ApplicationMain.main = function() {
-	ApplicationMain.config = { build : "1309", company : "Peltast", file : "LolosSuperDreamPlace", fps : 30, name : "Lolo's Super Dream Place", orientation : "", packageName : "LolosSuperDreamPlace", version : "1.0.0", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : true, height : 360, parameters : "{}", resizable : true, stencilBuffer : true, title : "Lolo's Super Dream Place", vsync : false, width : 540, x : null, y : null}]};
+	ApplicationMain.config = { build : "1496", company : "Peltast", file : "LolosSuperDreamPlace", fps : 30, name : "Lolo's Super Dream Place", orientation : "", packageName : "LolosSuperDreamPlace", version : "1.0.0", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : true, height : 360, parameters : "{}", resizable : true, stencilBuffer : true, title : "Lolo's Super Dream Place", vsync : false, width : 540, x : null, y : null}]};
 };
 ApplicationMain.start = function() {
 	var hasMain = false;
@@ -1303,6 +1315,9 @@ var DefaultAssetLibrary = function() {
 	id = "assets/Stage1-1.tmx";
 	this.path.set(id,id);
 	this.type.set(id,"TEXT");
+	id = "assets/Stage1-100.tmx";
+	this.path.set(id,id);
+	this.type.set(id,"TEXT");
 	id = "assets/Stage1-2.tmx";
 	this.path.set(id,id);
 	this.type.set(id,"TEXT");
@@ -1310,6 +1325,21 @@ var DefaultAssetLibrary = function() {
 	this.path.set(id,id);
 	this.type.set(id,"TEXT");
 	id = "assets/Stage1-4.tmx";
+	this.path.set(id,id);
+	this.type.set(id,"TEXT");
+	id = "assets/Stage1-420.tmx";
+	this.path.set(id,id);
+	this.type.set(id,"TEXT");
+	id = "assets/Stage1-421.tmx";
+	this.path.set(id,id);
+	this.type.set(id,"TEXT");
+	id = "assets/Stage1-97.tmx";
+	this.path.set(id,id);
+	this.type.set(id,"TEXT");
+	id = "assets/Stage1-98.tmx";
+	this.path.set(id,id);
+	this.type.set(id,"TEXT");
+	id = "assets/Stage1-99.tmx";
 	this.path.set(id,id);
 	this.type.set(id,"TEXT");
 	id = "assets/Stage3-1.tmx";
@@ -1988,7 +2018,9 @@ actors_Actor.prototype = $extend(maps_mapobjects_MapObject.prototype,{
 		var hitboxCollisions = this.currentMap.checkActorHitBoxes(this);
 		if(hitboxCollisions.length > 0) this.takeActorDamage(hitboxCollisions[0],hitboxCollisions[0].getAttackBehavior());
 		var projectileCollisions = this.currentMap.checkProjectileBounds(this);
-		if(projectileCollisions.length > 0) this.takeProjectileDamage(projectileCollisions[0]);
+		if(projectileCollisions.length > 0) {
+			if(this.takeProjectileDamage(projectileCollisions[0])) this.currentMap.removeProjectile(projectileCollisions[0]);
+		}
 	}
 	,checkInvulnerable: function() {
 		if(this.invulnerable) {
@@ -2009,14 +2041,14 @@ actors_Actor.prototype = $extend(maps_mapobjects_MapObject.prototype,{
 	,takeDamage: function(damage,source) {
 		if(this.invulnerable) return false; else if(this.unstoppable) return false;
 		this.health -= damage;
-		if(this.health <= 0) {
-			this.kill();
-			return true;
-		} else {
+		this.calculateDamage(source);
+		return true;
+	}
+	,calculateDamage: function(source) {
+		if(this.health <= 0) this.kill(); else {
 			this.set_alpha(.7);
 			this.invulnerable = true;
 		}
-		return true;
 	}
 	,kill: function() {
 		this.endAttack();
@@ -2422,15 +2454,15 @@ var actors_Player = function() {
 	rightProjectile;
 	this.currentAnimation = rightIdle;
 	var hits = [];
-	hits.push(new openfl_geom_Rectangle(-2,playerHeight,playerWidth + 4,14));
+	hits.push(new openfl_geom_Rectangle(4,playerHeight,playerWidth - 8,14));
 	this.jumpAttack = new actors_attacks_AbsorbAttack(new actors_ObjectMover(.5,.1,0,60,0,10,0,60,0),hits,60,3);
 	hits = [];
 	hits.push(new openfl_geom_Rectangle(-12,0,10,playerWidth));
 	hits.push(new openfl_geom_Rectangle(playerWidth + 2,0,10,playerWidth));
 	this.standAttack = new actors_attacks_Attack(new actors_ObjectMover(.5,.1,0,0,0,0,0,60,0),hits,15,1,0);
 	actors_Actor.call(this,this,Main.getBitmapAsset("assets/Player.png"),true,this.animations,mover,playerWidth,playerHeight);
-	this.maxHealth = 20;
-	this.health = 20;
+	this.maxHealth = 3;
+	this.health = 3;
 	this.collisionBounds = new openfl_geom_Rectangle(4,6,24,30);
 	this.originalBounds = this.collisionBounds;
 };
@@ -2439,7 +2471,6 @@ actors_Player.__name__ = ["actors","Player"];
 actors_Player.__super__ = actors_Actor;
 actors_Player.prototype = $extend(actors_Actor.prototype,{
 	updatePlayer: function() {
-		this.currentMap.updateCheckpoints(this);
 		this.centerScreen();
 		this.handleAnimation();
 		if(this.get_y() > this.currentMap.getMapHeight()) this.kill();
@@ -2468,8 +2499,14 @@ actors_Player.prototype = $extend(actors_Actor.prototype,{
 		var mapHeight = this.currentMap.getMapHeight();
 		mapWidth = mapWidth * scale;
 		mapHeight = mapHeight * scale;
-		if(mapWidth < screenWidth * scale) this.currentMap.set_x((screenWidth * scale / 2 - mapWidth / 2) / scale); else if(this.get_x() - screenWidth / 2 > this.currentMap.get_x() && this.get_x() + screenWidth / 2 < mapWidth / scale) this.currentMap.set_x(-this.get_x() + screenWidth / 2); else if(this.get_x() + screenWidth / 2 > mapWidth / scale) this.currentMap.set_x(screenWidth - mapWidth / scale);
-		if(mapHeight < screenHeight * scale) this.currentMap.set_y((screenHeight * scale / 2 - mapHeight / 2) / scale); else if(this.get_y() - screenHeight / 2 > this.currentMap.get_y() && this.get_y() + screenHeight / 2 < mapHeight / scale) this.currentMap.set_y(-this.get_y() + screenHeight / 2); else if(this.get_y() + screenHeight / 2 > mapHeight / scale) this.currentMap.set_y(screenHeight - mapHeight / scale);
+		if(mapWidth < screenWidth * scale) this.currentMap.set_x((screenWidth * scale / 2 - mapWidth / 2) / scale); else {
+			this.currentMap.set_x(screenWidth / 2 - this.get_x());
+			if(this.currentMap.get_x() > 0) this.currentMap.set_x(0); else if(this.get_x() + screenWidth / 2 > mapWidth) this.currentMap.set_x(screenWidth - mapWidth);
+		}
+		if(mapHeight < screenHeight * scale) this.currentMap.set_y((screenHeight * scale / 2 - mapHeight / 2) / scale); else {
+			this.currentMap.set_y(screenHeight / 2 - this.get_y());
+			if(this.currentMap.get_y() > 0) this.currentMap.set_y(0); else if(this.get_y() + screenHeight / 2 > mapHeight) this.currentMap.set_y(screenHeight - mapHeight);
+		}
 	}
 	,setGrounded: function() {
 		actors_Actor.prototype.setGrounded.call(this);
@@ -2505,13 +2542,14 @@ actors_Player.prototype = $extend(actors_Actor.prototype,{
 		this.actorHeight = this.originalActorHeight;
 		this.actorWidth = this.originalActorWidth;
 	}
-	,takeDamage: function(damage,source) {
-		if(actors_Actor.prototype.takeDamage.call(this,damage,source)) {
+	,calculateDamage: function(source) {
+		if(this.health <= 0) this.kill(); else {
+			this.set_alpha(.7);
+			this.invulnerable = true;
 			this.stunLock(Math.round(this.invulDuration / 4));
 			this.damageKnockback(source);
 			this.setAnimation("Hurt");
-			return true;
-		} else return false;
+		}
 	}
 	,takeProjectileDamage: function(projectile) {
 		if(js_Boot.__instanceof(projectile,actors_attacks_EnemyProjectile)) return actors_Actor.prototype.takeProjectileDamage.call(this,projectile);
@@ -2524,10 +2562,13 @@ actors_Player.prototype = $extend(actors_Actor.prototype,{
 	,kill: function() {
 		actors_Actor.prototype.kill.call(this);
 		var checkpoint = this.currentMap.getCurrentCheckpoint();
-		if(checkpoint == null) return;
+		if(checkpoint == null) checkpoint = this.currentMap.getStartPoint();
 		this.health = this.maxHealth;
-		this.set_x(checkpoint.get_x());
-		this.set_y(checkpoint.get_y() - this.actorHeight / 2);
+		this.set_x(checkpoint.get_x() + 6);
+		this.set_y(checkpoint.get_y() - 4);
+		this.currentMap.resetMap();
+		this.removeAbility();
+		this.currentMover.freeze();
 	}
 	,absorbAbility: function(enemy) {
 		if(js_Boot.__instanceof(enemy,actors_enemies_DashEnemy)) {
@@ -2550,7 +2591,10 @@ actors_Player.prototype = $extend(actors_Actor.prototype,{
 		if(key.keyCode == 65 || key.keyCode == 37) this.goLeft(); else if(key.keyCode == 68 || key.keyCode == 39) this.goRight(); else if(key.keyCode == 74) this.initiateAttack();
 		if(key.keyCode == 32) this.jump();
 		if(key.keyCode == 75) this.removeAbility();
-		if(key.keyCode == 38 || key.keyCode == 87) this.currentMap.updateEndPortal(this);
+		if(key.keyCode == 38 || key.keyCode == 87) {
+			this.health = this.maxHealth;
+			this.currentMap.updateEndPortal(this);
+		}
 	}
 	,checkKeysUp: function(key) {
 		if(key.keyCode == 65 || key.keyCode == 37) this.stopLeft(); else if(key.keyCode == 68 || key.keyCode == 39) this.stopRight(); else if(key.keyCode == 74) this.stopHoldAttack();
@@ -2742,7 +2786,7 @@ actors_actorsAI_LaunchAI.prototype = $extend(actors_actorsAI_EnemyAI.prototype,{
 			return;
 		}
 		var distFromPlayer = enemy.getCurrentMap().checkDistFromPlayer(enemy);
-		if(Math.abs(distFromPlayer.y) < this.visionConeHeight && Math.abs(distFromPlayer.x) < this.visionConeWidth) {
+		if(distFromPlayer.y < this.visionConeHeight && distFromPlayer.y >= 0 && Math.abs(distFromPlayer.x) < this.visionConeWidth) {
 			this.windupCooldown = 20;
 			enemy.windup();
 		}
@@ -2909,7 +2953,7 @@ actors_attacks_Attack.prototype = {
 	,__class__: actors_attacks_Attack
 };
 var actors_attacks_AbsorbAttack = function(attackMovement,hits,duration,damage) {
-	actors_attacks_Attack.call(this,attackMovement,hits,duration,damage,10);
+	actors_attacks_Attack.call(this,attackMovement,hits,duration,damage,10,"","",true);
 };
 $hxClasses["actors.attacks.AbsorbAttack"] = actors_attacks_AbsorbAttack;
 actors_attacks_AbsorbAttack.__name__ = ["actors","attacks","AbsorbAttack"];
@@ -2939,7 +2983,9 @@ var actors_attacks_Projectile = function(implementation,bitmap,mover,duration,da
 	this.projectileMover = mover;
 	this.duration = duration;
 	this.damage = damage;
+	this.expired = false;
 	actors_Actor.call(this,this,bitmap,true,this.animations,mover,24,24);
+	this.collisionBounds = new openfl_geom_Rectangle(3,5,15,17);
 };
 $hxClasses["actors.attacks.Projectile"] = actors_attacks_Projectile;
 actors_attacks_Projectile.__name__ = ["actors","attacks","Projectile"];
@@ -2952,7 +2998,7 @@ actors_attacks_Projectile.prototype = $extend(actors_Actor.prototype,{
 		this.moveXAxis();
 		this.moveYAxis();
 		this.updateActorAnimation();
-		return false;
+		return this.expired;
 	}
 	,flipProjectile: function(horizontal) {
 		if(horizontal) {
@@ -2976,10 +3022,14 @@ actors_attacks_Projectile.prototype = $extend(actors_Actor.prototype,{
 	,moveXAxis: function() {
 		var _g = this;
 		_g.set_x(_g.get_x() + Math.round(this.projectileMover.getXVel()));
+		var collisions = this.currentMap.checkCollisions(this);
+		if(collisions.length > 0) this.expired = true;
 	}
 	,moveYAxis: function() {
 		var _g = this;
 		_g.set_y(_g.get_y() + Math.round(this.projectileMover.getYVel()));
+		var collisions = this.currentMap.checkCollisions(this);
+		if(collisions.length > 0) this.expired = true;
 	}
 	,getProjectileDamage: function() {
 		return this.damage;
@@ -3128,6 +3178,7 @@ actors_enemies_Enemy.prototype = $extend(actors_Actor.prototype,{
 		this.currentMover.applyForce(hitAngle,60);
 	}
 	,getAttackDamage: function() {
+		if(this.attackBehavior != null) return this.attackBehavior.getDamage();
 		return this.touchDamage;
 	}
 	,moveXAxis: function() {
@@ -3212,10 +3263,10 @@ var actors_enemies_DashEnemy = function(homespawn) {
 	this.collisionBounds = new openfl_geom_Rectangle(2,4,28,26);
 	var hits = [];
 	hits.push(new openfl_geom_Rectangle(-7,-2,23,40));
-	this.leftDash = new actors_attacks_Attack(new actors_ObjectMover(.5,.1,-15,0,0,0,60,60,0,0,false),hits,15,3,20,"DashLeft");
+	this.leftDash = new actors_attacks_Attack(new actors_ObjectMover(.5,.1,-15,0,0,0,60,60,0,0,false),hits,15,1,20,"DashLeft");
 	hits = [];
 	hits.push(new openfl_geom_Rectangle(16,-2,23,40));
-	this.rightDash = new actors_attacks_Attack(new actors_ObjectMover(.5,.1,15,0,0,0,60,60,0,0,false),hits,15,3,20,"DashRight");
+	this.rightDash = new actors_attacks_Attack(new actors_ObjectMover(.5,.1,15,0,0,0,60,60,0,0,false),hits,15,1,20,"DashRight");
 };
 $hxClasses["actors.enemies.DashEnemy"] = actors_enemies_DashEnemy;
 actors_enemies_DashEnemy.__name__ = ["actors","enemies","DashEnemy"];
@@ -5226,6 +5277,7 @@ lime__$backend_html5_HTML5Renderer.prototype = {
 		if(this.parent.window.backend.div != null) this.parent.context = lime_graphics_RenderContext.DOM(this.parent.window.backend.div); else if(this.parent.window.backend.canvas != null) {
 			var webgl = null;
 			if(webgl == null) this.parent.context = lime_graphics_RenderContext.CANVAS(this.parent.window.backend.canvas.getContext("2d")); else {
+				webgl = WebGLDebugUtils.makeDebugContext(webgl);
 				lime_graphics_opengl_GL.context = webgl;
 				this.parent.context = lime_graphics_RenderContext.OPENGL(lime_graphics_opengl_GL.context);
 			}
@@ -15060,11 +15112,13 @@ lime_utils__$UInt8Array_UInt8Array_$Impl_$.toBytes = function(this1) {
 lime_utils__$UInt8Array_UInt8Array_$Impl_$.toString = function(this1) {
 	if(this1 != null) return "UInt8Array [byteLength:" + this1.byteLength + ", length:" + this1.length + "]"; else return null;
 };
-var maps_AreaMap = function(mapFile) {
+var maps_AreaMap = function(mapFile,hostLevel) {
 	openfl_display_Sprite.call(this);
+	this.hostLevel = hostLevel;
 	this.checkPoints = [];
 	this.spawnPoints = [];
 	this.pathWalls = [];
+	this.endPoints = [];
 	this.mapWidth = 0;
 	this.mapHeight = 0;
 	this.tileSize = 32;
@@ -15077,6 +15131,7 @@ var maps_AreaMap = function(mapFile) {
 	this.projectileList = [];
 	this.initiateObjectList(this.mapWidth,this.mapHeight);
 	this.readTiles(fileArray);
+	this.readDynamicObjects(fileArray);
 };
 $hxClasses["maps.AreaMap"] = maps_AreaMap;
 maps_AreaMap.__name__ = ["maps","AreaMap"];
@@ -15150,7 +15205,7 @@ maps_AreaMap.prototype = $extend(openfl_display_Sprite.prototype,{
 	}
 	,createObject: function(index,x,y) {
 		if(index == 0) return;
-		if(maps_ObjectFactory.getSingleton().isObjectTile(index)) this.createTile(index,x,y); else if(maps_ObjectFactory.getSingleton().isObjectCheckpoint(index)) this.createCheckpoint(index,x,y); else if(maps_ObjectFactory.getSingleton().isMapStart(index)) this.createStartpoint(index,x,y); else if(maps_ObjectFactory.getSingleton().isMapEnd(index)) this.createEndpoint(index,x,y); else if(maps_ObjectFactory.getSingleton().isObjectSpawnPoint(index)) this.createSpawnPoint(index,x,y); else if(maps_ObjectFactory.getSingleton().isObjectAIPathWall(index)) this.createAIPathWall(index,x,y);
+		if(maps_ObjectFactory.getSingleton().isObjectTile(index)) this.createTile(index,x,y); else if(maps_ObjectFactory.getSingleton().isObjectCheckpoint(index)) this.createCheckpoint(index,x,y); else if(maps_ObjectFactory.getSingleton().isMapStart(index)) this.createStartpoint(index,x,y); else if(maps_ObjectFactory.getSingleton().isObjectSpawnPoint(index)) this.createSpawnPoint(index,x,y); else if(maps_ObjectFactory.getSingleton().isObjectAIPathWall(index)) this.createAIPathWall(index,x,y);
 	}
 	,createTile: function(index,x,y) {
 		var newTile = maps_ObjectFactory.getSingleton().createTile(index);
@@ -15174,11 +15229,11 @@ maps_AreaMap.prototype = $extend(openfl_display_Sprite.prototype,{
 		startPoint.set_y(y * this.tileSize);
 		this.startPoint = startPoint;
 	}
-	,createEndpoint: function(index,x,y) {
-		var endPoint = maps_ObjectFactory.getSingleton().createPortal(index);
+	,createEndpoint: function(index,endMap,x,y) {
+		var endPoint = maps_ObjectFactory.getSingleton().createPortal(index,endMap);
 		endPoint.set_x(x * this.tileSize);
 		endPoint.set_y(y * this.tileSize);
-		this.endPoint = endPoint;
+		this.endPoints.push(endPoint);
 		this.addChild(endPoint);
 	}
 	,createSpawnPoint: function(index,x,y) {
@@ -15194,16 +15249,101 @@ maps_AreaMap.prototype = $extend(openfl_display_Sprite.prototype,{
 		this.objectList[y][x] = pathWall;
 		this.pathWalls.push(pathWall);
 	}
-	,setNextMap: function(map) {
-		this.nextMap = map;
+	,readDynamicObjects: function(fileArray) {
+		var _g1 = 0;
+		var _g = fileArray.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			if(fileArray[i].indexOf("object id") >= 0) this.parseDynamicObject(fileArray,i);
+		}
+	}
+	,parseDynamicObject: function(fileArray,startIndex) {
+		var objectProperties = new haxe_ds_StringMap();
+		var objectID = this.parseObjectID(fileArray[startIndex]);
+		var objectLocation = this.parseObjectLocation(fileArray[startIndex]);
+		var _g1 = startIndex;
+		var _g = fileArray.length;
+		while(_g1 < _g) {
+			var j = _g1++;
+			if(fileArray[j].indexOf("/properties") >= 0) break;
+			if(fileArray[j].indexOf("property name") >= 0) objectProperties = this.addObjectProperty(fileArray[j],objectProperties);
+		}
+		if((__map_reserved.type != null?objectProperties.getReserved("type"):objectProperties.h["type"]) == "portal") this.createEndpoint(objectID,__map_reserved.map != null?objectProperties.getReserved("map"):objectProperties.h["map"],objectLocation.x / this.tileSize,objectLocation.y / this.tileSize);
+	}
+	,parseObjectID: function(idLine) {
+		var parsedLine = idLine.split(" ");
+		var objectID = 0;
+		var _g1 = 0;
+		var _g = parsedLine.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			if(parsedLine[i].indexOf("gid") >= 0) objectID = parsedLine[i].split("\"")[1];
+		}
+		return objectID;
+	}
+	,parseObjectLocation: function(idLine) {
+		var parsedLine = idLine.split(" ");
+		var objectX = 0;
+		var objectY = 0;
+		var _g1 = 0;
+		var _g = parsedLine.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			if(parsedLine[i].indexOf("x") >= 0) objectX = parsedLine[i].split("\"")[1];
+			if(parsedLine[i].indexOf("y") >= 0) objectY = parsedLine[i].split("\"")[1];
+		}
+		return new openfl_geom_Point(objectX,objectY - 1);
+	}
+	,addObjectProperty: function(propertyLine,propertyMap) {
+		var parsedLine = propertyLine.split(" ");
+		var name = "";
+		var value = "";
+		var _g1 = 0;
+		var _g = parsedLine.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			if(parsedLine[i].indexOf("name") >= 0) name = parsedLine[i].split("\"")[1];
+			if(parsedLine[i].indexOf("value") >= 0) value = parsedLine[i].split("\"")[1];
+		}
+		{
+			if(__map_reserved[name] != null) propertyMap.setReserved(name,value); else propertyMap.h[name] = value;
+			value;
+		}
+		return propertyMap;
 	}
 	,resetMap: function() {
-		this.currentCheckpoint = null;
 		var _g1 = 0;
 		var _g = this.checkPoints.length;
 		while(_g1 < _g) {
 			var i = _g1++;
 			this.checkPoints[i].setInactive();
+		}
+		var removeList = [];
+		var _g11 = 0;
+		var _g2 = this.actorList.length;
+		while(_g11 < _g2) {
+			var j = _g11++;
+			removeList.push(this.actorList[j]);
+		}
+		var _g12 = 0;
+		var _g3 = removeList.length;
+		while(_g12 < _g3) {
+			var k = _g12++;
+			if(js_Boot.__instanceof(removeList[k],actors_Player)) continue;
+			this.removeActor(removeList[k]);
+		}
+		var removeProjList = [];
+		var _g13 = 0;
+		var _g4 = this.projectileList.length;
+		while(_g13 < _g4) {
+			var c = _g13++;
+			removeProjList.push(this.projectileList[c]);
+		}
+		var _g14 = 0;
+		var _g5 = removeProjList.length;
+		while(_g14 < _g5) {
+			var e = _g14++;
+			this.removeProjectile(removeProjList[e]);
 		}
 		this.resetSpawnPoints();
 	}
@@ -15253,11 +15393,15 @@ maps_AreaMap.prototype = $extend(openfl_display_Sprite.prototype,{
 			this.removeProjectile(expiredProjectiles[j]);
 		}
 	}
-	,addPlayer: function(player) {
+	,addPlayer: function(player,origin) {
 		this.player = player;
 		this.addActor(player);
-		if(this.startPoint != null) {
-			player.set_x(this.startPoint.get_x() - 32);
+		if(origin != null) {
+			player.set_x(origin.get_x() + 6);
+			player.set_y(origin.get_y() - 4);
+			this.currentCheckpoint = origin;
+		} else if(this.startPoint != null) {
+			player.set_x(this.startPoint.get_x());
 			player.set_y(this.startPoint.get_y());
 			this.currentCheckpoint = this.startPoint;
 		} else {
@@ -15281,6 +15425,7 @@ maps_AreaMap.prototype = $extend(openfl_display_Sprite.prototype,{
 	}
 	,addProjectile: function(projectile) {
 		this.projectileList.push(projectile);
+		projectile.setCurrentMap(this);
 		this.addChild(projectile);
 	}
 	,removeProjectile: function(projectile) {
@@ -15363,11 +15508,28 @@ maps_AreaMap.prototype = $extend(openfl_display_Sprite.prototype,{
 		}
 	}
 	,updateEndPortal: function(player) {
-		if(this.endPoint == null) return;
-		if(player.checkCollision(this.endPoint)) {
-			maps_LevelManager.getSingleton().getCurrentLevel().setMap(maps_LevelManager.getSingleton().getCurrentLevel().getNextMap(this),player);
-			this.removeActor(player);
+		if(this.endPoints == null) return;
+		var _g1 = 0;
+		var _g = this.endPoints.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			var endPoint = this.endPoints[i];
+			if(player.checkCollision(endPoint)) {
+				var endMap = this.hostLevel.getMap(endPoint.getEndMap());
+				var origin = endMap.findDoorFrom(this.hostLevel.getMapLabel(this));
+				maps_LevelManager.getSingleton().getCurrentLevel().setMap(endMap,player,origin);
+				this.removeActor(player);
+			}
 		}
+	}
+	,findDoorFrom: function(map) {
+		var _g1 = 0;
+		var _g = this.endPoints.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			if(this.endPoints[i].getEndMap() == map) return this.endPoints[i];
+		}
+		return null;
 	}
 	,checkAICollision: function(object,y,x) {
 		if(this.objectList[y][x] == null) return false;
@@ -15394,10 +15556,11 @@ maps_AreaMap.prototype = $extend(openfl_display_Sprite.prototype,{
 	,getCurrentCheckpoint: function() {
 		return this.currentCheckpoint;
 	}
+	,getStartPoint: function() {
+		return this.startPoint;
+	}
 	,changeCheckpoint: function(newCheckpoint) {
-		if(this.currentCheckpoint != null) this.currentCheckpoint.setInactive();
 		this.currentCheckpoint = newCheckpoint;
-		this.currentCheckpoint.setActive();
 	}
 	,getMapWidth: function() {
 		return this.mapWidth * this.tileSize;
@@ -15407,30 +15570,51 @@ maps_AreaMap.prototype = $extend(openfl_display_Sprite.prototype,{
 	}
 	,__class__: maps_AreaMap
 });
-var maps_Level = function(mapList) {
+var maps_Level = function(level,stages,startMap) {
 	openfl_display_Sprite.call(this);
-	this.mapList = mapList;
-	if(mapList.length > 0) this.currentMap = mapList[0];
+	this.mapList = this.loadMaps(level,stages);
+	this.startMap = startMap;
+	if(this.mapList.get(startMap) != null) this.currentMap = this.mapList.get(startMap);
 };
 $hxClasses["maps.Level"] = maps_Level;
 maps_Level.__name__ = ["maps","Level"];
 maps_Level.__super__ = openfl_display_Sprite;
 maps_Level.prototype = $extend(openfl_display_Sprite.prototype,{
-	resetLevel: function() {
-		this.currentMap = this.mapList[0];
+	loadMaps: function(level,stages) {
+		var loadedMapList = new haxe_ds_StringMap();
+		var _g1 = 0;
+		var _g = stages.length;
+		while(_g1 < _g) {
+			var i = _g1++;
+			var mapString = "assets/Stage" + level + "-" + stages[i] + ".tmx";
+			if(!openfl_Assets.exists(mapString)) continue;
+			var mapByteArray = openfl_Assets.getBytes(mapString);
+			var loadedMap = new maps_AreaMap(mapByteArray,this);
+			if(loadedMap == null) continue; else {
+				loadedMapList.set("Stage" + level + "-" + stages[i],loadedMap);
+				loadedMap;
+			}
+		}
+		return loadedMapList;
 	}
-	,getNextMap: function(map) {
-		var index = HxOverrides.indexOf(this.mapList,map,0);
-		if(index < 0 || index > this.mapList.length + 1) return null; else return this.getMapAt(index + 1);
+	,resetLevel: function() {
+		this.currentMap = this.mapList.get(this.startMap);
 	}
-	,getMapAt: function(index) {
-		if(index < this.mapList.length) return this.mapList[index];
-		return null;
+	,getMap: function(name) {
+		return this.mapList.get(name);
+	}
+	,getMapLabel: function(map) {
+		var $it0 = this.mapList.keys();
+		while( $it0.hasNext() ) {
+			var key = $it0.next();
+			if(this.mapList.get(key) == map) return key;
+		}
+		return "";
 	}
 	,getCurrentMap: function() {
 		return this.currentMap;
 	}
-	,setMap: function(newMap,player) {
+	,setMap: function(newMap,player,origin) {
 		if(this.currentMap != null) {
 			if(this.contains(this.currentMap)) {
 				this.currentMap.resetMap();
@@ -15440,7 +15624,7 @@ maps_Level.prototype = $extend(openfl_display_Sprite.prototype,{
 		this.currentMap = newMap;
 		this.addChild(this.currentMap);
 		this.currentMap.resetMap();
-		this.currentMap.addPlayer(player);
+		this.currentMap.addPlayer(player,origin);
 	}
 	,initiateLevel: function(player) {
 		this.setMap(this.currentMap,player);
@@ -15450,7 +15634,13 @@ maps_Level.prototype = $extend(openfl_display_Sprite.prototype,{
 var maps_LevelManager = function() {
 	openfl_display_Sprite.call(this);
 	this.levelList = [];
-	var levelOne = new maps_Level(this.loadMaps(1,[1,2,3,4]));
+	var levels = [];
+	var _g = 0;
+	while(_g < 101) {
+		var i = _g++;
+		levels.push(i);
+	}
+	var levelOne = new maps_Level(1,levels,"Stage1-1");
 	this.levelList.push(levelOne);
 };
 $hxClasses["maps.LevelManager"] = maps_LevelManager;
@@ -15462,19 +15652,7 @@ maps_LevelManager.getSingleton = function() {
 };
 maps_LevelManager.__super__ = openfl_display_Sprite;
 maps_LevelManager.prototype = $extend(openfl_display_Sprite.prototype,{
-	loadMaps: function(level,stages) {
-		var loadedMapList = [];
-		var _g1 = 1;
-		var _g = stages.length + 1;
-		while(_g1 < _g) {
-			var i = _g1++;
-			var mapString = "assets/Stage" + level + "-" + i + ".tmx";
-			var loadedMap = new maps_AreaMap(openfl_Assets.getBytes(mapString));
-			if(loadedMap == null) continue; else loadedMapList.push(loadedMap);
-		}
-		return loadedMapList;
-	}
-	,getCurrentLevel: function() {
+	getCurrentLevel: function() {
 		return this.currentLevel;
 	}
 	,setLevel: function(newLevel,player) {
@@ -15626,9 +15804,9 @@ maps_ObjectFactory.prototype = {
 		var checkpointBmp = Main.getBitmapAsset("assets/checkpoint.png");
 		return new maps_mapobjects_Checkpoint(false,checkpointBmp);
 	}
-	,createPortal: function(index) {
+	,createPortal: function(index,endMap) {
 		var portalBmp = Main.getBitmapAsset("assets/Door.png");
-		return new maps_mapobjects_Portal(portalBmp);
+		return new maps_mapobjects_Portal(portalBmp,endMap);
 	}
 	,createSpawnPoint: function(index) {
 		var indexType = this.getIndexType(index);
@@ -15715,16 +15893,20 @@ maps_mapobjects_Checkpoint.prototype = $extend(actors_Actor.prototype,{
 	}
 	,__class__: maps_mapobjects_Checkpoint
 });
-var maps_mapobjects_Portal = function(defaultBmp) {
+var maps_mapobjects_Portal = function(defaultBmp,endMap) {
 	maps_mapobjects_MapObject.call(this,this,defaultBmp,true);
-	this.defaultBitmap.set_x(4);
+	this.endMap = endMap;
+	this.defaultBitmap.set_x(0);
 	this.defaultBitmap.set_y(-8);
 };
 $hxClasses["maps.mapobjects.Portal"] = maps_mapobjects_Portal;
 maps_mapobjects_Portal.__name__ = ["maps","mapobjects","Portal"];
 maps_mapobjects_Portal.__super__ = maps_mapobjects_MapObject;
 maps_mapobjects_Portal.prototype = $extend(maps_mapobjects_MapObject.prototype,{
-	__class__: maps_mapobjects_Portal
+	getEndMap: function() {
+		return this.endMap;
+	}
+	,__class__: maps_mapobjects_Portal
 });
 var maps_mapobjects_SpawnPoint = function(defaultBmp,enemyPrototype,maxEnemies,frequency,startCount,enemiesPerInstance) {
 	if(enemiesPerInstance == null) enemiesPerInstance = -1;
@@ -15759,6 +15941,7 @@ maps_mapobjects_SpawnPoint.prototype = $extend(maps_mapobjects_MapObject.prototy
 	}
 	,resetSpawn: function() {
 		this.totalEnemiesSpawned = 0;
+		this.enemyCount = 0;
 		this.counter = this.startCount;
 	}
 	,getEnemyType: function() {
@@ -16640,24 +16823,29 @@ openfl_Memory._setPositionTemporarily = function(position,action) {
 	return value;
 };
 openfl_Memory.getByte = function(addr) {
+	if(addr < 0 || addr + 1 > openfl_Memory.len) throw new js__$Boot_HaxeError("Bad address");
 	return openfl_Memory.gcRef.data.getInt8(addr);
 };
 openfl_Memory.getDouble = function(addr) {
+	if(addr < 0 || addr + 8 > openfl_Memory.len) throw new js__$Boot_HaxeError("Bad address");
 	return openfl_Memory._setPositionTemporarily(addr,function() {
 		return openfl_Memory.gcRef.readDouble();
 	});
 };
 openfl_Memory.getFloat = function(addr) {
+	if(addr < 0 || addr + 4 > openfl_Memory.len) throw new js__$Boot_HaxeError("Bad address");
 	return openfl_Memory._setPositionTemporarily(addr,function() {
 		return openfl_Memory.gcRef.readFloat();
 	});
 };
 openfl_Memory.getI32 = function(addr) {
+	if(addr < 0 || addr + 4 > openfl_Memory.len) throw new js__$Boot_HaxeError("Bad address");
 	return openfl_Memory._setPositionTemporarily(addr,function() {
 		return openfl_Memory.gcRef.readInt();
 	});
 };
 openfl_Memory.getUI16 = function(addr) {
+	if(addr < 0 || addr + 2 > openfl_Memory.len) throw new js__$Boot_HaxeError("Bad address");
 	return openfl_Memory._setPositionTemporarily(addr,function() {
 		return openfl_Memory.gcRef.readUnsignedShort();
 	});
@@ -16667,24 +16855,29 @@ openfl_Memory.select = function(inBytes) {
 	if(inBytes != null) openfl_Memory.len = inBytes.length; else openfl_Memory.len = 0;
 };
 openfl_Memory.setByte = function(addr,v) {
+	if(addr < 0 || addr + 1 > openfl_Memory.len) throw new js__$Boot_HaxeError("Bad address");
 	openfl_Memory.gcRef.data.setUint8(addr,v);
 };
 openfl_Memory.setDouble = function(addr,v) {
+	if(addr < 0 || addr + 8 > openfl_Memory.len) throw new js__$Boot_HaxeError("Bad address");
 	openfl_Memory._setPositionTemporarily(addr,function() {
 		openfl_Memory.gcRef.writeDouble(v);
 	});
 };
 openfl_Memory.setFloat = function(addr,v) {
+	if(addr < 0 || addr + 4 > openfl_Memory.len) throw new js__$Boot_HaxeError("Bad address");
 	openfl_Memory._setPositionTemporarily(addr,function() {
 		openfl_Memory.gcRef.writeFloat(v);
 	});
 };
 openfl_Memory.setI16 = function(addr,v) {
+	if(addr < 0 || addr + 2 > openfl_Memory.len) throw new js__$Boot_HaxeError("Bad address");
 	openfl_Memory._setPositionTemporarily(addr,function() {
 		openfl_Memory.gcRef.writeUnsignedShort(v);
 	});
 };
 openfl_Memory.setI32 = function(addr,v) {
+	if(addr < 0 || addr + 4 > openfl_Memory.len) throw new js__$Boot_HaxeError("Bad address");
 	openfl_Memory._setPositionTemporarily(addr,function() {
 		openfl_Memory.gcRef.writeInt(v);
 	});
@@ -24035,9 +24228,7 @@ openfl_display_BitmapData.prototype = {
 				while(_g3 < _g2) {
 					var xx = _g3++;
 					position = (width_yy + xx) * 4;
-					pixelValue = openfl_Memory._setPositionTemporarily(position,function() {
-						return openfl_Memory.gcRef.readInt();
-					});
+					pixelValue = openfl_Memory.getI32(position);
 					pixelMask = pixelValue & mask;
 					i = openfl_display_BitmapData.__ucompare(pixelMask,thresholdMask);
 					test = false;
@@ -24099,9 +24290,7 @@ openfl_display_BitmapData.prototype = {
 				while(_g11 < dw) {
 					var xx1 = _g11++;
 					position1 = (xx1 + sx + (yy1 + sy) * sw) * 4;
-					pixelValue1 = openfl_Memory._setPositionTemporarily(canvasMemory + position1,function() {
-						return openfl_Memory.gcRef.readInt();
-					});
+					pixelValue1 = openfl_Memory.getI32(canvasMemory + position1);
 					pixelMask1 = pixelValue1 & mask;
 					i1 = openfl_display_BitmapData.__ucompare(pixelMask1,thresholdMask1);
 					test1 = false;
@@ -34761,3 +34950,5 @@ openfl_ui_Keyboard.RIGHTBRACKET = 221;
 openfl_ui_Keyboard.QUOTE = 222;
 ApplicationMain.main();
 })(typeof console != "undefined" ? console : {log:function(){}}, typeof window != "undefined" ? window : exports);
+
+//# sourceMappingURL=LolosSuperDreamPlace.js.map

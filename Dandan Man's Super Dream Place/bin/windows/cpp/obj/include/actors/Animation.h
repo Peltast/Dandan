@@ -16,12 +16,12 @@ class HXCPP_CLASS_ATTRIBUTES  Animation_obj : public hx::Object{
 		typedef hx::Object super;
 		typedef Animation_obj OBJ_;
 		Animation_obj();
-		Void __construct(::String name,int speed,::openfl::geom::Point animStart,int animWidth,int animHeight,Array< ::Dynamic > animFrames);
+		Void __construct(::String name,int speed,::openfl::geom::Point animStart,int animWidth,int animHeight,Array< ::Dynamic > animFrames,hx::Null< int >  __o_intervalPause,hx::Null< bool >  __o_loop);
 
 	public:
 		inline void *operator new( size_t inSize, bool inContainer=true,const char *inName="actors.Animation")
 			{ return hx::Object::operator new(inSize,inContainer,inName); }
-		static hx::ObjectPtr< Animation_obj > __new(::String name,int speed,::openfl::geom::Point animStart,int animWidth,int animHeight,Array< ::Dynamic > animFrames);
+		static hx::ObjectPtr< Animation_obj > __new(::String name,int speed,::openfl::geom::Point animStart,int animWidth,int animHeight,Array< ::Dynamic > animFrames,hx::Null< int >  __o_intervalPause,hx::Null< bool >  __o_loop);
 		static Dynamic __CreateEmpty();
 		static Dynamic __Create(hx::DynamicArray inArgs);
 		//~Animation_obj();
@@ -42,11 +42,20 @@ class HXCPP_CLASS_ATTRIBUTES  Animation_obj : public hx::Object{
 		int animWidth;
 		int animHeight;
 		Array< ::Dynamic > animFrames;
+		int intervalPause;
+		int intervalCount;
 		int tickCount;
 		int speed;
 		::openfl::geom::Rectangle currentFrame;
+		bool loop;
+		virtual Void resetAnimation( );
+		Dynamic resetAnimation_dyn();
+
 		virtual ::openfl::geom::Rectangle updateAnimation( );
 		Dynamic updateAnimation_dyn();
+
+		virtual bool isFinished( );
+		Dynamic isFinished_dyn();
 
 		virtual int getFrameIndex( );
 		Dynamic getFrameIndex_dyn();

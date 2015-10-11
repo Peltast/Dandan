@@ -82,6 +82,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
+		
+		
+		
 		#end
 		
 		#if flash
@@ -120,12 +126,24 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/ProjectileEnemy.png", AssetType.IMAGE);
 		className.set ("assets/Stage1-1.tmx", __ASSET__assets_stage1_1_tmx);
 		type.set ("assets/Stage1-1.tmx", AssetType.TEXT);
+		className.set ("assets/Stage1-100.tmx", __ASSET__assets_stage1_100_tmx);
+		type.set ("assets/Stage1-100.tmx", AssetType.TEXT);
 		className.set ("assets/Stage1-2.tmx", __ASSET__assets_stage1_2_tmx);
 		type.set ("assets/Stage1-2.tmx", AssetType.TEXT);
 		className.set ("assets/Stage1-3.tmx", __ASSET__assets_stage1_3_tmx);
 		type.set ("assets/Stage1-3.tmx", AssetType.TEXT);
 		className.set ("assets/Stage1-4.tmx", __ASSET__assets_stage1_4_tmx);
 		type.set ("assets/Stage1-4.tmx", AssetType.TEXT);
+		className.set ("assets/Stage1-420.tmx", __ASSET__assets_stage1_420_tmx);
+		type.set ("assets/Stage1-420.tmx", AssetType.TEXT);
+		className.set ("assets/Stage1-421.tmx", __ASSET__assets_stage1_421_tmx);
+		type.set ("assets/Stage1-421.tmx", AssetType.TEXT);
+		className.set ("assets/Stage1-97.tmx", __ASSET__assets_stage1_97_tmx);
+		type.set ("assets/Stage1-97.tmx", AssetType.TEXT);
+		className.set ("assets/Stage1-98.tmx", __ASSET__assets_stage1_98_tmx);
+		type.set ("assets/Stage1-98.tmx", AssetType.TEXT);
+		className.set ("assets/Stage1-99.tmx", __ASSET__assets_stage1_99_tmx);
+		type.set ("assets/Stage1-99.tmx", AssetType.TEXT);
 		className.set ("assets/Stage3-1.tmx", __ASSET__assets_stage3_1_tmx);
 		type.set ("assets/Stage3-1.tmx", AssetType.TEXT);
 		className.set ("assets/Stage3-2.tmx", __ASSET__assets_stage3_2_tmx);
@@ -221,6 +239,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-100.tmx";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
 		id = "assets/Stage1-2.tmx";
 		path.set (id, id);
 		
@@ -230,6 +252,26 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		type.set (id, AssetType.TEXT);
 		id = "assets/Stage1-4.tmx";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-420.tmx";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-421.tmx";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-97.tmx";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-98.tmx";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-99.tmx";
 		path.set (id, id);
 		
 		type.set (id, AssetType.TEXT);
@@ -343,6 +385,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("assets/Stage1-1.tmx", __ASSET__assets_stage1_1_tmx);
 		type.set ("assets/Stage1-1.tmx", AssetType.TEXT);
 		
+		className.set ("assets/Stage1-100.tmx", __ASSET__assets_stage1_100_tmx);
+		type.set ("assets/Stage1-100.tmx", AssetType.TEXT);
+		
 		className.set ("assets/Stage1-2.tmx", __ASSET__assets_stage1_2_tmx);
 		type.set ("assets/Stage1-2.tmx", AssetType.TEXT);
 		
@@ -351,6 +396,21 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("assets/Stage1-4.tmx", __ASSET__assets_stage1_4_tmx);
 		type.set ("assets/Stage1-4.tmx", AssetType.TEXT);
+		
+		className.set ("assets/Stage1-420.tmx", __ASSET__assets_stage1_420_tmx);
+		type.set ("assets/Stage1-420.tmx", AssetType.TEXT);
+		
+		className.set ("assets/Stage1-421.tmx", __ASSET__assets_stage1_421_tmx);
+		type.set ("assets/Stage1-421.tmx", AssetType.TEXT);
+		
+		className.set ("assets/Stage1-97.tmx", __ASSET__assets_stage1_97_tmx);
+		type.set ("assets/Stage1-97.tmx", AssetType.TEXT);
+		
+		className.set ("assets/Stage1-98.tmx", __ASSET__assets_stage1_98_tmx);
+		type.set ("assets/Stage1-98.tmx", AssetType.TEXT);
+		
+		className.set ("assets/Stage1-99.tmx", __ASSET__assets_stage1_99_tmx);
+		type.set ("assets/Stage1-99.tmx", AssetType.TEXT);
 		
 		className.set ("assets/Stage3-1.tmx", __ASSET__assets_stage3_1_tmx);
 		type.set ("assets/Stage3-1.tmx", AssetType.TEXT);
@@ -1092,9 +1152,15 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep @:bind #if display private #end class __ASSET__assets_projectile2_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_projectileenemy_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_stage1_1_tmx extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_stage1_100_tmx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_stage1_2_tmx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_stage1_3_tmx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_stage1_4_tmx extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_stage1_420_tmx extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_stage1_421_tmx extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_stage1_97_tmx extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_stage1_98_tmx extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_stage1_99_tmx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_stage3_1_tmx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_stage3_2_tmx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_stranger_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -1109,6 +1175,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 #elseif html5
+
+
+
+
+
+
 
 
 
@@ -1167,9 +1239,15 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:image("assets/Projectile2.png") #if display private #end class __ASSET__assets_projectile2_png extends lime.graphics.Image {}
 @:image("assets/ProjectileEnemy.png") #if display private #end class __ASSET__assets_projectileenemy_png extends lime.graphics.Image {}
 @:file("assets/Stage1-1.tmx") #if display private #end class __ASSET__assets_stage1_1_tmx extends lime.utils.ByteArray {}
+@:file("assets/Stage1-100.tmx") #if display private #end class __ASSET__assets_stage1_100_tmx extends lime.utils.ByteArray {}
 @:file("assets/Stage1-2.tmx") #if display private #end class __ASSET__assets_stage1_2_tmx extends lime.utils.ByteArray {}
 @:file("assets/Stage1-3.tmx") #if display private #end class __ASSET__assets_stage1_3_tmx extends lime.utils.ByteArray {}
 @:file("assets/Stage1-4.tmx") #if display private #end class __ASSET__assets_stage1_4_tmx extends lime.utils.ByteArray {}
+@:file("assets/Stage1-420.tmx") #if display private #end class __ASSET__assets_stage1_420_tmx extends lime.utils.ByteArray {}
+@:file("assets/Stage1-421.tmx") #if display private #end class __ASSET__assets_stage1_421_tmx extends lime.utils.ByteArray {}
+@:file("assets/Stage1-97.tmx") #if display private #end class __ASSET__assets_stage1_97_tmx extends lime.utils.ByteArray {}
+@:file("assets/Stage1-98.tmx") #if display private #end class __ASSET__assets_stage1_98_tmx extends lime.utils.ByteArray {}
+@:file("assets/Stage1-99.tmx") #if display private #end class __ASSET__assets_stage1_99_tmx extends lime.utils.ByteArray {}
 @:file("assets/Stage3-1.tmx") #if display private #end class __ASSET__assets_stage3_1_tmx extends lime.utils.ByteArray {}
 @:file("assets/Stage3-2.tmx") #if display private #end class __ASSET__assets_stage3_2_tmx extends lime.utils.ByteArray {}
 @:image("assets/Stranger.png") #if display private #end class __ASSET__assets_stranger_png extends lime.graphics.Image {}

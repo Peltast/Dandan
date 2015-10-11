@@ -56,6 +56,7 @@ class SpawnPoint extends MapObject
 	
 	public function resetSpawn():Void {
 		totalEnemiesSpawned = 0;
+		enemyCount = 0;
 		counter = startCount;
 	}
 	

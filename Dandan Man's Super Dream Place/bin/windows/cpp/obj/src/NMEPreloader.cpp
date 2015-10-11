@@ -235,7 +235,7 @@ Float NMEPreloader_obj::getHeight( ){
 	HX_STACK_FRAME("NMEPreloader","getHeight",0xcc30c39f,"NMEPreloader.getHeight","NMEPreloader.hx",64,0x86edec4e)
 	HX_STACK_THIS(this)
 	HX_STACK_LINE(66)
-	int height = (int)480;		HX_STACK_VAR(height,"height");
+	int height = (int)360;		HX_STACK_VAR(height,"height");
 	HX_STACK_LINE(68)
 	bool tmp = (height > (int)0);		HX_STACK_VAR(tmp,"tmp");
 	HX_STACK_LINE(68)
@@ -264,7 +264,7 @@ Float NMEPreloader_obj::getWidth( ){
 	HX_STACK_FRAME("NMEPreloader","getWidth",0xdb5cd94e,"NMEPreloader.getWidth","NMEPreloader.hx",81,0x86edec4e)
 	HX_STACK_THIS(this)
 	HX_STACK_LINE(83)
-	int width = (int)800;		HX_STACK_VAR(width,"width");
+	int width = (int)540;		HX_STACK_VAR(width,"width");
 	HX_STACK_LINE(85)
 	bool tmp = (width > (int)0);		HX_STACK_VAR(tmp,"tmp");
 	HX_STACK_LINE(85)

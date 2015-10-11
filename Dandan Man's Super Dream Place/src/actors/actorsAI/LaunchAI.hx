@@ -63,7 +63,7 @@ class LaunchAI extends EnemyAI
 		
 		var distFromPlayer:Point = enemy.getCurrentMap().checkDistFromPlayer(enemy);
 		
-		if (Math.abs(distFromPlayer.y) < visionConeHeight && Math.abs(distFromPlayer.x) < visionConeWidth) {
+		if (distFromPlayer.y < visionConeHeight && distFromPlayer.y >= 0 && Math.abs(distFromPlayer.x) < visionConeWidth) {
 			
 			windupCooldown = 20;
 			enemy.windup();

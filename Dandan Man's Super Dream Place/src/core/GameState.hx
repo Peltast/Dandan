@@ -2,6 +2,8 @@ package core;
 
 import maps.LevelManager;
 import actors.Player;
+import ui.GameScreen;
+import ui.Overlay;
 
 /**
  * ...
@@ -9,6 +11,9 @@ import actors.Player;
  */
 class GameState extends State
 {
+	
+	private var gameOverlay:Overlay;
+	private var pauseOverlay:Overlay;
 	
 	private var gameScreen:GameScreen;
 	private var levelManager:LevelManager;
@@ -23,13 +28,19 @@ class GameState extends State
 		levelManager = LevelManager.getSingleton();
 		levelManager.setLevel(1, player);
 		
-		this.addChild(levelManager);	
+		gameScreen.initiateGameScreen(this, player, levelManager);
+		gameOverlay = new Overlay();
+		gameOverlay.addToOverlay(gameScreen);
+		
+		pauseOverlay = new Overlay();
+		
+		overlayStack.pushOverlay(gameOverlay);
 	}
 	
 	override public function drawState():Void 
 	{
-		
-		levelManager.getCurrentLevel().getCurrentMap().updateMap();
+		super.drawState();
+		//levelManager.getCurrentLevel().getCurrentMap().updateMap();
 	}
 		
 }

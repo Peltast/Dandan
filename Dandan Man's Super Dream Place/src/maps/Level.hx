@@ -1,5 +1,6 @@
 package maps;
 import actors.Player;
+import lime.utils.ByteArray;
 import maps.mapobjects.Portal;
 import openfl.Assets;
 import openfl.display.Sprite;
@@ -33,7 +34,10 @@ class Level extends Sprite
 		
 		for (i in 0...stages.length) {
 			var mapString:String = "assets/Stage" + level + "-" + stages[i] + ".tmx";
-			var loadedMap:AreaMap = new AreaMap(Assets.getBytes(mapString), this);
+			if (!Assets.exists(mapString)) continue;
+			
+			var mapByteArray:ByteArray = Assets.getBytes(mapString);			
+			var loadedMap:AreaMap = new AreaMap(mapByteArray, this);
 			if (loadedMap == null)
 				continue;
 			else

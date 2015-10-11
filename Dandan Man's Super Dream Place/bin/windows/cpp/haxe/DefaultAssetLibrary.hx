@@ -59,18 +59,158 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		#end
 		
 		#if flash
 		
 		path.set ("assets/checkpoint.png", "assets/checkpoint.png");
 		type.set ("assets/checkpoint.png", AssetType.IMAGE);
+		path.set ("assets/DashEnemy.png", "assets/DashEnemy.png");
+		type.set ("assets/DashEnemy.png", AssetType.IMAGE);
+		path.set ("assets/Door.png", "assets/Door.png");
+		type.set ("assets/Door.png", AssetType.IMAGE);
+		path.set ("assets/FlyingEnemy.png", "assets/FlyingEnemy.png");
+		type.set ("assets/FlyingEnemy.png", AssetType.IMAGE);
+		path.set ("assets/LaunchEnemy.png", "assets/LaunchEnemy.png");
+		type.set ("assets/LaunchEnemy.png", AssetType.IMAGE);
+		path.set ("assets/oldplayer.png", "assets/oldplayer.png");
+		type.set ("assets/oldplayer.png", AssetType.IMAGE);
 		path.set ("assets/openfl.svg", "assets/openfl.svg");
 		type.set ("assets/openfl.svg", AssetType.TEXT);
-		path.set ("assets/player.png", "assets/player.png");
-		type.set ("assets/player.png", AssetType.IMAGE);
+		path.set ("assets/Player.png", "assets/Player.png");
+		type.set ("assets/Player.png", AssetType.IMAGE);
+		path.set ("assets/Player2.png", "assets/Player2.png");
+		type.set ("assets/Player2.png", AssetType.IMAGE);
+		path.set ("assets/PlayerDash.png", "assets/PlayerDash.png");
+		type.set ("assets/PlayerDash.png", AssetType.IMAGE);
+		path.set ("assets/PlayerLaunch.png", "assets/PlayerLaunch.png");
+		type.set ("assets/PlayerLaunch.png", AssetType.IMAGE);
+		path.set ("assets/PlayerProjectile.png", "assets/PlayerProjectile.png");
+		type.set ("assets/PlayerProjectile.png", AssetType.IMAGE);
 		path.set ("assets/portal.png", "assets/portal.png");
 		type.set ("assets/portal.png", AssetType.IMAGE);
+		path.set ("assets/Projectile.png", "assets/Projectile.png");
+		type.set ("assets/Projectile.png", AssetType.IMAGE);
+		path.set ("assets/Projectile2.png", "assets/Projectile2.png");
+		type.set ("assets/Projectile2.png", AssetType.IMAGE);
+		path.set ("assets/ProjectileEnemy.png", "assets/ProjectileEnemy.png");
+		type.set ("assets/ProjectileEnemy.png", AssetType.IMAGE);
+		path.set ("assets/RunningEnemy.png", "assets/RunningEnemy.png");
+		type.set ("assets/RunningEnemy.png", AssetType.IMAGE);
+		path.set ("assets/Stage1-1.tmx", "assets/Stage1-1.tmx");
+		type.set ("assets/Stage1-1.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-10.tmx", "assets/Stage1-10.tmx");
+		type.set ("assets/Stage1-10.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-100.tmx", "assets/Stage1-100.tmx");
+		type.set ("assets/Stage1-100.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-11.tmx", "assets/Stage1-11.tmx");
+		type.set ("assets/Stage1-11.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-12.tmx", "assets/Stage1-12.tmx");
+		type.set ("assets/Stage1-12.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-13.tmx", "assets/Stage1-13.tmx");
+		type.set ("assets/Stage1-13.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-14.tmx", "assets/Stage1-14.tmx");
+		type.set ("assets/Stage1-14.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-2.tmx", "assets/Stage1-2.tmx");
+		type.set ("assets/Stage1-2.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-20.tmx", "assets/Stage1-20.tmx");
+		type.set ("assets/Stage1-20.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-21.tmx", "assets/Stage1-21.tmx");
+		type.set ("assets/Stage1-21.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-22.tmx", "assets/Stage1-22.tmx");
+		type.set ("assets/Stage1-22.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-23.tmx", "assets/Stage1-23.tmx");
+		type.set ("assets/Stage1-23.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-24.tmx", "assets/Stage1-24.tmx");
+		type.set ("assets/Stage1-24.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-25.tmx", "assets/Stage1-25.tmx");
+		type.set ("assets/Stage1-25.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-26.tmx", "assets/Stage1-26.tmx");
+		type.set ("assets/Stage1-26.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-3.tmx", "assets/Stage1-3.tmx");
+		type.set ("assets/Stage1-3.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-30.tmx", "assets/Stage1-30.tmx");
+		type.set ("assets/Stage1-30.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-31.tmx", "assets/Stage1-31.tmx");
+		type.set ("assets/Stage1-31.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-32.tmx", "assets/Stage1-32.tmx");
+		type.set ("assets/Stage1-32.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-33.tmx", "assets/Stage1-33.tmx");
+		type.set ("assets/Stage1-33.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-34.tmx", "assets/Stage1-34.tmx");
+		type.set ("assets/Stage1-34.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-4.tmx", "assets/Stage1-4.tmx");
+		type.set ("assets/Stage1-4.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-420.tmx", "assets/Stage1-420.tmx");
+		type.set ("assets/Stage1-420.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-421.tmx", "assets/Stage1-421.tmx");
+		type.set ("assets/Stage1-421.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-5.tmx", "assets/Stage1-5.tmx");
+		type.set ("assets/Stage1-5.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-6.tmx", "assets/Stage1-6.tmx");
+		type.set ("assets/Stage1-6.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-97.tmx", "assets/Stage1-97.tmx");
+		type.set ("assets/Stage1-97.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-98.tmx", "assets/Stage1-98.tmx");
+		type.set ("assets/Stage1-98.tmx", AssetType.TEXT);
+		path.set ("assets/Stage1-99.tmx", "assets/Stage1-99.tmx");
+		type.set ("assets/Stage1-99.tmx", AssetType.TEXT);
+		path.set ("assets/Stage3-1.tmx", "assets/Stage3-1.tmx");
+		type.set ("assets/Stage3-1.tmx", AssetType.TEXT);
+		path.set ("assets/Stage3-2.tmx", "assets/Stage3-2.tmx");
+		type.set ("assets/Stage3-2.tmx", AssetType.TEXT);
+		path.set ("assets/Stranger.png", "assets/Stranger.png");
+		type.set ("assets/Stranger.png", AssetType.IMAGE);
 		path.set ("assets/TestMap.tmx", "assets/TestMap.tmx");
 		type.set ("assets/TestMap.tmx", AssetType.TEXT);
 		path.set ("assets/TestMap.txt", "assets/TestMap.txt");
@@ -79,6 +219,16 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/TestMap2.tmx", AssetType.TEXT);
 		path.set ("assets/tilesheet.png", "assets/tilesheet.png");
 		type.set ("assets/tilesheet.png", AssetType.IMAGE);
+		path.set ("assets/Tilset.pdn", "assets/Tilset.pdn");
+		type.set ("assets/Tilset.pdn", AssetType.TEXT);
+		path.set ("assets/Untitled.png", "assets/Untitled.png");
+		type.set ("assets/Untitled.png", AssetType.IMAGE);
+		path.set ("assets/WalkingEnemy.png", "assets/WalkingEnemy.png");
+		type.set ("assets/WalkingEnemy.png", AssetType.IMAGE);
+		path.set ("assets/World1Tiles.png", "assets/World1Tiles.png");
+		type.set ("assets/World1Tiles.png", AssetType.IMAGE);
+		path.set ("assets/World2Tiles.png", "assets/World2Tiles.png");
+		type.set ("assets/World2Tiles.png", AssetType.IMAGE);
 		
 		
 		#elseif html5
@@ -87,13 +237,148 @@ class DefaultAssetLibrary extends AssetLibrary {
 		id = "assets/checkpoint.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
+		id = "assets/DashEnemy.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/Door.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/FlyingEnemy.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/LaunchEnemy.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/oldplayer.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
 		id = "assets/openfl.svg";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
-		id = "assets/player.png";
+		id = "assets/Player.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/Player2.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/PlayerDash.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/PlayerLaunch.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/PlayerProjectile.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
 		id = "assets/portal.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/Projectile.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/Projectile2.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/ProjectileEnemy.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/RunningEnemy.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/Stage1-1.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-10.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-100.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-11.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-12.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-13.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-14.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-2.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-20.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-21.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-22.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-23.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-24.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-25.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-26.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-3.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-30.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-31.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-32.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-33.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-34.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-4.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-420.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-421.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-5.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-6.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-97.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-98.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage1-99.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage3-1.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stage3-2.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Stranger.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
 		id = "assets/TestMap.tmx";
@@ -106,6 +391,21 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
 		id = "assets/tilesheet.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/Tilset.pdn";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/Untitled.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/WalkingEnemy.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/World1Tiles.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/World2Tiles.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
 		
@@ -122,6 +422,56 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -831,7 +1181,107 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #elseif html5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -5,16 +5,16 @@
 #include <hxcpp.h>
 #endif
 
-#ifndef INCLUDED_maps_MapObject
-#include <maps/MapObject.h>
+#ifndef INCLUDED_actors_Actor
+#include <actors/Actor.h>
 #endif
-HX_DECLARE_CLASS1(actors,Animation)
+HX_DECLARE_CLASS1(actors,Actor)
 HX_DECLARE_CLASS1(actors,Player)
-HX_DECLARE_CLASS1(haxe,IMap)
-HX_DECLARE_CLASS2(haxe,ds,StringMap)
-HX_DECLARE_CLASS1(maps,AreaMap)
-HX_DECLARE_CLASS1(maps,MapObject)
-HX_DECLARE_CLASS2(openfl,display,Bitmap)
+HX_DECLARE_CLASS2(actors,abilities,Ability)
+HX_DECLARE_CLASS2(actors,attacks,Attack)
+HX_DECLARE_CLASS2(actors,attacks,Projectile)
+HX_DECLARE_CLASS2(actors,enemies,Enemy)
+HX_DECLARE_CLASS2(maps,mapobjects,MapObject)
 HX_DECLARE_CLASS2(openfl,display,DisplayObject)
 HX_DECLARE_CLASS2(openfl,display,DisplayObjectContainer)
 HX_DECLARE_CLASS2(openfl,display,IBitmapDrawable)
@@ -27,9 +27,9 @@ HX_DECLARE_CLASS2(openfl,events,KeyboardEvent)
 namespace actors{
 
 
-class HXCPP_CLASS_ATTRIBUTES  Player_obj : public ::maps::MapObject_obj{
+class HXCPP_CLASS_ATTRIBUTES  Player_obj : public ::actors::Actor_obj{
 	public:
-		typedef ::maps::MapObject_obj super;
+		typedef ::actors::Actor_obj super;
 		typedef Player_obj OBJ_;
 		Player_obj();
 		Void __construct();
@@ -52,59 +52,52 @@ class HXCPP_CLASS_ATTRIBUTES  Player_obj : public ::maps::MapObject_obj{
 		void __Visit(HX_VISIT_PARAMS);
 		::String __ToString() const { return HX_HCSTRING("Player","\x81","\x5f","\x4d","\x6c"); }
 
-		::haxe::ds::StringMap animations;
-		::actors::Animation currentAnimation;
-		::openfl::display::Bitmap playerBmp;
-		::maps::AreaMap currentMap;
-		bool grounded;
-		int jumpCharges;
-		Float xAcc;
-		Float yAcc;
-		int targetXVel;
-		int targetYVel;
-		Float xVel;
-		Float yVel;
-		int maxSpeedX;
-		int maxSpeedY;
-		int playerSize;
-		virtual Void removeCharBmp( );
-		Dynamic removeCharBmp_dyn();
-
+		::actors::attacks::Attack jumpAttack;
+		::actors::attacks::Attack standAttack;
+		::actors::abilities::Ability ability;
 		virtual Void updatePlayer( );
 		Dynamic updatePlayer_dyn();
 
-		virtual Void updateVelocity( );
-		Dynamic updateVelocity_dyn();
+		virtual bool isStunned( );
+		Dynamic isStunned_dyn();
 
-		virtual Void moveXAxis( );
-		Dynamic moveXAxis_dyn();
+		virtual Void handleAnimation( );
+		Dynamic handleAnimation_dyn();
 
-		virtual Void moveYAxis( );
-		Dynamic moveYAxis_dyn();
-
-		virtual bool checkFatalTiles( Array< ::Dynamic > collisionList,bool xAxis);
-		Dynamic checkFatalTiles_dyn();
-
-		virtual int getCollisionLargestDistance( Array< ::Dynamic > collisionList,bool xAxis);
-		Dynamic getCollisionLargestDistance_dyn();
+		virtual Void centerScreen( );
+		Dynamic centerScreen_dyn();
 
 		virtual Void setGrounded( );
-		Dynamic setGrounded_dyn();
 
-		virtual Void killPlayer( );
-		Dynamic killPlayer_dyn();
+		virtual Void initiateAttack( );
 
-		virtual ::maps::AreaMap getCurrentMap( );
-		Dynamic getCurrentMap_dyn();
+		virtual bool isAttacking( );
+		Dynamic isAttacking_dyn();
 
-		virtual Void setCurrentMap( ::maps::AreaMap map);
-		Dynamic setCurrentMap_dyn();
+		virtual Void endAttack( );
 
-		virtual Void addAnimationBmp( ::actors::Animation animation);
-		Dynamic addAnimationBmp_dyn();
+		virtual Void resetAttackAnimation( );
+		Dynamic resetAttackAnimation_dyn();
 
-		virtual ::openfl::display::Bitmap getAnimationBmp( ::actors::Animation animation,::openfl::display::Bitmap bitmap);
-		Dynamic getAnimationBmp_dyn();
+		virtual Void beginAbilityAttack( );
+		Dynamic beginAbilityAttack_dyn();
+
+		virtual Void endAbilityAttack( );
+		Dynamic endAbilityAttack_dyn();
+
+		virtual Void calculateDamage( ::maps::mapobjects::MapObject source);
+
+		virtual bool takeProjectileDamage( ::actors::attacks::Projectile projectile);
+
+		virtual Void kill( );
+
+		virtual Void handleDeath( );
+
+		virtual Void absorbAbility( ::actors::enemies::Enemy enemy);
+		Dynamic absorbAbility_dyn();
+
+		virtual Void removeAbility( );
+		Dynamic removeAbility_dyn();
 
 		virtual Void checkKeysDown( ::openfl::events::KeyboardEvent key);
 		Dynamic checkKeysDown_dyn();
@@ -112,23 +105,20 @@ class HXCPP_CLASS_ATTRIBUTES  Player_obj : public ::maps::MapObject_obj{
 		virtual Void checkKeysUp( ::openfl::events::KeyboardEvent key);
 		Dynamic checkKeysUp_dyn();
 
+		virtual Void stopHoldAttack( );
+		Dynamic stopHoldAttack_dyn();
+
 		virtual Void goLeft( );
-		Dynamic goLeft_dyn();
 
 		virtual Void goRight( );
-		Dynamic goRight_dyn();
 
 		virtual Void stopLeft( );
-		Dynamic stopLeft_dyn();
 
 		virtual Void stopRight( );
-		Dynamic stopRight_dyn();
 
 		virtual Void jump( );
-		Dynamic jump_dyn();
 
-		virtual ::actors::Animation getAnimation( ::String title);
-		Dynamic getAnimation_dyn();
+		virtual Void setAnimation( ::String action);
 
 };
 

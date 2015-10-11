@@ -22,8 +22,11 @@ class Animation
 	private var tickCount:Int;	// Timer for animation
 	private var speed:Int; // Number of ticks before animation progresses
 	private var currentFrame:Rectangle;
+	private var loop:Bool;
 	
-	public function new(name:String, speed:Int, animStart:Point, animWidth:Int, animHeight:Int, animFrames:Array<Point>, intervalPause:Int = 0) 
+	public function new
+		(name:String, speed:Int, animStart:Point, animWidth:Int, animHeight:Int, animFrames:Array<Point>,
+		intervalPause:Int = 0, loop:Bool = true) 
 	{
 		this.name = name;
 		this.speed = speed;
@@ -32,6 +35,7 @@ class Animation
 		this.animHeight = animHeight;
 		this.animFrames = animFrames;
 		this.intervalPause = intervalPause;
+		this.loop = loop;
 		tickCount = 0;
 		intervalCount = 0;
 		
@@ -70,7 +74,8 @@ class Animation
 					// If this is the last frame in the array, go back to the beginning.
 					if (frames.length - 1 == i) {
 						
-						currentFrame = frames[0];
+						if (loop)
+							currentFrame = frames[0];
 						
 						// If there's an interval pause, the animation stops for a bit at the end before looping.
 						intervalCount = intervalPause;
@@ -88,6 +93,13 @@ class Animation
 		return currentFrame;
 	}
 	
+	public function isFinished():Bool {
+		if (loop) 
+			return false;
+		else if (getFrameIndex() == frames.length - 1)
+			return true;
+		return false;
+	}
 	public function getFrameIndex():Int {
 		for (i in 0...frames.length) {
 			if (currentFrame == frames[i])

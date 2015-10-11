@@ -22,7 +22,7 @@ class DashAI extends EnemyAI
 		dashCooldown = 0;
 		
 		visionConeHeight = 32;
-		visionConeWidth = 100;
+		visionConeWidth = 112;
 	}
 	
 	override public function updateAI(actor:Actor, mover:ObjectMover):Void 

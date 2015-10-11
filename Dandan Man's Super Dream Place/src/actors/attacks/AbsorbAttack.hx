@@ -13,7 +13,7 @@ class AbsorbAttack extends Attack
 
 	public function new(attackMovement:ObjectMover, hits:Array<Rectangle>, duration:Int, damage:Int) 
 	{
-		super(attackMovement, hits, duration, damage, 10);
+		super(attackMovement, hits, duration, damage, 10, "JumpingAttack", "JumpingAttackRest", true);
 	}
 	
 	override public function updateAttack(mover:ObjectMover):Bool 

@@ -1,9 +1,11 @@
 package actors.enemies;
 import actors.Actor;
+import actors.Animation;
 import actors.ObjectMover;
 import actors.actorsAI.PaceAI;
 import actors.attacks.Attack;
 import actors.enemies.Enemy;
+import maps.mapobjects.MapObject;
 import maps.mapobjects.SpawnPoint;
 import openfl.geom.Point;
 import openfl.geom.Rectangle;
@@ -32,6 +34,8 @@ class WalkingEnemy extends Enemy
 			("Jump", 0, new Point(enemySize * 2, 0), enemySize, enemySize, [new Point()]);
 		var hurt:Animation = new Animation
 			("Hurt", 1, new Point(enemySize, 0), enemySize, enemySize, [new Point(), new Point(1)]);
+		deathAnimation = new Animation
+			("Death", 1, new Point(0, enemySize * 3), enemySize, enemySize, [new Point(), new Point(1), new Point(2), new Point(3)], 0, false);
 		
 		animations = new Map<String, Animation>();
 		animations[normalIdle.getName()] = normalIdle;
@@ -39,6 +43,7 @@ class WalkingEnemy extends Enemy
 		animations[rightWalk.getName()] = rightWalk;
 		animations[jump.getName()] = jump;
 		animations[hurt.getName()] = hurt;
+		animations[deathAnimation.getName()] = deathAnimation;
 		
 		currentAnimation = normalIdle;
 		var mover:ObjectMover = new ObjectMover(.1, .1, 0, 0, 0, 0, 2, 60, 2);
@@ -60,6 +65,8 @@ class WalkingEnemy extends Enemy
 	{
 		super.handleAnimation();
 		
+		if (currentAnimation == deathAnimation)
+			return;
 		if (invulnerable)
 			return;
 		if (!currentMover.getIsGrounded())
@@ -72,11 +79,11 @@ class WalkingEnemy extends Enemy
 			currentAnimation = getAnimation("LeftWalk");	
 	}
 	
-	override function damageReaction(actor:Actor):Void 
+	override function damageReaction(source:MapObject):Void 
 	{
-		super.damageReaction(actor);
+		super.damageReaction(source);
 		
-		knockBack(actor);
+		damageKnockback(source);
 		currentAnimation = getAnimation("Hurt");
 	}
 	

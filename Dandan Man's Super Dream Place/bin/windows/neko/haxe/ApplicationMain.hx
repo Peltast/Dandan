@@ -90,10 +90,10 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "301",
+			build: "1499",
 			company: "Peltast",
 			file: "LolosSuperDreamPlace",
-			fps: 60,
+			fps: 30,
 			name: "Lolo's Super Dream Place",
 			orientation: "",
 			packageName: "LolosSuperDreamPlace",
@@ -108,13 +108,13 @@ class ApplicationMain {
 					display: 0,
 					fullscreen: false,
 					hardware: true,
-					height: 480,
+					height: 360,
 					parameters: "{}",
 					resizable: true,
 					stencilBuffer: true,
 					title: "Lolo's Super Dream Place",
 					vsync: false,
-					width: 800,
+					width: 540,
 					x: null,
 					y: null
 				},
@@ -132,7 +132,7 @@ class ApplicationMain {
 		
 		#if (js && html5)
 		#if (munit || utest)
-		openfl.Lib.embed (null, 800, 480, "null");
+		openfl.Lib.embed (null, 540, 360, "null");
 		#end
 		#else
 		create ();

@@ -10,7 +10,7 @@
 #endif
 HX_DECLARE_CLASS1(core,GameState)
 HX_DECLARE_CLASS1(core,State)
-HX_DECLARE_CLASS1(maps,MapManager)
+HX_DECLARE_CLASS1(maps,LevelManager)
 HX_DECLARE_CLASS2(openfl,display,DisplayObject)
 HX_DECLARE_CLASS2(openfl,display,DisplayObjectContainer)
 HX_DECLARE_CLASS2(openfl,display,IBitmapDrawable)
@@ -18,6 +18,9 @@ HX_DECLARE_CLASS2(openfl,display,InteractiveObject)
 HX_DECLARE_CLASS2(openfl,display,Sprite)
 HX_DECLARE_CLASS2(openfl,events,EventDispatcher)
 HX_DECLARE_CLASS2(openfl,events,IEventDispatcher)
+HX_DECLARE_CLASS1(ui,GameScreen)
+HX_DECLARE_CLASS1(ui,Overlay)
+HX_DECLARE_CLASS1(ui,OverlayItem)
 namespace core{
 
 
@@ -46,7 +49,10 @@ class HXCPP_CLASS_ATTRIBUTES  GameState_obj : public ::core::State_obj{
 		void __Visit(HX_VISIT_PARAMS);
 		::String __ToString() const { return HX_HCSTRING("GameState","\x9f","\x44","\xf9","\x5a"); }
 
-		::maps::MapManager mapManager;
+		::ui::Overlay gameOverlay;
+		::ui::Overlay pauseOverlay;
+		::ui::GameScreen gameScreen;
+		::maps::LevelManager levelManager;
 		virtual Void drawState( );
 
 };

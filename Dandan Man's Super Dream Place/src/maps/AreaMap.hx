@@ -16,6 +16,7 @@ import maps.mapobjects.MapObject;
 import maps.mapobjects.Portal;
 import maps.mapobjects.SpawnPoint;
 import maps.mapobjects.Tile;
+import openfl.display.Bitmap;
 import openfl.Vector;
 /**
  * ...
@@ -24,6 +25,7 @@ import openfl.Vector;
 class AreaMap extends Sprite
 {
 	private var hostLevel:Level;
+	private var tileSheet:Bitmap;
 	
 	private var objectList:Array<Array<MapObject>>;
 	private var actorList:Array<Actor>;
@@ -47,6 +49,7 @@ class AreaMap extends Sprite
 	{
 		super();
 		this.hostLevel = hostLevel;
+		this.tileSheet = Main.getBitmapAsset("assets/World1Tiles.png");
 		
 		checkPoints = new Array<Checkpoint>();
 		spawnPoints = new Array<SpawnPoint>();
@@ -60,6 +63,7 @@ class AreaMap extends Sprite
 		var fileInfo:String = fileBytes.toString();
 		var fileArray:Array<String> = fileInfo.split("\n");
 		
+		parseMapTileSheet(fileArray);
 		parseMapDimensions(fileArray);
 		addMapBG(0x000000);
 		
@@ -67,8 +71,25 @@ class AreaMap extends Sprite
 		projectileList = new Array<Projectile>();
 		initiateObjectList(mapWidth, mapHeight);
 		
+		ObjectFactory.getSingleton().changeTileSheet(this.tileSheet);
 		readTiles(fileArray);
 		readDynamicObjects(fileArray);
+	}
+	private function parseMapTileSheet(fileArray:Array<String>):Void {
+		var fCount:Int = 0;
+		for (f in 0...fileArray.length) {
+			if (fileArray[f].indexOf("tileset") >= 0)
+				break;
+			fCount += 1;
+		}
+		
+		var tileSetLine:Array<String> = fileArray[fCount].split(' ');
+		for (i in 0...tileSetLine.length) {
+			if (tileSetLine[i].indexOf("name") >= 0) {
+				var tileSetName:String = tileSetLine[i].split('"')[1];
+				this.tileSheet = Main.getBitmapAsset("assets/" + tileSetName + ".png");
+			}
+		}
 	}
 	private function parseMapDimensions(fileArray:Array<String>):Void {
 		
@@ -126,7 +147,7 @@ class AreaMap extends Sprite
 				continue;
 				
 			var parsedTileLine:Array<String> = fileArray[j].split('"');
-			var index:Int = cast parsedTileLine[1];
+			var index:Int = Std.parseInt(parsedTileLine[1]);
 			
 			createObject(index, xCounter, yCounter);
 			
@@ -225,13 +246,14 @@ class AreaMap extends Sprite
 		
 		if (objectProperties["type"] == "portal")
 			createEndpoint(objectID, objectProperties["map"], cast objectLocation.x / tileSize, cast objectLocation.y / tileSize);
+		
 	}
 	private function parseObjectID(idLine:String):Int {
 		var parsedLine:Array<String> = idLine.split(" ");
 		var objectID:Int = 0;
 		for (i in 0...parsedLine.length) {
 			if (parsedLine[i].indexOf("gid") >= 0)
-				objectID = cast parsedLine[i].split('"')[1];
+				objectID = Std.parseInt(parsedLine[i].split('"')[1]);
 		}
 		return objectID;
 	}
@@ -241,9 +263,9 @@ class AreaMap extends Sprite
 		var objectY:Int  = 0;
 		for (i in 0...parsedLine.length) {
 			if (parsedLine[i].indexOf("x") >= 0)
-				objectX = cast parsedLine[i].split('"')[1];
+				objectX = Std.parseInt(parsedLine[i].split('"')[1]);
 			if (parsedLine[i].indexOf("y") >= 0)
-				objectY = cast parsedLine[i].split('"')[1];
+				objectY = Std.parseInt(parsedLine[i].split('"')[1]);
 		}
 		return new Point(objectX, objectY - 1);
 	}
@@ -262,11 +284,26 @@ class AreaMap extends Sprite
 	}
 	
 	public function resetMap():Void {
-		currentCheckpoint = null;
+		//currentCheckpoint = null;
 		for (i in 0...checkPoints.length) {
 			checkPoints[i].setInactive();
 		}
+		var removeList:Array<Actor> = [];
+		
+		for (j in 0...actorList.length)
+			removeList.push(actorList[j]);
+		for (k in 0...removeList.length) {
+			if (Std.is(removeList[k], Player)) continue;
+			removeActor(removeList[k]);
+		}
+		
+		var removeProjList:Array<Projectile> = [];
+		for (c in 0...projectileList.length)
+			removeProjList.push(projectileList[c]);
+		for (e in 0...removeProjList.length)
+			removeProjectile(removeProjList[e]);
 		resetSpawnPoints();
+		
 	}
 	private function resetSpawnPoints():Void {
 		for (i in 0...spawnPoints.length) {
@@ -345,6 +382,7 @@ class AreaMap extends Sprite
 	
 	public function addProjectile(projectile:Projectile):Void {
 		projectileList.push(projectile);
+		projectile.setCurrentMap(this);
 		this.addChild(projectile);
 	}
 	public function removeProjectile(projectile:Projectile):Void {
@@ -360,8 +398,8 @@ class AreaMap extends Sprite
 		objectCenter = new Point(Math.floor(objectCenter.x / tileSize), Math.floor(objectCenter.y / tileSize));
 		var collisionList:Array<MapObject> = new Array<MapObject>();
 		
-		var objectY:Int = cast objectCenter.y;
-		var objectX:Int = cast objectCenter.x;
+		var objectY:Int = Math.round(objectCenter.y);
+		var objectX:Int = Math.round(objectCenter.x);
 		
 		for (y in objectY - 1...objectY + 2) {
 			for (x in objectX - 1...objectX + 2) {
@@ -497,6 +535,9 @@ class AreaMap extends Sprite
 	
 	public function getCurrentCheckpoint():MapObject {
 		return currentCheckpoint;
+	}
+	public function getStartPoint():Checkpoint {
+		return startPoint;
 	}
 	private function changeCheckpoint(newCheckpoint:MapObject):Void {
 		

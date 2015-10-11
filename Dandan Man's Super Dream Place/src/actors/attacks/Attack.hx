@@ -14,17 +14,22 @@ class Attack
 	private var stunAnimation:String;
 	
 	private var duration:Int;
+	private var hitDuration:Int;
 	private var counter:Int;
 	private var damage:Int;
 	private var stunDuration:Int;
 	private var unstoppable:Bool;
 	
 	public function new(attackMovement:ObjectMover, hits:Array<Rectangle>, duration:Int, damage:Int,
-						stunDuration:Int, animation:String = "", stunAnimation:String = "", unstoppable:Bool = false) 
+						stunDuration:Int, animation:String = "", stunAnimation:String = "", unstoppable:Bool = false, hitDuration:Int = -1) 
 	{
 		this.attackMovement = attackMovement;
 		this.duration = duration;
-		this.attackHitbox = new Hitbox(hits, duration);
+		if (hitDuration == -1)
+			this.hitDuration = duration;
+		else
+			this.hitDuration = hitDuration;
+		this.attackHitbox = new Hitbox(hits, this.hitDuration);
 		this.damage = damage;
 		this.stunDuration = stunDuration;
 		this.attackAnimation = animation;

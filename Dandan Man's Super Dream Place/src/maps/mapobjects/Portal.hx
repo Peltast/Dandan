@@ -18,7 +18,7 @@ class Portal extends MapObject
 		super(this, defaultBmp, true);
 		
 		this.endMap = endMap;
-		this.defaultBitmap.x = 4;
+		this.defaultBitmap.x = 0;
 		this.defaultBitmap.y = -8;
 	}
 	

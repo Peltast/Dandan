@@ -462,6 +462,18 @@
 #ifndef INCLUDED_openfl_display_DisplayObject
 #include <openfl/display/DisplayObject.h>
 #endif
+#ifndef INCLUDED_ui_OverlayStack
+#include <ui/OverlayStack.h>
+#endif
+#ifndef INCLUDED_ui_Overlay
+#include <ui/Overlay.h>
+#endif
+#ifndef INCLUDED_ui_GameScreen
+#include <ui/GameScreen.h>
+#endif
+#ifndef INCLUDED_ui_OverlayItem
+#include <ui/OverlayItem.h>
+#endif
 #ifndef INCLUDED_openfl_utils_Dictionary
 #include <openfl/utils/Dictionary.h>
 #endif
@@ -786,17 +798,26 @@
 #ifndef INCLUDED_openfl_IAssetCache
 #include <openfl/IAssetCache.h>
 #endif
-#ifndef INCLUDED_maps_Tile
-#include <maps/Tile.h>
+#ifndef INCLUDED_maps_mapobjects_Tile
+#include <maps/mapobjects/Tile.h>
 #endif
-#ifndef INCLUDED_maps_Portal
-#include <maps/Portal.h>
+#ifndef INCLUDED_maps_mapobjects_SpawnPoint
+#include <maps/mapobjects/SpawnPoint.h>
 #endif
-#ifndef INCLUDED_maps_MapManager
-#include <maps/MapManager.h>
+#ifndef INCLUDED_maps_mapobjects_Portal
+#include <maps/mapobjects/Portal.h>
 #endif
-#ifndef INCLUDED_maps_Checkpoint
-#include <maps/Checkpoint.h>
+#ifndef INCLUDED_maps_mapobjects_Checkpoint
+#include <maps/mapobjects/Checkpoint.h>
+#endif
+#ifndef INCLUDED_maps_mapobjects_AIPathWall
+#include <maps/mapobjects/AIPathWall.h>
+#endif
+#ifndef INCLUDED_maps_LevelManager
+#include <maps/LevelManager.h>
+#endif
+#ifndef INCLUDED_maps_Level
+#include <maps/Level.h>
 #endif
 #ifndef INCLUDED_maps_AreaMap
 #include <maps/AreaMap.h>
@@ -1056,14 +1077,95 @@
 #ifndef INCLUDED_core_Game
 #include <core/Game.h>
 #endif
+#ifndef INCLUDED_actors_enemies_WalkingEnemy
+#include <actors/enemies/WalkingEnemy.h>
+#endif
+#ifndef INCLUDED_actors_enemies_RunningEnemy
+#include <actors/enemies/RunningEnemy.h>
+#endif
+#ifndef INCLUDED_actors_enemies_ProjectileEnemy
+#include <actors/enemies/ProjectileEnemy.h>
+#endif
+#ifndef INCLUDED_actors_enemies_LaunchEnemy
+#include <actors/enemies/LaunchEnemy.h>
+#endif
+#ifndef INCLUDED_actors_enemies_FlyingEnemy
+#include <actors/enemies/FlyingEnemy.h>
+#endif
+#ifndef INCLUDED_actors_enemies_DashEnemy
+#include <actors/enemies/DashEnemy.h>
+#endif
+#ifndef INCLUDED_actors_enemies_Enemy
+#include <actors/enemies/Enemy.h>
+#endif
+#ifndef INCLUDED_actors_attacks_ProjectileAttack
+#include <actors/attacks/ProjectileAttack.h>
+#endif
+#ifndef INCLUDED_actors_attacks_PlayerProjectile
+#include <actors/attacks/PlayerProjectile.h>
+#endif
+#ifndef INCLUDED_actors_attacks_Hitbox
+#include <actors/attacks/Hitbox.h>
+#endif
+#ifndef INCLUDED_actors_attacks_EnemyProjectile
+#include <actors/attacks/EnemyProjectile.h>
+#endif
+#ifndef INCLUDED_actors_attacks_Projectile
+#include <actors/attacks/Projectile.h>
+#endif
+#ifndef INCLUDED_actors_attacks_AbsorbAttack
+#include <actors/attacks/AbsorbAttack.h>
+#endif
+#ifndef INCLUDED_actors_attacks_Attack
+#include <actors/attacks/Attack.h>
+#endif
+#ifndef INCLUDED_actors_actorsAI_RunningAI
+#include <actors/actorsAI/RunningAI.h>
+#endif
+#ifndef INCLUDED_actors_actorsAI_ProjectileAI
+#include <actors/actorsAI/ProjectileAI.h>
+#endif
+#ifndef INCLUDED_actors_actorsAI_PaceAI
+#include <actors/actorsAI/PaceAI.h>
+#endif
+#ifndef INCLUDED_actors_actorsAI_LaunchAI
+#include <actors/actorsAI/LaunchAI.h>
+#endif
+#ifndef INCLUDED_actors_actorsAI_FlyingAI
+#include <actors/actorsAI/FlyingAI.h>
+#endif
+#ifndef INCLUDED_actors_actorsAI_DashAI
+#include <actors/actorsAI/DashAI.h>
+#endif
+#ifndef INCLUDED_actors_actorsAI_EnemyAI
+#include <actors/actorsAI/EnemyAI.h>
+#endif
+#ifndef INCLUDED_actors_abilities_ProjectileAbility
+#include <actors/abilities/ProjectileAbility.h>
+#endif
+#ifndef INCLUDED_actors_abilities_LaunchAbility
+#include <actors/abilities/LaunchAbility.h>
+#endif
+#ifndef INCLUDED_actors_abilities_DashAbility
+#include <actors/abilities/DashAbility.h>
+#endif
+#ifndef INCLUDED_actors_abilities_Ability
+#include <actors/abilities/Ability.h>
+#endif
 #ifndef INCLUDED_actors_Player
 #include <actors/Player.h>
 #endif
-#ifndef INCLUDED_maps_MapObject
-#include <maps/MapObject.h>
+#ifndef INCLUDED_actors_ObjectMover
+#include <actors/ObjectMover.h>
 #endif
 #ifndef INCLUDED_actors_Animation
 #include <actors/Animation.h>
+#endif
+#ifndef INCLUDED_actors_Actor
+#include <actors/Actor.h>
+#endif
+#ifndef INCLUDED_maps_mapobjects_MapObject
+#include <maps/mapobjects/MapObject.h>
 #endif
 #ifndef INCLUDED_Type
 #include <Type.h>
@@ -1292,6 +1394,10 @@ hx::RegisterResources( hx::GetResources() );
 ::haxe::Log_obj::__register();
 ::EReg_obj::__register();
 ::openfl::display::DisplayObject_obj::__register();
+::ui::OverlayStack_obj::__register();
+::ui::Overlay_obj::__register();
+::ui::GameScreen_obj::__register();
+::ui::OverlayItem_obj::__register();
 ::openfl::utils::Dictionary_obj::__register();
 ::openfl::ui::GameInputControl_obj::__register();
 ::openfl::text::TextLineMetrics_obj::__register();
@@ -1400,10 +1506,13 @@ hx::RegisterResources( hx::GetResources() );
 ::openfl::AssetLibrary_obj::__register();
 ::openfl::AssetCache_obj::__register();
 ::openfl::IAssetCache_obj::__register();
-::maps::Tile_obj::__register();
-::maps::Portal_obj::__register();
-::maps::MapManager_obj::__register();
-::maps::Checkpoint_obj::__register();
+::maps::mapobjects::Tile_obj::__register();
+::maps::mapobjects::SpawnPoint_obj::__register();
+::maps::mapobjects::Portal_obj::__register();
+::maps::mapobjects::Checkpoint_obj::__register();
+::maps::mapobjects::AIPathWall_obj::__register();
+::maps::LevelManager_obj::__register();
+::maps::Level_obj::__register();
 ::maps::AreaMap_obj::__register();
 ::lime::utils::GLUtils_obj::__register();
 ::lime::utils::IDataInput_obj::__register();
@@ -1490,9 +1599,36 @@ hx::RegisterResources( hx::GetResources() );
 ::core::GameState_obj::__register();
 ::core::State_obj::__register();
 ::core::Game_obj::__register();
+::actors::enemies::WalkingEnemy_obj::__register();
+::actors::enemies::RunningEnemy_obj::__register();
+::actors::enemies::ProjectileEnemy_obj::__register();
+::actors::enemies::LaunchEnemy_obj::__register();
+::actors::enemies::FlyingEnemy_obj::__register();
+::actors::enemies::DashEnemy_obj::__register();
+::actors::enemies::Enemy_obj::__register();
+::actors::attacks::ProjectileAttack_obj::__register();
+::actors::attacks::PlayerProjectile_obj::__register();
+::actors::attacks::Hitbox_obj::__register();
+::actors::attacks::EnemyProjectile_obj::__register();
+::actors::attacks::Projectile_obj::__register();
+::actors::attacks::AbsorbAttack_obj::__register();
+::actors::attacks::Attack_obj::__register();
+::actors::actorsAI::RunningAI_obj::__register();
+::actors::actorsAI::ProjectileAI_obj::__register();
+::actors::actorsAI::PaceAI_obj::__register();
+::actors::actorsAI::LaunchAI_obj::__register();
+::actors::actorsAI::FlyingAI_obj::__register();
+::actors::actorsAI::DashAI_obj::__register();
+::actors::actorsAI::EnemyAI_obj::__register();
+::actors::abilities::ProjectileAbility_obj::__register();
+::actors::abilities::LaunchAbility_obj::__register();
+::actors::abilities::DashAbility_obj::__register();
+::actors::abilities::Ability_obj::__register();
 ::actors::Player_obj::__register();
-::maps::MapObject_obj::__register();
+::actors::ObjectMover_obj::__register();
 ::actors::Animation_obj::__register();
+::actors::Actor_obj::__register();
+::maps::mapobjects::MapObject_obj::__register();
 ::Type_obj::__register();
 ::Sys_obj::__register();
 ::StringTools_obj::__register();

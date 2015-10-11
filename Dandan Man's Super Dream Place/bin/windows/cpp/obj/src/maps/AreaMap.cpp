@@ -1,11 +1,29 @@
 #include <hxcpp.h>
 
 #include "hxMath.h"
+#ifndef INCLUDED_Main
+#include <Main.h>
+#endif
 #ifndef INCLUDED_Std
 #include <Std.h>
 #endif
+#ifndef INCLUDED_actors_Actor
+#include <actors/Actor.h>
+#endif
 #ifndef INCLUDED_actors_Player
 #include <actors/Player.h>
+#endif
+#ifndef INCLUDED_actors_attacks_Projectile
+#include <actors/attacks/Projectile.h>
+#endif
+#ifndef INCLUDED_actors_enemies_Enemy
+#include <actors/enemies/Enemy.h>
+#endif
+#ifndef INCLUDED_haxe_IMap
+#include <haxe/IMap.h>
+#endif
+#ifndef INCLUDED_haxe_ds_StringMap
+#include <haxe/ds/StringMap.h>
 #endif
 #ifndef INCLUDED_haxe_io_Bytes
 #include <haxe/io/Bytes.h>
@@ -22,23 +40,35 @@
 #ifndef INCLUDED_maps_AreaMap
 #include <maps/AreaMap.h>
 #endif
-#ifndef INCLUDED_maps_Checkpoint
-#include <maps/Checkpoint.h>
+#ifndef INCLUDED_maps_Level
+#include <maps/Level.h>
 #endif
-#ifndef INCLUDED_maps_MapManager
-#include <maps/MapManager.h>
-#endif
-#ifndef INCLUDED_maps_MapObject
-#include <maps/MapObject.h>
+#ifndef INCLUDED_maps_LevelManager
+#include <maps/LevelManager.h>
 #endif
 #ifndef INCLUDED_maps_ObjectFactory
 #include <maps/ObjectFactory.h>
 #endif
-#ifndef INCLUDED_maps_Portal
-#include <maps/Portal.h>
+#ifndef INCLUDED_maps_mapobjects_AIPathWall
+#include <maps/mapobjects/AIPathWall.h>
 #endif
-#ifndef INCLUDED_maps_Tile
-#include <maps/Tile.h>
+#ifndef INCLUDED_maps_mapobjects_Checkpoint
+#include <maps/mapobjects/Checkpoint.h>
+#endif
+#ifndef INCLUDED_maps_mapobjects_MapObject
+#include <maps/mapobjects/MapObject.h>
+#endif
+#ifndef INCLUDED_maps_mapobjects_Portal
+#include <maps/mapobjects/Portal.h>
+#endif
+#ifndef INCLUDED_maps_mapobjects_SpawnPoint
+#include <maps/mapobjects/SpawnPoint.h>
+#endif
+#ifndef INCLUDED_maps_mapobjects_Tile
+#include <maps/mapobjects/Tile.h>
+#endif
+#ifndef INCLUDED_openfl_display_Bitmap
+#include <openfl/display/Bitmap.h>
 #endif
 #ifndef INCLUDED_openfl_display_DisplayObject
 #include <openfl/display/DisplayObject.h>
@@ -75,53 +105,69 @@
 #endif
 namespace maps{
 
-Void AreaMap_obj::__construct(::lime::utils::ByteArray mapFile)
+Void AreaMap_obj::__construct(::lime::utils::ByteArray mapFile,::maps::Level hostLevel)
 {
-HX_STACK_FRAME("maps.AreaMap","new",0xb9b930ca,"maps.AreaMap.new","maps/AreaMap.hx",34,0xeb50e127)
+HX_STACK_FRAME("maps.AreaMap","new",0xb9b930ca,"maps.AreaMap.new","maps/AreaMap.hx",49,0xeb50e127)
 HX_STACK_THIS(this)
 HX_STACK_ARG(mapFile,"mapFile")
+HX_STACK_ARG(hostLevel,"hostLevel")
 {
-	HX_STACK_LINE(35)
-	super::__construct();
-	HX_STACK_LINE(37)
-	Array< ::Dynamic > tmp;		HX_STACK_VAR(tmp,"tmp");
-	HX_STACK_LINE(37)
-	{
-		HX_STACK_LINE(37)
-		Array< ::Dynamic > this1;		HX_STACK_VAR(this1,"this1");
-		HX_STACK_LINE(37)
-		this1 = Array_obj< ::Dynamic >::__new()->__SetSizeExact(null());
-		HX_STACK_LINE(37)
-		tmp = this1;
-	}
-	HX_STACK_LINE(37)
-	this->checkPoints = tmp;
-	HX_STACK_LINE(39)
-	this->mapWidth = (int)0;
-	HX_STACK_LINE(40)
-	this->mapHeight = (int)0;
-	HX_STACK_LINE(41)
-	this->tileSize = (int)16;
-	HX_STACK_LINE(42)
-	::lime::utils::ByteArray fileBytes = mapFile;		HX_STACK_VAR(fileBytes,"fileBytes");
-	HX_STACK_LINE(43)
-	::String tmp1 = fileBytes->toString();		HX_STACK_VAR(tmp1,"tmp1");
-	HX_STACK_LINE(43)
-	::String fileInfo = tmp1;		HX_STACK_VAR(fileInfo,"fileInfo");
-	HX_STACK_LINE(44)
-	Array< ::String > fileArray = fileInfo.split(HX_HCSTRING("\n","\x0a","\x00","\x00","\x00"));		HX_STACK_VAR(fileArray,"fileArray");
-	HX_STACK_LINE(46)
-	this->parseMapDimensions(fileArray);
-	HX_STACK_LINE(47)
-	this->addMapBG((int)11184810);
-	HX_STACK_LINE(49)
-	int tmp2 = this->mapWidth;		HX_STACK_VAR(tmp2,"tmp2");
-	HX_STACK_LINE(49)
-	int tmp3 = this->mapHeight;		HX_STACK_VAR(tmp3,"tmp3");
-	HX_STACK_LINE(49)
-	this->initiateObjectList(tmp2,tmp3);
 	HX_STACK_LINE(50)
+	super::__construct();
+	HX_STACK_LINE(51)
+	this->hostLevel = hostLevel;
+	HX_STACK_LINE(52)
+	::openfl::display::Bitmap tmp = ::Main_obj::getBitmapAsset(HX_HCSTRING("assets/World1Tiles.png","\xb5","\x66","\xc9","\xd5"));		HX_STACK_VAR(tmp,"tmp");
+	HX_STACK_LINE(52)
+	this->tileSheet = tmp;
+	HX_STACK_LINE(54)
+	this->checkPoints = Array_obj< ::Dynamic >::__new();
+	HX_STACK_LINE(55)
+	this->spawnPoints = Array_obj< ::Dynamic >::__new();
+	HX_STACK_LINE(56)
+	this->pathWalls = Array_obj< ::Dynamic >::__new();
+	HX_STACK_LINE(57)
+	this->endPoints = Array_obj< ::Dynamic >::__new();
+	HX_STACK_LINE(59)
+	this->mapWidth = (int)0;
+	HX_STACK_LINE(60)
+	this->mapHeight = (int)0;
+	HX_STACK_LINE(61)
+	this->tileSize = (int)32;
+	HX_STACK_LINE(62)
+	::lime::utils::ByteArray fileBytes = mapFile;		HX_STACK_VAR(fileBytes,"fileBytes");
+	HX_STACK_LINE(63)
+	::String tmp1 = fileBytes->toString();		HX_STACK_VAR(tmp1,"tmp1");
+	HX_STACK_LINE(63)
+	::String fileInfo = tmp1;		HX_STACK_VAR(fileInfo,"fileInfo");
+	HX_STACK_LINE(64)
+	Array< ::String > fileArray = fileInfo.split(HX_HCSTRING("\n","\x0a","\x00","\x00","\x00"));		HX_STACK_VAR(fileArray,"fileArray");
+	HX_STACK_LINE(66)
+	this->parseMapTileSheet(fileArray);
+	HX_STACK_LINE(67)
+	this->parseMapDimensions(fileArray);
+	HX_STACK_LINE(68)
+	this->addMapBG((int)0);
+	HX_STACK_LINE(70)
+	this->actorList = Array_obj< ::Dynamic >::__new();
+	HX_STACK_LINE(71)
+	this->projectileList = Array_obj< ::Dynamic >::__new();
+	HX_STACK_LINE(72)
+	int tmp2 = this->mapWidth;		HX_STACK_VAR(tmp2,"tmp2");
+	HX_STACK_LINE(72)
+	int tmp3 = this->mapHeight;		HX_STACK_VAR(tmp3,"tmp3");
+	HX_STACK_LINE(72)
+	this->initiateObjectList(tmp2,tmp3);
+	HX_STACK_LINE(74)
+	::maps::ObjectFactory tmp4 = ::maps::ObjectFactory_obj::getSingleton();		HX_STACK_VAR(tmp4,"tmp4");
+	HX_STACK_LINE(74)
+	::openfl::display::Bitmap tmp5 = this->tileSheet;		HX_STACK_VAR(tmp5,"tmp5");
+	HX_STACK_LINE(74)
+	tmp4->changeTileSheet(tmp5);
+	HX_STACK_LINE(75)
 	this->readTiles(fileArray);
+	HX_STACK_LINE(76)
+	this->readDynamicObjects(fileArray);
 }
 ;
 	return null();
@@ -130,261 +176,127 @@ HX_STACK_ARG(mapFile,"mapFile")
 //AreaMap_obj::~AreaMap_obj() { }
 
 Dynamic AreaMap_obj::__CreateEmpty() { return  new AreaMap_obj; }
-hx::ObjectPtr< AreaMap_obj > AreaMap_obj::__new(::lime::utils::ByteArray mapFile)
+hx::ObjectPtr< AreaMap_obj > AreaMap_obj::__new(::lime::utils::ByteArray mapFile,::maps::Level hostLevel)
 {  hx::ObjectPtr< AreaMap_obj > _result_ = new AreaMap_obj();
-	_result_->__construct(mapFile);
+	_result_->__construct(mapFile,hostLevel);
 	return _result_;}
 
 Dynamic AreaMap_obj::__Create(hx::DynamicArray inArgs)
 {  hx::ObjectPtr< AreaMap_obj > _result_ = new AreaMap_obj();
-	_result_->__construct(inArgs[0]);
+	_result_->__construct(inArgs[0],inArgs[1]);
 	return _result_;}
+
+Void AreaMap_obj::parseMapTileSheet( Array< ::String > fileArray){
+{
+		HX_STACK_FRAME("maps.AreaMap","parseMapTileSheet",0x05c14512,"maps.AreaMap.parseMapTileSheet","maps/AreaMap.hx",78,0xeb50e127)
+		HX_STACK_THIS(this)
+		HX_STACK_ARG(fileArray,"fileArray")
+		HX_STACK_LINE(79)
+		int fCount = (int)0;		HX_STACK_VAR(fCount,"fCount");
+		HX_STACK_LINE(80)
+		{
+			HX_STACK_LINE(80)
+			int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
+			HX_STACK_LINE(80)
+			int _g = fileArray->length;		HX_STACK_VAR(_g,"_g");
+			HX_STACK_LINE(80)
+			while((true)){
+				HX_STACK_LINE(80)
+				bool tmp = (_g1 < _g);		HX_STACK_VAR(tmp,"tmp");
+				HX_STACK_LINE(80)
+				bool tmp1 = !(tmp);		HX_STACK_VAR(tmp1,"tmp1");
+				HX_STACK_LINE(80)
+				if ((tmp1)){
+					HX_STACK_LINE(80)
+					break;
+				}
+				HX_STACK_LINE(80)
+				int tmp2 = (_g1)++;		HX_STACK_VAR(tmp2,"tmp2");
+				HX_STACK_LINE(80)
+				int f = tmp2;		HX_STACK_VAR(f,"f");
+				HX_STACK_LINE(81)
+				::String tmp3 = fileArray->__get(f);		HX_STACK_VAR(tmp3,"tmp3");
+				HX_STACK_LINE(81)
+				int tmp4 = tmp3.indexOf(HX_HCSTRING("tileset","\x34","\x81","\x93","\x45"),null());		HX_STACK_VAR(tmp4,"tmp4");
+				HX_STACK_LINE(81)
+				bool tmp5 = (tmp4 >= (int)0);		HX_STACK_VAR(tmp5,"tmp5");
+				HX_STACK_LINE(81)
+				if ((tmp5)){
+					HX_STACK_LINE(82)
+					break;
+				}
+				HX_STACK_LINE(83)
+				hx::AddEq(fCount,(int)1);
+			}
+		}
+		HX_STACK_LINE(86)
+		::String tmp = fileArray->__get(fCount);		HX_STACK_VAR(tmp,"tmp");
+		HX_STACK_LINE(86)
+		Array< ::String > tileSetLine = tmp.split(HX_HCSTRING(" ","\x20","\x00","\x00","\x00"));		HX_STACK_VAR(tileSetLine,"tileSetLine");
+		HX_STACK_LINE(87)
+		{
+			HX_STACK_LINE(87)
+			int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
+			HX_STACK_LINE(87)
+			int _g = tileSetLine->length;		HX_STACK_VAR(_g,"_g");
+			HX_STACK_LINE(87)
+			while((true)){
+				HX_STACK_LINE(87)
+				bool tmp1 = (_g1 < _g);		HX_STACK_VAR(tmp1,"tmp1");
+				HX_STACK_LINE(87)
+				bool tmp2 = !(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
+				HX_STACK_LINE(87)
+				if ((tmp2)){
+					HX_STACK_LINE(87)
+					break;
+				}
+				HX_STACK_LINE(87)
+				int tmp3 = (_g1)++;		HX_STACK_VAR(tmp3,"tmp3");
+				HX_STACK_LINE(87)
+				int i = tmp3;		HX_STACK_VAR(i,"i");
+				HX_STACK_LINE(88)
+				::String tmp4 = tileSetLine->__get(i);		HX_STACK_VAR(tmp4,"tmp4");
+				HX_STACK_LINE(88)
+				int tmp5 = tmp4.indexOf(HX_HCSTRING("name","\x4b","\x72","\xff","\x48"),null());		HX_STACK_VAR(tmp5,"tmp5");
+				HX_STACK_LINE(88)
+				bool tmp6 = (tmp5 >= (int)0);		HX_STACK_VAR(tmp6,"tmp6");
+				HX_STACK_LINE(88)
+				if ((tmp6)){
+					HX_STACK_LINE(89)
+					::String tmp7 = tileSetLine->__get(i);		HX_STACK_VAR(tmp7,"tmp7");
+					HX_STACK_LINE(89)
+					::String tmp8 = tmp7.split(HX_HCSTRING("\"","\x22","\x00","\x00","\x00"))->__get((int)1);		HX_STACK_VAR(tmp8,"tmp8");
+					HX_STACK_LINE(89)
+					::String tileSetName = tmp8;		HX_STACK_VAR(tileSetName,"tileSetName");
+					HX_STACK_LINE(90)
+					::String tmp9 = (HX_HCSTRING("assets/","\x4c","\x2a","\xdc","\x36") + tileSetName);		HX_STACK_VAR(tmp9,"tmp9");
+					HX_STACK_LINE(90)
+					::String tmp10 = (tmp9 + HX_HCSTRING(".png","\x3b","\x2d","\xbd","\x1e"));		HX_STACK_VAR(tmp10,"tmp10");
+					HX_STACK_LINE(90)
+					::openfl::display::Bitmap tmp11 = ::Main_obj::getBitmapAsset(tmp10);		HX_STACK_VAR(tmp11,"tmp11");
+					HX_STACK_LINE(90)
+					this->tileSheet = tmp11;
+				}
+			}
+		}
+	}
+return null();
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,parseMapTileSheet,(void))
 
 Void AreaMap_obj::parseMapDimensions( Array< ::String > fileArray){
 {
-		HX_STACK_FRAME("maps.AreaMap","parseMapDimensions",0x5b9daaac,"maps.AreaMap.parseMapDimensions","maps/AreaMap.hx",53,0xeb50e127)
+		HX_STACK_FRAME("maps.AreaMap","parseMapDimensions",0x5b9daaac,"maps.AreaMap.parseMapDimensions","maps/AreaMap.hx",94,0xeb50e127)
 		HX_STACK_THIS(this)
 		HX_STACK_ARG(fileArray,"fileArray")
-		HX_STACK_LINE(56)
+		HX_STACK_LINE(97)
 		int fcount = (int)0;		HX_STACK_VAR(fcount,"fcount");
-		HX_STACK_LINE(57)
-		{
-			HX_STACK_LINE(57)
-			int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
-			HX_STACK_LINE(57)
-			int _g = fileArray->length;		HX_STACK_VAR(_g,"_g");
-			HX_STACK_LINE(57)
-			while((true)){
-				HX_STACK_LINE(57)
-				bool tmp = (_g1 < _g);		HX_STACK_VAR(tmp,"tmp");
-				HX_STACK_LINE(57)
-				bool tmp1 = !(tmp);		HX_STACK_VAR(tmp1,"tmp1");
-				HX_STACK_LINE(57)
-				if ((tmp1)){
-					HX_STACK_LINE(57)
-					break;
-				}
-				HX_STACK_LINE(57)
-				int tmp2 = (_g1)++;		HX_STACK_VAR(tmp2,"tmp2");
-				HX_STACK_LINE(57)
-				int f = tmp2;		HX_STACK_VAR(f,"f");
-				HX_STACK_LINE(58)
-				::String tmp3 = fileArray->__get(f);		HX_STACK_VAR(tmp3,"tmp3");
-				HX_STACK_LINE(58)
-				int tmp4 = tmp3.indexOf(HX_HCSTRING("layer name","\xfa","\x4a","\x34","\xc8"),null());		HX_STACK_VAR(tmp4,"tmp4");
-				HX_STACK_LINE(58)
-				bool tmp5 = (tmp4 >= (int)0);		HX_STACK_VAR(tmp5,"tmp5");
-				HX_STACK_LINE(58)
-				if ((tmp5)){
-					HX_STACK_LINE(58)
-					break;
-				}
-				HX_STACK_LINE(59)
-				hx::AddEq(fcount,(int)1);
-			}
-		}
-		HX_STACK_LINE(62)
-		::String tmp = fileArray->__get(fcount);		HX_STACK_VAR(tmp,"tmp");
-		HX_STACK_LINE(62)
-		Array< ::String > sizeLine = tmp.split(HX_HCSTRING(" ","\x20","\x00","\x00","\x00"));		HX_STACK_VAR(sizeLine,"sizeLine");
-		HX_STACK_LINE(63)
-		{
-			HX_STACK_LINE(63)
-			int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
-			HX_STACK_LINE(63)
-			int _g = sizeLine->length;		HX_STACK_VAR(_g,"_g");
-			HX_STACK_LINE(63)
-			while((true)){
-				HX_STACK_LINE(63)
-				bool tmp1 = (_g1 < _g);		HX_STACK_VAR(tmp1,"tmp1");
-				HX_STACK_LINE(63)
-				bool tmp2 = !(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
-				HX_STACK_LINE(63)
-				if ((tmp2)){
-					HX_STACK_LINE(63)
-					break;
-				}
-				HX_STACK_LINE(63)
-				int tmp3 = (_g1)++;		HX_STACK_VAR(tmp3,"tmp3");
-				HX_STACK_LINE(63)
-				int i = tmp3;		HX_STACK_VAR(i,"i");
-				HX_STACK_LINE(64)
-				::String tmp4 = sizeLine->__get(i);		HX_STACK_VAR(tmp4,"tmp4");
-				HX_STACK_LINE(64)
-				int tmp5 = tmp4.indexOf(HX_HCSTRING("width","\x06","\xb6","\x62","\xca"),null());		HX_STACK_VAR(tmp5,"tmp5");
-				HX_STACK_LINE(64)
-				bool tmp6 = (tmp5 >= (int)0);		HX_STACK_VAR(tmp6,"tmp6");
-				HX_STACK_LINE(64)
-				if ((tmp6)){
-					HX_STACK_LINE(65)
-					::String tmp7 = sizeLine->__get(i);		HX_STACK_VAR(tmp7,"tmp7");
-					HX_STACK_LINE(65)
-					Array< ::String > parsedWidth = tmp7.split(HX_HCSTRING("\"","\x22","\x00","\x00","\x00"));		HX_STACK_VAR(parsedWidth,"parsedWidth");
-					HX_STACK_LINE(66)
-					::String tmp8 = parsedWidth->__get((int)1);		HX_STACK_VAR(tmp8,"tmp8");
-					HX_STACK_LINE(66)
-					Dynamic tmp9 = ::Std_obj::parseInt(tmp8);		HX_STACK_VAR(tmp9,"tmp9");
-					HX_STACK_LINE(66)
-					this->mapWidth = tmp9;
-				}
-				else{
-					HX_STACK_LINE(68)
-					::String tmp7 = sizeLine->__get(i);		HX_STACK_VAR(tmp7,"tmp7");
-					HX_STACK_LINE(68)
-					int tmp8 = tmp7.indexOf(HX_HCSTRING("height","\xe7","\x07","\x4c","\x02"),null());		HX_STACK_VAR(tmp8,"tmp8");
-					HX_STACK_LINE(68)
-					bool tmp9 = (tmp8 >= (int)0);		HX_STACK_VAR(tmp9,"tmp9");
-					HX_STACK_LINE(68)
-					if ((tmp9)){
-						HX_STACK_LINE(69)
-						::String tmp10 = sizeLine->__get(i);		HX_STACK_VAR(tmp10,"tmp10");
-						HX_STACK_LINE(69)
-						Array< ::String > parsedHeight = tmp10.split(HX_HCSTRING("\"","\x22","\x00","\x00","\x00"));		HX_STACK_VAR(parsedHeight,"parsedHeight");
-						HX_STACK_LINE(70)
-						::String tmp11 = parsedHeight->__get((int)1);		HX_STACK_VAR(tmp11,"tmp11");
-						HX_STACK_LINE(70)
-						Dynamic tmp12 = ::Std_obj::parseInt(tmp11);		HX_STACK_VAR(tmp12,"tmp12");
-						HX_STACK_LINE(70)
-						this->mapHeight = tmp12;
-					}
-				}
-			}
-		}
-	}
-return null();
-}
-
-
-HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,parseMapDimensions,(void))
-
-Void AreaMap_obj::addMapBG( int color){
-{
-		HX_STACK_FRAME("maps.AreaMap","addMapBG",0x397028d6,"maps.AreaMap.addMapBG","maps/AreaMap.hx",74,0xeb50e127)
-		HX_STACK_THIS(this)
-		HX_STACK_ARG(color,"color")
-		HX_STACK_LINE(76)
-		::openfl::display::Shape tmp = ::openfl::display::Shape_obj::__new();		HX_STACK_VAR(tmp,"tmp");
-		HX_STACK_LINE(76)
-		this->background = tmp;
-		HX_STACK_LINE(77)
-		::openfl::display::Shape tmp1 = this->background;		HX_STACK_VAR(tmp1,"tmp1");
-		HX_STACK_LINE(77)
-		::openfl::display::Graphics tmp2 = tmp1->get_graphics();		HX_STACK_VAR(tmp2,"tmp2");
-		HX_STACK_LINE(77)
-		int tmp3 = color;		HX_STACK_VAR(tmp3,"tmp3");
-		HX_STACK_LINE(77)
-		tmp2->beginFill(tmp3,null());
-		HX_STACK_LINE(78)
-		::openfl::display::Shape tmp4 = this->background;		HX_STACK_VAR(tmp4,"tmp4");
-		HX_STACK_LINE(78)
-		::openfl::display::Graphics tmp5 = tmp4->get_graphics();		HX_STACK_VAR(tmp5,"tmp5");
-		HX_STACK_LINE(78)
-		int tmp6 = this->mapWidth;		HX_STACK_VAR(tmp6,"tmp6");
-		HX_STACK_LINE(78)
-		int tmp7 = this->tileSize;		HX_STACK_VAR(tmp7,"tmp7");
-		HX_STACK_LINE(78)
-		int tmp8 = (tmp6 * tmp7);		HX_STACK_VAR(tmp8,"tmp8");
-		HX_STACK_LINE(78)
-		int tmp9 = this->mapHeight;		HX_STACK_VAR(tmp9,"tmp9");
-		HX_STACK_LINE(78)
-		int tmp10 = this->tileSize;		HX_STACK_VAR(tmp10,"tmp10");
-		HX_STACK_LINE(78)
-		int tmp11 = (tmp9 * tmp10);		HX_STACK_VAR(tmp11,"tmp11");
-		HX_STACK_LINE(78)
-		tmp5->drawRect((int)0,(int)0,tmp8,tmp11);
-		HX_STACK_LINE(79)
-		::openfl::display::Shape tmp12 = this->background;		HX_STACK_VAR(tmp12,"tmp12");
-		HX_STACK_LINE(79)
-		::openfl::display::Graphics tmp13 = tmp12->get_graphics();		HX_STACK_VAR(tmp13,"tmp13");
-		HX_STACK_LINE(79)
-		tmp13->endFill();
-		HX_STACK_LINE(80)
-		::openfl::display::Shape tmp14 = this->background;		HX_STACK_VAR(tmp14,"tmp14");
-		HX_STACK_LINE(80)
-		this->addChildAt(tmp14,(int)0);
-	}
-return null();
-}
-
-
-HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,addMapBG,(void))
-
-Void AreaMap_obj::initiateObjectList( int width,int height){
-{
-		HX_STACK_FRAME("maps.AreaMap","initiateObjectList",0xd83f714c,"maps.AreaMap.initiateObjectList","maps/AreaMap.hx",82,0xeb50e127)
-		HX_STACK_THIS(this)
-		HX_STACK_ARG(width,"width")
-		HX_STACK_ARG(height,"height")
-		HX_STACK_LINE(84)
-		this->objectList = Array_obj< ::Dynamic >::__new();
-		HX_STACK_LINE(85)
-		{
-			HX_STACK_LINE(85)
-			int _g = (int)0;		HX_STACK_VAR(_g,"_g");
-			HX_STACK_LINE(85)
-			while((true)){
-				HX_STACK_LINE(85)
-				bool tmp = (_g < height);		HX_STACK_VAR(tmp,"tmp");
-				HX_STACK_LINE(85)
-				bool tmp1 = !(tmp);		HX_STACK_VAR(tmp1,"tmp1");
-				HX_STACK_LINE(85)
-				if ((tmp1)){
-					HX_STACK_LINE(85)
-					break;
-				}
-				HX_STACK_LINE(85)
-				int tmp2 = (_g)++;		HX_STACK_VAR(tmp2,"tmp2");
-				HX_STACK_LINE(85)
-				int y = tmp2;		HX_STACK_VAR(y,"y");
-				HX_STACK_LINE(86)
-				Array< ::Dynamic > row = Array_obj< ::Dynamic >::__new();		HX_STACK_VAR(row,"row");
-				HX_STACK_LINE(87)
-				{
-					HX_STACK_LINE(87)
-					int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
-					HX_STACK_LINE(87)
-					while((true)){
-						HX_STACK_LINE(87)
-						bool tmp3 = (_g1 < width);		HX_STACK_VAR(tmp3,"tmp3");
-						HX_STACK_LINE(87)
-						bool tmp4 = !(tmp3);		HX_STACK_VAR(tmp4,"tmp4");
-						HX_STACK_LINE(87)
-						if ((tmp4)){
-							HX_STACK_LINE(87)
-							break;
-						}
-						HX_STACK_LINE(87)
-						int tmp5 = (_g1)++;		HX_STACK_VAR(tmp5,"tmp5");
-						HX_STACK_LINE(87)
-						int x = tmp5;		HX_STACK_VAR(x,"x");
-						HX_STACK_LINE(88)
-						row->push(null());
-					}
-				}
-				HX_STACK_LINE(90)
-				this->objectList->push(row);
-			}
-		}
-	}
-return null();
-}
-
-
-HX_DEFINE_DYNAMIC_FUNC2(AreaMap_obj,initiateObjectList,(void))
-
-Void AreaMap_obj::readTiles( Array< ::String > fileArray){
-{
-		HX_STACK_FRAME("maps.AreaMap","readTiles",0x78acd639,"maps.AreaMap.readTiles","maps/AreaMap.hx",93,0xeb50e127)
-		HX_STACK_THIS(this)
-		HX_STACK_ARG(fileArray,"fileArray")
-		HX_STACK_LINE(95)
-		int yCounter = (int)0;		HX_STACK_VAR(yCounter,"yCounter");
-		HX_STACK_LINE(96)
-		int xCounter = (int)0;		HX_STACK_VAR(xCounter,"xCounter");
 		HX_STACK_LINE(98)
 		{
 			HX_STACK_LINE(98)
-			int _g1 = (int)7;		HX_STACK_VAR(_g1,"_g1");
+			int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
 			HX_STACK_LINE(98)
 			int _g = fileArray->length;		HX_STACK_VAR(_g,"_g");
 			HX_STACK_LINE(98)
@@ -401,47 +313,300 @@ Void AreaMap_obj::readTiles( Array< ::String > fileArray){
 				HX_STACK_LINE(98)
 				int tmp2 = (_g1)++;		HX_STACK_VAR(tmp2,"tmp2");
 				HX_STACK_LINE(98)
-				int j = tmp2;		HX_STACK_VAR(j,"j");
+				int f = tmp2;		HX_STACK_VAR(f,"f");
 				HX_STACK_LINE(99)
-				::String tmp3 = fileArray->__get(j);		HX_STACK_VAR(tmp3,"tmp3");
+				::String tmp3 = fileArray->__get(f);		HX_STACK_VAR(tmp3,"tmp3");
 				HX_STACK_LINE(99)
-				int tmp4 = tmp3.indexOf(HX_HCSTRING("tile gid=\"","\x55","\x2b","\x67","\x8f"),null());		HX_STACK_VAR(tmp4,"tmp4");
+				int tmp4 = tmp3.indexOf(HX_HCSTRING("layer name","\xfa","\x4a","\x34","\xc8"),null());		HX_STACK_VAR(tmp4,"tmp4");
 				HX_STACK_LINE(99)
-				bool tmp5 = (tmp4 < (int)0);		HX_STACK_VAR(tmp5,"tmp5");
+				bool tmp5 = (tmp4 >= (int)0);		HX_STACK_VAR(tmp5,"tmp5");
 				HX_STACK_LINE(99)
 				if ((tmp5)){
 					HX_STACK_LINE(100)
+					break;
+				}
+				HX_STACK_LINE(101)
+				hx::AddEq(fcount,(int)1);
+			}
+		}
+		HX_STACK_LINE(104)
+		::String tmp = fileArray->__get(fcount);		HX_STACK_VAR(tmp,"tmp");
+		HX_STACK_LINE(104)
+		Array< ::String > sizeLine = tmp.split(HX_HCSTRING(" ","\x20","\x00","\x00","\x00"));		HX_STACK_VAR(sizeLine,"sizeLine");
+		HX_STACK_LINE(105)
+		{
+			HX_STACK_LINE(105)
+			int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
+			HX_STACK_LINE(105)
+			int _g = sizeLine->length;		HX_STACK_VAR(_g,"_g");
+			HX_STACK_LINE(105)
+			while((true)){
+				HX_STACK_LINE(105)
+				bool tmp1 = (_g1 < _g);		HX_STACK_VAR(tmp1,"tmp1");
+				HX_STACK_LINE(105)
+				bool tmp2 = !(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
+				HX_STACK_LINE(105)
+				if ((tmp2)){
+					HX_STACK_LINE(105)
+					break;
+				}
+				HX_STACK_LINE(105)
+				int tmp3 = (_g1)++;		HX_STACK_VAR(tmp3,"tmp3");
+				HX_STACK_LINE(105)
+				int i = tmp3;		HX_STACK_VAR(i,"i");
+				HX_STACK_LINE(106)
+				::String tmp4 = sizeLine->__get(i);		HX_STACK_VAR(tmp4,"tmp4");
+				HX_STACK_LINE(106)
+				int tmp5 = tmp4.indexOf(HX_HCSTRING("width","\x06","\xb6","\x62","\xca"),null());		HX_STACK_VAR(tmp5,"tmp5");
+				HX_STACK_LINE(106)
+				bool tmp6 = (tmp5 >= (int)0);		HX_STACK_VAR(tmp6,"tmp6");
+				HX_STACK_LINE(106)
+				if ((tmp6)){
+					HX_STACK_LINE(107)
+					::String tmp7 = sizeLine->__get(i);		HX_STACK_VAR(tmp7,"tmp7");
+					HX_STACK_LINE(107)
+					Array< ::String > parsedWidth = tmp7.split(HX_HCSTRING("\"","\x22","\x00","\x00","\x00"));		HX_STACK_VAR(parsedWidth,"parsedWidth");
+					HX_STACK_LINE(108)
+					::String tmp8 = parsedWidth->__get((int)1);		HX_STACK_VAR(tmp8,"tmp8");
+					HX_STACK_LINE(108)
+					Dynamic tmp9 = ::Std_obj::parseInt(tmp8);		HX_STACK_VAR(tmp9,"tmp9");
+					HX_STACK_LINE(108)
+					this->mapWidth = tmp9;
+				}
+				else{
+					HX_STACK_LINE(110)
+					::String tmp7 = sizeLine->__get(i);		HX_STACK_VAR(tmp7,"tmp7");
+					HX_STACK_LINE(110)
+					int tmp8 = tmp7.indexOf(HX_HCSTRING("height","\xe7","\x07","\x4c","\x02"),null());		HX_STACK_VAR(tmp8,"tmp8");
+					HX_STACK_LINE(110)
+					bool tmp9 = (tmp8 >= (int)0);		HX_STACK_VAR(tmp9,"tmp9");
+					HX_STACK_LINE(110)
+					if ((tmp9)){
+						HX_STACK_LINE(111)
+						::String tmp10 = sizeLine->__get(i);		HX_STACK_VAR(tmp10,"tmp10");
+						HX_STACK_LINE(111)
+						Array< ::String > parsedHeight = tmp10.split(HX_HCSTRING("\"","\x22","\x00","\x00","\x00"));		HX_STACK_VAR(parsedHeight,"parsedHeight");
+						HX_STACK_LINE(112)
+						::String tmp11 = parsedHeight->__get((int)1);		HX_STACK_VAR(tmp11,"tmp11");
+						HX_STACK_LINE(112)
+						Dynamic tmp12 = ::Std_obj::parseInt(tmp11);		HX_STACK_VAR(tmp12,"tmp12");
+						HX_STACK_LINE(112)
+						this->mapHeight = tmp12;
+					}
+				}
+			}
+		}
+	}
+return null();
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,parseMapDimensions,(void))
+
+Void AreaMap_obj::addMapBG( int color){
+{
+		HX_STACK_FRAME("maps.AreaMap","addMapBG",0x397028d6,"maps.AreaMap.addMapBG","maps/AreaMap.hx",116,0xeb50e127)
+		HX_STACK_THIS(this)
+		HX_STACK_ARG(color,"color")
+		HX_STACK_LINE(118)
+		::openfl::display::Shape tmp = ::openfl::display::Shape_obj::__new();		HX_STACK_VAR(tmp,"tmp");
+		HX_STACK_LINE(118)
+		this->background = tmp;
+		HX_STACK_LINE(119)
+		::openfl::display::Shape tmp1 = this->background;		HX_STACK_VAR(tmp1,"tmp1");
+		HX_STACK_LINE(119)
+		::openfl::display::Graphics tmp2 = tmp1->get_graphics();		HX_STACK_VAR(tmp2,"tmp2");
+		HX_STACK_LINE(119)
+		int tmp3 = color;		HX_STACK_VAR(tmp3,"tmp3");
+		HX_STACK_LINE(119)
+		tmp2->beginFill(tmp3,null());
+		HX_STACK_LINE(120)
+		::openfl::display::Shape tmp4 = this->background;		HX_STACK_VAR(tmp4,"tmp4");
+		HX_STACK_LINE(120)
+		::openfl::display::Graphics tmp5 = tmp4->get_graphics();		HX_STACK_VAR(tmp5,"tmp5");
+		HX_STACK_LINE(120)
+		int tmp6 = this->mapWidth;		HX_STACK_VAR(tmp6,"tmp6");
+		HX_STACK_LINE(120)
+		int tmp7 = this->tileSize;		HX_STACK_VAR(tmp7,"tmp7");
+		HX_STACK_LINE(120)
+		int tmp8 = (tmp6 * tmp7);		HX_STACK_VAR(tmp8,"tmp8");
+		HX_STACK_LINE(120)
+		int tmp9 = this->mapHeight;		HX_STACK_VAR(tmp9,"tmp9");
+		HX_STACK_LINE(120)
+		int tmp10 = this->tileSize;		HX_STACK_VAR(tmp10,"tmp10");
+		HX_STACK_LINE(120)
+		int tmp11 = (tmp9 * tmp10);		HX_STACK_VAR(tmp11,"tmp11");
+		HX_STACK_LINE(120)
+		tmp5->drawRect((int)0,(int)0,tmp8,tmp11);
+		HX_STACK_LINE(121)
+		::openfl::display::Shape tmp12 = this->background;		HX_STACK_VAR(tmp12,"tmp12");
+		HX_STACK_LINE(121)
+		::openfl::display::Graphics tmp13 = tmp12->get_graphics();		HX_STACK_VAR(tmp13,"tmp13");
+		HX_STACK_LINE(121)
+		tmp13->endFill();
+		HX_STACK_LINE(122)
+		::openfl::display::Shape tmp14 = this->background;		HX_STACK_VAR(tmp14,"tmp14");
+		HX_STACK_LINE(122)
+		this->addChildAt(tmp14,(int)0);
+	}
+return null();
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,addMapBG,(void))
+
+Void AreaMap_obj::initiateObjectList( int width,int height){
+{
+		HX_STACK_FRAME("maps.AreaMap","initiateObjectList",0xd83f714c,"maps.AreaMap.initiateObjectList","maps/AreaMap.hx",124,0xeb50e127)
+		HX_STACK_THIS(this)
+		HX_STACK_ARG(width,"width")
+		HX_STACK_ARG(height,"height")
+		HX_STACK_LINE(126)
+		this->objectList = Array_obj< ::Dynamic >::__new();
+		HX_STACK_LINE(127)
+		{
+			HX_STACK_LINE(127)
+			int _g = (int)0;		HX_STACK_VAR(_g,"_g");
+			HX_STACK_LINE(127)
+			while((true)){
+				HX_STACK_LINE(127)
+				bool tmp = (_g < height);		HX_STACK_VAR(tmp,"tmp");
+				HX_STACK_LINE(127)
+				bool tmp1 = !(tmp);		HX_STACK_VAR(tmp1,"tmp1");
+				HX_STACK_LINE(127)
+				if ((tmp1)){
+					HX_STACK_LINE(127)
+					break;
+				}
+				HX_STACK_LINE(127)
+				int tmp2 = (_g)++;		HX_STACK_VAR(tmp2,"tmp2");
+				HX_STACK_LINE(127)
+				int y = tmp2;		HX_STACK_VAR(y,"y");
+				HX_STACK_LINE(128)
+				Array< ::Dynamic > row = Array_obj< ::Dynamic >::__new();		HX_STACK_VAR(row,"row");
+				HX_STACK_LINE(129)
+				{
+					HX_STACK_LINE(129)
+					int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
+					HX_STACK_LINE(129)
+					while((true)){
+						HX_STACK_LINE(129)
+						bool tmp3 = (_g1 < width);		HX_STACK_VAR(tmp3,"tmp3");
+						HX_STACK_LINE(129)
+						bool tmp4 = !(tmp3);		HX_STACK_VAR(tmp4,"tmp4");
+						HX_STACK_LINE(129)
+						if ((tmp4)){
+							HX_STACK_LINE(129)
+							break;
+						}
+						HX_STACK_LINE(129)
+						int tmp5 = (_g1)++;		HX_STACK_VAR(tmp5,"tmp5");
+						HX_STACK_LINE(129)
+						int x = tmp5;		HX_STACK_VAR(x,"x");
+						HX_STACK_LINE(130)
+						row->push(null());
+					}
+				}
+				HX_STACK_LINE(132)
+				this->objectList->push(row);
+			}
+		}
+	}
+return null();
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC2(AreaMap_obj,initiateObjectList,(void))
+
+Void AreaMap_obj::readTiles( Array< ::String > fileArray){
+{
+		HX_STACK_FRAME("maps.AreaMap","readTiles",0x78acd639,"maps.AreaMap.readTiles","maps/AreaMap.hx",135,0xeb50e127)
+		HX_STACK_THIS(this)
+		HX_STACK_ARG(fileArray,"fileArray")
+		HX_STACK_LINE(137)
+		int yCounter = (int)0;		HX_STACK_VAR(yCounter,"yCounter");
+		HX_STACK_LINE(138)
+		int xCounter = (int)0;		HX_STACK_VAR(xCounter,"xCounter");
+		HX_STACK_LINE(140)
+		{
+			HX_STACK_LINE(140)
+			int _g1 = (int)7;		HX_STACK_VAR(_g1,"_g1");
+			HX_STACK_LINE(140)
+			int _g = fileArray->length;		HX_STACK_VAR(_g,"_g");
+			HX_STACK_LINE(140)
+			while((true)){
+				HX_STACK_LINE(140)
+				bool tmp = (_g1 < _g);		HX_STACK_VAR(tmp,"tmp");
+				HX_STACK_LINE(140)
+				bool tmp1 = !(tmp);		HX_STACK_VAR(tmp1,"tmp1");
+				HX_STACK_LINE(140)
+				if ((tmp1)){
+					HX_STACK_LINE(140)
+					break;
+				}
+				HX_STACK_LINE(140)
+				int tmp2 = (_g1)++;		HX_STACK_VAR(tmp2,"tmp2");
+				HX_STACK_LINE(140)
+				int j = tmp2;		HX_STACK_VAR(j,"j");
+				HX_STACK_LINE(141)
+				::String tmp3 = fileArray->__get(j);		HX_STACK_VAR(tmp3,"tmp3");
+				HX_STACK_LINE(141)
+				int tmp4 = tmp3.indexOf(HX_HCSTRING("layer name","\xfa","\x4a","\x34","\xc8"),null());		HX_STACK_VAR(tmp4,"tmp4");
+				HX_STACK_LINE(141)
+				bool tmp5 = (tmp4 >= (int)0);		HX_STACK_VAR(tmp5,"tmp5");
+				HX_STACK_LINE(141)
+				if ((tmp5)){
+					HX_STACK_LINE(142)
+					xCounter = (int)0;
+					HX_STACK_LINE(143)
+					yCounter = (int)0;
+					HX_STACK_LINE(144)
 					continue;
 				}
-				HX_STACK_LINE(102)
+				else{
+					HX_STACK_LINE(146)
+					::String tmp6 = fileArray->__get(j);		HX_STACK_VAR(tmp6,"tmp6");
+					HX_STACK_LINE(146)
+					int tmp7 = tmp6.indexOf(HX_HCSTRING("tile gid=\"","\x55","\x2b","\x67","\x8f"),null());		HX_STACK_VAR(tmp7,"tmp7");
+					HX_STACK_LINE(146)
+					bool tmp8 = (tmp7 < (int)0);		HX_STACK_VAR(tmp8,"tmp8");
+					HX_STACK_LINE(146)
+					if ((tmp8)){
+						HX_STACK_LINE(147)
+						continue;
+					}
+				}
+				HX_STACK_LINE(149)
 				::String tmp6 = fileArray->__get(j);		HX_STACK_VAR(tmp6,"tmp6");
-				HX_STACK_LINE(102)
+				HX_STACK_LINE(149)
 				Array< ::String > parsedTileLine = tmp6.split(HX_HCSTRING("\"","\x22","\x00","\x00","\x00"));		HX_STACK_VAR(parsedTileLine,"parsedTileLine");
-				HX_STACK_LINE(103)
+				HX_STACK_LINE(150)
 				::String tmp7 = parsedTileLine->__get((int)1);		HX_STACK_VAR(tmp7,"tmp7");
-				HX_STACK_LINE(103)
-				int index = ((int)(tmp7));		HX_STACK_VAR(index,"index");
-				HX_STACK_LINE(105)
-				int tmp8 = index;		HX_STACK_VAR(tmp8,"tmp8");
-				HX_STACK_LINE(105)
-				int tmp9 = xCounter;		HX_STACK_VAR(tmp9,"tmp9");
-				HX_STACK_LINE(105)
-				int tmp10 = yCounter;		HX_STACK_VAR(tmp10,"tmp10");
-				HX_STACK_LINE(105)
-				this->createObject(tmp8,tmp9,tmp10);
-				HX_STACK_LINE(107)
+				HX_STACK_LINE(150)
+				Dynamic tmp8 = ::Std_obj::parseInt(tmp7);		HX_STACK_VAR(tmp8,"tmp8");
+				HX_STACK_LINE(150)
+				int index = tmp8;		HX_STACK_VAR(index,"index");
+				HX_STACK_LINE(152)
+				int tmp9 = index;		HX_STACK_VAR(tmp9,"tmp9");
+				HX_STACK_LINE(152)
+				int tmp10 = xCounter;		HX_STACK_VAR(tmp10,"tmp10");
+				HX_STACK_LINE(152)
+				int tmp11 = yCounter;		HX_STACK_VAR(tmp11,"tmp11");
+				HX_STACK_LINE(152)
+				this->createObject(tmp9,tmp10,tmp11);
+				HX_STACK_LINE(154)
 				hx::AddEq(xCounter,(int)1);
-				HX_STACK_LINE(108)
-				int tmp11 = xCounter;		HX_STACK_VAR(tmp11,"tmp11");
-				HX_STACK_LINE(108)
-				int tmp12 = this->mapWidth;		HX_STACK_VAR(tmp12,"tmp12");
-				HX_STACK_LINE(108)
-				bool tmp13 = (tmp11 >= tmp12);		HX_STACK_VAR(tmp13,"tmp13");
-				HX_STACK_LINE(108)
-				if ((tmp13)){
-					HX_STACK_LINE(109)
+				HX_STACK_LINE(155)
+				int tmp12 = xCounter;		HX_STACK_VAR(tmp12,"tmp12");
+				HX_STACK_LINE(155)
+				int tmp13 = this->mapWidth;		HX_STACK_VAR(tmp13,"tmp13");
+				HX_STACK_LINE(155)
+				bool tmp14 = (tmp12 >= tmp13);		HX_STACK_VAR(tmp14,"tmp14");
+				HX_STACK_LINE(155)
+				if ((tmp14)){
+					HX_STACK_LINE(156)
 					xCounter = (int)0;
-					HX_STACK_LINE(110)
+					HX_STACK_LINE(157)
 					hx::AddEq(yCounter,(int)1);
 				}
 			}
@@ -455,81 +620,107 @@ HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,readTiles,(void))
 
 Void AreaMap_obj::createObject( int index,int x,int y){
 {
-		HX_STACK_FRAME("maps.AreaMap","createObject",0x35590131,"maps.AreaMap.createObject","maps/AreaMap.hx",114,0xeb50e127)
+		HX_STACK_FRAME("maps.AreaMap","createObject",0x35590131,"maps.AreaMap.createObject","maps/AreaMap.hx",161,0xeb50e127)
 		HX_STACK_THIS(this)
 		HX_STACK_ARG(index,"index")
 		HX_STACK_ARG(x,"x")
 		HX_STACK_ARG(y,"y")
-		HX_STACK_LINE(116)
-		::maps::ObjectFactory tmp = ::maps::ObjectFactory_obj::getSingleton();		HX_STACK_VAR(tmp,"tmp");
-		HX_STACK_LINE(116)
-		int tmp1 = index;		HX_STACK_VAR(tmp1,"tmp1");
-		HX_STACK_LINE(116)
-		bool tmp2 = tmp->isObjectTile(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
-		HX_STACK_LINE(116)
-		if ((tmp2)){
-			HX_STACK_LINE(117)
-			int tmp3 = index;		HX_STACK_VAR(tmp3,"tmp3");
-			HX_STACK_LINE(117)
-			int tmp4 = x;		HX_STACK_VAR(tmp4,"tmp4");
-			HX_STACK_LINE(117)
-			int tmp5 = y;		HX_STACK_VAR(tmp5,"tmp5");
-			HX_STACK_LINE(117)
-			this->createTile(tmp3,tmp4,tmp5);
+		HX_STACK_LINE(162)
+		bool tmp = (index == (int)0);		HX_STACK_VAR(tmp,"tmp");
+		HX_STACK_LINE(162)
+		if ((tmp)){
+			HX_STACK_LINE(162)
+			return null();
+		}
+		HX_STACK_LINE(164)
+		::maps::ObjectFactory tmp1 = ::maps::ObjectFactory_obj::getSingleton();		HX_STACK_VAR(tmp1,"tmp1");
+		HX_STACK_LINE(164)
+		int tmp2 = index;		HX_STACK_VAR(tmp2,"tmp2");
+		HX_STACK_LINE(164)
+		bool tmp3 = tmp1->isObjectTile(tmp2);		HX_STACK_VAR(tmp3,"tmp3");
+		HX_STACK_LINE(164)
+		if ((tmp3)){
+			HX_STACK_LINE(165)
+			int tmp4 = index;		HX_STACK_VAR(tmp4,"tmp4");
+			HX_STACK_LINE(165)
+			int tmp5 = x;		HX_STACK_VAR(tmp5,"tmp5");
+			HX_STACK_LINE(165)
+			int tmp6 = y;		HX_STACK_VAR(tmp6,"tmp6");
+			HX_STACK_LINE(165)
+			this->createTile(tmp4,tmp5,tmp6);
 		}
 		else{
-			HX_STACK_LINE(118)
-			::maps::ObjectFactory tmp3 = ::maps::ObjectFactory_obj::getSingleton();		HX_STACK_VAR(tmp3,"tmp3");
-			HX_STACK_LINE(118)
-			int tmp4 = index;		HX_STACK_VAR(tmp4,"tmp4");
-			HX_STACK_LINE(118)
-			bool tmp5 = tmp3->isObjectCheckpoint(tmp4);		HX_STACK_VAR(tmp5,"tmp5");
-			HX_STACK_LINE(118)
-			if ((tmp5)){
-				HX_STACK_LINE(119)
-				int tmp6 = index;		HX_STACK_VAR(tmp6,"tmp6");
-				HX_STACK_LINE(119)
-				int tmp7 = x;		HX_STACK_VAR(tmp7,"tmp7");
-				HX_STACK_LINE(119)
-				int tmp8 = y;		HX_STACK_VAR(tmp8,"tmp8");
-				HX_STACK_LINE(119)
-				this->createCheckpoint(tmp6,tmp7,tmp8);
+			HX_STACK_LINE(166)
+			::maps::ObjectFactory tmp4 = ::maps::ObjectFactory_obj::getSingleton();		HX_STACK_VAR(tmp4,"tmp4");
+			HX_STACK_LINE(166)
+			int tmp5 = index;		HX_STACK_VAR(tmp5,"tmp5");
+			HX_STACK_LINE(166)
+			bool tmp6 = tmp4->isObjectCheckpoint(tmp5);		HX_STACK_VAR(tmp6,"tmp6");
+			HX_STACK_LINE(166)
+			if ((tmp6)){
+				HX_STACK_LINE(167)
+				int tmp7 = index;		HX_STACK_VAR(tmp7,"tmp7");
+				HX_STACK_LINE(167)
+				int tmp8 = x;		HX_STACK_VAR(tmp8,"tmp8");
+				HX_STACK_LINE(167)
+				int tmp9 = y;		HX_STACK_VAR(tmp9,"tmp9");
+				HX_STACK_LINE(167)
+				this->createCheckpoint(tmp7,tmp8,tmp9);
 			}
 			else{
-				HX_STACK_LINE(120)
-				::maps::ObjectFactory tmp6 = ::maps::ObjectFactory_obj::getSingleton();		HX_STACK_VAR(tmp6,"tmp6");
-				HX_STACK_LINE(120)
-				int tmp7 = index;		HX_STACK_VAR(tmp7,"tmp7");
-				HX_STACK_LINE(120)
-				bool tmp8 = tmp6->isMapStart(tmp7);		HX_STACK_VAR(tmp8,"tmp8");
-				HX_STACK_LINE(120)
-				if ((tmp8)){
-					HX_STACK_LINE(121)
-					int tmp9 = index;		HX_STACK_VAR(tmp9,"tmp9");
-					HX_STACK_LINE(121)
-					int tmp10 = x;		HX_STACK_VAR(tmp10,"tmp10");
-					HX_STACK_LINE(121)
-					int tmp11 = y;		HX_STACK_VAR(tmp11,"tmp11");
-					HX_STACK_LINE(121)
-					this->createStartpoint(tmp9,tmp10,tmp11);
+				HX_STACK_LINE(168)
+				::maps::ObjectFactory tmp7 = ::maps::ObjectFactory_obj::getSingleton();		HX_STACK_VAR(tmp7,"tmp7");
+				HX_STACK_LINE(168)
+				int tmp8 = index;		HX_STACK_VAR(tmp8,"tmp8");
+				HX_STACK_LINE(168)
+				bool tmp9 = tmp7->isMapStart(tmp8);		HX_STACK_VAR(tmp9,"tmp9");
+				HX_STACK_LINE(168)
+				if ((tmp9)){
+					HX_STACK_LINE(169)
+					int tmp10 = index;		HX_STACK_VAR(tmp10,"tmp10");
+					HX_STACK_LINE(169)
+					int tmp11 = x;		HX_STACK_VAR(tmp11,"tmp11");
+					HX_STACK_LINE(169)
+					int tmp12 = y;		HX_STACK_VAR(tmp12,"tmp12");
+					HX_STACK_LINE(169)
+					this->createStartpoint(tmp10,tmp11,tmp12);
 				}
 				else{
-					HX_STACK_LINE(122)
-					::maps::ObjectFactory tmp9 = ::maps::ObjectFactory_obj::getSingleton();		HX_STACK_VAR(tmp9,"tmp9");
-					HX_STACK_LINE(122)
-					int tmp10 = index;		HX_STACK_VAR(tmp10,"tmp10");
-					HX_STACK_LINE(122)
-					bool tmp11 = tmp9->isMapEnd(tmp10);		HX_STACK_VAR(tmp11,"tmp11");
-					HX_STACK_LINE(122)
-					if ((tmp11)){
-						HX_STACK_LINE(123)
-						int tmp12 = index;		HX_STACK_VAR(tmp12,"tmp12");
-						HX_STACK_LINE(123)
-						int tmp13 = x;		HX_STACK_VAR(tmp13,"tmp13");
-						HX_STACK_LINE(123)
-						int tmp14 = y;		HX_STACK_VAR(tmp14,"tmp14");
-						HX_STACK_LINE(123)
-						this->createEndpoint(tmp12,tmp13,tmp14);
+					HX_STACK_LINE(172)
+					::maps::ObjectFactory tmp10 = ::maps::ObjectFactory_obj::getSingleton();		HX_STACK_VAR(tmp10,"tmp10");
+					HX_STACK_LINE(172)
+					int tmp11 = index;		HX_STACK_VAR(tmp11,"tmp11");
+					HX_STACK_LINE(172)
+					bool tmp12 = tmp10->isObjectSpawnPoint(tmp11);		HX_STACK_VAR(tmp12,"tmp12");
+					HX_STACK_LINE(172)
+					if ((tmp12)){
+						HX_STACK_LINE(173)
+						int tmp13 = index;		HX_STACK_VAR(tmp13,"tmp13");
+						HX_STACK_LINE(173)
+						int tmp14 = x;		HX_STACK_VAR(tmp14,"tmp14");
+						HX_STACK_LINE(173)
+						int tmp15 = y;		HX_STACK_VAR(tmp15,"tmp15");
+						HX_STACK_LINE(173)
+						this->createSpawnPoint(tmp13,tmp14,tmp15);
+					}
+					else{
+						HX_STACK_LINE(174)
+						::maps::ObjectFactory tmp13 = ::maps::ObjectFactory_obj::getSingleton();		HX_STACK_VAR(tmp13,"tmp13");
+						HX_STACK_LINE(174)
+						int tmp14 = index;		HX_STACK_VAR(tmp14,"tmp14");
+						HX_STACK_LINE(174)
+						bool tmp15 = tmp13->isObjectAIPathWall(tmp14);		HX_STACK_VAR(tmp15,"tmp15");
+						HX_STACK_LINE(174)
+						if ((tmp15)){
+							HX_STACK_LINE(175)
+							int tmp16 = index;		HX_STACK_VAR(tmp16,"tmp16");
+							HX_STACK_LINE(175)
+							int tmp17 = x;		HX_STACK_VAR(tmp17,"tmp17");
+							HX_STACK_LINE(175)
+							int tmp18 = y;		HX_STACK_VAR(tmp18,"tmp18");
+							HX_STACK_LINE(175)
+							this->createAIPathWall(tmp16,tmp17,tmp18);
+						}
 					}
 				}
 			}
@@ -543,49 +734,49 @@ HX_DEFINE_DYNAMIC_FUNC3(AreaMap_obj,createObject,(void))
 
 Void AreaMap_obj::createTile( int index,int x,int y){
 {
-		HX_STACK_FRAME("maps.AreaMap","createTile",0x66746d20,"maps.AreaMap.createTile","maps/AreaMap.hx",125,0xeb50e127)
+		HX_STACK_FRAME("maps.AreaMap","createTile",0x66746d20,"maps.AreaMap.createTile","maps/AreaMap.hx",177,0xeb50e127)
 		HX_STACK_THIS(this)
 		HX_STACK_ARG(index,"index")
 		HX_STACK_ARG(x,"x")
 		HX_STACK_ARG(y,"y")
-		HX_STACK_LINE(126)
+		HX_STACK_LINE(178)
 		::maps::ObjectFactory tmp = ::maps::ObjectFactory_obj::getSingleton();		HX_STACK_VAR(tmp,"tmp");
-		HX_STACK_LINE(126)
+		HX_STACK_LINE(178)
 		int tmp1 = index;		HX_STACK_VAR(tmp1,"tmp1");
-		HX_STACK_LINE(126)
-		::maps::Tile tmp2 = tmp->createTile(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
-		HX_STACK_LINE(126)
-		::maps::Tile newTile = tmp2;		HX_STACK_VAR(newTile,"newTile");
-		HX_STACK_LINE(127)
+		HX_STACK_LINE(178)
+		::maps::mapobjects::Tile tmp2 = tmp->createTile(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
+		HX_STACK_LINE(178)
+		::maps::mapobjects::Tile newTile = tmp2;		HX_STACK_VAR(newTile,"newTile");
+		HX_STACK_LINE(179)
 		bool tmp3 = (newTile == null());		HX_STACK_VAR(tmp3,"tmp3");
-		HX_STACK_LINE(127)
+		HX_STACK_LINE(179)
 		if ((tmp3)){
-			HX_STACK_LINE(128)
+			HX_STACK_LINE(180)
 			return null();
 		}
-		HX_STACK_LINE(130)
-		::maps::Tile tmp4 = newTile;		HX_STACK_VAR(tmp4,"tmp4");
-		HX_STACK_LINE(130)
+		HX_STACK_LINE(182)
+		::maps::mapobjects::Tile tmp4 = newTile;		HX_STACK_VAR(tmp4,"tmp4");
+		HX_STACK_LINE(182)
 		this->addChild(tmp4);
-		HX_STACK_LINE(131)
+		HX_STACK_LINE(183)
 		int tmp5 = x;		HX_STACK_VAR(tmp5,"tmp5");
-		HX_STACK_LINE(131)
+		HX_STACK_LINE(183)
 		int tmp6 = this->tileSize;		HX_STACK_VAR(tmp6,"tmp6");
-		HX_STACK_LINE(131)
+		HX_STACK_LINE(183)
 		int tmp7 = (tmp5 * tmp6);		HX_STACK_VAR(tmp7,"tmp7");
-		HX_STACK_LINE(131)
+		HX_STACK_LINE(183)
 		newTile->set_x(tmp7);
-		HX_STACK_LINE(132)
+		HX_STACK_LINE(184)
 		int tmp8 = y;		HX_STACK_VAR(tmp8,"tmp8");
-		HX_STACK_LINE(132)
+		HX_STACK_LINE(184)
 		int tmp9 = this->tileSize;		HX_STACK_VAR(tmp9,"tmp9");
-		HX_STACK_LINE(132)
+		HX_STACK_LINE(184)
 		int tmp10 = (tmp8 * tmp9);		HX_STACK_VAR(tmp10,"tmp10");
-		HX_STACK_LINE(132)
+		HX_STACK_LINE(184)
 		newTile->set_y(tmp10);
-		HX_STACK_LINE(133)
-		::maps::Tile tmp11 = newTile;		HX_STACK_VAR(tmp11,"tmp11");
-		HX_STACK_LINE(133)
+		HX_STACK_LINE(185)
+		::maps::mapobjects::Tile tmp11 = newTile;		HX_STACK_VAR(tmp11,"tmp11");
+		HX_STACK_LINE(185)
 		this->objectList->__get(y).StaticCast< Array< ::Dynamic > >()[x] = tmp11;
 	}
 return null();
@@ -596,49 +787,47 @@ HX_DEFINE_DYNAMIC_FUNC3(AreaMap_obj,createTile,(void))
 
 Void AreaMap_obj::createCheckpoint( int index,int x,int y){
 {
-		HX_STACK_FRAME("maps.AreaMap","createCheckpoint",0x9f02e9fa,"maps.AreaMap.createCheckpoint","maps/AreaMap.hx",135,0xeb50e127)
+		HX_STACK_FRAME("maps.AreaMap","createCheckpoint",0x9f02e9fa,"maps.AreaMap.createCheckpoint","maps/AreaMap.hx",187,0xeb50e127)
 		HX_STACK_THIS(this)
 		HX_STACK_ARG(index,"index")
 		HX_STACK_ARG(x,"x")
 		HX_STACK_ARG(y,"y")
-		HX_STACK_LINE(136)
+		HX_STACK_LINE(188)
 		::maps::ObjectFactory tmp = ::maps::ObjectFactory_obj::getSingleton();		HX_STACK_VAR(tmp,"tmp");
-		HX_STACK_LINE(136)
+		HX_STACK_LINE(188)
 		int tmp1 = index;		HX_STACK_VAR(tmp1,"tmp1");
-		HX_STACK_LINE(136)
-		::maps::Checkpoint tmp2 = tmp->createCheckpoint(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
-		HX_STACK_LINE(136)
-		::maps::Checkpoint newCheckpoint = tmp2;		HX_STACK_VAR(newCheckpoint,"newCheckpoint");
-		HX_STACK_LINE(138)
-		::maps::Checkpoint tmp3 = newCheckpoint;		HX_STACK_VAR(tmp3,"tmp3");
-		HX_STACK_LINE(138)
+		HX_STACK_LINE(188)
+		::maps::mapobjects::Checkpoint tmp2 = tmp->createCheckpoint(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
+		HX_STACK_LINE(188)
+		::maps::mapobjects::Checkpoint newCheckpoint = tmp2;		HX_STACK_VAR(newCheckpoint,"newCheckpoint");
+		HX_STACK_LINE(190)
+		::maps::mapobjects::Checkpoint tmp3 = newCheckpoint;		HX_STACK_VAR(tmp3,"tmp3");
+		HX_STACK_LINE(190)
 		this->addChild(tmp3);
-		HX_STACK_LINE(139)
+		HX_STACK_LINE(191)
 		int tmp4 = x;		HX_STACK_VAR(tmp4,"tmp4");
-		HX_STACK_LINE(139)
+		HX_STACK_LINE(191)
 		int tmp5 = this->tileSize;		HX_STACK_VAR(tmp5,"tmp5");
-		HX_STACK_LINE(139)
+		HX_STACK_LINE(191)
 		int tmp6 = (tmp4 * tmp5);		HX_STACK_VAR(tmp6,"tmp6");
-		HX_STACK_LINE(139)
+		HX_STACK_LINE(191)
 		newCheckpoint->set_x(tmp6);
-		HX_STACK_LINE(140)
+		HX_STACK_LINE(192)
 		int tmp7 = y;		HX_STACK_VAR(tmp7,"tmp7");
-		HX_STACK_LINE(140)
+		HX_STACK_LINE(192)
 		int tmp8 = this->tileSize;		HX_STACK_VAR(tmp8,"tmp8");
-		HX_STACK_LINE(140)
+		HX_STACK_LINE(192)
 		int tmp9 = (tmp7 * tmp8);		HX_STACK_VAR(tmp9,"tmp9");
-		HX_STACK_LINE(140)
+		HX_STACK_LINE(192)
 		newCheckpoint->set_y(tmp9);
-		HX_STACK_LINE(141)
-		::maps::Checkpoint tmp10 = newCheckpoint;		HX_STACK_VAR(tmp10,"tmp10");
-		HX_STACK_LINE(141)
+		HX_STACK_LINE(193)
+		::maps::mapobjects::Checkpoint tmp10 = newCheckpoint;		HX_STACK_VAR(tmp10,"tmp10");
+		HX_STACK_LINE(193)
 		this->objectList->__get(y).StaticCast< Array< ::Dynamic > >()[x] = tmp10;
-		HX_STACK_LINE(143)
-		Array< ::Dynamic > tmp11 = this->checkPoints;		HX_STACK_VAR(tmp11,"tmp11");
-		HX_STACK_LINE(143)
-		::maps::Checkpoint tmp12 = newCheckpoint;		HX_STACK_VAR(tmp12,"tmp12");
-		HX_STACK_LINE(143)
-		tmp11->push(tmp12);
+		HX_STACK_LINE(195)
+		::maps::mapobjects::Checkpoint tmp11 = newCheckpoint;		HX_STACK_VAR(tmp11,"tmp11");
+		HX_STACK_LINE(195)
+		this->checkPoints->push(tmp11);
 	}
 return null();
 }
@@ -648,36 +837,36 @@ HX_DEFINE_DYNAMIC_FUNC3(AreaMap_obj,createCheckpoint,(void))
 
 Void AreaMap_obj::createStartpoint( int index,int x,int y){
 {
-		HX_STACK_FRAME("maps.AreaMap","createStartpoint",0xab29c020,"maps.AreaMap.createStartpoint","maps/AreaMap.hx",145,0xeb50e127)
+		HX_STACK_FRAME("maps.AreaMap","createStartpoint",0xab29c020,"maps.AreaMap.createStartpoint","maps/AreaMap.hx",197,0xeb50e127)
 		HX_STACK_THIS(this)
 		HX_STACK_ARG(index,"index")
 		HX_STACK_ARG(x,"x")
 		HX_STACK_ARG(y,"y")
-		HX_STACK_LINE(146)
+		HX_STACK_LINE(198)
 		::maps::ObjectFactory tmp = ::maps::ObjectFactory_obj::getSingleton();		HX_STACK_VAR(tmp,"tmp");
-		HX_STACK_LINE(146)
+		HX_STACK_LINE(198)
 		int tmp1 = index;		HX_STACK_VAR(tmp1,"tmp1");
-		HX_STACK_LINE(146)
-		::maps::Checkpoint tmp2 = tmp->createCheckpoint(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
-		HX_STACK_LINE(146)
-		::maps::Checkpoint startPoint = tmp2;		HX_STACK_VAR(startPoint,"startPoint");
-		HX_STACK_LINE(147)
+		HX_STACK_LINE(198)
+		::maps::mapobjects::Checkpoint tmp2 = tmp->createCheckpoint(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
+		HX_STACK_LINE(198)
+		::maps::mapobjects::Checkpoint startPoint = tmp2;		HX_STACK_VAR(startPoint,"startPoint");
+		HX_STACK_LINE(199)
 		int tmp3 = x;		HX_STACK_VAR(tmp3,"tmp3");
-		HX_STACK_LINE(147)
+		HX_STACK_LINE(199)
 		int tmp4 = this->tileSize;		HX_STACK_VAR(tmp4,"tmp4");
-		HX_STACK_LINE(147)
+		HX_STACK_LINE(199)
 		int tmp5 = (tmp3 * tmp4);		HX_STACK_VAR(tmp5,"tmp5");
-		HX_STACK_LINE(147)
+		HX_STACK_LINE(199)
 		startPoint->set_x(tmp5);
-		HX_STACK_LINE(148)
+		HX_STACK_LINE(200)
 		int tmp6 = y;		HX_STACK_VAR(tmp6,"tmp6");
-		HX_STACK_LINE(148)
+		HX_STACK_LINE(200)
 		int tmp7 = this->tileSize;		HX_STACK_VAR(tmp7,"tmp7");
-		HX_STACK_LINE(148)
+		HX_STACK_LINE(200)
 		int tmp8 = (tmp6 * tmp7);		HX_STACK_VAR(tmp8,"tmp8");
-		HX_STACK_LINE(148)
+		HX_STACK_LINE(200)
 		startPoint->set_y(tmp8);
-		HX_STACK_LINE(149)
+		HX_STACK_LINE(201)
 		this->startPoint = startPoint;
 	}
 return null();
@@ -686,103 +875,695 @@ return null();
 
 HX_DEFINE_DYNAMIC_FUNC3(AreaMap_obj,createStartpoint,(void))
 
-Void AreaMap_obj::createEndpoint( int index,int x,int y){
+Void AreaMap_obj::createEndpoint( int index,::String endMap,int x,int y){
 {
-		HX_STACK_FRAME("maps.AreaMap","createEndpoint",0xacb45987,"maps.AreaMap.createEndpoint","maps/AreaMap.hx",151,0xeb50e127)
+		HX_STACK_FRAME("maps.AreaMap","createEndpoint",0xacb45987,"maps.AreaMap.createEndpoint","maps/AreaMap.hx",203,0xeb50e127)
+		HX_STACK_THIS(this)
+		HX_STACK_ARG(index,"index")
+		HX_STACK_ARG(endMap,"endMap")
+		HX_STACK_ARG(x,"x")
+		HX_STACK_ARG(y,"y")
+		HX_STACK_LINE(204)
+		::maps::ObjectFactory tmp = ::maps::ObjectFactory_obj::getSingleton();		HX_STACK_VAR(tmp,"tmp");
+		HX_STACK_LINE(204)
+		int tmp1 = index;		HX_STACK_VAR(tmp1,"tmp1");
+		HX_STACK_LINE(204)
+		::String tmp2 = endMap;		HX_STACK_VAR(tmp2,"tmp2");
+		HX_STACK_LINE(204)
+		::maps::mapobjects::Portal tmp3 = tmp->createPortal(tmp1,tmp2);		HX_STACK_VAR(tmp3,"tmp3");
+		HX_STACK_LINE(204)
+		::maps::mapobjects::Portal endPoint = tmp3;		HX_STACK_VAR(endPoint,"endPoint");
+		HX_STACK_LINE(205)
+		int tmp4 = x;		HX_STACK_VAR(tmp4,"tmp4");
+		HX_STACK_LINE(205)
+		int tmp5 = this->tileSize;		HX_STACK_VAR(tmp5,"tmp5");
+		HX_STACK_LINE(205)
+		int tmp6 = (tmp4 * tmp5);		HX_STACK_VAR(tmp6,"tmp6");
+		HX_STACK_LINE(205)
+		endPoint->set_x(tmp6);
+		HX_STACK_LINE(206)
+		int tmp7 = y;		HX_STACK_VAR(tmp7,"tmp7");
+		HX_STACK_LINE(206)
+		int tmp8 = this->tileSize;		HX_STACK_VAR(tmp8,"tmp8");
+		HX_STACK_LINE(206)
+		int tmp9 = (tmp7 * tmp8);		HX_STACK_VAR(tmp9,"tmp9");
+		HX_STACK_LINE(206)
+		endPoint->set_y(tmp9);
+		HX_STACK_LINE(207)
+		::maps::mapobjects::Portal tmp10 = endPoint;		HX_STACK_VAR(tmp10,"tmp10");
+		HX_STACK_LINE(207)
+		this->endPoints->push(tmp10);
+		HX_STACK_LINE(208)
+		::maps::mapobjects::Portal tmp11 = endPoint;		HX_STACK_VAR(tmp11,"tmp11");
+		HX_STACK_LINE(208)
+		this->addChild(tmp11);
+	}
+return null();
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC4(AreaMap_obj,createEndpoint,(void))
+
+Void AreaMap_obj::createSpawnPoint( int index,int x,int y){
+{
+		HX_STACK_FRAME("maps.AreaMap","createSpawnPoint",0x5c58b387,"maps.AreaMap.createSpawnPoint","maps/AreaMap.hx",210,0xeb50e127)
 		HX_STACK_THIS(this)
 		HX_STACK_ARG(index,"index")
 		HX_STACK_ARG(x,"x")
 		HX_STACK_ARG(y,"y")
-		HX_STACK_LINE(152)
+		HX_STACK_LINE(211)
 		::maps::ObjectFactory tmp = ::maps::ObjectFactory_obj::getSingleton();		HX_STACK_VAR(tmp,"tmp");
-		HX_STACK_LINE(152)
+		HX_STACK_LINE(211)
 		int tmp1 = index;		HX_STACK_VAR(tmp1,"tmp1");
-		HX_STACK_LINE(152)
-		::maps::Portal tmp2 = tmp->createPortal(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
-		HX_STACK_LINE(152)
-		::maps::Portal endPoint = tmp2;		HX_STACK_VAR(endPoint,"endPoint");
-		HX_STACK_LINE(153)
+		HX_STACK_LINE(211)
+		::maps::mapobjects::SpawnPoint tmp2 = tmp->createSpawnPoint(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
+		HX_STACK_LINE(211)
+		::maps::mapobjects::SpawnPoint spawnPoint = tmp2;		HX_STACK_VAR(spawnPoint,"spawnPoint");
+		HX_STACK_LINE(212)
 		int tmp3 = x;		HX_STACK_VAR(tmp3,"tmp3");
-		HX_STACK_LINE(153)
+		HX_STACK_LINE(212)
 		int tmp4 = this->tileSize;		HX_STACK_VAR(tmp4,"tmp4");
-		HX_STACK_LINE(153)
+		HX_STACK_LINE(212)
 		int tmp5 = (tmp3 * tmp4);		HX_STACK_VAR(tmp5,"tmp5");
-		HX_STACK_LINE(153)
-		endPoint->set_x(tmp5);
-		HX_STACK_LINE(154)
+		HX_STACK_LINE(212)
+		spawnPoint->set_x(tmp5);
+		HX_STACK_LINE(213)
 		int tmp6 = y;		HX_STACK_VAR(tmp6,"tmp6");
-		HX_STACK_LINE(154)
+		HX_STACK_LINE(213)
 		int tmp7 = this->tileSize;		HX_STACK_VAR(tmp7,"tmp7");
-		HX_STACK_LINE(154)
+		HX_STACK_LINE(213)
 		int tmp8 = (tmp6 * tmp7);		HX_STACK_VAR(tmp8,"tmp8");
-		HX_STACK_LINE(154)
-		endPoint->set_y(tmp8);
-		HX_STACK_LINE(155)
-		this->endPoint = endPoint;
-		HX_STACK_LINE(156)
-		::maps::Portal tmp9 = endPoint;		HX_STACK_VAR(tmp9,"tmp9");
-		HX_STACK_LINE(156)
-		this->addChild(tmp9);
+		HX_STACK_LINE(213)
+		spawnPoint->set_y(tmp8);
+		HX_STACK_LINE(215)
+		::maps::mapobjects::SpawnPoint tmp9 = spawnPoint;		HX_STACK_VAR(tmp9,"tmp9");
+		HX_STACK_LINE(215)
+		this->spawnPoints->push(tmp9);
 	}
 return null();
 }
 
 
-HX_DEFINE_DYNAMIC_FUNC3(AreaMap_obj,createEndpoint,(void))
+HX_DEFINE_DYNAMIC_FUNC3(AreaMap_obj,createSpawnPoint,(void))
 
-Void AreaMap_obj::setNextMap( ::maps::AreaMap map){
+Void AreaMap_obj::createAIPathWall( int index,int x,int y){
 {
-		HX_STACK_FRAME("maps.AreaMap","setNextMap",0xff0a9cbd,"maps.AreaMap.setNextMap","maps/AreaMap.hx",160,0xeb50e127)
+		HX_STACK_FRAME("maps.AreaMap","createAIPathWall",0x7d0261a9,"maps.AreaMap.createAIPathWall","maps/AreaMap.hx",217,0xeb50e127)
 		HX_STACK_THIS(this)
-		HX_STACK_ARG(map,"map")
-		HX_STACK_LINE(160)
-		this->nextMap = map;
+		HX_STACK_ARG(index,"index")
+		HX_STACK_ARG(x,"x")
+		HX_STACK_ARG(y,"y")
+		HX_STACK_LINE(218)
+		::maps::ObjectFactory tmp = ::maps::ObjectFactory_obj::getSingleton();		HX_STACK_VAR(tmp,"tmp");
+		HX_STACK_LINE(218)
+		int tmp1 = index;		HX_STACK_VAR(tmp1,"tmp1");
+		HX_STACK_LINE(218)
+		::maps::mapobjects::AIPathWall tmp2 = tmp->createAIPathWall(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
+		HX_STACK_LINE(218)
+		::maps::mapobjects::AIPathWall pathWall = tmp2;		HX_STACK_VAR(pathWall,"pathWall");
+		HX_STACK_LINE(219)
+		int tmp3 = x;		HX_STACK_VAR(tmp3,"tmp3");
+		HX_STACK_LINE(219)
+		int tmp4 = this->tileSize;		HX_STACK_VAR(tmp4,"tmp4");
+		HX_STACK_LINE(219)
+		int tmp5 = (tmp3 * tmp4);		HX_STACK_VAR(tmp5,"tmp5");
+		HX_STACK_LINE(219)
+		pathWall->set_x(tmp5);
+		HX_STACK_LINE(220)
+		int tmp6 = y;		HX_STACK_VAR(tmp6,"tmp6");
+		HX_STACK_LINE(220)
+		int tmp7 = this->tileSize;		HX_STACK_VAR(tmp7,"tmp7");
+		HX_STACK_LINE(220)
+		int tmp8 = (tmp6 * tmp7);		HX_STACK_VAR(tmp8,"tmp8");
+		HX_STACK_LINE(220)
+		pathWall->set_y(tmp8);
+		HX_STACK_LINE(221)
+		::maps::mapobjects::AIPathWall tmp9 = pathWall;		HX_STACK_VAR(tmp9,"tmp9");
+		HX_STACK_LINE(221)
+		this->objectList->__get(y).StaticCast< Array< ::Dynamic > >()[x] = tmp9;
+		HX_STACK_LINE(223)
+		::maps::mapobjects::AIPathWall tmp10 = pathWall;		HX_STACK_VAR(tmp10,"tmp10");
+		HX_STACK_LINE(223)
+		this->pathWalls->push(tmp10);
 	}
 return null();
 }
 
 
-HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,setNextMap,(void))
+HX_DEFINE_DYNAMIC_FUNC3(AreaMap_obj,createAIPathWall,(void))
+
+Void AreaMap_obj::readDynamicObjects( Array< ::String > fileArray){
+{
+		HX_STACK_FRAME("maps.AreaMap","readDynamicObjects",0x453cdfe1,"maps.AreaMap.readDynamicObjects","maps/AreaMap.hx",228,0xeb50e127)
+		HX_STACK_THIS(this)
+		HX_STACK_ARG(fileArray,"fileArray")
+		HX_STACK_LINE(228)
+		int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
+		HX_STACK_LINE(228)
+		int _g = fileArray->length;		HX_STACK_VAR(_g,"_g");
+		HX_STACK_LINE(228)
+		while((true)){
+			HX_STACK_LINE(228)
+			bool tmp = (_g1 < _g);		HX_STACK_VAR(tmp,"tmp");
+			HX_STACK_LINE(228)
+			bool tmp1 = !(tmp);		HX_STACK_VAR(tmp1,"tmp1");
+			HX_STACK_LINE(228)
+			if ((tmp1)){
+				HX_STACK_LINE(228)
+				break;
+			}
+			HX_STACK_LINE(228)
+			int tmp2 = (_g1)++;		HX_STACK_VAR(tmp2,"tmp2");
+			HX_STACK_LINE(228)
+			int i = tmp2;		HX_STACK_VAR(i,"i");
+			HX_STACK_LINE(229)
+			::String tmp3 = fileArray->__get(i);		HX_STACK_VAR(tmp3,"tmp3");
+			HX_STACK_LINE(229)
+			int tmp4 = tmp3.indexOf(HX_HCSTRING("object id","\x9c","\xa6","\x5b","\x43"),null());		HX_STACK_VAR(tmp4,"tmp4");
+			HX_STACK_LINE(229)
+			bool tmp5 = (tmp4 >= (int)0);		HX_STACK_VAR(tmp5,"tmp5");
+			HX_STACK_LINE(229)
+			if ((tmp5)){
+				HX_STACK_LINE(230)
+				int tmp6 = i;		HX_STACK_VAR(tmp6,"tmp6");
+				HX_STACK_LINE(230)
+				this->parseDynamicObject(fileArray,tmp6);
+			}
+		}
+	}
+return null();
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,readDynamicObjects,(void))
+
+Void AreaMap_obj::parseDynamicObject( Array< ::String > fileArray,int startIndex){
+{
+		HX_STACK_FRAME("maps.AreaMap","parseDynamicObject",0xbe10be41,"maps.AreaMap.parseDynamicObject","maps/AreaMap.hx",234,0xeb50e127)
+		HX_STACK_THIS(this)
+		HX_STACK_ARG(fileArray,"fileArray")
+		HX_STACK_ARG(startIndex,"startIndex")
+		HX_STACK_LINE(236)
+		::haxe::ds::StringMap tmp;		HX_STACK_VAR(tmp,"tmp");
+		HX_STACK_LINE(236)
+		{
+			HX_STACK_LINE(236)
+			::haxe::ds::StringMap tmp1 = ::haxe::ds::StringMap_obj::__new();		HX_STACK_VAR(tmp1,"tmp1");
+			HX_STACK_LINE(236)
+			::haxe::ds::StringMap tmp2 = tmp1;		HX_STACK_VAR(tmp2,"tmp2");
+			HX_STACK_LINE(236)
+			tmp = tmp2;
+		}
+		HX_STACK_LINE(236)
+		::haxe::ds::StringMap objectProperties = tmp;		HX_STACK_VAR(objectProperties,"objectProperties");
+		HX_STACK_LINE(237)
+		::String tmp1 = fileArray->__get(startIndex);		HX_STACK_VAR(tmp1,"tmp1");
+		HX_STACK_LINE(237)
+		int tmp2 = this->parseObjectID(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
+		HX_STACK_LINE(237)
+		int objectID = tmp2;		HX_STACK_VAR(objectID,"objectID");
+		HX_STACK_LINE(238)
+		::String tmp3 = fileArray->__get(startIndex);		HX_STACK_VAR(tmp3,"tmp3");
+		HX_STACK_LINE(238)
+		::openfl::geom::Point tmp4 = this->parseObjectLocation(tmp3);		HX_STACK_VAR(tmp4,"tmp4");
+		HX_STACK_LINE(238)
+		::openfl::geom::Point objectLocation = tmp4;		HX_STACK_VAR(objectLocation,"objectLocation");
+		HX_STACK_LINE(240)
+		{
+			HX_STACK_LINE(240)
+			int _g1 = startIndex;		HX_STACK_VAR(_g1,"_g1");
+			HX_STACK_LINE(240)
+			int _g = fileArray->length;		HX_STACK_VAR(_g,"_g");
+			HX_STACK_LINE(240)
+			while((true)){
+				HX_STACK_LINE(240)
+				bool tmp5 = (_g1 < _g);		HX_STACK_VAR(tmp5,"tmp5");
+				HX_STACK_LINE(240)
+				bool tmp6 = !(tmp5);		HX_STACK_VAR(tmp6,"tmp6");
+				HX_STACK_LINE(240)
+				if ((tmp6)){
+					HX_STACK_LINE(240)
+					break;
+				}
+				HX_STACK_LINE(240)
+				int tmp7 = (_g1)++;		HX_STACK_VAR(tmp7,"tmp7");
+				HX_STACK_LINE(240)
+				int j = tmp7;		HX_STACK_VAR(j,"j");
+				HX_STACK_LINE(241)
+				::String tmp8 = fileArray->__get(j);		HX_STACK_VAR(tmp8,"tmp8");
+				HX_STACK_LINE(241)
+				int tmp9 = tmp8.indexOf(HX_HCSTRING("/properties","\xe2","\xac","\xe4","\x09"),null());		HX_STACK_VAR(tmp9,"tmp9");
+				HX_STACK_LINE(241)
+				bool tmp10 = (tmp9 >= (int)0);		HX_STACK_VAR(tmp10,"tmp10");
+				HX_STACK_LINE(241)
+				if ((tmp10)){
+					HX_STACK_LINE(241)
+					break;
+				}
+				HX_STACK_LINE(243)
+				::String tmp11 = fileArray->__get(j);		HX_STACK_VAR(tmp11,"tmp11");
+				HX_STACK_LINE(243)
+				int tmp12 = tmp11.indexOf(HX_HCSTRING("property name","\xf6","\x65","\xea","\x6c"),null());		HX_STACK_VAR(tmp12,"tmp12");
+				HX_STACK_LINE(243)
+				bool tmp13 = (tmp12 >= (int)0);		HX_STACK_VAR(tmp13,"tmp13");
+				HX_STACK_LINE(243)
+				if ((tmp13)){
+					HX_STACK_LINE(244)
+					::String tmp14 = fileArray->__get(j);		HX_STACK_VAR(tmp14,"tmp14");
+					HX_STACK_LINE(244)
+					::haxe::ds::StringMap tmp15 = objectProperties;		HX_STACK_VAR(tmp15,"tmp15");
+					HX_STACK_LINE(244)
+					::haxe::ds::StringMap tmp16 = this->addObjectProperty(tmp14,tmp15);		HX_STACK_VAR(tmp16,"tmp16");
+					HX_STACK_LINE(244)
+					objectProperties = tmp16;
+				}
+			}
+		}
+		HX_STACK_LINE(247)
+		::String tmp5 = objectProperties->get(HX_HCSTRING("type","\xba","\xf2","\x08","\x4d"));		HX_STACK_VAR(tmp5,"tmp5");
+		HX_STACK_LINE(247)
+		::String tmp6 = tmp5;		HX_STACK_VAR(tmp6,"tmp6");
+		HX_STACK_LINE(247)
+		bool tmp7 = (tmp6 == HX_HCSTRING("portal","\xac","\x7a","\x25","\xfd"));		HX_STACK_VAR(tmp7,"tmp7");
+		HX_STACK_LINE(247)
+		if ((tmp7)){
+			HX_STACK_LINE(248)
+			int tmp8 = objectID;		HX_STACK_VAR(tmp8,"tmp8");
+			HX_STACK_LINE(248)
+			::String tmp9 = objectProperties->get(HX_HCSTRING("map","\x9c","\x0a","\x53","\x00"));		HX_STACK_VAR(tmp9,"tmp9");
+			HX_STACK_LINE(248)
+			::String tmp10 = tmp9;		HX_STACK_VAR(tmp10,"tmp10");
+			HX_STACK_LINE(248)
+			Float tmp11 = objectLocation->x;		HX_STACK_VAR(tmp11,"tmp11");
+			HX_STACK_LINE(248)
+			int tmp12 = this->tileSize;		HX_STACK_VAR(tmp12,"tmp12");
+			HX_STACK_LINE(248)
+			Float tmp13 = (Float(tmp11) / Float(tmp12));		HX_STACK_VAR(tmp13,"tmp13");
+			HX_STACK_LINE(248)
+			int tmp14 = ((int)(tmp13));		HX_STACK_VAR(tmp14,"tmp14");
+			HX_STACK_LINE(248)
+			Float tmp15 = objectLocation->y;		HX_STACK_VAR(tmp15,"tmp15");
+			HX_STACK_LINE(248)
+			int tmp16 = this->tileSize;		HX_STACK_VAR(tmp16,"tmp16");
+			HX_STACK_LINE(248)
+			Float tmp17 = (Float(tmp15) / Float(tmp16));		HX_STACK_VAR(tmp17,"tmp17");
+			HX_STACK_LINE(248)
+			int tmp18 = ((int)(tmp17));		HX_STACK_VAR(tmp18,"tmp18");
+			HX_STACK_LINE(248)
+			this->createEndpoint(tmp8,tmp10,tmp14,tmp18);
+		}
+	}
+return null();
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC2(AreaMap_obj,parseDynamicObject,(void))
+
+int AreaMap_obj::parseObjectID( ::String idLine){
+	HX_STACK_FRAME("maps.AreaMap","parseObjectID",0xd6512c97,"maps.AreaMap.parseObjectID","maps/AreaMap.hx",251,0xeb50e127)
+	HX_STACK_THIS(this)
+	HX_STACK_ARG(idLine,"idLine")
+	HX_STACK_LINE(252)
+	Array< ::String > parsedLine = idLine.split(HX_HCSTRING(" ","\x20","\x00","\x00","\x00"));		HX_STACK_VAR(parsedLine,"parsedLine");
+	HX_STACK_LINE(253)
+	int objectID = (int)0;		HX_STACK_VAR(objectID,"objectID");
+	HX_STACK_LINE(254)
+	{
+		HX_STACK_LINE(254)
+		int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
+		HX_STACK_LINE(254)
+		int _g = parsedLine->length;		HX_STACK_VAR(_g,"_g");
+		HX_STACK_LINE(254)
+		while((true)){
+			HX_STACK_LINE(254)
+			bool tmp = (_g1 < _g);		HX_STACK_VAR(tmp,"tmp");
+			HX_STACK_LINE(254)
+			bool tmp1 = !(tmp);		HX_STACK_VAR(tmp1,"tmp1");
+			HX_STACK_LINE(254)
+			if ((tmp1)){
+				HX_STACK_LINE(254)
+				break;
+			}
+			HX_STACK_LINE(254)
+			int tmp2 = (_g1)++;		HX_STACK_VAR(tmp2,"tmp2");
+			HX_STACK_LINE(254)
+			int i = tmp2;		HX_STACK_VAR(i,"i");
+			HX_STACK_LINE(255)
+			::String tmp3 = parsedLine->__get(i);		HX_STACK_VAR(tmp3,"tmp3");
+			HX_STACK_LINE(255)
+			int tmp4 = tmp3.indexOf(HX_HCSTRING("gid","\x02","\x84","\x4e","\x00"),null());		HX_STACK_VAR(tmp4,"tmp4");
+			HX_STACK_LINE(255)
+			bool tmp5 = (tmp4 >= (int)0);		HX_STACK_VAR(tmp5,"tmp5");
+			HX_STACK_LINE(255)
+			if ((tmp5)){
+				HX_STACK_LINE(256)
+				::String tmp6 = parsedLine->__get(i);		HX_STACK_VAR(tmp6,"tmp6");
+				HX_STACK_LINE(256)
+				::String tmp7 = tmp6.split(HX_HCSTRING("\"","\x22","\x00","\x00","\x00"))->__get((int)1);		HX_STACK_VAR(tmp7,"tmp7");
+				HX_STACK_LINE(256)
+				Dynamic tmp8 = ::Std_obj::parseInt(tmp7);		HX_STACK_VAR(tmp8,"tmp8");
+				HX_STACK_LINE(256)
+				objectID = tmp8;
+			}
+		}
+	}
+	HX_STACK_LINE(258)
+	int tmp = objectID;		HX_STACK_VAR(tmp,"tmp");
+	HX_STACK_LINE(258)
+	return tmp;
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,parseObjectID,return )
+
+::openfl::geom::Point AreaMap_obj::parseObjectLocation( ::String idLine){
+	HX_STACK_FRAME("maps.AreaMap","parseObjectLocation",0x84854c11,"maps.AreaMap.parseObjectLocation","maps/AreaMap.hx",260,0xeb50e127)
+	HX_STACK_THIS(this)
+	HX_STACK_ARG(idLine,"idLine")
+	HX_STACK_LINE(261)
+	Array< ::String > parsedLine = idLine.split(HX_HCSTRING(" ","\x20","\x00","\x00","\x00"));		HX_STACK_VAR(parsedLine,"parsedLine");
+	HX_STACK_LINE(262)
+	int objectX = (int)0;		HX_STACK_VAR(objectX,"objectX");
+	HX_STACK_LINE(263)
+	int objectY = (int)0;		HX_STACK_VAR(objectY,"objectY");
+	HX_STACK_LINE(264)
+	{
+		HX_STACK_LINE(264)
+		int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
+		HX_STACK_LINE(264)
+		int _g = parsedLine->length;		HX_STACK_VAR(_g,"_g");
+		HX_STACK_LINE(264)
+		while((true)){
+			HX_STACK_LINE(264)
+			bool tmp = (_g1 < _g);		HX_STACK_VAR(tmp,"tmp");
+			HX_STACK_LINE(264)
+			bool tmp1 = !(tmp);		HX_STACK_VAR(tmp1,"tmp1");
+			HX_STACK_LINE(264)
+			if ((tmp1)){
+				HX_STACK_LINE(264)
+				break;
+			}
+			HX_STACK_LINE(264)
+			int tmp2 = (_g1)++;		HX_STACK_VAR(tmp2,"tmp2");
+			HX_STACK_LINE(264)
+			int i = tmp2;		HX_STACK_VAR(i,"i");
+			HX_STACK_LINE(265)
+			::String tmp3 = parsedLine->__get(i);		HX_STACK_VAR(tmp3,"tmp3");
+			HX_STACK_LINE(265)
+			int tmp4 = tmp3.indexOf(HX_HCSTRING("x","\x78","\x00","\x00","\x00"),null());		HX_STACK_VAR(tmp4,"tmp4");
+			HX_STACK_LINE(265)
+			bool tmp5 = (tmp4 >= (int)0);		HX_STACK_VAR(tmp5,"tmp5");
+			HX_STACK_LINE(265)
+			if ((tmp5)){
+				HX_STACK_LINE(266)
+				::String tmp6 = parsedLine->__get(i);		HX_STACK_VAR(tmp6,"tmp6");
+				HX_STACK_LINE(266)
+				::String tmp7 = tmp6.split(HX_HCSTRING("\"","\x22","\x00","\x00","\x00"))->__get((int)1);		HX_STACK_VAR(tmp7,"tmp7");
+				HX_STACK_LINE(266)
+				Dynamic tmp8 = ::Std_obj::parseInt(tmp7);		HX_STACK_VAR(tmp8,"tmp8");
+				HX_STACK_LINE(266)
+				objectX = tmp8;
+			}
+			HX_STACK_LINE(267)
+			::String tmp6 = parsedLine->__get(i);		HX_STACK_VAR(tmp6,"tmp6");
+			HX_STACK_LINE(267)
+			int tmp7 = tmp6.indexOf(HX_HCSTRING("y","\x79","\x00","\x00","\x00"),null());		HX_STACK_VAR(tmp7,"tmp7");
+			HX_STACK_LINE(267)
+			bool tmp8 = (tmp7 >= (int)0);		HX_STACK_VAR(tmp8,"tmp8");
+			HX_STACK_LINE(267)
+			if ((tmp8)){
+				HX_STACK_LINE(268)
+				::String tmp9 = parsedLine->__get(i);		HX_STACK_VAR(tmp9,"tmp9");
+				HX_STACK_LINE(268)
+				::String tmp10 = tmp9.split(HX_HCSTRING("\"","\x22","\x00","\x00","\x00"))->__get((int)1);		HX_STACK_VAR(tmp10,"tmp10");
+				HX_STACK_LINE(268)
+				Dynamic tmp11 = ::Std_obj::parseInt(tmp10);		HX_STACK_VAR(tmp11,"tmp11");
+				HX_STACK_LINE(268)
+				objectY = tmp11;
+			}
+		}
+	}
+	HX_STACK_LINE(270)
+	int tmp = objectX;		HX_STACK_VAR(tmp,"tmp");
+	HX_STACK_LINE(270)
+	int tmp1 = (objectY - (int)1);		HX_STACK_VAR(tmp1,"tmp1");
+	HX_STACK_LINE(270)
+	::openfl::geom::Point tmp2 = ::openfl::geom::Point_obj::__new(tmp,tmp1);		HX_STACK_VAR(tmp2,"tmp2");
+	HX_STACK_LINE(270)
+	return tmp2;
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,parseObjectLocation,return )
+
+::haxe::ds::StringMap AreaMap_obj::addObjectProperty( ::String propertyLine,::haxe::ds::StringMap propertyMap){
+	HX_STACK_FRAME("maps.AreaMap","addObjectProperty",0x7c04fe1f,"maps.AreaMap.addObjectProperty","maps/AreaMap.hx",272,0xeb50e127)
+	HX_STACK_THIS(this)
+	HX_STACK_ARG(propertyLine,"propertyLine")
+	HX_STACK_ARG(propertyMap,"propertyMap")
+	HX_STACK_LINE(273)
+	Array< ::String > parsedLine = propertyLine.split(HX_HCSTRING(" ","\x20","\x00","\x00","\x00"));		HX_STACK_VAR(parsedLine,"parsedLine");
+	HX_STACK_LINE(274)
+	::String name = HX_HCSTRING("","\x00","\x00","\x00","\x00");		HX_STACK_VAR(name,"name");
+	HX_STACK_LINE(275)
+	::String value = HX_HCSTRING("","\x00","\x00","\x00","\x00");		HX_STACK_VAR(value,"value");
+	HX_STACK_LINE(276)
+	{
+		HX_STACK_LINE(276)
+		int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
+		HX_STACK_LINE(276)
+		int _g = parsedLine->length;		HX_STACK_VAR(_g,"_g");
+		HX_STACK_LINE(276)
+		while((true)){
+			HX_STACK_LINE(276)
+			bool tmp = (_g1 < _g);		HX_STACK_VAR(tmp,"tmp");
+			HX_STACK_LINE(276)
+			bool tmp1 = !(tmp);		HX_STACK_VAR(tmp1,"tmp1");
+			HX_STACK_LINE(276)
+			if ((tmp1)){
+				HX_STACK_LINE(276)
+				break;
+			}
+			HX_STACK_LINE(276)
+			int tmp2 = (_g1)++;		HX_STACK_VAR(tmp2,"tmp2");
+			HX_STACK_LINE(276)
+			int i = tmp2;		HX_STACK_VAR(i,"i");
+			HX_STACK_LINE(277)
+			::String tmp3 = parsedLine->__get(i);		HX_STACK_VAR(tmp3,"tmp3");
+			HX_STACK_LINE(277)
+			int tmp4 = tmp3.indexOf(HX_HCSTRING("name","\x4b","\x72","\xff","\x48"),null());		HX_STACK_VAR(tmp4,"tmp4");
+			HX_STACK_LINE(277)
+			bool tmp5 = (tmp4 >= (int)0);		HX_STACK_VAR(tmp5,"tmp5");
+			HX_STACK_LINE(277)
+			if ((tmp5)){
+				HX_STACK_LINE(278)
+				::String tmp6 = parsedLine->__get(i);		HX_STACK_VAR(tmp6,"tmp6");
+				HX_STACK_LINE(278)
+				::String tmp7 = tmp6.split(HX_HCSTRING("\"","\x22","\x00","\x00","\x00"))->__get((int)1);		HX_STACK_VAR(tmp7,"tmp7");
+				HX_STACK_LINE(278)
+				name = tmp7;
+			}
+			HX_STACK_LINE(279)
+			::String tmp6 = parsedLine->__get(i);		HX_STACK_VAR(tmp6,"tmp6");
+			HX_STACK_LINE(279)
+			int tmp7 = tmp6.indexOf(HX_HCSTRING("value","\x71","\x7f","\xb8","\x31"),null());		HX_STACK_VAR(tmp7,"tmp7");
+			HX_STACK_LINE(279)
+			bool tmp8 = (tmp7 >= (int)0);		HX_STACK_VAR(tmp8,"tmp8");
+			HX_STACK_LINE(279)
+			if ((tmp8)){
+				HX_STACK_LINE(280)
+				::String tmp9 = parsedLine->__get(i);		HX_STACK_VAR(tmp9,"tmp9");
+				HX_STACK_LINE(280)
+				::String tmp10 = tmp9.split(HX_HCSTRING("\"","\x22","\x00","\x00","\x00"))->__get((int)1);		HX_STACK_VAR(tmp10,"tmp10");
+				HX_STACK_LINE(280)
+				value = tmp10;
+			}
+		}
+	}
+	HX_STACK_LINE(282)
+	::String tmp;		HX_STACK_VAR(tmp,"tmp");
+	HX_STACK_LINE(282)
+	{
+		HX_STACK_LINE(282)
+		::String tmp1 = name;		HX_STACK_VAR(tmp1,"tmp1");
+		HX_STACK_LINE(282)
+		::String tmp2 = value;		HX_STACK_VAR(tmp2,"tmp2");
+		HX_STACK_LINE(282)
+		propertyMap->set(tmp1,tmp2);
+		HX_STACK_LINE(282)
+		tmp = value;
+	}
+	HX_STACK_LINE(282)
+	tmp;
+	HX_STACK_LINE(283)
+	::haxe::ds::StringMap tmp1 = propertyMap;		HX_STACK_VAR(tmp1,"tmp1");
+	HX_STACK_LINE(283)
+	return tmp1;
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC2(AreaMap_obj,addObjectProperty,return )
 
 Void AreaMap_obj::resetMap( ){
 {
-		HX_STACK_FRAME("maps.AreaMap","resetMap",0x0ccc2363,"maps.AreaMap.resetMap","maps/AreaMap.hx",163,0xeb50e127)
+		HX_STACK_FRAME("maps.AreaMap","resetMap",0x0ccc2363,"maps.AreaMap.resetMap","maps/AreaMap.hx",286,0xeb50e127)
 		HX_STACK_THIS(this)
-		HX_STACK_LINE(164)
-		this->currentCheckpoint = null();
-		HX_STACK_LINE(165)
+		HX_STACK_LINE(288)
 		{
-			HX_STACK_LINE(165)
+			HX_STACK_LINE(288)
 			int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
-			HX_STACK_LINE(165)
-			Array< ::Dynamic > tmp = this->checkPoints;		HX_STACK_VAR(tmp,"tmp");
-			HX_STACK_LINE(165)
-			int tmp1 = tmp->length;		HX_STACK_VAR(tmp1,"tmp1");
-			HX_STACK_LINE(165)
-			int _g = tmp1;		HX_STACK_VAR(_g,"_g");
-			HX_STACK_LINE(165)
+			HX_STACK_LINE(288)
+			int tmp = this->checkPoints->length;		HX_STACK_VAR(tmp,"tmp");
+			HX_STACK_LINE(288)
+			int _g = tmp;		HX_STACK_VAR(_g,"_g");
+			HX_STACK_LINE(288)
 			while((true)){
-				HX_STACK_LINE(165)
-				bool tmp2 = (_g1 < _g);		HX_STACK_VAR(tmp2,"tmp2");
-				HX_STACK_LINE(165)
-				bool tmp3 = !(tmp2);		HX_STACK_VAR(tmp3,"tmp3");
-				HX_STACK_LINE(165)
-				if ((tmp3)){
-					HX_STACK_LINE(165)
+				HX_STACK_LINE(288)
+				bool tmp1 = (_g1 < _g);		HX_STACK_VAR(tmp1,"tmp1");
+				HX_STACK_LINE(288)
+				bool tmp2 = !(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
+				HX_STACK_LINE(288)
+				if ((tmp2)){
+					HX_STACK_LINE(288)
 					break;
 				}
-				HX_STACK_LINE(165)
-				int tmp4 = (_g1)++;		HX_STACK_VAR(tmp4,"tmp4");
-				HX_STACK_LINE(165)
-				int i = tmp4;		HX_STACK_VAR(i,"i");
-				HX_STACK_LINE(166)
-				Array< ::Dynamic > tmp5 = this->checkPoints;		HX_STACK_VAR(tmp5,"tmp5");
-				HX_STACK_LINE(166)
-				::maps::Checkpoint tmp6 = tmp5->__get(i).StaticCast< ::maps::Checkpoint >();		HX_STACK_VAR(tmp6,"tmp6");
-				HX_STACK_LINE(166)
-				tmp6->setInactive();
+				HX_STACK_LINE(288)
+				int tmp3 = (_g1)++;		HX_STACK_VAR(tmp3,"tmp3");
+				HX_STACK_LINE(288)
+				int i = tmp3;		HX_STACK_VAR(i,"i");
+				HX_STACK_LINE(289)
+				::maps::mapobjects::Checkpoint tmp4 = this->checkPoints->__get(i).StaticCast< ::maps::mapobjects::Checkpoint >();		HX_STACK_VAR(tmp4,"tmp4");
+				HX_STACK_LINE(289)
+				tmp4->setInactive();
 			}
 		}
+		HX_STACK_LINE(291)
+		Array< ::Dynamic > removeList = Array_obj< ::Dynamic >::__new();		HX_STACK_VAR(removeList,"removeList");
+		HX_STACK_LINE(293)
+		{
+			HX_STACK_LINE(293)
+			int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
+			HX_STACK_LINE(293)
+			int tmp = this->actorList->length;		HX_STACK_VAR(tmp,"tmp");
+			HX_STACK_LINE(293)
+			int _g = tmp;		HX_STACK_VAR(_g,"_g");
+			HX_STACK_LINE(293)
+			while((true)){
+				HX_STACK_LINE(293)
+				bool tmp1 = (_g1 < _g);		HX_STACK_VAR(tmp1,"tmp1");
+				HX_STACK_LINE(293)
+				bool tmp2 = !(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
+				HX_STACK_LINE(293)
+				if ((tmp2)){
+					HX_STACK_LINE(293)
+					break;
+				}
+				HX_STACK_LINE(293)
+				int tmp3 = (_g1)++;		HX_STACK_VAR(tmp3,"tmp3");
+				HX_STACK_LINE(293)
+				int j = tmp3;		HX_STACK_VAR(j,"j");
+				HX_STACK_LINE(294)
+				::actors::Actor tmp4 = this->actorList->__get(j).StaticCast< ::actors::Actor >();		HX_STACK_VAR(tmp4,"tmp4");
+				HX_STACK_LINE(294)
+				removeList->push(tmp4);
+			}
+		}
+		HX_STACK_LINE(295)
+		{
+			HX_STACK_LINE(295)
+			int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
+			HX_STACK_LINE(295)
+			int _g = removeList->length;		HX_STACK_VAR(_g,"_g");
+			HX_STACK_LINE(295)
+			while((true)){
+				HX_STACK_LINE(295)
+				bool tmp = (_g1 < _g);		HX_STACK_VAR(tmp,"tmp");
+				HX_STACK_LINE(295)
+				bool tmp1 = !(tmp);		HX_STACK_VAR(tmp1,"tmp1");
+				HX_STACK_LINE(295)
+				if ((tmp1)){
+					HX_STACK_LINE(295)
+					break;
+				}
+				HX_STACK_LINE(295)
+				int tmp2 = (_g1)++;		HX_STACK_VAR(tmp2,"tmp2");
+				HX_STACK_LINE(295)
+				int k = tmp2;		HX_STACK_VAR(k,"k");
+				HX_STACK_LINE(296)
+				::actors::Actor tmp3 = removeList->__get(k).StaticCast< ::actors::Actor >();		HX_STACK_VAR(tmp3,"tmp3");
+				HX_STACK_LINE(296)
+				bool tmp4 = ::Std_obj::is(tmp3,hx::ClassOf< ::actors::Player >());		HX_STACK_VAR(tmp4,"tmp4");
+				HX_STACK_LINE(296)
+				if ((tmp4)){
+					HX_STACK_LINE(296)
+					continue;
+				}
+				HX_STACK_LINE(297)
+				::actors::Actor tmp5 = removeList->__get(k).StaticCast< ::actors::Actor >();		HX_STACK_VAR(tmp5,"tmp5");
+				HX_STACK_LINE(297)
+				this->removeActor(tmp5);
+			}
+		}
+		HX_STACK_LINE(300)
+		Array< ::Dynamic > removeProjList = Array_obj< ::Dynamic >::__new();		HX_STACK_VAR(removeProjList,"removeProjList");
+		HX_STACK_LINE(301)
+		{
+			HX_STACK_LINE(301)
+			int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
+			HX_STACK_LINE(301)
+			int tmp = this->projectileList->length;		HX_STACK_VAR(tmp,"tmp");
+			HX_STACK_LINE(301)
+			int _g = tmp;		HX_STACK_VAR(_g,"_g");
+			HX_STACK_LINE(301)
+			while((true)){
+				HX_STACK_LINE(301)
+				bool tmp1 = (_g1 < _g);		HX_STACK_VAR(tmp1,"tmp1");
+				HX_STACK_LINE(301)
+				bool tmp2 = !(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
+				HX_STACK_LINE(301)
+				if ((tmp2)){
+					HX_STACK_LINE(301)
+					break;
+				}
+				HX_STACK_LINE(301)
+				int tmp3 = (_g1)++;		HX_STACK_VAR(tmp3,"tmp3");
+				HX_STACK_LINE(301)
+				int c = tmp3;		HX_STACK_VAR(c,"c");
+				HX_STACK_LINE(302)
+				::actors::attacks::Projectile tmp4 = this->projectileList->__get(c).StaticCast< ::actors::attacks::Projectile >();		HX_STACK_VAR(tmp4,"tmp4");
+				HX_STACK_LINE(302)
+				removeProjList->push(tmp4);
+			}
+		}
+		HX_STACK_LINE(303)
+		{
+			HX_STACK_LINE(303)
+			int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
+			HX_STACK_LINE(303)
+			int _g = removeProjList->length;		HX_STACK_VAR(_g,"_g");
+			HX_STACK_LINE(303)
+			while((true)){
+				HX_STACK_LINE(303)
+				bool tmp = (_g1 < _g);		HX_STACK_VAR(tmp,"tmp");
+				HX_STACK_LINE(303)
+				bool tmp1 = !(tmp);		HX_STACK_VAR(tmp1,"tmp1");
+				HX_STACK_LINE(303)
+				if ((tmp1)){
+					HX_STACK_LINE(303)
+					break;
+				}
+				HX_STACK_LINE(303)
+				int tmp2 = (_g1)++;		HX_STACK_VAR(tmp2,"tmp2");
+				HX_STACK_LINE(303)
+				int e = tmp2;		HX_STACK_VAR(e,"e");
+				HX_STACK_LINE(304)
+				::actors::attacks::Projectile tmp3 = removeProjList->__get(e).StaticCast< ::actors::attacks::Projectile >();		HX_STACK_VAR(tmp3,"tmp3");
+				HX_STACK_LINE(304)
+				this->removeProjectile(tmp3);
+			}
+		}
+		HX_STACK_LINE(305)
+		this->resetSpawnPoints();
 	}
 return null();
 }
@@ -790,14 +1571,57 @@ return null();
 
 HX_DEFINE_DYNAMIC_FUNC0(AreaMap_obj,resetMap,(void))
 
+Void AreaMap_obj::resetSpawnPoints( ){
+{
+		HX_STACK_FRAME("maps.AreaMap","resetSpawnPoints",0xdb5fba85,"maps.AreaMap.resetSpawnPoints","maps/AreaMap.hx",309,0xeb50e127)
+		HX_STACK_THIS(this)
+		HX_STACK_LINE(309)
+		int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
+		HX_STACK_LINE(309)
+		int tmp = this->spawnPoints->length;		HX_STACK_VAR(tmp,"tmp");
+		HX_STACK_LINE(309)
+		int _g = tmp;		HX_STACK_VAR(_g,"_g");
+		HX_STACK_LINE(309)
+		while((true)){
+			HX_STACK_LINE(309)
+			bool tmp1 = (_g1 < _g);		HX_STACK_VAR(tmp1,"tmp1");
+			HX_STACK_LINE(309)
+			bool tmp2 = !(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
+			HX_STACK_LINE(309)
+			if ((tmp2)){
+				HX_STACK_LINE(309)
+				break;
+			}
+			HX_STACK_LINE(309)
+			int tmp3 = (_g1)++;		HX_STACK_VAR(tmp3,"tmp3");
+			HX_STACK_LINE(309)
+			int i = tmp3;		HX_STACK_VAR(i,"i");
+			HX_STACK_LINE(310)
+			::maps::mapobjects::SpawnPoint tmp4 = this->spawnPoints->__get(i).StaticCast< ::maps::mapobjects::SpawnPoint >();		HX_STACK_VAR(tmp4,"tmp4");
+			HX_STACK_LINE(310)
+			tmp4->resetSpawn();
+		}
+	}
+return null();
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC0(AreaMap_obj,resetSpawnPoints,(void))
+
 Void AreaMap_obj::updateMap( ){
 {
-		HX_STACK_FRAME("maps.AreaMap","updateMap",0x1a7073fd,"maps.AreaMap.updateMap","maps/AreaMap.hx",171,0xeb50e127)
+		HX_STACK_FRAME("maps.AreaMap","updateMap",0x1a7073fd,"maps.AreaMap.updateMap","maps/AreaMap.hx",315,0xeb50e127)
 		HX_STACK_THIS(this)
-		HX_STACK_LINE(173)
+		HX_STACK_LINE(317)
 		::actors::Player tmp = this->player;		HX_STACK_VAR(tmp,"tmp");
-		HX_STACK_LINE(173)
+		HX_STACK_LINE(317)
 		tmp->updatePlayer();
+		HX_STACK_LINE(318)
+		this->updateActors();
+		HX_STACK_LINE(319)
+		this->updateProjectiles();
+		HX_STACK_LINE(320)
+		this->updateSpawnPoints();
 	}
 return null();
 }
@@ -805,327 +1629,891 @@ return null();
 
 HX_DEFINE_DYNAMIC_FUNC0(AreaMap_obj,updateMap,(void))
 
-Void AreaMap_obj::addPlayer( ::actors::Player player){
+Void AreaMap_obj::updateActors( ){
 {
-		HX_STACK_FRAME("maps.AreaMap","addPlayer",0x876dac4c,"maps.AreaMap.addPlayer","maps/AreaMap.hx",177,0xeb50e127)
+		HX_STACK_FRAME("maps.AreaMap","updateActors",0x13d2b51d,"maps.AreaMap.updateActors","maps/AreaMap.hx",324,0xeb50e127)
 		HX_STACK_THIS(this)
-		HX_STACK_ARG(player,"player")
-		HX_STACK_LINE(178)
-		this->player = player;
-		HX_STACK_LINE(179)
-		player->setCurrentMap(hx::ObjectPtr<OBJ_>(this));
-		HX_STACK_LINE(180)
-		::actors::Player tmp = player;		HX_STACK_VAR(tmp,"tmp");
-		HX_STACK_LINE(180)
-		this->addChild(tmp);
-		HX_STACK_LINE(182)
-		::maps::Checkpoint tmp1 = this->startPoint;		HX_STACK_VAR(tmp1,"tmp1");
-		HX_STACK_LINE(182)
-		bool tmp2 = (tmp1 != null());		HX_STACK_VAR(tmp2,"tmp2");
-		HX_STACK_LINE(182)
-		if ((tmp2)){
-			HX_STACK_LINE(183)
-			::maps::Checkpoint tmp3 = this->startPoint;		HX_STACK_VAR(tmp3,"tmp3");
-			HX_STACK_LINE(183)
-			Float tmp4 = tmp3->get_x();		HX_STACK_VAR(tmp4,"tmp4");
-			HX_STACK_LINE(183)
-			player->set_x(tmp4);
-			HX_STACK_LINE(184)
-			::maps::Checkpoint tmp5 = this->startPoint;		HX_STACK_VAR(tmp5,"tmp5");
-			HX_STACK_LINE(184)
-			Float tmp6 = tmp5->get_y();		HX_STACK_VAR(tmp6,"tmp6");
-			HX_STACK_LINE(184)
-			player->set_y(tmp6);
-			HX_STACK_LINE(185)
-			::maps::Checkpoint tmp7 = this->startPoint;		HX_STACK_VAR(tmp7,"tmp7");
-			HX_STACK_LINE(185)
-			this->currentCheckpoint = tmp7;
-		}
-		else{
-			HX_STACK_LINE(188)
-			player->set_x((int)32);
-			HX_STACK_LINE(189)
-			player->set_y((int)32);
+		HX_STACK_LINE(324)
+		int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
+		HX_STACK_LINE(324)
+		int tmp = this->actorList->length;		HX_STACK_VAR(tmp,"tmp");
+		HX_STACK_LINE(324)
+		int _g = tmp;		HX_STACK_VAR(_g,"_g");
+		HX_STACK_LINE(324)
+		while((true)){
+			HX_STACK_LINE(324)
+			bool tmp1 = (_g1 < _g);		HX_STACK_VAR(tmp1,"tmp1");
+			HX_STACK_LINE(324)
+			bool tmp2 = !(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
+			HX_STACK_LINE(324)
+			if ((tmp2)){
+				HX_STACK_LINE(324)
+				break;
+			}
+			HX_STACK_LINE(324)
+			int tmp3 = (_g1)++;		HX_STACK_VAR(tmp3,"tmp3");
+			HX_STACK_LINE(324)
+			int i = tmp3;		HX_STACK_VAR(i,"i");
+			HX_STACK_LINE(325)
+			int tmp4 = i;		HX_STACK_VAR(tmp4,"tmp4");
+			HX_STACK_LINE(325)
+			int tmp5 = this->actorList->length;		HX_STACK_VAR(tmp5,"tmp5");
+			HX_STACK_LINE(325)
+			bool tmp6 = (tmp4 >= tmp5);		HX_STACK_VAR(tmp6,"tmp6");
+			HX_STACK_LINE(325)
+			if ((tmp6)){
+				HX_STACK_LINE(325)
+				return null();
+			}
+			HX_STACK_LINE(326)
+			::actors::Actor tmp7 = this->actorList->__get(i).StaticCast< ::actors::Actor >();		HX_STACK_VAR(tmp7,"tmp7");
+			HX_STACK_LINE(326)
+			tmp7->updateActor();
 		}
 	}
 return null();
 }
 
 
-HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,addPlayer,(void))
+HX_DEFINE_DYNAMIC_FUNC0(AreaMap_obj,updateActors,(void))
 
-Array< ::Dynamic > AreaMap_obj::checkCollisions( ::maps::MapObject object){
-	HX_STACK_FRAME("maps.AreaMap","checkCollisions",0x3f1b7a13,"maps.AreaMap.checkCollisions","maps/AreaMap.hx",194,0xeb50e127)
-	HX_STACK_THIS(this)
-	HX_STACK_ARG(object,"object")
-	HX_STACK_LINE(196)
-	Float tmp = object->get_x();		HX_STACK_VAR(tmp,"tmp");
-	HX_STACK_LINE(196)
-	Float tmp1 = object->get_width();		HX_STACK_VAR(tmp1,"tmp1");
-	HX_STACK_LINE(196)
-	Float tmp2 = (Float(tmp1) / Float((int)2));		HX_STACK_VAR(tmp2,"tmp2");
-	HX_STACK_LINE(196)
-	Float tmp3 = (tmp + tmp2);		HX_STACK_VAR(tmp3,"tmp3");
-	HX_STACK_LINE(196)
-	Float tmp4 = object->get_y();		HX_STACK_VAR(tmp4,"tmp4");
-	HX_STACK_LINE(196)
-	Float tmp5 = object->get_height();		HX_STACK_VAR(tmp5,"tmp5");
-	HX_STACK_LINE(196)
-	Float tmp6 = (Float(tmp5) / Float((int)2));		HX_STACK_VAR(tmp6,"tmp6");
-	HX_STACK_LINE(196)
-	Float tmp7 = (tmp4 + tmp6);		HX_STACK_VAR(tmp7,"tmp7");
-	HX_STACK_LINE(196)
-	::openfl::geom::Point tmp8 = ::openfl::geom::Point_obj::__new(tmp3,tmp7);		HX_STACK_VAR(tmp8,"tmp8");
-	HX_STACK_LINE(196)
-	::openfl::geom::Point objectCenter = tmp8;		HX_STACK_VAR(objectCenter,"objectCenter");
-	HX_STACK_LINE(197)
-	Float tmp9 = objectCenter->x;		HX_STACK_VAR(tmp9,"tmp9");
-	HX_STACK_LINE(197)
-	int tmp10 = this->tileSize;		HX_STACK_VAR(tmp10,"tmp10");
-	HX_STACK_LINE(197)
-	Float tmp11 = (Float(tmp9) / Float(tmp10));		HX_STACK_VAR(tmp11,"tmp11");
-	HX_STACK_LINE(197)
-	int tmp12 = ::Math_obj::floor(tmp11);		HX_STACK_VAR(tmp12,"tmp12");
-	HX_STACK_LINE(197)
-	Float tmp13 = objectCenter->y;		HX_STACK_VAR(tmp13,"tmp13");
-	HX_STACK_LINE(197)
-	int tmp14 = this->tileSize;		HX_STACK_VAR(tmp14,"tmp14");
-	HX_STACK_LINE(197)
-	Float tmp15 = (Float(tmp13) / Float(tmp14));		HX_STACK_VAR(tmp15,"tmp15");
-	HX_STACK_LINE(197)
-	int tmp16 = ::Math_obj::floor(tmp15);		HX_STACK_VAR(tmp16,"tmp16");
-	HX_STACK_LINE(197)
-	::openfl::geom::Point tmp17 = ::openfl::geom::Point_obj::__new(tmp12,tmp16);		HX_STACK_VAR(tmp17,"tmp17");
-	HX_STACK_LINE(197)
-	objectCenter = tmp17;
-	HX_STACK_LINE(198)
-	Float tmp18 = object->get_x();		HX_STACK_VAR(tmp18,"tmp18");
-	HX_STACK_LINE(198)
-	Float tmp19 = object->get_y();		HX_STACK_VAR(tmp19,"tmp19");
-	HX_STACK_LINE(198)
-	Float tmp20 = object->get_width();		HX_STACK_VAR(tmp20,"tmp20");
-	HX_STACK_LINE(198)
-	Float tmp21 = object->get_height();		HX_STACK_VAR(tmp21,"tmp21");
-	HX_STACK_LINE(198)
-	::openfl::geom::Rectangle tmp22 = ::openfl::geom::Rectangle_obj::__new(tmp18,tmp19,tmp20,tmp21);		HX_STACK_VAR(tmp22,"tmp22");
-	HX_STACK_LINE(198)
-	::openfl::geom::Rectangle objectBounds = tmp22;		HX_STACK_VAR(objectBounds,"objectBounds");
-	HX_STACK_LINE(199)
-	Array< ::Dynamic > tmp23;		HX_STACK_VAR(tmp23,"tmp23");
-	HX_STACK_LINE(199)
-	{
-		HX_STACK_LINE(199)
-		Array< ::Dynamic > this1;		HX_STACK_VAR(this1,"this1");
-		HX_STACK_LINE(199)
-		this1 = Array_obj< ::Dynamic >::__new()->__SetSizeExact(null());
-		HX_STACK_LINE(199)
-		tmp23 = this1;
-	}
-	HX_STACK_LINE(199)
-	Array< ::Dynamic > collisionList = tmp23;		HX_STACK_VAR(collisionList,"collisionList");
-	HX_STACK_LINE(201)
-	int objectY = ((int)(objectCenter->y));		HX_STACK_VAR(objectY,"objectY");
-	HX_STACK_LINE(202)
-	int objectX = ((int)(objectCenter->x));		HX_STACK_VAR(objectX,"objectX");
-	HX_STACK_LINE(204)
-	{
-		HX_STACK_LINE(204)
-		int tmp24 = (objectY - (int)1);		HX_STACK_VAR(tmp24,"tmp24");
-		HX_STACK_LINE(204)
-		int _g1 = tmp24;		HX_STACK_VAR(_g1,"_g1");
-		HX_STACK_LINE(204)
-		int tmp25 = (objectY + (int)2);		HX_STACK_VAR(tmp25,"tmp25");
-		HX_STACK_LINE(204)
-		int _g = tmp25;		HX_STACK_VAR(_g,"_g");
-		HX_STACK_LINE(204)
+Void AreaMap_obj::updateSpawnPoints( ){
+{
+		HX_STACK_FRAME("maps.AreaMap","updateSpawnPoints",0x830d351f,"maps.AreaMap.updateSpawnPoints","maps/AreaMap.hx",331,0xeb50e127)
+		HX_STACK_THIS(this)
+		HX_STACK_LINE(331)
+		int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
+		HX_STACK_LINE(331)
+		int tmp = this->spawnPoints->length;		HX_STACK_VAR(tmp,"tmp");
+		HX_STACK_LINE(331)
+		int _g = tmp;		HX_STACK_VAR(_g,"_g");
+		HX_STACK_LINE(331)
 		while((true)){
-			HX_STACK_LINE(204)
-			bool tmp26 = (_g1 < _g);		HX_STACK_VAR(tmp26,"tmp26");
-			HX_STACK_LINE(204)
-			bool tmp27 = !(tmp26);		HX_STACK_VAR(tmp27,"tmp27");
-			HX_STACK_LINE(204)
-			if ((tmp27)){
-				HX_STACK_LINE(204)
+			HX_STACK_LINE(331)
+			bool tmp1 = (_g1 < _g);		HX_STACK_VAR(tmp1,"tmp1");
+			HX_STACK_LINE(331)
+			bool tmp2 = !(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
+			HX_STACK_LINE(331)
+			if ((tmp2)){
+				HX_STACK_LINE(331)
 				break;
 			}
-			HX_STACK_LINE(204)
-			int tmp28 = (_g1)++;		HX_STACK_VAR(tmp28,"tmp28");
-			HX_STACK_LINE(204)
-			int y = tmp28;		HX_STACK_VAR(y,"y");
-			HX_STACK_LINE(205)
-			{
-				HX_STACK_LINE(205)
-				int tmp29 = (objectX - (int)1);		HX_STACK_VAR(tmp29,"tmp29");
-				HX_STACK_LINE(205)
-				int _g3 = tmp29;		HX_STACK_VAR(_g3,"_g3");
-				HX_STACK_LINE(205)
-				int tmp30 = (objectX + (int)2);		HX_STACK_VAR(tmp30,"tmp30");
-				HX_STACK_LINE(205)
-				int _g2 = tmp30;		HX_STACK_VAR(_g2,"_g2");
-				HX_STACK_LINE(205)
-				while((true)){
-					HX_STACK_LINE(205)
-					bool tmp31 = (_g3 < _g2);		HX_STACK_VAR(tmp31,"tmp31");
-					HX_STACK_LINE(205)
-					bool tmp32 = !(tmp31);		HX_STACK_VAR(tmp32,"tmp32");
-					HX_STACK_LINE(205)
-					if ((tmp32)){
-						HX_STACK_LINE(205)
-						break;
-					}
-					HX_STACK_LINE(205)
-					int tmp33 = (_g3)++;		HX_STACK_VAR(tmp33,"tmp33");
-					HX_STACK_LINE(205)
-					int x = tmp33;		HX_STACK_VAR(x,"x");
-					HX_STACK_LINE(207)
-					int tmp34 = y;		HX_STACK_VAR(tmp34,"tmp34");
-					HX_STACK_LINE(207)
-					int tmp35 = this->objectList->length;		HX_STACK_VAR(tmp35,"tmp35");
-					HX_STACK_LINE(207)
-					bool tmp36 = (tmp34 >= tmp35);		HX_STACK_VAR(tmp36,"tmp36");
-					HX_STACK_LINE(207)
-					bool tmp37 = !(tmp36);		HX_STACK_VAR(tmp37,"tmp37");
-					HX_STACK_LINE(207)
-					bool tmp38;		HX_STACK_VAR(tmp38,"tmp38");
-					HX_STACK_LINE(207)
-					if ((tmp37)){
-						HX_STACK_LINE(207)
-						tmp38 = (y < (int)0);
-					}
-					else{
-						HX_STACK_LINE(207)
-						tmp38 = true;
-					}
-					HX_STACK_LINE(207)
-					if ((tmp38)){
-						HX_STACK_LINE(207)
-						continue;
-					}
-					else{
-						HX_STACK_LINE(208)
-						int tmp39 = x;		HX_STACK_VAR(tmp39,"tmp39");
-						HX_STACK_LINE(208)
-						int tmp40 = this->objectList->__get(y).StaticCast< Array< ::Dynamic > >()->length;		HX_STACK_VAR(tmp40,"tmp40");
-						HX_STACK_LINE(208)
-						bool tmp41 = (tmp39 >= tmp40);		HX_STACK_VAR(tmp41,"tmp41");
-						HX_STACK_LINE(208)
-						bool tmp42 = !(tmp41);		HX_STACK_VAR(tmp42,"tmp42");
-						HX_STACK_LINE(208)
-						bool tmp43;		HX_STACK_VAR(tmp43,"tmp43");
-						HX_STACK_LINE(208)
-						if ((tmp42)){
-							HX_STACK_LINE(208)
-							tmp43 = (x < (int)0);
+			HX_STACK_LINE(331)
+			int tmp3 = (_g1)++;		HX_STACK_VAR(tmp3,"tmp3");
+			HX_STACK_LINE(331)
+			int i = tmp3;		HX_STACK_VAR(i,"i");
+			HX_STACK_LINE(332)
+			::maps::mapobjects::SpawnPoint tmp4 = this->spawnPoints->__get(i).StaticCast< ::maps::mapobjects::SpawnPoint >();		HX_STACK_VAR(tmp4,"tmp4");
+			HX_STACK_LINE(332)
+			bool tmp5 = tmp4->updateSpawn();		HX_STACK_VAR(tmp5,"tmp5");
+			HX_STACK_LINE(332)
+			if ((tmp5)){
+				HX_STACK_LINE(333)
+				::maps::mapobjects::SpawnPoint tmp6 = this->spawnPoints->__get(i).StaticCast< ::maps::mapobjects::SpawnPoint >();		HX_STACK_VAR(tmp6,"tmp6");
+				HX_STACK_LINE(333)
+				::actors::enemies::Enemy tmp7 = tmp6->getEnemyType();		HX_STACK_VAR(tmp7,"tmp7");
+				HX_STACK_LINE(333)
+				this->addActor(tmp7);
+			}
+		}
+	}
+return null();
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC0(AreaMap_obj,updateSpawnPoints,(void))
+
+Void AreaMap_obj::updateProjectiles( ){
+{
+		HX_STACK_FRAME("maps.AreaMap","updateProjectiles",0x2630d8cb,"maps.AreaMap.updateProjectiles","maps/AreaMap.hx",337,0xeb50e127)
+		HX_STACK_THIS(this)
+		HX_STACK_LINE(338)
+		Array< ::Dynamic > expiredProjectiles = Array_obj< ::Dynamic >::__new();		HX_STACK_VAR(expiredProjectiles,"expiredProjectiles");
+		HX_STACK_LINE(340)
+		{
+			HX_STACK_LINE(340)
+			int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
+			HX_STACK_LINE(340)
+			int tmp = this->projectileList->length;		HX_STACK_VAR(tmp,"tmp");
+			HX_STACK_LINE(340)
+			int _g = tmp;		HX_STACK_VAR(_g,"_g");
+			HX_STACK_LINE(340)
+			while((true)){
+				HX_STACK_LINE(340)
+				bool tmp1 = (_g1 < _g);		HX_STACK_VAR(tmp1,"tmp1");
+				HX_STACK_LINE(340)
+				bool tmp2 = !(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
+				HX_STACK_LINE(340)
+				if ((tmp2)){
+					HX_STACK_LINE(340)
+					break;
+				}
+				HX_STACK_LINE(340)
+				int tmp3 = (_g1)++;		HX_STACK_VAR(tmp3,"tmp3");
+				HX_STACK_LINE(340)
+				int i = tmp3;		HX_STACK_VAR(i,"i");
+				HX_STACK_LINE(341)
+				::actors::attacks::Projectile tmp4 = this->projectileList->__get(i).StaticCast< ::actors::attacks::Projectile >();		HX_STACK_VAR(tmp4,"tmp4");
+				HX_STACK_LINE(341)
+				bool tmp5 = tmp4->updateProjectile();		HX_STACK_VAR(tmp5,"tmp5");
+				HX_STACK_LINE(341)
+				if ((tmp5)){
+					HX_STACK_LINE(342)
+					::actors::attacks::Projectile tmp6 = this->projectileList->__get(i).StaticCast< ::actors::attacks::Projectile >();		HX_STACK_VAR(tmp6,"tmp6");
+					HX_STACK_LINE(342)
+					expiredProjectiles->push(tmp6);
+				}
+			}
+		}
+		HX_STACK_LINE(344)
+		{
+			HX_STACK_LINE(344)
+			int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
+			HX_STACK_LINE(344)
+			int _g = expiredProjectiles->length;		HX_STACK_VAR(_g,"_g");
+			HX_STACK_LINE(344)
+			while((true)){
+				HX_STACK_LINE(344)
+				bool tmp = (_g1 < _g);		HX_STACK_VAR(tmp,"tmp");
+				HX_STACK_LINE(344)
+				bool tmp1 = !(tmp);		HX_STACK_VAR(tmp1,"tmp1");
+				HX_STACK_LINE(344)
+				if ((tmp1)){
+					HX_STACK_LINE(344)
+					break;
+				}
+				HX_STACK_LINE(344)
+				int tmp2 = (_g1)++;		HX_STACK_VAR(tmp2,"tmp2");
+				HX_STACK_LINE(344)
+				int j = tmp2;		HX_STACK_VAR(j,"j");
+				HX_STACK_LINE(345)
+				::actors::attacks::Projectile tmp3 = expiredProjectiles->__get(j).StaticCast< ::actors::attacks::Projectile >();		HX_STACK_VAR(tmp3,"tmp3");
+				HX_STACK_LINE(345)
+				this->removeProjectile(tmp3);
+			}
+		}
+	}
+return null();
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC0(AreaMap_obj,updateProjectiles,(void))
+
+Void AreaMap_obj::addPlayer( ::actors::Player player,::maps::mapobjects::Portal origin){
+{
+		HX_STACK_FRAME("maps.AreaMap","addPlayer",0x876dac4c,"maps.AreaMap.addPlayer","maps/AreaMap.hx",349,0xeb50e127)
+		HX_STACK_THIS(this)
+		HX_STACK_ARG(player,"player")
+		HX_STACK_ARG(origin,"origin")
+		HX_STACK_LINE(350)
+		this->player = player;
+		HX_STACK_LINE(351)
+		::actors::Player tmp = player;		HX_STACK_VAR(tmp,"tmp");
+		HX_STACK_LINE(351)
+		this->addActor(tmp);
+		HX_STACK_LINE(353)
+		bool tmp1 = (origin != null());		HX_STACK_VAR(tmp1,"tmp1");
+		HX_STACK_LINE(353)
+		if ((tmp1)){
+			HX_STACK_LINE(354)
+			Float tmp2 = origin->get_x();		HX_STACK_VAR(tmp2,"tmp2");
+			HX_STACK_LINE(354)
+			Float tmp3 = (tmp2 + (int)6);		HX_STACK_VAR(tmp3,"tmp3");
+			HX_STACK_LINE(354)
+			player->set_x(tmp3);
+			HX_STACK_LINE(355)
+			Float tmp4 = origin->get_y();		HX_STACK_VAR(tmp4,"tmp4");
+			HX_STACK_LINE(355)
+			Float tmp5 = (tmp4 - (int)4);		HX_STACK_VAR(tmp5,"tmp5");
+			HX_STACK_LINE(355)
+			player->set_y(tmp5);
+			HX_STACK_LINE(356)
+			this->currentCheckpoint = origin;
+		}
+		else{
+			HX_STACK_LINE(358)
+			::maps::mapobjects::Checkpoint tmp2 = this->startPoint;		HX_STACK_VAR(tmp2,"tmp2");
+			HX_STACK_LINE(358)
+			bool tmp3 = (tmp2 != null());		HX_STACK_VAR(tmp3,"tmp3");
+			HX_STACK_LINE(358)
+			if ((tmp3)){
+				HX_STACK_LINE(359)
+				::maps::mapobjects::Checkpoint tmp4 = this->startPoint;		HX_STACK_VAR(tmp4,"tmp4");
+				HX_STACK_LINE(359)
+				Float tmp5 = tmp4->get_x();		HX_STACK_VAR(tmp5,"tmp5");
+				HX_STACK_LINE(359)
+				player->set_x(tmp5);
+				HX_STACK_LINE(360)
+				::maps::mapobjects::Checkpoint tmp6 = this->startPoint;		HX_STACK_VAR(tmp6,"tmp6");
+				HX_STACK_LINE(360)
+				Float tmp7 = tmp6->get_y();		HX_STACK_VAR(tmp7,"tmp7");
+				HX_STACK_LINE(360)
+				player->set_y(tmp7);
+				HX_STACK_LINE(361)
+				::maps::mapobjects::Checkpoint tmp8 = this->startPoint;		HX_STACK_VAR(tmp8,"tmp8");
+				HX_STACK_LINE(361)
+				this->currentCheckpoint = tmp8;
+			}
+			else{
+				HX_STACK_LINE(364)
+				player->set_x((int)32);
+				HX_STACK_LINE(365)
+				player->set_y((int)32);
+			}
+		}
+	}
+return null();
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC2(AreaMap_obj,addPlayer,(void))
+
+Void AreaMap_obj::addActor( ::actors::Actor actor){
+{
+		HX_STACK_FRAME("maps.AreaMap","addActor",0x51f6d06a,"maps.AreaMap.addActor","maps/AreaMap.hx",368,0xeb50e127)
+		HX_STACK_THIS(this)
+		HX_STACK_ARG(actor,"actor")
+		HX_STACK_LINE(370)
+		::actors::Actor tmp = actor;		HX_STACK_VAR(tmp,"tmp");
+		HX_STACK_LINE(370)
+		this->actorList->push(tmp);
+		HX_STACK_LINE(371)
+		actor->setCurrentMap(hx::ObjectPtr<OBJ_>(this));
+		HX_STACK_LINE(372)
+		::actors::Actor tmp1 = actor;		HX_STACK_VAR(tmp1,"tmp1");
+		HX_STACK_LINE(372)
+		this->addChild(tmp1);
+	}
+return null();
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,addActor,(void))
+
+Void AreaMap_obj::removeActor( ::actors::Actor actor){
+{
+		HX_STACK_FRAME("maps.AreaMap","removeActor",0x1f95827b,"maps.AreaMap.removeActor","maps/AreaMap.hx",374,0xeb50e127)
+		HX_STACK_THIS(this)
+		HX_STACK_ARG(actor,"actor")
+		HX_STACK_LINE(375)
+		::actors::Actor tmp = actor;		HX_STACK_VAR(tmp,"tmp");
+		HX_STACK_LINE(375)
+		bool tmp1 = this->contains(tmp);		HX_STACK_VAR(tmp1,"tmp1");
+		HX_STACK_LINE(375)
+		if ((tmp1)){
+			HX_STACK_LINE(376)
+			::actors::Actor tmp2 = actor;		HX_STACK_VAR(tmp2,"tmp2");
+			HX_STACK_LINE(376)
+			this->removeChild(tmp2);
+		}
+		HX_STACK_LINE(377)
+		{
+			HX_STACK_LINE(377)
+			int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
+			HX_STACK_LINE(377)
+			int tmp2 = this->actorList->length;		HX_STACK_VAR(tmp2,"tmp2");
+			HX_STACK_LINE(377)
+			int _g = tmp2;		HX_STACK_VAR(_g,"_g");
+			HX_STACK_LINE(377)
+			while((true)){
+				HX_STACK_LINE(377)
+				bool tmp3 = (_g1 < _g);		HX_STACK_VAR(tmp3,"tmp3");
+				HX_STACK_LINE(377)
+				bool tmp4 = !(tmp3);		HX_STACK_VAR(tmp4,"tmp4");
+				HX_STACK_LINE(377)
+				if ((tmp4)){
+					HX_STACK_LINE(377)
+					break;
+				}
+				HX_STACK_LINE(377)
+				int tmp5 = (_g1)++;		HX_STACK_VAR(tmp5,"tmp5");
+				HX_STACK_LINE(377)
+				int i = tmp5;		HX_STACK_VAR(i,"i");
+				HX_STACK_LINE(378)
+				::actors::Actor tmp6 = this->actorList->__get(i).StaticCast< ::actors::Actor >();		HX_STACK_VAR(tmp6,"tmp6");
+				HX_STACK_LINE(378)
+				::actors::Actor tmp7 = actor;		HX_STACK_VAR(tmp7,"tmp7");
+				HX_STACK_LINE(378)
+				bool tmp8 = (tmp6 == tmp7);		HX_STACK_VAR(tmp8,"tmp8");
+				HX_STACK_LINE(378)
+				if ((tmp8)){
+					HX_STACK_LINE(379)
+					int tmp9 = i;		HX_STACK_VAR(tmp9,"tmp9");
+					HX_STACK_LINE(379)
+					this->actorList->splice(tmp9,(int)1);
+				}
+			}
+		}
+	}
+return null();
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,removeActor,(void))
+
+Void AreaMap_obj::addProjectile( ::actors::attacks::Projectile projectile){
+{
+		HX_STACK_FRAME("maps.AreaMap","addProjectile",0x3cca9854,"maps.AreaMap.addProjectile","maps/AreaMap.hx",383,0xeb50e127)
+		HX_STACK_THIS(this)
+		HX_STACK_ARG(projectile,"projectile")
+		HX_STACK_LINE(384)
+		::actors::attacks::Projectile tmp = projectile;		HX_STACK_VAR(tmp,"tmp");
+		HX_STACK_LINE(384)
+		this->projectileList->push(tmp);
+		HX_STACK_LINE(385)
+		projectile->setCurrentMap(hx::ObjectPtr<OBJ_>(this));
+		HX_STACK_LINE(386)
+		::actors::attacks::Projectile tmp1 = projectile;		HX_STACK_VAR(tmp1,"tmp1");
+		HX_STACK_LINE(386)
+		this->addChild(tmp1);
+	}
+return null();
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,addProjectile,(void))
+
+Void AreaMap_obj::removeProjectile( ::actors::attacks::Projectile projectile){
+{
+		HX_STACK_FRAME("maps.AreaMap","removeProjectile",0xa4b7c8a3,"maps.AreaMap.removeProjectile","maps/AreaMap.hx",388,0xeb50e127)
+		HX_STACK_THIS(this)
+		HX_STACK_ARG(projectile,"projectile")
+		HX_STACK_LINE(389)
+		::actors::attacks::Projectile tmp = projectile;		HX_STACK_VAR(tmp,"tmp");
+		HX_STACK_LINE(389)
+		int tmp1 = this->projectileList->indexOf(tmp,null());		HX_STACK_VAR(tmp1,"tmp1");
+		HX_STACK_LINE(389)
+		this->projectileList->splice(tmp1,(int)1);
+		HX_STACK_LINE(390)
+		::actors::attacks::Projectile tmp2 = projectile;		HX_STACK_VAR(tmp2,"tmp2");
+		HX_STACK_LINE(390)
+		bool tmp3 = this->contains(tmp2);		HX_STACK_VAR(tmp3,"tmp3");
+		HX_STACK_LINE(390)
+		if ((tmp3)){
+			HX_STACK_LINE(391)
+			::actors::attacks::Projectile tmp4 = projectile;		HX_STACK_VAR(tmp4,"tmp4");
+			HX_STACK_LINE(391)
+			this->removeChild(tmp4);
+		}
+	}
+return null();
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,removeProjectile,(void))
+
+Array< ::Dynamic > AreaMap_obj::checkCollisions( ::maps::mapobjects::MapObject object,hx::Null< bool >  __o_AIcheck){
+bool AIcheck = __o_AIcheck.Default(false);
+	HX_STACK_FRAME("maps.AreaMap","checkCollisions",0x3f1b7a13,"maps.AreaMap.checkCollisions","maps/AreaMap.hx",394,0xeb50e127)
+	HX_STACK_THIS(this)
+	HX_STACK_ARG(object,"object")
+	HX_STACK_ARG(AIcheck,"AIcheck")
+{
+		HX_STACK_LINE(396)
+		::openfl::geom::Rectangle tmp = object->getCollisionBounds();		HX_STACK_VAR(tmp,"tmp");
+		HX_STACK_LINE(396)
+		::openfl::geom::Rectangle objectBounds = tmp;		HX_STACK_VAR(objectBounds,"objectBounds");
+		HX_STACK_LINE(397)
+		Float tmp1 = objectBounds->x;		HX_STACK_VAR(tmp1,"tmp1");
+		HX_STACK_LINE(397)
+		Float tmp2 = (Float(objectBounds->width) / Float((int)2));		HX_STACK_VAR(tmp2,"tmp2");
+		HX_STACK_LINE(397)
+		Float tmp3 = (tmp1 + tmp2);		HX_STACK_VAR(tmp3,"tmp3");
+		HX_STACK_LINE(397)
+		Float tmp4 = objectBounds->y;		HX_STACK_VAR(tmp4,"tmp4");
+		HX_STACK_LINE(397)
+		Float tmp5 = (Float(objectBounds->height) / Float((int)2));		HX_STACK_VAR(tmp5,"tmp5");
+		HX_STACK_LINE(397)
+		Float tmp6 = (tmp4 + tmp5);		HX_STACK_VAR(tmp6,"tmp6");
+		HX_STACK_LINE(397)
+		::openfl::geom::Point tmp7 = ::openfl::geom::Point_obj::__new(tmp3,tmp6);		HX_STACK_VAR(tmp7,"tmp7");
+		HX_STACK_LINE(397)
+		::openfl::geom::Point objectCenter = tmp7;		HX_STACK_VAR(objectCenter,"objectCenter");
+		HX_STACK_LINE(398)
+		Float tmp8 = objectCenter->x;		HX_STACK_VAR(tmp8,"tmp8");
+		HX_STACK_LINE(398)
+		int tmp9 = this->tileSize;		HX_STACK_VAR(tmp9,"tmp9");
+		HX_STACK_LINE(398)
+		Float tmp10 = (Float(tmp8) / Float(tmp9));		HX_STACK_VAR(tmp10,"tmp10");
+		HX_STACK_LINE(398)
+		int tmp11 = ::Math_obj::floor(tmp10);		HX_STACK_VAR(tmp11,"tmp11");
+		HX_STACK_LINE(398)
+		Float tmp12 = objectCenter->y;		HX_STACK_VAR(tmp12,"tmp12");
+		HX_STACK_LINE(398)
+		int tmp13 = this->tileSize;		HX_STACK_VAR(tmp13,"tmp13");
+		HX_STACK_LINE(398)
+		Float tmp14 = (Float(tmp12) / Float(tmp13));		HX_STACK_VAR(tmp14,"tmp14");
+		HX_STACK_LINE(398)
+		int tmp15 = ::Math_obj::floor(tmp14);		HX_STACK_VAR(tmp15,"tmp15");
+		HX_STACK_LINE(398)
+		::openfl::geom::Point tmp16 = ::openfl::geom::Point_obj::__new(tmp11,tmp15);		HX_STACK_VAR(tmp16,"tmp16");
+		HX_STACK_LINE(398)
+		objectCenter = tmp16;
+		HX_STACK_LINE(399)
+		Array< ::Dynamic > collisionList = Array_obj< ::Dynamic >::__new();		HX_STACK_VAR(collisionList,"collisionList");
+		HX_STACK_LINE(401)
+		Float tmp17 = objectCenter->y;		HX_STACK_VAR(tmp17,"tmp17");
+		HX_STACK_LINE(401)
+		int tmp18 = ::Math_obj::round(tmp17);		HX_STACK_VAR(tmp18,"tmp18");
+		HX_STACK_LINE(401)
+		int objectY = tmp18;		HX_STACK_VAR(objectY,"objectY");
+		HX_STACK_LINE(402)
+		Float tmp19 = objectCenter->x;		HX_STACK_VAR(tmp19,"tmp19");
+		HX_STACK_LINE(402)
+		int tmp20 = ::Math_obj::round(tmp19);		HX_STACK_VAR(tmp20,"tmp20");
+		HX_STACK_LINE(402)
+		int objectX = tmp20;		HX_STACK_VAR(objectX,"objectX");
+		HX_STACK_LINE(404)
+		{
+			HX_STACK_LINE(404)
+			int tmp21 = (objectY - (int)1);		HX_STACK_VAR(tmp21,"tmp21");
+			HX_STACK_LINE(404)
+			int _g1 = tmp21;		HX_STACK_VAR(_g1,"_g1");
+			HX_STACK_LINE(404)
+			int tmp22 = (objectY + (int)2);		HX_STACK_VAR(tmp22,"tmp22");
+			HX_STACK_LINE(404)
+			int _g = tmp22;		HX_STACK_VAR(_g,"_g");
+			HX_STACK_LINE(404)
+			while((true)){
+				HX_STACK_LINE(404)
+				bool tmp23 = (_g1 < _g);		HX_STACK_VAR(tmp23,"tmp23");
+				HX_STACK_LINE(404)
+				bool tmp24 = !(tmp23);		HX_STACK_VAR(tmp24,"tmp24");
+				HX_STACK_LINE(404)
+				if ((tmp24)){
+					HX_STACK_LINE(404)
+					break;
+				}
+				HX_STACK_LINE(404)
+				int tmp25 = (_g1)++;		HX_STACK_VAR(tmp25,"tmp25");
+				HX_STACK_LINE(404)
+				int y = tmp25;		HX_STACK_VAR(y,"y");
+				HX_STACK_LINE(405)
+				{
+					HX_STACK_LINE(405)
+					int tmp26 = (objectX - (int)1);		HX_STACK_VAR(tmp26,"tmp26");
+					HX_STACK_LINE(405)
+					int _g3 = tmp26;		HX_STACK_VAR(_g3,"_g3");
+					HX_STACK_LINE(405)
+					int tmp27 = (objectX + (int)2);		HX_STACK_VAR(tmp27,"tmp27");
+					HX_STACK_LINE(405)
+					int _g2 = tmp27;		HX_STACK_VAR(_g2,"_g2");
+					HX_STACK_LINE(405)
+					while((true)){
+						HX_STACK_LINE(405)
+						bool tmp28 = (_g3 < _g2);		HX_STACK_VAR(tmp28,"tmp28");
+						HX_STACK_LINE(405)
+						bool tmp29 = !(tmp28);		HX_STACK_VAR(tmp29,"tmp29");
+						HX_STACK_LINE(405)
+						if ((tmp29)){
+							HX_STACK_LINE(405)
+							break;
+						}
+						HX_STACK_LINE(405)
+						int tmp30 = (_g3)++;		HX_STACK_VAR(tmp30,"tmp30");
+						HX_STACK_LINE(405)
+						int x = tmp30;		HX_STACK_VAR(x,"x");
+						HX_STACK_LINE(407)
+						int tmp31 = y;		HX_STACK_VAR(tmp31,"tmp31");
+						HX_STACK_LINE(407)
+						int tmp32 = this->objectList->length;		HX_STACK_VAR(tmp32,"tmp32");
+						HX_STACK_LINE(407)
+						bool tmp33 = (tmp31 >= tmp32);		HX_STACK_VAR(tmp33,"tmp33");
+						HX_STACK_LINE(407)
+						bool tmp34 = !(tmp33);		HX_STACK_VAR(tmp34,"tmp34");
+						HX_STACK_LINE(407)
+						bool tmp35;		HX_STACK_VAR(tmp35,"tmp35");
+						HX_STACK_LINE(407)
+						if ((tmp34)){
+							HX_STACK_LINE(407)
+							tmp35 = (y < (int)0);
 						}
 						else{
-							HX_STACK_LINE(208)
-							tmp43 = true;
+							HX_STACK_LINE(407)
+							tmp35 = true;
 						}
-						HX_STACK_LINE(208)
-						if ((tmp43)){
-							HX_STACK_LINE(208)
+						HX_STACK_LINE(407)
+						if ((tmp35)){
+							HX_STACK_LINE(407)
 							continue;
 						}
-					}
-					HX_STACK_LINE(210)
-					::maps::MapObject tmp39 = this->objectList->__get(y).StaticCast< Array< ::Dynamic > >()->__get(x).StaticCast< ::maps::MapObject >();		HX_STACK_VAR(tmp39,"tmp39");
-					HX_STACK_LINE(210)
-					bool tmp40 = (tmp39 != null());		HX_STACK_VAR(tmp40,"tmp40");
-					HX_STACK_LINE(210)
-					if ((tmp40)){
-						HX_STACK_LINE(212)
-						::maps::MapObject tmp41 = object;		HX_STACK_VAR(tmp41,"tmp41");
-						HX_STACK_LINE(212)
-						int tmp42 = y;		HX_STACK_VAR(tmp42,"tmp42");
-						HX_STACK_LINE(212)
-						int tmp43 = x;		HX_STACK_VAR(tmp43,"tmp43");
-						HX_STACK_LINE(212)
-						bool tmp44 = this->checkObjectCollision(tmp41,tmp42,tmp43);		HX_STACK_VAR(tmp44,"tmp44");
-						HX_STACK_LINE(212)
-						if ((tmp44)){
-							HX_STACK_LINE(213)
-							::maps::MapObject tmp45 = this->objectList->__get(y).StaticCast< Array< ::Dynamic > >()->__get(x).StaticCast< ::maps::MapObject >();		HX_STACK_VAR(tmp45,"tmp45");
-							HX_STACK_LINE(213)
-							collisionList->push(tmp45);
+						else{
+							HX_STACK_LINE(408)
+							int tmp36 = x;		HX_STACK_VAR(tmp36,"tmp36");
+							HX_STACK_LINE(408)
+							int tmp37 = this->objectList->__get(y).StaticCast< Array< ::Dynamic > >()->length;		HX_STACK_VAR(tmp37,"tmp37");
+							HX_STACK_LINE(408)
+							bool tmp38 = (tmp36 >= tmp37);		HX_STACK_VAR(tmp38,"tmp38");
+							HX_STACK_LINE(408)
+							bool tmp39 = !(tmp38);		HX_STACK_VAR(tmp39,"tmp39");
+							HX_STACK_LINE(408)
+							bool tmp40;		HX_STACK_VAR(tmp40,"tmp40");
+							HX_STACK_LINE(408)
+							if ((tmp39)){
+								HX_STACK_LINE(408)
+								tmp40 = (x < (int)0);
+							}
+							else{
+								HX_STACK_LINE(408)
+								tmp40 = true;
+							}
+							HX_STACK_LINE(408)
+							if ((tmp40)){
+								HX_STACK_LINE(408)
+								continue;
+							}
+						}
+						HX_STACK_LINE(410)
+						::maps::mapobjects::MapObject tmp36 = this->objectList->__get(y).StaticCast< Array< ::Dynamic > >()->__get(x).StaticCast< ::maps::mapobjects::MapObject >();		HX_STACK_VAR(tmp36,"tmp36");
+						HX_STACK_LINE(410)
+						bool tmp37 = (tmp36 != null());		HX_STACK_VAR(tmp37,"tmp37");
+						HX_STACK_LINE(410)
+						if ((tmp37)){
+							HX_STACK_LINE(412)
+							bool tmp38 = AIcheck;		HX_STACK_VAR(tmp38,"tmp38");
+							HX_STACK_LINE(412)
+							bool tmp39 = !(tmp38);		HX_STACK_VAR(tmp39,"tmp39");
+							HX_STACK_LINE(412)
+							if ((tmp39)){
+								HX_STACK_LINE(413)
+								::maps::mapobjects::MapObject tmp40 = object;		HX_STACK_VAR(tmp40,"tmp40");
+								HX_STACK_LINE(413)
+								int tmp41 = y;		HX_STACK_VAR(tmp41,"tmp41");
+								HX_STACK_LINE(413)
+								int tmp42 = x;		HX_STACK_VAR(tmp42,"tmp42");
+								HX_STACK_LINE(413)
+								bool tmp43 = this->checkObjectCollision(tmp40,tmp41,tmp42);		HX_STACK_VAR(tmp43,"tmp43");
+								HX_STACK_LINE(413)
+								if ((tmp43)){
+									HX_STACK_LINE(414)
+									::maps::mapobjects::MapObject tmp44 = this->objectList->__get(y).StaticCast< Array< ::Dynamic > >()->__get(x).StaticCast< ::maps::mapobjects::MapObject >();		HX_STACK_VAR(tmp44,"tmp44");
+									HX_STACK_LINE(414)
+									collisionList->push(tmp44);
+								}
+							}
+							else{
+								HX_STACK_LINE(417)
+								::maps::mapobjects::MapObject tmp40 = object;		HX_STACK_VAR(tmp40,"tmp40");
+								HX_STACK_LINE(417)
+								int tmp41 = y;		HX_STACK_VAR(tmp41,"tmp41");
+								HX_STACK_LINE(417)
+								int tmp42 = x;		HX_STACK_VAR(tmp42,"tmp42");
+								HX_STACK_LINE(417)
+								bool tmp43 = this->checkAICollision(tmp40,tmp41,tmp42);		HX_STACK_VAR(tmp43,"tmp43");
+								HX_STACK_LINE(417)
+								if ((tmp43)){
+									HX_STACK_LINE(418)
+									::maps::mapobjects::MapObject tmp44 = this->objectList->__get(y).StaticCast< Array< ::Dynamic > >()->__get(x).StaticCast< ::maps::mapobjects::MapObject >();		HX_STACK_VAR(tmp44,"tmp44");
+									HX_STACK_LINE(418)
+									collisionList->push(tmp44);
+								}
+							}
 						}
 					}
 				}
 			}
 		}
+		HX_STACK_LINE(423)
+		return collisionList;
 	}
-	HX_STACK_LINE(218)
-	Array< ::Dynamic > tmp24 = collisionList;		HX_STACK_VAR(tmp24,"tmp24");
-	HX_STACK_LINE(218)
-	return tmp24;
 }
 
 
-HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,checkCollisions,return )
+HX_DEFINE_DYNAMIC_FUNC2(AreaMap_obj,checkCollisions,return )
+
+::openfl::geom::Point AreaMap_obj::checkDistFromPlayer( ::actors::Actor actor){
+	HX_STACK_FRAME("maps.AreaMap","checkDistFromPlayer",0x503226c3,"maps.AreaMap.checkDistFromPlayer","maps/AreaMap.hx",426,0xeb50e127)
+	HX_STACK_THIS(this)
+	HX_STACK_ARG(actor,"actor")
+	HX_STACK_LINE(427)
+	::actors::Actor tmp = actor;		HX_STACK_VAR(tmp,"tmp");
+	HX_STACK_LINE(427)
+	::actors::Player tmp1 = this->player;		HX_STACK_VAR(tmp1,"tmp1");
+	HX_STACK_LINE(427)
+	bool tmp2 = ::Std_obj::is(tmp,tmp1);		HX_STACK_VAR(tmp2,"tmp2");
+	HX_STACK_LINE(427)
+	if ((tmp2)){
+		HX_STACK_LINE(427)
+		::openfl::geom::Point tmp3 = ::openfl::geom::Point_obj::__new((int)-1,(int)-1);		HX_STACK_VAR(tmp3,"tmp3");
+		HX_STACK_LINE(427)
+		return tmp3;
+	}
+	HX_STACK_LINE(429)
+	Float tmp3 = actor->get_x();		HX_STACK_VAR(tmp3,"tmp3");
+	HX_STACK_LINE(429)
+	::actors::Player tmp4 = this->player;		HX_STACK_VAR(tmp4,"tmp4");
+	HX_STACK_LINE(429)
+	Float tmp5 = tmp4->get_x();		HX_STACK_VAR(tmp5,"tmp5");
+	HX_STACK_LINE(429)
+	Float tmp6 = (tmp3 - tmp5);		HX_STACK_VAR(tmp6,"tmp6");
+	HX_STACK_LINE(429)
+	Float tmp7 = actor->get_y();		HX_STACK_VAR(tmp7,"tmp7");
+	HX_STACK_LINE(429)
+	::actors::Player tmp8 = this->player;		HX_STACK_VAR(tmp8,"tmp8");
+	HX_STACK_LINE(429)
+	Float tmp9 = tmp8->get_y();		HX_STACK_VAR(tmp9,"tmp9");
+	HX_STACK_LINE(429)
+	Float tmp10 = (tmp7 - tmp9);		HX_STACK_VAR(tmp10,"tmp10");
+	HX_STACK_LINE(429)
+	::openfl::geom::Point tmp11 = ::openfl::geom::Point_obj::__new(tmp6,tmp10);		HX_STACK_VAR(tmp11,"tmp11");
+	HX_STACK_LINE(429)
+	return tmp11;
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,checkDistFromPlayer,return )
+
+Array< ::Dynamic > AreaMap_obj::checkActorCollisions( ::actors::Actor actor){
+	HX_STACK_FRAME("maps.AreaMap","checkActorCollisions",0xd4fdc784,"maps.AreaMap.checkActorCollisions","maps/AreaMap.hx",432,0xeb50e127)
+	HX_STACK_THIS(this)
+	HX_STACK_ARG(actor,"actor")
+	HX_STACK_LINE(434)
+	::openfl::geom::Rectangle tmp = actor->getCollisionBounds();		HX_STACK_VAR(tmp,"tmp");
+	HX_STACK_LINE(434)
+	::openfl::geom::Rectangle actorBounds = tmp;		HX_STACK_VAR(actorBounds,"actorBounds");
+	HX_STACK_LINE(435)
+	Array< ::Dynamic > collisionList = Array_obj< ::Dynamic >::__new();		HX_STACK_VAR(collisionList,"collisionList");
+	HX_STACK_LINE(437)
+	{
+		HX_STACK_LINE(437)
+		int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
+		HX_STACK_LINE(437)
+		int tmp1 = this->actorList->length;		HX_STACK_VAR(tmp1,"tmp1");
+		HX_STACK_LINE(437)
+		int _g = tmp1;		HX_STACK_VAR(_g,"_g");
+		HX_STACK_LINE(437)
+		while((true)){
+			HX_STACK_LINE(437)
+			bool tmp2 = (_g1 < _g);		HX_STACK_VAR(tmp2,"tmp2");
+			HX_STACK_LINE(437)
+			bool tmp3 = !(tmp2);		HX_STACK_VAR(tmp3,"tmp3");
+			HX_STACK_LINE(437)
+			if ((tmp3)){
+				HX_STACK_LINE(437)
+				break;
+			}
+			HX_STACK_LINE(437)
+			int tmp4 = (_g1)++;		HX_STACK_VAR(tmp4,"tmp4");
+			HX_STACK_LINE(437)
+			int i = tmp4;		HX_STACK_VAR(i,"i");
+			HX_STACK_LINE(438)
+			::actors::Actor tmp5 = this->actorList->__get(i).StaticCast< ::actors::Actor >();		HX_STACK_VAR(tmp5,"tmp5");
+			HX_STACK_LINE(438)
+			::actors::Actor tmp6 = actor;		HX_STACK_VAR(tmp6,"tmp6");
+			HX_STACK_LINE(438)
+			bool tmp7 = (tmp5 == tmp6);		HX_STACK_VAR(tmp7,"tmp7");
+			HX_STACK_LINE(438)
+			if ((tmp7)){
+				HX_STACK_LINE(438)
+				continue;
+			}
+			HX_STACK_LINE(439)
+			::actors::Actor tmp8 = this->actorList->__get(i).StaticCast< ::actors::Actor >();		HX_STACK_VAR(tmp8,"tmp8");
+			HX_STACK_LINE(439)
+			::openfl::geom::Rectangle tmp9 = tmp8->getCollisionBounds();		HX_STACK_VAR(tmp9,"tmp9");
+			HX_STACK_LINE(439)
+			::openfl::geom::Rectangle otherBounds = tmp9;		HX_STACK_VAR(otherBounds,"otherBounds");
+			HX_STACK_LINE(441)
+			::openfl::geom::Rectangle tmp10 = actorBounds;		HX_STACK_VAR(tmp10,"tmp10");
+			HX_STACK_LINE(441)
+			bool tmp11 = otherBounds->intersects(tmp10);		HX_STACK_VAR(tmp11,"tmp11");
+			HX_STACK_LINE(441)
+			if ((tmp11)){
+				HX_STACK_LINE(442)
+				::actors::Actor tmp12 = this->actorList->__get(i).StaticCast< ::actors::Actor >();		HX_STACK_VAR(tmp12,"tmp12");
+				HX_STACK_LINE(442)
+				collisionList->push(tmp12);
+			}
+		}
+	}
+	HX_STACK_LINE(445)
+	return collisionList;
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,checkActorCollisions,return )
+
+Array< ::Dynamic > AreaMap_obj::checkActorHitBoxes( ::actors::Actor actor){
+	HX_STACK_FRAME("maps.AreaMap","checkActorHitBoxes",0xb295d0e9,"maps.AreaMap.checkActorHitBoxes","maps/AreaMap.hx",448,0xeb50e127)
+	HX_STACK_THIS(this)
+	HX_STACK_ARG(actor,"actor")
+	HX_STACK_LINE(450)
+	Array< ::Dynamic > collisionList = Array_obj< ::Dynamic >::__new();		HX_STACK_VAR(collisionList,"collisionList");
+	HX_STACK_LINE(452)
+	{
+		HX_STACK_LINE(452)
+		int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
+		HX_STACK_LINE(452)
+		int tmp = this->actorList->length;		HX_STACK_VAR(tmp,"tmp");
+		HX_STACK_LINE(452)
+		int _g = tmp;		HX_STACK_VAR(_g,"_g");
+		HX_STACK_LINE(452)
+		while((true)){
+			HX_STACK_LINE(452)
+			bool tmp1 = (_g1 < _g);		HX_STACK_VAR(tmp1,"tmp1");
+			HX_STACK_LINE(452)
+			bool tmp2 = !(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
+			HX_STACK_LINE(452)
+			if ((tmp2)){
+				HX_STACK_LINE(452)
+				break;
+			}
+			HX_STACK_LINE(452)
+			int tmp3 = (_g1)++;		HX_STACK_VAR(tmp3,"tmp3");
+			HX_STACK_LINE(452)
+			int i = tmp3;		HX_STACK_VAR(i,"i");
+			HX_STACK_LINE(453)
+			::actors::Actor tmp4 = this->actorList->__get(i).StaticCast< ::actors::Actor >();		HX_STACK_VAR(tmp4,"tmp4");
+			HX_STACK_LINE(453)
+			::actors::Actor tmp5 = actor;		HX_STACK_VAR(tmp5,"tmp5");
+			HX_STACK_LINE(453)
+			::actors::Actor tmp6 = tmp5;		HX_STACK_VAR(tmp6,"tmp6");
+			HX_STACK_LINE(453)
+			bool tmp7 = tmp4->isHitting(tmp6);		HX_STACK_VAR(tmp7,"tmp7");
+			HX_STACK_LINE(453)
+			bool tmp8;		HX_STACK_VAR(tmp8,"tmp8");
+			HX_STACK_LINE(453)
+			if ((tmp7)){
+				HX_STACK_LINE(453)
+				::actors::Actor tmp9 = actor;		HX_STACK_VAR(tmp9,"tmp9");
+				HX_STACK_LINE(453)
+				::actors::Actor tmp10 = this->actorList->__get(i).StaticCast< ::actors::Actor >();		HX_STACK_VAR(tmp10,"tmp10");
+				HX_STACK_LINE(453)
+				::actors::Actor tmp11 = tmp10;		HX_STACK_VAR(tmp11,"tmp11");
+				HX_STACK_LINE(453)
+				tmp8 = (tmp9 != tmp11);
+			}
+			else{
+				HX_STACK_LINE(453)
+				tmp8 = false;
+			}
+			HX_STACK_LINE(453)
+			if ((tmp8)){
+				HX_STACK_LINE(454)
+				::actors::Actor tmp9 = this->actorList->__get(i).StaticCast< ::actors::Actor >();		HX_STACK_VAR(tmp9,"tmp9");
+				HX_STACK_LINE(454)
+				collisionList->push(tmp9);
+			}
+		}
+	}
+	HX_STACK_LINE(457)
+	return collisionList;
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,checkActorHitBoxes,return )
+
+Array< ::Dynamic > AreaMap_obj::checkProjectileBounds( ::actors::Actor actor){
+	HX_STACK_FRAME("maps.AreaMap","checkProjectileBounds",0x0dbd9d10,"maps.AreaMap.checkProjectileBounds","maps/AreaMap.hx",459,0xeb50e127)
+	HX_STACK_THIS(this)
+	HX_STACK_ARG(actor,"actor")
+	HX_STACK_LINE(460)
+	Array< ::Dynamic > collisionList = Array_obj< ::Dynamic >::__new();		HX_STACK_VAR(collisionList,"collisionList");
+	HX_STACK_LINE(462)
+	{
+		HX_STACK_LINE(462)
+		int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
+		HX_STACK_LINE(462)
+		int tmp = this->projectileList->length;		HX_STACK_VAR(tmp,"tmp");
+		HX_STACK_LINE(462)
+		int _g = tmp;		HX_STACK_VAR(_g,"_g");
+		HX_STACK_LINE(462)
+		while((true)){
+			HX_STACK_LINE(462)
+			bool tmp1 = (_g1 < _g);		HX_STACK_VAR(tmp1,"tmp1");
+			HX_STACK_LINE(462)
+			bool tmp2 = !(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
+			HX_STACK_LINE(462)
+			if ((tmp2)){
+				HX_STACK_LINE(462)
+				break;
+			}
+			HX_STACK_LINE(462)
+			int tmp3 = (_g1)++;		HX_STACK_VAR(tmp3,"tmp3");
+			HX_STACK_LINE(462)
+			int i = tmp3;		HX_STACK_VAR(i,"i");
+			HX_STACK_LINE(463)
+			::actors::attacks::Projectile tmp4 = this->projectileList->__get(i).StaticCast< ::actors::attacks::Projectile >();		HX_STACK_VAR(tmp4,"tmp4");
+			HX_STACK_LINE(463)
+			::actors::Actor tmp5 = actor;		HX_STACK_VAR(tmp5,"tmp5");
+			HX_STACK_LINE(463)
+			bool tmp6 = tmp4->checkCollision(tmp5,null());		HX_STACK_VAR(tmp6,"tmp6");
+			HX_STACK_LINE(463)
+			if ((tmp6)){
+				HX_STACK_LINE(464)
+				::actors::attacks::Projectile tmp7 = this->projectileList->__get(i).StaticCast< ::actors::attacks::Projectile >();		HX_STACK_VAR(tmp7,"tmp7");
+				HX_STACK_LINE(464)
+				collisionList->push(tmp7);
+			}
+		}
+	}
+	HX_STACK_LINE(467)
+	return collisionList;
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,checkProjectileBounds,return )
 
 Void AreaMap_obj::updateCheckpoints( ::actors::Player player){
 {
-		HX_STACK_FRAME("maps.AreaMap","updateCheckpoints",0x9552a34c,"maps.AreaMap.updateCheckpoints","maps/AreaMap.hx",221,0xeb50e127)
+		HX_STACK_FRAME("maps.AreaMap","updateCheckpoints",0x9552a34c,"maps.AreaMap.updateCheckpoints","maps/AreaMap.hx",471,0xeb50e127)
 		HX_STACK_THIS(this)
 		HX_STACK_ARG(player,"player")
-		HX_STACK_LINE(221)
+		HX_STACK_LINE(471)
 		int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
-		HX_STACK_LINE(221)
-		Array< ::Dynamic > tmp = this->checkPoints;		HX_STACK_VAR(tmp,"tmp");
-		HX_STACK_LINE(221)
-		int tmp1 = tmp->length;		HX_STACK_VAR(tmp1,"tmp1");
-		HX_STACK_LINE(221)
-		int _g = tmp1;		HX_STACK_VAR(_g,"_g");
-		HX_STACK_LINE(221)
+		HX_STACK_LINE(471)
+		int tmp = this->checkPoints->length;		HX_STACK_VAR(tmp,"tmp");
+		HX_STACK_LINE(471)
+		int _g = tmp;		HX_STACK_VAR(_g,"_g");
+		HX_STACK_LINE(471)
 		while((true)){
-			HX_STACK_LINE(221)
-			bool tmp2 = (_g1 < _g);		HX_STACK_VAR(tmp2,"tmp2");
-			HX_STACK_LINE(221)
-			bool tmp3 = !(tmp2);		HX_STACK_VAR(tmp3,"tmp3");
-			HX_STACK_LINE(221)
-			if ((tmp3)){
-				HX_STACK_LINE(221)
+			HX_STACK_LINE(471)
+			bool tmp1 = (_g1 < _g);		HX_STACK_VAR(tmp1,"tmp1");
+			HX_STACK_LINE(471)
+			bool tmp2 = !(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
+			HX_STACK_LINE(471)
+			if ((tmp2)){
+				HX_STACK_LINE(471)
 				break;
 			}
-			HX_STACK_LINE(221)
-			int tmp4 = (_g1)++;		HX_STACK_VAR(tmp4,"tmp4");
-			HX_STACK_LINE(221)
-			int i = tmp4;		HX_STACK_VAR(i,"i");
-			HX_STACK_LINE(223)
-			Array< ::Dynamic > tmp5 = this->checkPoints;		HX_STACK_VAR(tmp5,"tmp5");
-			HX_STACK_LINE(223)
-			::maps::Checkpoint tmp6 = tmp5->__get(i).StaticCast< ::maps::Checkpoint >();		HX_STACK_VAR(tmp6,"tmp6");
-			HX_STACK_LINE(223)
-			::maps::Checkpoint checkpoint = tmp6;		HX_STACK_VAR(checkpoint,"checkpoint");
-			HX_STACK_LINE(224)
-			::maps::Checkpoint tmp7 = checkpoint;		HX_STACK_VAR(tmp7,"tmp7");
-			HX_STACK_LINE(224)
-			::maps::Checkpoint tmp8 = tmp7;		HX_STACK_VAR(tmp8,"tmp8");
-			HX_STACK_LINE(224)
-			bool tmp9 = player->checkCollision(tmp8);		HX_STACK_VAR(tmp9,"tmp9");
-			HX_STACK_LINE(224)
-			bool tmp10;		HX_STACK_VAR(tmp10,"tmp10");
-			HX_STACK_LINE(224)
-			if ((tmp9)){
-				HX_STACK_LINE(224)
-				bool tmp11 = checkpoint->getActive();		HX_STACK_VAR(tmp11,"tmp11");
-				HX_STACK_LINE(224)
-				bool tmp12 = tmp11;		HX_STACK_VAR(tmp12,"tmp12");
-				HX_STACK_LINE(224)
-				bool tmp13 = tmp12;		HX_STACK_VAR(tmp13,"tmp13");
-				HX_STACK_LINE(224)
-				tmp10 = !(tmp13);
+			HX_STACK_LINE(471)
+			int tmp3 = (_g1)++;		HX_STACK_VAR(tmp3,"tmp3");
+			HX_STACK_LINE(471)
+			int i = tmp3;		HX_STACK_VAR(i,"i");
+			HX_STACK_LINE(473)
+			::maps::mapobjects::Checkpoint tmp4 = this->checkPoints->__get(i).StaticCast< ::maps::mapobjects::Checkpoint >();		HX_STACK_VAR(tmp4,"tmp4");
+			HX_STACK_LINE(473)
+			::maps::mapobjects::Checkpoint checkpoint = tmp4;		HX_STACK_VAR(checkpoint,"checkpoint");
+			HX_STACK_LINE(474)
+			::maps::mapobjects::Checkpoint tmp5 = checkpoint;		HX_STACK_VAR(tmp5,"tmp5");
+			HX_STACK_LINE(474)
+			::maps::mapobjects::Checkpoint tmp6 = tmp5;		HX_STACK_VAR(tmp6,"tmp6");
+			HX_STACK_LINE(474)
+			bool tmp7 = player->checkCollision(tmp6,null());		HX_STACK_VAR(tmp7,"tmp7");
+			HX_STACK_LINE(474)
+			bool tmp8;		HX_STACK_VAR(tmp8,"tmp8");
+			HX_STACK_LINE(474)
+			if ((tmp7)){
+				HX_STACK_LINE(474)
+				bool tmp9 = checkpoint->getActive();		HX_STACK_VAR(tmp9,"tmp9");
+				HX_STACK_LINE(474)
+				bool tmp10 = tmp9;		HX_STACK_VAR(tmp10,"tmp10");
+				HX_STACK_LINE(474)
+				bool tmp11 = tmp10;		HX_STACK_VAR(tmp11,"tmp11");
+				HX_STACK_LINE(474)
+				tmp8 = !(tmp11);
 			}
 			else{
-				HX_STACK_LINE(224)
-				tmp10 = false;
+				HX_STACK_LINE(474)
+				tmp8 = false;
 			}
-			HX_STACK_LINE(224)
-			if ((tmp10)){
-				HX_STACK_LINE(225)
-				::maps::Checkpoint tmp11 = checkpoint;		HX_STACK_VAR(tmp11,"tmp11");
-				HX_STACK_LINE(225)
-				this->changeCheckpoint(tmp11);
-				HX_STACK_LINE(226)
+			HX_STACK_LINE(474)
+			if ((tmp8)){
+				HX_STACK_LINE(475)
+				::maps::mapobjects::Checkpoint tmp9 = checkpoint;		HX_STACK_VAR(tmp9,"tmp9");
+				HX_STACK_LINE(475)
+				this->changeCheckpoint(tmp9);
+				HX_STACK_LINE(476)
 				return null();
 			}
 		}
@@ -1138,32 +2526,83 @@ HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,updateCheckpoints,(void))
 
 Void AreaMap_obj::updateEndPortal( ::actors::Player player){
 {
-		HX_STACK_FRAME("maps.AreaMap","updateEndPortal",0x5a3bf108,"maps.AreaMap.updateEndPortal","maps/AreaMap.hx",230,0xeb50e127)
+		HX_STACK_FRAME("maps.AreaMap","updateEndPortal",0x5a3bf108,"maps.AreaMap.updateEndPortal","maps/AreaMap.hx",480,0xeb50e127)
 		HX_STACK_THIS(this)
 		HX_STACK_ARG(player,"player")
-		HX_STACK_LINE(231)
-		::maps::Portal tmp = this->endPoint;		HX_STACK_VAR(tmp,"tmp");
-		HX_STACK_LINE(231)
-		bool tmp1 = (tmp == null());		HX_STACK_VAR(tmp1,"tmp1");
-		HX_STACK_LINE(231)
-		if ((tmp1)){
-			HX_STACK_LINE(231)
+		HX_STACK_LINE(481)
+		bool tmp = (this->endPoints == null());		HX_STACK_VAR(tmp,"tmp");
+		HX_STACK_LINE(481)
+		if ((tmp)){
+			HX_STACK_LINE(481)
 			return null();
 		}
-		HX_STACK_LINE(233)
-		::maps::Portal tmp2 = this->endPoint;		HX_STACK_VAR(tmp2,"tmp2");
-		HX_STACK_LINE(233)
-		bool tmp3 = player->checkCollision(tmp2);		HX_STACK_VAR(tmp3,"tmp3");
-		HX_STACK_LINE(233)
-		if ((tmp3)){
-			HX_STACK_LINE(234)
-			::maps::MapManager tmp4 = ::maps::MapManager_obj::getSingleton();		HX_STACK_VAR(tmp4,"tmp4");
-			HX_STACK_LINE(234)
-			::maps::AreaMap tmp5 = this->nextMap;		HX_STACK_VAR(tmp5,"tmp5");
-			HX_STACK_LINE(234)
-			::actors::Player tmp6 = player;		HX_STACK_VAR(tmp6,"tmp6");
-			HX_STACK_LINE(234)
-			tmp4->setMap(tmp5,tmp6);
+		HX_STACK_LINE(483)
+		{
+			HX_STACK_LINE(483)
+			int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
+			HX_STACK_LINE(483)
+			int tmp1 = this->endPoints->length;		HX_STACK_VAR(tmp1,"tmp1");
+			HX_STACK_LINE(483)
+			int _g = tmp1;		HX_STACK_VAR(_g,"_g");
+			HX_STACK_LINE(483)
+			while((true)){
+				HX_STACK_LINE(483)
+				bool tmp2 = (_g1 < _g);		HX_STACK_VAR(tmp2,"tmp2");
+				HX_STACK_LINE(483)
+				bool tmp3 = !(tmp2);		HX_STACK_VAR(tmp3,"tmp3");
+				HX_STACK_LINE(483)
+				if ((tmp3)){
+					HX_STACK_LINE(483)
+					break;
+				}
+				HX_STACK_LINE(483)
+				int tmp4 = (_g1)++;		HX_STACK_VAR(tmp4,"tmp4");
+				HX_STACK_LINE(483)
+				int i = tmp4;		HX_STACK_VAR(i,"i");
+				HX_STACK_LINE(485)
+				::maps::mapobjects::Portal tmp5 = this->endPoints->__get(i).StaticCast< ::maps::mapobjects::Portal >();		HX_STACK_VAR(tmp5,"tmp5");
+				HX_STACK_LINE(485)
+				::maps::mapobjects::Portal endPoint = tmp5;		HX_STACK_VAR(endPoint,"endPoint");
+				HX_STACK_LINE(486)
+				::maps::mapobjects::Portal tmp6 = endPoint;		HX_STACK_VAR(tmp6,"tmp6");
+				HX_STACK_LINE(486)
+				bool tmp7 = player->checkCollision(tmp6,null());		HX_STACK_VAR(tmp7,"tmp7");
+				HX_STACK_LINE(486)
+				if ((tmp7)){
+					HX_STACK_LINE(488)
+					::maps::Level tmp8 = this->hostLevel;		HX_STACK_VAR(tmp8,"tmp8");
+					HX_STACK_LINE(488)
+					::String tmp9 = endPoint->getEndMap();		HX_STACK_VAR(tmp9,"tmp9");
+					HX_STACK_LINE(488)
+					::maps::AreaMap tmp10 = tmp8->getMap(tmp9);		HX_STACK_VAR(tmp10,"tmp10");
+					HX_STACK_LINE(488)
+					::maps::AreaMap endMap = tmp10;		HX_STACK_VAR(endMap,"endMap");
+					HX_STACK_LINE(489)
+					::maps::Level tmp11 = this->hostLevel;		HX_STACK_VAR(tmp11,"tmp11");
+					HX_STACK_LINE(489)
+					::String tmp12 = tmp11->getMapLabel(hx::ObjectPtr<OBJ_>(this));		HX_STACK_VAR(tmp12,"tmp12");
+					HX_STACK_LINE(489)
+					::maps::mapobjects::Portal tmp13 = endMap->findDoorFrom(tmp12);		HX_STACK_VAR(tmp13,"tmp13");
+					HX_STACK_LINE(489)
+					::maps::mapobjects::Portal origin = tmp13;		HX_STACK_VAR(origin,"origin");
+					HX_STACK_LINE(491)
+					::maps::LevelManager tmp14 = ::maps::LevelManager_obj::getSingleton();		HX_STACK_VAR(tmp14,"tmp14");
+					HX_STACK_LINE(491)
+					::maps::Level tmp15 = tmp14->getCurrentLevel();		HX_STACK_VAR(tmp15,"tmp15");
+					HX_STACK_LINE(491)
+					::maps::AreaMap tmp16 = endMap;		HX_STACK_VAR(tmp16,"tmp16");
+					HX_STACK_LINE(491)
+					::actors::Player tmp17 = player;		HX_STACK_VAR(tmp17,"tmp17");
+					HX_STACK_LINE(491)
+					::maps::mapobjects::Portal tmp18 = origin;		HX_STACK_VAR(tmp18,"tmp18");
+					HX_STACK_LINE(491)
+					tmp15->setMap(tmp16,tmp17,tmp18);
+					HX_STACK_LINE(492)
+					::actors::Player tmp19 = player;		HX_STACK_VAR(tmp19,"tmp19");
+					HX_STACK_LINE(492)
+					this->removeActor(tmp19);
+				}
+			}
 		}
 	}
 return null();
@@ -1172,103 +2611,247 @@ return null();
 
 HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,updateEndPortal,(void))
 
-bool AreaMap_obj::checkObjectCollision( ::maps::MapObject object,int y,int x){
-	HX_STACK_FRAME("maps.AreaMap","checkObjectCollision",0x100dd221,"maps.AreaMap.checkObjectCollision","maps/AreaMap.hx",238,0xeb50e127)
+::maps::mapobjects::Portal AreaMap_obj::findDoorFrom( ::String map){
+	HX_STACK_FRAME("maps.AreaMap","findDoorFrom",0x7eac41a7,"maps.AreaMap.findDoorFrom","maps/AreaMap.hx",496,0xeb50e127)
+	HX_STACK_THIS(this)
+	HX_STACK_ARG(map,"map")
+	HX_STACK_LINE(497)
+	{
+		HX_STACK_LINE(497)
+		int _g1 = (int)0;		HX_STACK_VAR(_g1,"_g1");
+		HX_STACK_LINE(497)
+		int tmp = this->endPoints->length;		HX_STACK_VAR(tmp,"tmp");
+		HX_STACK_LINE(497)
+		int _g = tmp;		HX_STACK_VAR(_g,"_g");
+		HX_STACK_LINE(497)
+		while((true)){
+			HX_STACK_LINE(497)
+			bool tmp1 = (_g1 < _g);		HX_STACK_VAR(tmp1,"tmp1");
+			HX_STACK_LINE(497)
+			bool tmp2 = !(tmp1);		HX_STACK_VAR(tmp2,"tmp2");
+			HX_STACK_LINE(497)
+			if ((tmp2)){
+				HX_STACK_LINE(497)
+				break;
+			}
+			HX_STACK_LINE(497)
+			int tmp3 = (_g1)++;		HX_STACK_VAR(tmp3,"tmp3");
+			HX_STACK_LINE(497)
+			int i = tmp3;		HX_STACK_VAR(i,"i");
+			HX_STACK_LINE(498)
+			::maps::mapobjects::Portal tmp4 = this->endPoints->__get(i).StaticCast< ::maps::mapobjects::Portal >();		HX_STACK_VAR(tmp4,"tmp4");
+			HX_STACK_LINE(498)
+			::String tmp5 = tmp4->getEndMap();		HX_STACK_VAR(tmp5,"tmp5");
+			HX_STACK_LINE(498)
+			::String tmp6 = map;		HX_STACK_VAR(tmp6,"tmp6");
+			HX_STACK_LINE(498)
+			bool tmp7 = (tmp5 == tmp6);		HX_STACK_VAR(tmp7,"tmp7");
+			HX_STACK_LINE(498)
+			if ((tmp7)){
+				HX_STACK_LINE(499)
+				::maps::mapobjects::Portal tmp8 = this->endPoints->__get(i).StaticCast< ::maps::mapobjects::Portal >();		HX_STACK_VAR(tmp8,"tmp8");
+				HX_STACK_LINE(499)
+				return tmp8;
+			}
+		}
+	}
+	HX_STACK_LINE(501)
+	return null();
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,findDoorFrom,return )
+
+bool AreaMap_obj::checkAICollision( ::maps::mapobjects::MapObject object,int y,int x){
+	HX_STACK_FRAME("maps.AreaMap","checkAICollision",0x01f423f8,"maps.AreaMap.checkAICollision","maps/AreaMap.hx",504,0xeb50e127)
 	HX_STACK_THIS(this)
 	HX_STACK_ARG(object,"object")
 	HX_STACK_ARG(y,"y")
 	HX_STACK_ARG(x,"x")
-	HX_STACK_LINE(239)
-	::maps::MapObject tmp = this->objectList->__get(y).StaticCast< Array< ::Dynamic > >()->__get(x).StaticCast< ::maps::MapObject >();		HX_STACK_VAR(tmp,"tmp");
-	HX_STACK_LINE(239)
+	HX_STACK_LINE(505)
+	::maps::mapobjects::MapObject tmp = this->objectList->__get(y).StaticCast< Array< ::Dynamic > >()->__get(x).StaticCast< ::maps::mapobjects::MapObject >();		HX_STACK_VAR(tmp,"tmp");
+	HX_STACK_LINE(505)
 	bool tmp1 = (tmp == null());		HX_STACK_VAR(tmp1,"tmp1");
-	HX_STACK_LINE(239)
+	HX_STACK_LINE(505)
 	if ((tmp1)){
-		HX_STACK_LINE(239)
+		HX_STACK_LINE(505)
 		return false;
 	}
-	HX_STACK_LINE(241)
-	::maps::MapObject tmp2 = this->objectList->__get(y).StaticCast< Array< ::Dynamic > >()->__get(x).StaticCast< ::maps::MapObject >();		HX_STACK_VAR(tmp2,"tmp2");
-	HX_STACK_LINE(241)
-	bool tmp3 = ::Std_obj::is(tmp2,hx::ClassOf< ::maps::Tile >());		HX_STACK_VAR(tmp3,"tmp3");
-	HX_STACK_LINE(241)
+	HX_STACK_LINE(507)
+	::maps::mapobjects::MapObject tmp2 = this->objectList->__get(y).StaticCast< Array< ::Dynamic > >()->__get(x).StaticCast< ::maps::mapobjects::MapObject >();		HX_STACK_VAR(tmp2,"tmp2");
+	HX_STACK_LINE(507)
+	bool tmp3 = ::Std_obj::is(tmp2,hx::ClassOf< ::maps::mapobjects::AIPathWall >());		HX_STACK_VAR(tmp3,"tmp3");
+	HX_STACK_LINE(507)
 	if ((tmp3)){
-		HX_STACK_LINE(242)
-		::maps::MapObject tmp4 = this->objectList->__get(y).StaticCast< Array< ::Dynamic > >()->__get(x).StaticCast< ::maps::MapObject >();		HX_STACK_VAR(tmp4,"tmp4");
-		HX_STACK_LINE(242)
-		::maps::Tile collidingTile = ((::maps::Tile)(tmp4));		HX_STACK_VAR(collidingTile,"collidingTile");
-		HX_STACK_LINE(243)
-		::maps::MapObject tmp5 = object;		HX_STACK_VAR(tmp5,"tmp5");
-		HX_STACK_LINE(243)
-		bool tmp6 = collidingTile->checkCollision(tmp5);		HX_STACK_VAR(tmp6,"tmp6");
-		HX_STACK_LINE(243)
+		HX_STACK_LINE(508)
+		::maps::mapobjects::MapObject tmp4 = this->objectList->__get(y).StaticCast< Array< ::Dynamic > >()->__get(x).StaticCast< ::maps::mapobjects::MapObject >();		HX_STACK_VAR(tmp4,"tmp4");
+		HX_STACK_LINE(508)
+		::maps::mapobjects::AIPathWall collidingPath = ((::maps::mapobjects::AIPathWall)(tmp4));		HX_STACK_VAR(collidingPath,"collidingPath");
+		HX_STACK_LINE(509)
+		::maps::mapobjects::MapObject tmp5 = object;		HX_STACK_VAR(tmp5,"tmp5");
+		HX_STACK_LINE(509)
+		bool tmp6 = collidingPath->checkCollision(tmp5,false);		HX_STACK_VAR(tmp6,"tmp6");
+		HX_STACK_LINE(509)
 		if ((tmp6)){
-			HX_STACK_LINE(244)
+			HX_STACK_LINE(510)
 			return true;
 		}
 	}
 	else{
-		HX_STACK_LINE(247)
-		::maps::MapObject tmp4 = this->objectList->__get(y).StaticCast< Array< ::Dynamic > >()->__get(x).StaticCast< ::maps::MapObject >();		HX_STACK_VAR(tmp4,"tmp4");
-		HX_STACK_LINE(247)
-		::maps::MapObject collidingObject = tmp4;		HX_STACK_VAR(collidingObject,"collidingObject");
-		HX_STACK_LINE(248)
-		::maps::MapObject tmp5 = object;		HX_STACK_VAR(tmp5,"tmp5");
-		HX_STACK_LINE(248)
-		bool tmp6 = collidingObject->checkCollision(tmp5);		HX_STACK_VAR(tmp6,"tmp6");
-		HX_STACK_LINE(248)
+		HX_STACK_LINE(512)
+		::maps::mapobjects::MapObject tmp4 = this->objectList->__get(y).StaticCast< Array< ::Dynamic > >()->__get(x).StaticCast< ::maps::mapobjects::MapObject >();		HX_STACK_VAR(tmp4,"tmp4");
+		HX_STACK_LINE(512)
+		bool tmp5 = ::Std_obj::is(tmp4,hx::ClassOf< ::actors::enemies::Enemy >());		HX_STACK_VAR(tmp5,"tmp5");
+		HX_STACK_LINE(512)
+		if ((tmp5)){
+			HX_STACK_LINE(513)
+			::maps::mapobjects::MapObject tmp6 = this->objectList->__get(y).StaticCast< Array< ::Dynamic > >()->__get(x).StaticCast< ::maps::mapobjects::MapObject >();		HX_STACK_VAR(tmp6,"tmp6");
+			HX_STACK_LINE(513)
+			::actors::enemies::Enemy collidingEnemy = ((::actors::enemies::Enemy)(tmp6));		HX_STACK_VAR(collidingEnemy,"collidingEnemy");
+			HX_STACK_LINE(514)
+			::maps::mapobjects::MapObject tmp7 = object;		HX_STACK_VAR(tmp7,"tmp7");
+			HX_STACK_LINE(514)
+			bool tmp8 = collidingEnemy->checkCollision(tmp7,null());		HX_STACK_VAR(tmp8,"tmp8");
+			HX_STACK_LINE(514)
+			if ((tmp8)){
+				HX_STACK_LINE(515)
+				return true;
+			}
+		}
+	}
+	HX_STACK_LINE(517)
+	return false;
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC3(AreaMap_obj,checkAICollision,return )
+
+bool AreaMap_obj::checkObjectCollision( ::maps::mapobjects::MapObject object,int y,int x){
+	HX_STACK_FRAME("maps.AreaMap","checkObjectCollision",0x100dd221,"maps.AreaMap.checkObjectCollision","maps/AreaMap.hx",520,0xeb50e127)
+	HX_STACK_THIS(this)
+	HX_STACK_ARG(object,"object")
+	HX_STACK_ARG(y,"y")
+	HX_STACK_ARG(x,"x")
+	HX_STACK_LINE(521)
+	::maps::mapobjects::MapObject tmp = this->objectList->__get(y).StaticCast< Array< ::Dynamic > >()->__get(x).StaticCast< ::maps::mapobjects::MapObject >();		HX_STACK_VAR(tmp,"tmp");
+	HX_STACK_LINE(521)
+	bool tmp1 = (tmp == null());		HX_STACK_VAR(tmp1,"tmp1");
+	HX_STACK_LINE(521)
+	if ((tmp1)){
+		HX_STACK_LINE(521)
+		return false;
+	}
+	HX_STACK_LINE(523)
+	::maps::mapobjects::MapObject tmp2 = this->objectList->__get(y).StaticCast< Array< ::Dynamic > >()->__get(x).StaticCast< ::maps::mapobjects::MapObject >();		HX_STACK_VAR(tmp2,"tmp2");
+	HX_STACK_LINE(523)
+	bool tmp3 = ::Std_obj::is(tmp2,hx::ClassOf< ::maps::mapobjects::Tile >());		HX_STACK_VAR(tmp3,"tmp3");
+	HX_STACK_LINE(523)
+	if ((tmp3)){
+		HX_STACK_LINE(524)
+		::maps::mapobjects::MapObject tmp4 = this->objectList->__get(y).StaticCast< Array< ::Dynamic > >()->__get(x).StaticCast< ::maps::mapobjects::MapObject >();		HX_STACK_VAR(tmp4,"tmp4");
+		HX_STACK_LINE(524)
+		::maps::mapobjects::Tile collidingTile = ((::maps::mapobjects::Tile)(tmp4));		HX_STACK_VAR(collidingTile,"collidingTile");
+		HX_STACK_LINE(525)
+		::maps::mapobjects::MapObject tmp5 = object;		HX_STACK_VAR(tmp5,"tmp5");
+		HX_STACK_LINE(525)
+		bool tmp6 = collidingTile->checkCollision(tmp5,null());		HX_STACK_VAR(tmp6,"tmp6");
+		HX_STACK_LINE(525)
 		if ((tmp6)){
-			HX_STACK_LINE(249)
+			HX_STACK_LINE(526)
 			return true;
 		}
 	}
-	HX_STACK_LINE(251)
+	else{
+		HX_STACK_LINE(529)
+		::maps::mapobjects::MapObject tmp4 = this->objectList->__get(y).StaticCast< Array< ::Dynamic > >()->__get(x).StaticCast< ::maps::mapobjects::MapObject >();		HX_STACK_VAR(tmp4,"tmp4");
+		HX_STACK_LINE(529)
+		::maps::mapobjects::MapObject collidingObject = tmp4;		HX_STACK_VAR(collidingObject,"collidingObject");
+		HX_STACK_LINE(530)
+		::maps::mapobjects::MapObject tmp5 = object;		HX_STACK_VAR(tmp5,"tmp5");
+		HX_STACK_LINE(530)
+		bool tmp6 = collidingObject->checkCollision(tmp5,null());		HX_STACK_VAR(tmp6,"tmp6");
+		HX_STACK_LINE(530)
+		if ((tmp6)){
+			HX_STACK_LINE(531)
+			return true;
+		}
+	}
+	HX_STACK_LINE(533)
 	return false;
 }
 
 
 HX_DEFINE_DYNAMIC_FUNC3(AreaMap_obj,checkObjectCollision,return )
 
-::maps::Checkpoint AreaMap_obj::getCurrentCheckpoint( ){
-	HX_STACK_FRAME("maps.AreaMap","getCurrentCheckpoint",0xbdec8701,"maps.AreaMap.getCurrentCheckpoint","maps/AreaMap.hx",254,0xeb50e127)
+::maps::mapobjects::MapObject AreaMap_obj::getCurrentCheckpoint( ){
+	HX_STACK_FRAME("maps.AreaMap","getCurrentCheckpoint",0xbdec8701,"maps.AreaMap.getCurrentCheckpoint","maps/AreaMap.hx",536,0xeb50e127)
 	HX_STACK_THIS(this)
-	HX_STACK_LINE(255)
-	::maps::Checkpoint tmp = this->currentCheckpoint;		HX_STACK_VAR(tmp,"tmp");
-	HX_STACK_LINE(255)
+	HX_STACK_LINE(537)
+	::maps::mapobjects::MapObject tmp = this->currentCheckpoint;		HX_STACK_VAR(tmp,"tmp");
+	HX_STACK_LINE(537)
 	return tmp;
 }
 
 
 HX_DEFINE_DYNAMIC_FUNC0(AreaMap_obj,getCurrentCheckpoint,return )
 
-Void AreaMap_obj::changeCheckpoint( ::maps::Checkpoint newCheckpoint){
+::maps::mapobjects::Checkpoint AreaMap_obj::getStartPoint( ){
+	HX_STACK_FRAME("maps.AreaMap","getStartPoint",0x4d0eb1ae,"maps.AreaMap.getStartPoint","maps/AreaMap.hx",539,0xeb50e127)
+	HX_STACK_THIS(this)
+	HX_STACK_LINE(540)
+	::maps::mapobjects::Checkpoint tmp = this->startPoint;		HX_STACK_VAR(tmp,"tmp");
+	HX_STACK_LINE(540)
+	return tmp;
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC0(AreaMap_obj,getStartPoint,return )
+
+Void AreaMap_obj::changeCheckpoint( ::maps::mapobjects::MapObject newCheckpoint){
 {
-		HX_STACK_FRAME("maps.AreaMap","changeCheckpoint",0xf6872d6e,"maps.AreaMap.changeCheckpoint","maps/AreaMap.hx",257,0xeb50e127)
+		HX_STACK_FRAME("maps.AreaMap","changeCheckpoint",0xf6872d6e,"maps.AreaMap.changeCheckpoint","maps/AreaMap.hx",544,0xeb50e127)
 		HX_STACK_THIS(this)
 		HX_STACK_ARG(newCheckpoint,"newCheckpoint")
-		HX_STACK_LINE(259)
-		::maps::Checkpoint tmp = this->currentCheckpoint;		HX_STACK_VAR(tmp,"tmp");
-		HX_STACK_LINE(259)
-		bool tmp1 = (tmp != null());		HX_STACK_VAR(tmp1,"tmp1");
-		HX_STACK_LINE(259)
-		if ((tmp1)){
-			HX_STACK_LINE(260)
-			::maps::Checkpoint tmp2 = this->currentCheckpoint;		HX_STACK_VAR(tmp2,"tmp2");
-			HX_STACK_LINE(260)
-			tmp2->setInactive();
-		}
-		HX_STACK_LINE(262)
+		HX_STACK_LINE(544)
 		this->currentCheckpoint = newCheckpoint;
-		HX_STACK_LINE(263)
-		::maps::Checkpoint tmp2 = this->currentCheckpoint;		HX_STACK_VAR(tmp2,"tmp2");
-		HX_STACK_LINE(263)
-		tmp2->setActive();
 	}
 return null();
 }
 
 
 HX_DEFINE_DYNAMIC_FUNC1(AreaMap_obj,changeCheckpoint,(void))
+
+int AreaMap_obj::getMapWidth( ){
+	HX_STACK_FRAME("maps.AreaMap","getMapWidth",0x6d53c2ea,"maps.AreaMap.getMapWidth","maps/AreaMap.hx",547,0xeb50e127)
+	HX_STACK_THIS(this)
+	HX_STACK_LINE(548)
+	int tmp = this->mapWidth;		HX_STACK_VAR(tmp,"tmp");
+	HX_STACK_LINE(548)
+	int tmp1 = this->tileSize;		HX_STACK_VAR(tmp1,"tmp1");
+	HX_STACK_LINE(548)
+	int tmp2 = (tmp * tmp1);		HX_STACK_VAR(tmp2,"tmp2");
+	HX_STACK_LINE(548)
+	return tmp2;
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC0(AreaMap_obj,getMapWidth,return )
+
+int AreaMap_obj::getMapHeight( ){
+	HX_STACK_FRAME("maps.AreaMap","getMapHeight",0xf2464283,"maps.AreaMap.getMapHeight","maps/AreaMap.hx",550,0xeb50e127)
+	HX_STACK_THIS(this)
+	HX_STACK_LINE(551)
+	int tmp = this->mapHeight;		HX_STACK_VAR(tmp,"tmp");
+	HX_STACK_LINE(551)
+	int tmp1 = this->tileSize;		HX_STACK_VAR(tmp1,"tmp1");
+	HX_STACK_LINE(551)
+	int tmp2 = (tmp * tmp1);		HX_STACK_VAR(tmp2,"tmp2");
+	HX_STACK_LINE(551)
+	return tmp2;
+}
+
+
+HX_DEFINE_DYNAMIC_FUNC0(AreaMap_obj,getMapHeight,return )
 
 
 AreaMap_obj::AreaMap_obj()
@@ -1278,13 +2861,18 @@ AreaMap_obj::AreaMap_obj()
 void AreaMap_obj::__Mark(HX_MARK_PARAMS)
 {
 	HX_MARK_BEGIN_CLASS(AreaMap);
+	HX_MARK_MEMBER_NAME(hostLevel,"hostLevel");
+	HX_MARK_MEMBER_NAME(tileSheet,"tileSheet");
 	HX_MARK_MEMBER_NAME(objectList,"objectList");
+	HX_MARK_MEMBER_NAME(actorList,"actorList");
+	HX_MARK_MEMBER_NAME(projectileList,"projectileList");
 	HX_MARK_MEMBER_NAME(player,"player");
 	HX_MARK_MEMBER_NAME(startPoint,"startPoint");
 	HX_MARK_MEMBER_NAME(currentCheckpoint,"currentCheckpoint");
 	HX_MARK_MEMBER_NAME(checkPoints,"checkPoints");
-	HX_MARK_MEMBER_NAME(endPoint,"endPoint");
-	HX_MARK_MEMBER_NAME(nextMap,"nextMap");
+	HX_MARK_MEMBER_NAME(spawnPoints,"spawnPoints");
+	HX_MARK_MEMBER_NAME(pathWalls,"pathWalls");
+	HX_MARK_MEMBER_NAME(endPoints,"endPoints");
 	HX_MARK_MEMBER_NAME(background,"background");
 	HX_MARK_MEMBER_NAME(mapWidth,"mapWidth");
 	HX_MARK_MEMBER_NAME(mapHeight,"mapHeight");
@@ -1295,13 +2883,18 @@ void AreaMap_obj::__Mark(HX_MARK_PARAMS)
 
 void AreaMap_obj::__Visit(HX_VISIT_PARAMS)
 {
+	HX_VISIT_MEMBER_NAME(hostLevel,"hostLevel");
+	HX_VISIT_MEMBER_NAME(tileSheet,"tileSheet");
 	HX_VISIT_MEMBER_NAME(objectList,"objectList");
+	HX_VISIT_MEMBER_NAME(actorList,"actorList");
+	HX_VISIT_MEMBER_NAME(projectileList,"projectileList");
 	HX_VISIT_MEMBER_NAME(player,"player");
 	HX_VISIT_MEMBER_NAME(startPoint,"startPoint");
 	HX_VISIT_MEMBER_NAME(currentCheckpoint,"currentCheckpoint");
 	HX_VISIT_MEMBER_NAME(checkPoints,"checkPoints");
-	HX_VISIT_MEMBER_NAME(endPoint,"endPoint");
-	HX_VISIT_MEMBER_NAME(nextMap,"nextMap");
+	HX_VISIT_MEMBER_NAME(spawnPoints,"spawnPoints");
+	HX_VISIT_MEMBER_NAME(pathWalls,"pathWalls");
+	HX_VISIT_MEMBER_NAME(endPoints,"endPoints");
 	HX_VISIT_MEMBER_NAME(background,"background");
 	HX_VISIT_MEMBER_NAME(mapWidth,"mapWidth");
 	HX_VISIT_MEMBER_NAME(mapHeight,"mapHeight");
@@ -1315,17 +2908,19 @@ Dynamic AreaMap_obj::__Field(const ::String &inName,hx::PropertyAccess inCallPro
 	case 6:
 		if (HX_FIELD_EQ(inName,"player") ) { return player; }
 		break;
-	case 7:
-		if (HX_FIELD_EQ(inName,"nextMap") ) { return nextMap; }
-		break;
 	case 8:
-		if (HX_FIELD_EQ(inName,"endPoint") ) { return endPoint; }
 		if (HX_FIELD_EQ(inName,"mapWidth") ) { return mapWidth; }
 		if (HX_FIELD_EQ(inName,"tileSize") ) { return tileSize; }
 		if (HX_FIELD_EQ(inName,"addMapBG") ) { return addMapBG_dyn(); }
 		if (HX_FIELD_EQ(inName,"resetMap") ) { return resetMap_dyn(); }
+		if (HX_FIELD_EQ(inName,"addActor") ) { return addActor_dyn(); }
 		break;
 	case 9:
+		if (HX_FIELD_EQ(inName,"hostLevel") ) { return hostLevel; }
+		if (HX_FIELD_EQ(inName,"tileSheet") ) { return tileSheet; }
+		if (HX_FIELD_EQ(inName,"actorList") ) { return actorList; }
+		if (HX_FIELD_EQ(inName,"pathWalls") ) { return pathWalls; }
+		if (HX_FIELD_EQ(inName,"endPoints") ) { return endPoints; }
 		if (HX_FIELD_EQ(inName,"mapHeight") ) { return mapHeight; }
 		if (HX_FIELD_EQ(inName,"readTiles") ) { return readTiles_dyn(); }
 		if (HX_FIELD_EQ(inName,"updateMap") ) { return updateMap_dyn(); }
@@ -1336,15 +2931,26 @@ Dynamic AreaMap_obj::__Field(const ::String &inName,hx::PropertyAccess inCallPro
 		if (HX_FIELD_EQ(inName,"startPoint") ) { return startPoint; }
 		if (HX_FIELD_EQ(inName,"background") ) { return background; }
 		if (HX_FIELD_EQ(inName,"createTile") ) { return createTile_dyn(); }
-		if (HX_FIELD_EQ(inName,"setNextMap") ) { return setNextMap_dyn(); }
 		break;
 	case 11:
 		if (HX_FIELD_EQ(inName,"checkPoints") ) { return checkPoints; }
+		if (HX_FIELD_EQ(inName,"spawnPoints") ) { return spawnPoints; }
+		if (HX_FIELD_EQ(inName,"removeActor") ) { return removeActor_dyn(); }
+		if (HX_FIELD_EQ(inName,"getMapWidth") ) { return getMapWidth_dyn(); }
 		break;
 	case 12:
 		if (HX_FIELD_EQ(inName,"createObject") ) { return createObject_dyn(); }
+		if (HX_FIELD_EQ(inName,"updateActors") ) { return updateActors_dyn(); }
+		if (HX_FIELD_EQ(inName,"findDoorFrom") ) { return findDoorFrom_dyn(); }
+		if (HX_FIELD_EQ(inName,"getMapHeight") ) { return getMapHeight_dyn(); }
+		break;
+	case 13:
+		if (HX_FIELD_EQ(inName,"parseObjectID") ) { return parseObjectID_dyn(); }
+		if (HX_FIELD_EQ(inName,"addProjectile") ) { return addProjectile_dyn(); }
+		if (HX_FIELD_EQ(inName,"getStartPoint") ) { return getStartPoint_dyn(); }
 		break;
 	case 14:
+		if (HX_FIELD_EQ(inName,"projectileList") ) { return projectileList; }
 		if (HX_FIELD_EQ(inName,"createEndpoint") ) { return createEndpoint_dyn(); }
 		break;
 	case 15:
@@ -1354,19 +2960,39 @@ Dynamic AreaMap_obj::__Field(const ::String &inName,hx::PropertyAccess inCallPro
 	case 16:
 		if (HX_FIELD_EQ(inName,"createCheckpoint") ) { return createCheckpoint_dyn(); }
 		if (HX_FIELD_EQ(inName,"createStartpoint") ) { return createStartpoint_dyn(); }
+		if (HX_FIELD_EQ(inName,"createSpawnPoint") ) { return createSpawnPoint_dyn(); }
+		if (HX_FIELD_EQ(inName,"createAIPathWall") ) { return createAIPathWall_dyn(); }
+		if (HX_FIELD_EQ(inName,"resetSpawnPoints") ) { return resetSpawnPoints_dyn(); }
+		if (HX_FIELD_EQ(inName,"removeProjectile") ) { return removeProjectile_dyn(); }
+		if (HX_FIELD_EQ(inName,"checkAICollision") ) { return checkAICollision_dyn(); }
 		if (HX_FIELD_EQ(inName,"changeCheckpoint") ) { return changeCheckpoint_dyn(); }
 		break;
 	case 17:
 		if (HX_FIELD_EQ(inName,"currentCheckpoint") ) { return currentCheckpoint; }
+		if (HX_FIELD_EQ(inName,"parseMapTileSheet") ) { return parseMapTileSheet_dyn(); }
+		if (HX_FIELD_EQ(inName,"addObjectProperty") ) { return addObjectProperty_dyn(); }
+		if (HX_FIELD_EQ(inName,"updateSpawnPoints") ) { return updateSpawnPoints_dyn(); }
+		if (HX_FIELD_EQ(inName,"updateProjectiles") ) { return updateProjectiles_dyn(); }
 		if (HX_FIELD_EQ(inName,"updateCheckpoints") ) { return updateCheckpoints_dyn(); }
 		break;
 	case 18:
 		if (HX_FIELD_EQ(inName,"parseMapDimensions") ) { return parseMapDimensions_dyn(); }
 		if (HX_FIELD_EQ(inName,"initiateObjectList") ) { return initiateObjectList_dyn(); }
+		if (HX_FIELD_EQ(inName,"readDynamicObjects") ) { return readDynamicObjects_dyn(); }
+		if (HX_FIELD_EQ(inName,"parseDynamicObject") ) { return parseDynamicObject_dyn(); }
+		if (HX_FIELD_EQ(inName,"checkActorHitBoxes") ) { return checkActorHitBoxes_dyn(); }
+		break;
+	case 19:
+		if (HX_FIELD_EQ(inName,"parseObjectLocation") ) { return parseObjectLocation_dyn(); }
+		if (HX_FIELD_EQ(inName,"checkDistFromPlayer") ) { return checkDistFromPlayer_dyn(); }
 		break;
 	case 20:
+		if (HX_FIELD_EQ(inName,"checkActorCollisions") ) { return checkActorCollisions_dyn(); }
 		if (HX_FIELD_EQ(inName,"checkObjectCollision") ) { return checkObjectCollision_dyn(); }
 		if (HX_FIELD_EQ(inName,"getCurrentCheckpoint") ) { return getCurrentCheckpoint_dyn(); }
+		break;
+	case 21:
+		if (HX_FIELD_EQ(inName,"checkProjectileBounds") ) { return checkProjectileBounds_dyn(); }
 	}
 	return super::__Field(inName,inCallProp);
 }
@@ -1377,27 +3003,32 @@ Dynamic AreaMap_obj::__SetField(const ::String &inName,const Dynamic &inValue,hx
 	case 6:
 		if (HX_FIELD_EQ(inName,"player") ) { player=inValue.Cast< ::actors::Player >(); return inValue; }
 		break;
-	case 7:
-		if (HX_FIELD_EQ(inName,"nextMap") ) { nextMap=inValue.Cast< ::maps::AreaMap >(); return inValue; }
-		break;
 	case 8:
-		if (HX_FIELD_EQ(inName,"endPoint") ) { endPoint=inValue.Cast< ::maps::Portal >(); return inValue; }
 		if (HX_FIELD_EQ(inName,"mapWidth") ) { mapWidth=inValue.Cast< int >(); return inValue; }
 		if (HX_FIELD_EQ(inName,"tileSize") ) { tileSize=inValue.Cast< int >(); return inValue; }
 		break;
 	case 9:
+		if (HX_FIELD_EQ(inName,"hostLevel") ) { hostLevel=inValue.Cast< ::maps::Level >(); return inValue; }
+		if (HX_FIELD_EQ(inName,"tileSheet") ) { tileSheet=inValue.Cast< ::openfl::display::Bitmap >(); return inValue; }
+		if (HX_FIELD_EQ(inName,"actorList") ) { actorList=inValue.Cast< Array< ::Dynamic > >(); return inValue; }
+		if (HX_FIELD_EQ(inName,"pathWalls") ) { pathWalls=inValue.Cast< Array< ::Dynamic > >(); return inValue; }
+		if (HX_FIELD_EQ(inName,"endPoints") ) { endPoints=inValue.Cast< Array< ::Dynamic > >(); return inValue; }
 		if (HX_FIELD_EQ(inName,"mapHeight") ) { mapHeight=inValue.Cast< int >(); return inValue; }
 		break;
 	case 10:
 		if (HX_FIELD_EQ(inName,"objectList") ) { objectList=inValue.Cast< Array< ::Dynamic > >(); return inValue; }
-		if (HX_FIELD_EQ(inName,"startPoint") ) { startPoint=inValue.Cast< ::maps::Checkpoint >(); return inValue; }
+		if (HX_FIELD_EQ(inName,"startPoint") ) { startPoint=inValue.Cast< ::maps::mapobjects::Checkpoint >(); return inValue; }
 		if (HX_FIELD_EQ(inName,"background") ) { background=inValue.Cast< ::openfl::display::Shape >(); return inValue; }
 		break;
 	case 11:
 		if (HX_FIELD_EQ(inName,"checkPoints") ) { checkPoints=inValue.Cast< Array< ::Dynamic > >(); return inValue; }
+		if (HX_FIELD_EQ(inName,"spawnPoints") ) { spawnPoints=inValue.Cast< Array< ::Dynamic > >(); return inValue; }
+		break;
+	case 14:
+		if (HX_FIELD_EQ(inName,"projectileList") ) { projectileList=inValue.Cast< Array< ::Dynamic > >(); return inValue; }
 		break;
 	case 17:
-		if (HX_FIELD_EQ(inName,"currentCheckpoint") ) { currentCheckpoint=inValue.Cast< ::maps::Checkpoint >(); return inValue; }
+		if (HX_FIELD_EQ(inName,"currentCheckpoint") ) { currentCheckpoint=inValue.Cast< ::maps::mapobjects::MapObject >(); return inValue; }
 	}
 	return super::__SetField(inName,inValue,inCallProp);
 }
@@ -1409,13 +3040,18 @@ bool AreaMap_obj::__SetStatic(const ::String &inName,Dynamic &ioValue,hx::Proper
 
 void AreaMap_obj::__GetFields(Array< ::String> &outFields)
 {
+	outFields->push(HX_HCSTRING("hostLevel","\xfc","\xdc","\x0c","\x94"));
+	outFields->push(HX_HCSTRING("tileSheet","\x91","\x40","\x7b","\x07"));
 	outFields->push(HX_HCSTRING("objectList","\xbd","\x92","\xeb","\xc9"));
+	outFields->push(HX_HCSTRING("actorList","\xf3","\x31","\x8c","\x1b"));
+	outFields->push(HX_HCSTRING("projectileList","\xe7","\x76","\x1b","\x0c"));
 	outFields->push(HX_HCSTRING("player","\x61","\xeb","\xb8","\x37"));
 	outFields->push(HX_HCSTRING("startPoint","\x8e","\x8c","\xa6","\xe2"));
 	outFields->push(HX_HCSTRING("currentCheckpoint","\x21","\xc8","\x87","\x1a"));
 	outFields->push(HX_HCSTRING("checkPoints","\x0b","\xe5","\x3f","\xd9"));
-	outFields->push(HX_HCSTRING("endPoint","\x75","\x46","\x8d","\xc4"));
-	outFields->push(HX_HCSTRING("nextMap","\x69","\x97","\x41","\xa5"));
+	outFields->push(HX_HCSTRING("spawnPoints","\xbe","\x02","\x66","\x92"));
+	outFields->push(HX_HCSTRING("pathWalls","\x44","\x00","\xdf","\xba"));
+	outFields->push(HX_HCSTRING("endPoints","\x5e","\x60","\x10","\x37"));
 	outFields->push(HX_HCSTRING("background","\xee","\x93","\x1d","\x26"));
 	outFields->push(HX_HCSTRING("mapWidth","\xca","\x25","\xa5","\x41"));
 	outFields->push(HX_HCSTRING("mapHeight","\xa3","\x63","\x2b","\xe5"));
@@ -1425,13 +3061,18 @@ void AreaMap_obj::__GetFields(Array< ::String> &outFields)
 
 #if HXCPP_SCRIPTABLE
 static hx::StorageInfo sMemberStorageInfo[] = {
+	{hx::fsObject /*::maps::Level*/ ,(int)offsetof(AreaMap_obj,hostLevel),HX_HCSTRING("hostLevel","\xfc","\xdc","\x0c","\x94")},
+	{hx::fsObject /*::openfl::display::Bitmap*/ ,(int)offsetof(AreaMap_obj,tileSheet),HX_HCSTRING("tileSheet","\x91","\x40","\x7b","\x07")},
 	{hx::fsObject /*Array< ::Dynamic >*/ ,(int)offsetof(AreaMap_obj,objectList),HX_HCSTRING("objectList","\xbd","\x92","\xeb","\xc9")},
+	{hx::fsObject /*Array< ::Dynamic >*/ ,(int)offsetof(AreaMap_obj,actorList),HX_HCSTRING("actorList","\xf3","\x31","\x8c","\x1b")},
+	{hx::fsObject /*Array< ::Dynamic >*/ ,(int)offsetof(AreaMap_obj,projectileList),HX_HCSTRING("projectileList","\xe7","\x76","\x1b","\x0c")},
 	{hx::fsObject /*::actors::Player*/ ,(int)offsetof(AreaMap_obj,player),HX_HCSTRING("player","\x61","\xeb","\xb8","\x37")},
-	{hx::fsObject /*::maps::Checkpoint*/ ,(int)offsetof(AreaMap_obj,startPoint),HX_HCSTRING("startPoint","\x8e","\x8c","\xa6","\xe2")},
-	{hx::fsObject /*::maps::Checkpoint*/ ,(int)offsetof(AreaMap_obj,currentCheckpoint),HX_HCSTRING("currentCheckpoint","\x21","\xc8","\x87","\x1a")},
+	{hx::fsObject /*::maps::mapobjects::Checkpoint*/ ,(int)offsetof(AreaMap_obj,startPoint),HX_HCSTRING("startPoint","\x8e","\x8c","\xa6","\xe2")},
+	{hx::fsObject /*::maps::mapobjects::MapObject*/ ,(int)offsetof(AreaMap_obj,currentCheckpoint),HX_HCSTRING("currentCheckpoint","\x21","\xc8","\x87","\x1a")},
 	{hx::fsObject /*Array< ::Dynamic >*/ ,(int)offsetof(AreaMap_obj,checkPoints),HX_HCSTRING("checkPoints","\x0b","\xe5","\x3f","\xd9")},
-	{hx::fsObject /*::maps::Portal*/ ,(int)offsetof(AreaMap_obj,endPoint),HX_HCSTRING("endPoint","\x75","\x46","\x8d","\xc4")},
-	{hx::fsObject /*::maps::AreaMap*/ ,(int)offsetof(AreaMap_obj,nextMap),HX_HCSTRING("nextMap","\x69","\x97","\x41","\xa5")},
+	{hx::fsObject /*Array< ::Dynamic >*/ ,(int)offsetof(AreaMap_obj,spawnPoints),HX_HCSTRING("spawnPoints","\xbe","\x02","\x66","\x92")},
+	{hx::fsObject /*Array< ::Dynamic >*/ ,(int)offsetof(AreaMap_obj,pathWalls),HX_HCSTRING("pathWalls","\x44","\x00","\xdf","\xba")},
+	{hx::fsObject /*Array< ::Dynamic >*/ ,(int)offsetof(AreaMap_obj,endPoints),HX_HCSTRING("endPoints","\x5e","\x60","\x10","\x37")},
 	{hx::fsObject /*::openfl::display::Shape*/ ,(int)offsetof(AreaMap_obj,background),HX_HCSTRING("background","\xee","\x93","\x1d","\x26")},
 	{hx::fsInt,(int)offsetof(AreaMap_obj,mapWidth),HX_HCSTRING("mapWidth","\xca","\x25","\xa5","\x41")},
 	{hx::fsInt,(int)offsetof(AreaMap_obj,mapHeight),HX_HCSTRING("mapHeight","\xa3","\x63","\x2b","\xe5")},
@@ -1442,17 +3083,23 @@ static hx::StaticInfo *sStaticStorageInfo = 0;
 #endif
 
 static ::String sMemberFields[] = {
+	HX_HCSTRING("hostLevel","\xfc","\xdc","\x0c","\x94"),
+	HX_HCSTRING("tileSheet","\x91","\x40","\x7b","\x07"),
 	HX_HCSTRING("objectList","\xbd","\x92","\xeb","\xc9"),
+	HX_HCSTRING("actorList","\xf3","\x31","\x8c","\x1b"),
+	HX_HCSTRING("projectileList","\xe7","\x76","\x1b","\x0c"),
 	HX_HCSTRING("player","\x61","\xeb","\xb8","\x37"),
 	HX_HCSTRING("startPoint","\x8e","\x8c","\xa6","\xe2"),
 	HX_HCSTRING("currentCheckpoint","\x21","\xc8","\x87","\x1a"),
 	HX_HCSTRING("checkPoints","\x0b","\xe5","\x3f","\xd9"),
-	HX_HCSTRING("endPoint","\x75","\x46","\x8d","\xc4"),
-	HX_HCSTRING("nextMap","\x69","\x97","\x41","\xa5"),
+	HX_HCSTRING("spawnPoints","\xbe","\x02","\x66","\x92"),
+	HX_HCSTRING("pathWalls","\x44","\x00","\xdf","\xba"),
+	HX_HCSTRING("endPoints","\x5e","\x60","\x10","\x37"),
 	HX_HCSTRING("background","\xee","\x93","\x1d","\x26"),
 	HX_HCSTRING("mapWidth","\xca","\x25","\xa5","\x41"),
 	HX_HCSTRING("mapHeight","\xa3","\x63","\x2b","\xe5"),
 	HX_HCSTRING("tileSize","\x0f","\xc7","\x59","\x86"),
+	HX_HCSTRING("parseMapTileSheet","\x28","\xbf","\x83","\x79"),
 	HX_HCSTRING("parseMapDimensions","\xd6","\x03","\x06","\x32"),
 	HX_HCSTRING("addMapBG","\x80","\x49","\x7d","\x7c"),
 	HX_HCSTRING("initiateObjectList","\x76","\xca","\xa7","\xae"),
@@ -1462,16 +3109,39 @@ static ::String sMemberFields[] = {
 	HX_HCSTRING("createCheckpoint","\xa4","\xc4","\x7f","\x78"),
 	HX_HCSTRING("createStartpoint","\xca","\x9a","\xa6","\x84"),
 	HX_HCSTRING("createEndpoint","\xb1","\x55","\x9a","\x83"),
-	HX_HCSTRING("setNextMap","\xe7","\xbb","\x20","\xf8"),
+	HX_HCSTRING("createSpawnPoint","\x31","\x8e","\xd5","\x35"),
+	HX_HCSTRING("createAIPathWall","\x53","\x3c","\x7f","\x56"),
+	HX_HCSTRING("readDynamicObjects","\x0b","\x39","\xa5","\x1b"),
+	HX_HCSTRING("parseDynamicObject","\x6b","\x17","\x79","\x94"),
+	HX_HCSTRING("parseObjectID","\xad","\x63","\x5b","\xc8"),
+	HX_HCSTRING("parseObjectLocation","\xa7","\xf7","\x6a","\x49"),
+	HX_HCSTRING("addObjectProperty","\x35","\x78","\xc7","\xef"),
 	HX_HCSTRING("resetMap","\x0d","\x44","\xd9","\x4f"),
+	HX_HCSTRING("resetSpawnPoints","\x2f","\x95","\xdc","\xb4"),
 	HX_HCSTRING("updateMap","\x13","\xe8","\xdf","\x82"),
+	HX_HCSTRING("updateActors","\xc7","\x72","\x0e","\x16"),
+	HX_HCSTRING("updateSpawnPoints","\x35","\xaf","\xcf","\xf6"),
+	HX_HCSTRING("updateProjectiles","\xe1","\x52","\xf3","\x99"),
 	HX_HCSTRING("addPlayer","\x62","\x20","\xdd","\xef"),
+	HX_HCSTRING("addActor","\x14","\xf1","\x03","\x95"),
+	HX_HCSTRING("removeActor","\x11","\xa8","\xda","\x19"),
+	HX_HCSTRING("addProjectile","\x6a","\xcf","\xd4","\x2e"),
+	HX_HCSTRING("removeProjectile","\x4d","\xa3","\x34","\x7e"),
 	HX_HCSTRING("checkCollisions","\xa9","\x22","\x72","\x71"),
+	HX_HCSTRING("checkDistFromPlayer","\x59","\xd2","\x17","\x15"),
+	HX_HCSTRING("checkActorCollisions","\x2e","\x3f","\x0e","\x59"),
+	HX_HCSTRING("checkActorHitBoxes","\x13","\x2a","\xfe","\x88"),
+	HX_HCSTRING("checkProjectileBounds","\x26","\xda","\x15","\x18"),
 	HX_HCSTRING("updateCheckpoints","\x62","\x1d","\x15","\x09"),
 	HX_HCSTRING("updateEndPortal","\x9e","\x99","\x92","\x8c"),
+	HX_HCSTRING("findDoorFrom","\x51","\xff","\xe7","\x80"),
+	HX_HCSTRING("checkAICollision","\xa2","\xfe","\x70","\xdb"),
 	HX_HCSTRING("checkObjectCollision","\xcb","\x49","\x1e","\x94"),
 	HX_HCSTRING("getCurrentCheckpoint","\xab","\xfe","\xfc","\x41"),
+	HX_HCSTRING("getStartPoint","\xc4","\xe8","\x18","\x3f"),
 	HX_HCSTRING("changeCheckpoint","\x18","\x08","\x04","\xd0"),
+	HX_HCSTRING("getMapWidth","\x80","\xe8","\x98","\x67"),
+	HX_HCSTRING("getMapHeight","\x2d","\x00","\x82","\xf4"),
 	::String(null()) };
 
 static void sMarkStatics(HX_MARK_PARAMS) {

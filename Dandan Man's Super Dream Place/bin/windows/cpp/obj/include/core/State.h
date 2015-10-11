@@ -16,6 +16,7 @@ HX_DECLARE_CLASS2(openfl,display,InteractiveObject)
 HX_DECLARE_CLASS2(openfl,display,Sprite)
 HX_DECLARE_CLASS2(openfl,events,EventDispatcher)
 HX_DECLARE_CLASS2(openfl,events,IEventDispatcher)
+HX_DECLARE_CLASS1(ui,OverlayStack)
 namespace core{
 
 
@@ -45,6 +46,7 @@ class HXCPP_CLASS_ATTRIBUTES  State_obj : public ::openfl::display::Sprite_obj{
 		::String __ToString() const { return HX_HCSTRING("State","\xf1","\xe5","\x38","\x17"); }
 
 		::String stateName;
+		::ui::OverlayStack overlayStack;
 		virtual Void redrawState( );
 		Dynamic redrawState_dyn();
 

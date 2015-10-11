@@ -32,7 +32,11 @@ import actors.Player;
 			
 			levelList = new Array<Level>();
 			
-			var levelOne:Level = new Level(1, [1, 2, 3, 4, 420], "Stage1-1");
+			var levels:Array<Int> = [];
+			for (i in 0...101)
+				levels.push(i);
+			
+			var levelOne:Level = new Level(1, levels, "Stage1-6");
 			//var levelTwo:Level = new Level(loadMaps(2, [1, 2]));
 			
 			levelList.push(levelOne);

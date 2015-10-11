@@ -212,13 +212,13 @@ Void ApplicationMain_obj::main( ){
 					__result->Add(HX_HCSTRING("display","\x42","\x2a","\x4a","\xbb") , (int)0,false);
 					__result->Add(HX_HCSTRING("fullscreen","\x3b","\x3a","\xb4","\xf9") , false,false);
 					__result->Add(HX_HCSTRING("hardware","\xa8","\xe2","\xd3","\x75") , true,false);
-					__result->Add(HX_HCSTRING("height","\xe7","\x07","\x4c","\x02") , (int)480,false);
+					__result->Add(HX_HCSTRING("height","\xe7","\x07","\x4c","\x02") , (int)360,false);
 					__result->Add(HX_HCSTRING("parameters","\xaa","\xbe","\x7e","\x51") , HX_HCSTRING("{}","\xa2","\x6b","\x00","\x00"),false);
 					__result->Add(HX_HCSTRING("resizable","\x6b","\x37","\x50","\xa9") , true,false);
 					__result->Add(HX_HCSTRING("stencilBuffer","\x1c","\x94","\x39","\x31") , true,false);
 					__result->Add(HX_HCSTRING("title","\x98","\x15","\x3b","\x10") , HX_HCSTRING("Lolo's Super Dream Place","\x57","\xbc","\xb4","\x98"),false);
 					__result->Add(HX_HCSTRING("vsync","\xd1","\x2d","\xa8","\x3d") , false,false);
-					__result->Add(HX_HCSTRING("width","\x06","\xb6","\x62","\xca") , (int)800,false);
+					__result->Add(HX_HCSTRING("width","\x06","\xb6","\x62","\xca") , (int)540,false);
 					__result->Add(HX_HCSTRING("x","\x78","\x00","\x00","\x00") , null(),false);
 					__result->Add(HX_HCSTRING("y","\x79","\x00","\x00","\x00") , null(),false);
 					return __result;
@@ -233,13 +233,13 @@ Void ApplicationMain_obj::main( ){
 				HX_STACK_FRAME("*","closure",0x5bdab937,"*.closure","ApplicationMain.hx",91,0x0780ded5)
 				{
 					hx::Anon __result = hx::Anon_obj::Create();
-					__result->Add(HX_HCSTRING("build","\x2e","\xdb","\xea","\xba") , HX_HCSTRING("296","\x8f","\x22","\x26","\x00"),false);
+					__result->Add(HX_HCSTRING("build","\x2e","\xdb","\xea","\xba") , HX_HCSTRING("1716","\x4b","\x5b","\x8d","\x20"),false);
 					__result->Add(HX_HCSTRING("company","\x3d","\x15","\x69","\x83") , HX_HCSTRING("Peltast","\x85","\xf3","\xfd","\xdc"),false);
 					__result->Add(HX_HCSTRING("file","\x7c","\xce","\xbb","\x43") , HX_HCSTRING("LolosSuperDreamPlace","\x12","\x1e","\x18","\xfc"),false);
-					__result->Add(HX_HCSTRING("fps","\xe9","\xc7","\x4d","\x00") , (int)60,false);
+					__result->Add(HX_HCSTRING("fps","\xe9","\xc7","\x4d","\x00") , (int)30,false);
 					__result->Add(HX_HCSTRING("name","\x4b","\x72","\xff","\x48") , HX_HCSTRING("Lolo's Super Dream Place","\x57","\xbc","\xb4","\x98"),false);
 					__result->Add(HX_HCSTRING("orientation","\xd0","\xee","\xfe","\xfd") , HX_HCSTRING("landscape","\x3b","\x78","\xad","\xfc"),false);
-					__result->Add(HX_HCSTRING("packageName","\xf1","\x04","\xad","\x04") , HX_HCSTRING("LolosSuperDreamPlace","\x12","\x1e","\x18","\xfc"),false);
+					__result->Add(HX_HCSTRING("packageName","\xf1","\x04","\xad","\x04") , HX_HCSTRING("peltast.LolosSuperDreamPlace.game","\xc5","\x17","\x24","\x7d"),false);
 					__result->Add(HX_HCSTRING("version","\x18","\xe7","\xf1","\x7c") , HX_HCSTRING("1.0.0","\xb5","\xd1","\x2e","\x55"),false);
 					__result->Add(HX_HCSTRING("windows","\x83","\xde","\x74","\xe8") , cpp::ArrayBase_obj::__new().Add(tmp),false);
 					return __result;

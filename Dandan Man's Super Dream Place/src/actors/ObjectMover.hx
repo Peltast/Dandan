@@ -23,9 +23,10 @@ class ObjectMover
 	private var yVel:Float;
 	
 	private var takesInput:Bool;
+	private var obeysGravity:Bool;
 	
 	public function new(xAcc:Float, yAcc:Float, targetXVel:Int, targetYVel:Int, xVel:Float, yVel:Float,
-						maxSpeedX:Int, maxSpeedY:Int, jumpCharges:Int, gravity:Int = 10, takesInput:Bool = true) 
+						maxSpeedX:Int, maxSpeedY:Int, jumpCharges:Int, gravity:Int = 10, takesInput:Bool = true, obeysGravity:Bool = true) 
 	{
 		this.xAcc = xAcc;
 		this.yAcc = yAcc;
@@ -39,6 +40,7 @@ class ObjectMover
 		this.jumpCharges = jumpCharges;
 		this.gravity = gravity;
 		this.takesInput = takesInput;
+		this.obeysGravity = obeysGravity;
 	}
 	
 	public function updateMovement():Void {
@@ -59,7 +61,8 @@ class ObjectMover
 		else if (yVel < -maxSpeedY)
 			yVel = -maxSpeedY;
 		
-		targetYVel = gravity;
+		if (obeysGravity)
+			targetYVel = gravity;
 	}
 	
 	public function setGrounded():Void {
@@ -85,6 +88,16 @@ class ObjectMover
 		
 		targetXVel = 5;
 	}
+	public function goUp():Void {
+		if (!takesInput) return;
+		
+		targetYVel = -5;
+	}
+	public function goDown():Void {
+		if (!takesInput) return;
+		
+		targetYVel = 5;
+	}
 	public function stopLeft():Void {
 		if (!takesInput) return;
 		
@@ -96,6 +109,18 @@ class ObjectMover
 		
 		if (targetXVel > 0)
 			targetXVel = 0;
+	}
+	public function stopUp():Void {
+		if (!takesInput) return;
+		
+		if (targetYVel < 0)
+			targetYVel = 0;
+	}
+	public function stopDown():Void {
+		if (!takesInput) return;
+		
+		if (targetYVel > 0)
+			targetYVel = 0;
 	}
 	public function jump():Void {
 		if (!takesInput) return;

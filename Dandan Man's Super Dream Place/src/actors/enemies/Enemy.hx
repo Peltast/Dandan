@@ -57,15 +57,16 @@ class Enemy extends Actor
 			if (health <= 0)
 				beAbsorbed(actor, attack);
 			
-			damageReaction(actor);
 			return true;
 		}
 		else return false;
 	}
 	override function takeProjectileDamage(projectile:Projectile):Bool 
 	{
-		if (Std.is(projectile, PlayerProjectile))
+		if (Std.is(projectile, PlayerProjectile)) {
+			damageReaction(projectile);
 			return super.takeProjectileDamage(projectile);
+		}
 		return false;
 	}
 	
@@ -76,21 +77,39 @@ class Enemy extends Actor
 			player.absorbAbility(this);
 		}
 	}
+	private override function calculateDamage(source:MapObject):Void {
+		
+		if (health <= 0) {	
+			kill();
+		}
+		else {
+			this.alpha = .7;
+			invulnerable = true;
+			damageReaction(source);
+		}
+	}
 	
-	private function damageReaction(actor:Actor):Void {
+	override function kill():Void 
+	{
+		super.kill();
+		this.collisionBounds = new Rectangle(0, 0, 0, 0);
+	}
+	override function handleDeath():Void 
+	{
+		super.handleDeath();
+		currentMap.removeActor(this);
+		homeSpawn.enemyDead(this);
+	}
+	private function damageReaction(source:MapObject):Void {
 		return;
 	}
-	
-	private function knockBack(actor:Actor):Void {
-		var hitAngle:Point = new Point((this.x + this.actorWidth / 2) - (actor.x + actor.actorWidth / 2),
-										(this.y + this.actorHeight / 2) - (actor.y + actor.actorHeight / 2));
-		currentMover.applyForce(hitAngle, 60);	
-	}
-	
 	override public function getAttackDamage():Int 
 	{
+		if (attackBehavior != null)
+			return attackBehavior.getDamage();
 		return touchDamage;
 	}
+	
 	
 	private override function moveXAxis():Void {
 		
@@ -140,13 +159,7 @@ class Enemy extends Actor
 	}
 	
 	
-	override function kill():Void 
-	{
-		super.kill();
-		
-		currentMap.removeActor(this);
-		homeSpawn.enemyDead(this);
-	}
+	
 	public override function goLeft():Void {
 		super.goLeft();		
 		if (currentAnimation.getName() != "LeftWalk" && currentMover.getIsGrounded())

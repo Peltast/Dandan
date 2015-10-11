@@ -3,8 +3,10 @@ package maps;
 import actors.abilities.LaunchAbility;
 import actors.abilities.ProjectileAbility;
 import actors.enemies.DashEnemy;
+import actors.enemies.FlyingEnemy;
 import actors.enemies.LaunchEnemy;
 import actors.enemies.ProjectileEnemy;
+import actors.enemies.RunningEnemy;
 import actors.enemies.WalkingEnemy;
 import maps.mapobjects.AIPathWall;
 import maps.mapobjects.Checkpoint;
@@ -41,6 +43,9 @@ class ObjectFactory
 	private static var TILE_SPAWNPOINT_DASH:Int = 45;
 	private static var TILE_SPAWNPOINT_LAUNCH:Int = 46;
 	private static var TILE_SPAWNPOINT_PROJECTILE:Int = 47;
+	private static var TILE_SPAWNPOINT_FLYING_HOR:Int = 48;
+	private static var TILE_SPAWNPOINT_FLYING_VER:Int = 49;
+	private static var TILE_SPAWNPOINT_RUNNING:Int = 50;
 	
 	private static var TILE_BACKGROUND:Int = 11;
 	private static var TILE_PLATFORM:Int = 12;
@@ -60,7 +65,7 @@ class ObjectFactory
 						TILE_FATAL_LR, TILE_FATAL_UD];
 	
 	private static var spawnTypes:Array<Int> = [TILE_SPAWNPOINT_WALKING, TILE_SPAWNPOINT_DASH, TILE_SPAWNPOINT_LAUNCH,
-						TILE_SPAWNPOINT_PROJECTILE];
+						TILE_SPAWNPOINT_PROJECTILE, TILE_SPAWNPOINT_FLYING_HOR, TILE_SPAWNPOINT_FLYING_VER, TILE_SPAWNPOINT_RUNNING];
 	
 	private var tileSize:Int;
 	private var tileSheetWidth:Int;
@@ -91,6 +96,9 @@ class ObjectFactory
 		tileIndexTypes[30] = TILE_SPAWNPOINT_DASH;
 		tileIndexTypes[45] = TILE_SPAWNPOINT_LAUNCH;
 		tileIndexTypes[60] = TILE_SPAWNPOINT_PROJECTILE;
+		tileIndexTypes[75] = TILE_SPAWNPOINT_FLYING_HOR;
+		tileIndexTypes[90] = TILE_SPAWNPOINT_FLYING_VER;
+		tileIndexTypes[105] = TILE_SPAWNPOINT_RUNNING;
 		
 		tileIndexTypes[31] = TILE_PLATFORM;
 		tileIndexTypes[32] = TILE_PLATFORM;
@@ -101,16 +109,57 @@ class ObjectFactory
 		tileIndexTypes[61] = TILE_PLATFORM;
 		tileIndexTypes[62] = TILE_PLATFORM;
 		tileIndexTypes[63] = TILE_PLATFORM;
+		tileIndexTypes[64] = TILE_PLATFORM;
+		tileIndexTypes[76] = TILE_PLATFORM;
+		tileIndexTypes[77] = TILE_PLATFORM;
+		tileIndexTypes[78] = TILE_PLATFORM;
+		tileIndexTypes[79] = TILE_PLATFORM;
+		tileIndexTypes[65] = TILE_PLATFORM;
+		tileIndexTypes[66] = TILE_PLATFORM;
+		tileIndexTypes[80] = TILE_PLATFORM;
 		
-		tileIndexTypes[36] = TILE_PLATFORM;
-		tileIndexTypes[51] = TILE_PLATFORM;
+		tileIndexTypes[34] = TILE_PLATFORM;
+		tileIndexTypes[49] = TILE_PLATFORM;
 		
-		tileIndexTypes[24] = TILE_FATAL_DOWN;
-		tileIndexTypes[25] = TILE_FATAL_DOWN;
-		tileIndexTypes[26] = TILE_FATAL_DOWN;
-		tileIndexTypes[54] = TILE_FATAL_UP;
-		tileIndexTypes[55] = TILE_FATAL_UP;
-		tileIndexTypes[56] = TILE_FATAL_UP;
+		tileIndexTypes[20] = TILE_FATAL_DOWN;
+		tileIndexTypes[21] = TILE_FATAL_DOWN;
+		tileIndexTypes[22] = TILE_FATAL_DOWN;
+		tileIndexTypes[23] = TILE_FATAL_DOWN;
+		tileIndexTypes[35] = TILE_FATAL_UP;
+		tileIndexTypes[36] = TILE_FATAL_UP;
+		tileIndexTypes[37] = TILE_FATAL_UP;
+		tileIndexTypes[38] = TILE_FATAL_UP;
+		
+		tileIndexTypes[9] = TILE_FATAL_LEFT;
+		tileIndexTypes[24] = TILE_FATAL_LEFT;
+		tileIndexTypes[39] = TILE_FATAL_LEFT;
+		tileIndexTypes[54] = TILE_FATAL_LEFT;
+		tileIndexTypes[10] = TILE_FATAL_RIGHT;
+		tileIndexTypes[25] = TILE_FATAL_RIGHT;
+		tileIndexTypes[40] = TILE_FATAL_RIGHT;
+		tileIndexTypes[55] = TILE_FATAL_RIGHT;
+		
+		tileIndexTypes[11] = TILE_BACKGROUND;
+		tileIndexTypes[12] = TILE_BACKGROUND;
+		tileIndexTypes[13] = TILE_BACKGROUND;
+		tileIndexTypes[14] = TILE_BACKGROUND;
+		tileIndexTypes[26] = TILE_BACKGROUND;
+		tileIndexTypes[27] = TILE_BACKGROUND;
+		tileIndexTypes[28] = TILE_BACKGROUND;
+		tileIndexTypes[29] = TILE_BACKGROUND;
+		tileIndexTypes[41] = TILE_BACKGROUND;
+		tileIndexTypes[42] = TILE_BACKGROUND;
+		tileIndexTypes[43] = TILE_BACKGROUND;
+		tileIndexTypes[44] = TILE_BACKGROUND;
+		tileIndexTypes[56] = TILE_BACKGROUND;
+		tileIndexTypes[57] = TILE_BACKGROUND;
+		tileIndexTypes[58] = TILE_BACKGROUND;
+		tileIndexTypes[71] = TILE_BACKGROUND;
+		tileIndexTypes[72] = TILE_BACKGROUND;
+		tileIndexTypes[73] = TILE_BACKGROUND;
+		tileIndexTypes[86] = TILE_BACKGROUND;
+		tileIndexTypes[87] = TILE_BACKGROUND;
+		
 	}
 	private function getIndexType(tileIndex:Int = 0):Int {
 		
@@ -120,6 +169,12 @@ class ObjectFactory
 			return tileIndexTypes[tileIndex];
 		else
 			return -1;
+	}
+	
+	public function changeTileSheet(newSet:Bitmap):Void {
+		if (newSet.bitmapData != null) {	
+			tileSheet = newSet;
+		}
 	}
 	
 	public function isObjectTile(index:Int):Bool
@@ -189,6 +244,12 @@ class ObjectFactory
 			return new SpawnPoint(spawnBmp, new LaunchEnemy(null), 1, 60, 60, 1);
 		else if (indexType == TILE_SPAWNPOINT_PROJECTILE)
 			return new SpawnPoint(spawnBmp, new ProjectileEnemy(null), 1, 60, 60, 1);
+		else if (indexType == TILE_SPAWNPOINT_FLYING_HOR)
+			return new SpawnPoint(spawnBmp, new FlyingEnemy(null, true), 1, 60, 60, 1);
+		else if (indexType == TILE_SPAWNPOINT_FLYING_VER)
+			return new SpawnPoint(spawnBmp, new FlyingEnemy(null, false), 1, 60, 60, 1);
+		else if (indexType == TILE_SPAWNPOINT_RUNNING)
+			return new SpawnPoint(spawnBmp, new RunningEnemy(null), 1, 60, 60, 1);
 			
 		else 
 			return new SpawnPoint(spawnBmp, new WalkingEnemy(null));

@@ -74,6 +74,15 @@ class Player extends Actor
 			("RightHurt", 1, new Point(0, playerHeight * 5), playerWidth, playerHeight, [new Point(), new Point(1)]);
 		var leftHurt:Animation = new Animation
 			("LeftHurt", 1, new Point(playerWidth * 2, playerHeight * 5), playerWidth, playerHeight, [new Point(), new Point(1)]);
+			
+		var standingAttack:Animation = new Animation
+			("StandingAttack", 1, new Point(0, playerHeight * 6), playerWidth, playerHeight, [new Point(), new Point(1), new Point(2),
+			new Point(3), new Point(0, 1)], 20);
+		var jumpingAttack:Animation = new Animation
+			("JumpingAttack", 1, new Point(playerWidth, playerHeight * 7), playerWidth, playerHeight, [new Point(), new Point(1), new Point(2),
+			new Point( -1, 1), new Point(0, 1)]);
+		var jumpingAttackStun:Animation = new Animation
+			("JumpingAttackRest", 3, new Point(playerWidth * 2, playerHeight * 8), playerWidth, playerHeight, [new Point(), new Point(1)]);
 		
 		var dashLeft:Animation = new Animation
 			("LeftDash", 1, new Point(0, playerHeight * 6), playerWidth, playerHeight, [new Point(), new Point(1)]);
@@ -98,6 +107,10 @@ class Player extends Actor
 		var leftProjectile:Animation = new Animation
 			("LeftProjectile", 1, new Point(0, playerHeight * 7), playerWidth, playerHeight, [new Point(), new Point(1), new Point(2), new Point(3)], 10); 
 		
+		this.deathAnimation = new Animation
+			("Death", 1, new Point(0, playerHeight * 9), playerWidth, playerHeight,
+			[new Point(), new Point(1), new Point(2), new Point(3)], 0, false);
+		
 		
 		animations = new Map<String, Animation>();
 		animations[rightIdle.getName()] = rightIdle;
@@ -110,6 +123,9 @@ class Player extends Actor
 		animations[leftFall.getName()] = leftFall;
 		animations[rightHurt.getName()] = rightHurt;
 		animations[leftHurt.getName()] = leftHurt;
+		animations[standingAttack.getName()] = standingAttack;
+		animations[jumpingAttack.getName()] = jumpingAttack;
+		animations[jumpingAttackStun.getName()] = jumpingAttackStun;
 		
 		animations[dashLeft.getName()] = dashLeft;
 		animations[dashRight.getName()] = dashRight;
@@ -124,22 +140,24 @@ class Player extends Actor
 		animations[leftProjectile.getName()] = leftProjectile;
 		animations[rightProjectile.getName()] = rightProjectile;
 		
+		animations[deathAnimation.getName()] = deathAnimation;
+		
 		currentAnimation = rightIdle;
 		
 		
 		var hits:Array<Rectangle> = new Array<Rectangle>();
-		hits.push(new Rectangle( -2, playerHeight, playerWidth + 4, 14));
+		hits.push(new Rectangle( 4, playerHeight, playerWidth - 8, 14));
 		jumpAttack = new AbsorbAttack(new ObjectMover(.5, .1, 0, 60, 0, 10, 0, 60, 0), hits, 60, 3);
 		
 		hits = [];
-		hits.push(new Rectangle( -2 - 10, 0, 10, playerWidth));
-		hits.push(new Rectangle(playerWidth + 2, 0, 10, playerWidth));
-		standAttack = new Attack(new ObjectMover(.5, .1, 0, 0, 0, 0, 0, 60, 0), hits, 15, 1, 0);
+		hits.push(new Rectangle( -10, 0, 15, playerWidth));
+		hits.push(new Rectangle(playerWidth - 5, 0, 15, playerWidth));
+		standAttack = new Attack(null, hits, 20, 1, 0, standingAttack.getName(), "", true, 10);
 		
 		super(this, Main.getBitmapAsset("assets/Player.png"), true, animations, mover, playerWidth, playerHeight);
 		
-		maxHealth = 20;
-		health = 20;
+		maxHealth = 3;
+		health = 3;
 		
 		this.collisionBounds = new Rectangle(4, 6, 24, 30);
 		this.originalBounds = this.collisionBounds;
@@ -164,6 +182,8 @@ class Player extends Actor
 	
 	private function handleAnimation():Void {
 		
+		if (currentAnimation == deathAnimation) 
+			return;
 		if (stunCount > 0 && invulnerable)
 			return;
 		if (attackBehavior != null) {
@@ -286,17 +306,18 @@ class Player extends Actor
 		actorWidth = originalActorWidth;
 	}
 	
-	private override function takeDamage(damage:Int, source:MapObject):Bool {
+	private override function calculateDamage(source:MapObject):Void {
 		
-		if (super.takeDamage(damage, source)) {
-			
+		if (health <= 0) {	
+			kill();
+		}
+		else {
+			this.alpha = .7;
+			invulnerable = true;
 			stunLock(Math.round(invulDuration / 4));
 			damageKnockback(source);
 			setAnimation("Hurt");
-			
-			return true;
 		}
-		else return false;
 	}
 	
 	override function takeProjectileDamage(projectile:Projectile):Bool 
@@ -306,41 +327,48 @@ class Player extends Actor
 		return false;
 	}
 	
-	private function damageKnockback(source:MapObject):Void {
-		var hitAngle:Point = new Point((this.x + this.actorWidth / 2) - (source.x + source.width / 2),
-										(this.y + this.actorHeight / 2) - (source.y + source.height / 2));
-		currentMover.applyForce(hitAngle, 60);
-	}
 	
 	private override function kill():Void {
+		removeAbility();
+		currentMover.freeze();
+		stunCount = 60;
 		super.kill();
-		
+	}
+	private override function handleDeath():Void {
 		var checkpoint:MapObject = currentMap.getCurrentCheckpoint();
-		if (checkpoint == null) return;
+		if (checkpoint == null) checkpoint = currentMap.getStartPoint();
 		
 		this.health = maxHealth;
 		this.x = checkpoint.x + 6;
 		this.y = checkpoint.y - 4;
+		this.currentMap.resetMap();
+		currentMover.freeze();
+		setAnimation("Idle");
+		stunCount = 0;
 	}
 	
 	public function absorbAbility(enemy:Enemy):Void {
 		
 		if (Std.is(enemy, DashEnemy)) {	
 			ability = new DashAbility();
+			setAnimation("Idle");
 			this.baseBmp = Main.getBitmapAsset("assets/PlayerDash.png");
 		}
 		else if (Std.is(enemy, LaunchEnemy)) {
 			ability = new LaunchAbility();
+			setAnimation("Idle");
 			this.baseBmp = Main.getBitmapAsset("assets/PlayerLaunch.png");
 		}
 		else if (Std.is(enemy, ProjectileEnemy)) {
 			ability = new ProjectileAbility();
+			setAnimation("Idle");
 			this.baseBmp = Main.getBitmapAsset("assets/PlayerProjectile.png");
 		}
 	}
 	private function removeAbility():Void {
 		ability = null;
 		this.baseBmp = Main.getBitmapAsset("assets/Player.png");
+		setAnimation("Idle");
 	}
 	
 	
@@ -360,8 +388,10 @@ class Player extends Actor
 		if (key.keyCode == Keyboard.K)
 			removeAbility();
 		
-		if (key.keyCode == Keyboard.UP || key.keyCode == Keyboard.W)
+		if (key.keyCode == Keyboard.UP || key.keyCode == Keyboard.W) {
+			health = maxHealth;
 			currentMap.updateEndPortal(this);
+		}
 	}
 	private function checkKeysUp(key:KeyboardEvent):Void {
 		
@@ -394,6 +424,10 @@ class Player extends Actor
 		
 	}
 	public override function jump():Void {
+		
+		if (attackBehavior == standAttack)
+			return;
+		
 		super.jump();
 		
 		if (!currentMover.getIsGrounded())
@@ -401,10 +435,12 @@ class Player extends Actor
 	}
 	
 	private override function setAnimation(action:String):Void {
-		if (alignmentLeft)
+		if (alignmentLeft && getAnimation("Left" + action) != null)
 			currentAnimation = getAnimation("Left" + action);
-		else
+		else if(getAnimation("Right" + action) != null)
 			currentAnimation = getAnimation("Right" + action);
+		else
+			currentAnimation = getAnimation(action);
 	}
 
 	

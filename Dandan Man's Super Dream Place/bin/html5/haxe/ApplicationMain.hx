@@ -98,6 +98,10 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
+		urls.push ("assets/Stage1-100.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
 		urls.push ("assets/Stage1-2.tmx");
 		types.push (lime.Assets.AssetType.TEXT);
 		
@@ -107,6 +111,26 @@ class ApplicationMain {
 		
 		
 		urls.push ("assets/Stage1-4.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-420.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-421.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-97.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-98.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-99.tmx");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
@@ -214,7 +238,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "1309",
+			build: "1496",
 			company: "Peltast",
 			file: "LolosSuperDreamPlace",
 			fps: 30,

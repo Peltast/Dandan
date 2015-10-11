@@ -8,6 +8,7 @@ import openfl.display.Sprite;
 import openfl.errors.Error;
 import openfl.geom.Matrix;
 import openfl.geom.Point;
+import openfl.geom.Rectangle;
 
 /**
  * ...
@@ -19,6 +20,7 @@ class Projectile extends Actor
 	private var projectileMover:ObjectMover;
 	private var duration:Int;
 	private var damage:Int;
+	private var expired:Bool;
 	
 	public function new(implementation:Projectile, bitmap:Bitmap, mover:ObjectMover, duration:Int, damage:Int)
 	{
@@ -35,8 +37,11 @@ class Projectile extends Actor
 		this.projectileMover = mover;
 		this.duration = duration;
 		this.damage = damage;
+		expired = false;
 		
 		super(this, bitmap, true, animations, mover, 24, 24);
+		
+		this.collisionBounds = new Rectangle(3, 5, 15, 17);
 	}
 	
 	
@@ -51,7 +56,7 @@ class Projectile extends Actor
 		moveYAxis();
 		updateActorAnimation();
 		
-		return false;
+		return expired;
 	}
 	
 	public function flipProjectile(horizontal:Bool):Void {
@@ -94,7 +99,9 @@ class Projectile extends Actor
 		
 		this.x += Math.round(projectileMover.getXVel());
 		
-		//var collisions:Array<MapObject> = currentMap.checkCollisions(this);
+		var collisions:Array<MapObject> = currentMap.checkCollisions(this);
+		if (collisions.length > 0)
+			expired = true;
 		//var largestDistance:Int = getCollisionLargestDistance(collisions, true);
 		
 		//if (largestDistance != 0)
@@ -104,7 +111,9 @@ class Projectile extends Actor
 		
 		this.y += Math.round(projectileMover.getYVel());
 		
-		//var collisions:Array<MapObject> = currentMap.checkCollisions(this);
+		var collisions:Array<MapObject> = currentMap.checkCollisions(this);
+		if (collisions.length > 0)
+			expired = true;
 		//var largestDistance:Int = getCollisionLargestDistance(collisions, false);
 		
 		//if (largestDistance > 0)

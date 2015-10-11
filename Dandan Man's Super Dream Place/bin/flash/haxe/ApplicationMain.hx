@@ -42,7 +42,7 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
-		urls.push ("assets/Enemy.png");
+		urls.push ("assets/FlyingEnemy.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
@@ -94,7 +94,35 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
+		urls.push ("assets/RunningEnemy.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
 		urls.push ("assets/Stage1-1.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-10.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-100.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-11.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-12.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-13.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-14.tmx");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
@@ -102,7 +130,55 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
+		urls.push ("assets/Stage1-20.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-21.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-22.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-23.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-24.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-25.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-26.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
 		urls.push ("assets/Stage1-3.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-30.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-31.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-32.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-33.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-34.tmx");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
@@ -111,6 +187,30 @@ class ApplicationMain {
 		
 		
 		urls.push ("assets/Stage1-420.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-421.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-5.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-6.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-97.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-98.tmx");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/Stage1-99.tmx");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
@@ -155,6 +255,14 @@ class ApplicationMain {
 		
 		
 		urls.push ("assets/World1Tiles.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/World2Tiles.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/World3Tiles.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
@@ -218,13 +326,13 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "1418",
+			build: "1722",
 			company: "Peltast",
 			file: "LolosSuperDreamPlace",
 			fps: 30,
 			name: "Lolo's Super Dream Place",
 			orientation: "",
-			packageName: "LolosSuperDreamPlace",
+			packageName: "peltast.LolosSuperDreamPlace.game",
 			version: "1.0.0",
 			windows: [
 				
